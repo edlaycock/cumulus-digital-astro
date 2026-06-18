@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ServiceCards from '../components/ServiceCards';
 ---
 
 <!doctype html>
@@ -16,7 +17,7 @@ import '../styles/global.css';
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -30,13 +31,11 @@ import '../styles/global.css';
 
       <header class="site-head">
         <a class="brand" href="/" aria-label="Cumulus Digital home">
-          <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <path
-              d="M11 27a7 7 0 0 1-.6-13.97A9 9 0 0 1 28.4 14.2 6.5 6.5 0 0 1 28 27H15l-4.2 5.2c-.5.6-1.5.2-1.4-.6L10 27Z"
-              fill="#4fc5d5"
-            />
-          </svg>
-          <span class="brand-text">cumulus<small>digital</small></span>
+          <img
+            class="brand-logo"
+            src="/cumulus-logo.png"
+            alt="Cumulus Digital"
+          />
         </a>
 
         <nav class="nav" aria-label="Primary">
@@ -92,6 +91,21 @@ import '../styles/global.css';
       </div>
     </section>
 
+    <!-- ===================== CLIENT LOGOS ===================== -->
+    <section class="logos-band" aria-label="Clients we've worked with">
+      <div class="container">
+        <p class="logos-label">Trusted by ambitious brands</p>
+        <ul class="logos-row" role="list">
+          <li><span class="logo-placeholder">OakBridge Group</span></li>
+          <li><span class="logo-placeholder">PSD Solutions</span></li>
+          <li><span class="logo-placeholder">Heritage Tours</span></li>
+          <li><span class="logo-placeholder">Surrey Ventures</span></li>
+          <li><span class="logo-placeholder">TravelCo</span></li>
+          <li><span class="logo-placeholder">Apex Media</span></li>
+        </ul>
+      </div>
+    </section>
+
     <!-- ===================== SERVICES ===================== -->
     <section class="section services-section" id="services">
       <div class="container">
@@ -102,117 +116,47 @@ import '../styles/global.css';
           </h2>
           <p class="section-sub">
             From first impression to lasting impact — strategy, design, code,
-            and marketing that works together.
+            and marketing that works together seamlessly.
           </p>
         </div>
 
-        <ul class="services-grid" role="list">
-
-          <li class="service-card service-card--featured">
-            <div class="service-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none">
-                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2"/>
-                <path d="M15 30 Q24 14 33 30" stroke="currentColor" stroke-width="2" fill="none"/>
-                <circle cx="24" cy="20" r="3" fill="currentColor"/>
-              </svg>
-            </div>
-            <h3>Branding</h3>
-            <p>Full brand identity — logo, colour, type, tone — built to reflect who you are and win the customers you want.</p>
-            <a class="service-link" href="#contact">Learn more →</a>
-          </li>
-
-          <li class="service-card">
-            <div class="service-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none">
-                <rect x="8" y="14" width="32" height="20" rx="3" stroke="currentColor" stroke-width="2"/>
-                <path d="M16 34v4M32 34v4M12 38h24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M15 22h18M15 27h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <h3>Web Design</h3>
-            <p>Distinctive, responsive websites designed from scratch — no templates, no compromise on quality.</p>
-            <a class="service-link" href="#contact">Learn more →</a>
-          </li>
-
-          <li class="service-card">
-            <div class="service-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none">
-                <path d="M14 22 L10 26 L14 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M34 22 L38 26 L34 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M27 16 L21 36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <h3>Web Development</h3>
-            <p>Custom-built, fast, secure websites and web apps. Hand-coded for performance — not bolted together from plugins.</p>
-            <a class="service-link" href="#contact">Learn more →</a>
-          </li>
-
-          <li class="service-card">
-            <div class="service-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none">
-                <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/>
-                <path d="M24 8 Q36 24 24 40 Q12 24 24 8Z" stroke="currentColor" stroke-width="2" fill="none"/>
-                <path d="M8 24h32" stroke="currentColor" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3>Digital Marketing</h3>
-            <p>SEO, PPC, and content strategies that put you in front of the right audience — and keep you there.</p>
-            <a class="service-link" href="#contact">Learn more →</a>
-          </li>
-
-          <li class="service-card">
-            <div class="service-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none">
-                <path d="M8 38 L16 26 L22 32 L30 18 L40 38Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
-                <circle cx="16" cy="26" r="2" fill="currentColor"/>
-                <circle cx="22" cy="32" r="2" fill="currentColor"/>
-                <circle cx="30" cy="18" r="2" fill="currentColor"/>
-              </svg>
-            </div>
-            <h3>Strategy &amp; Consulting</h3>
-            <p>Digital advisory for CEOs and business owners navigating transformation — clear direction, practical steps.</p>
-            <a class="service-link" href="#contact">Learn more →</a>
-          </li>
-
-          <li class="service-card service-card--travel">
-            <div class="service-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none">
-                <path d="M10 32 Q18 10 24 28 Q30 46 40 20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
-                <circle cx="10" cy="32" r="3" fill="currentColor"/>
-                <circle cx="40" cy="20" r="3" fill="currentColor"/>
-                <path d="M20 14 L24 8 L28 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3>Travel Industry</h3>
-            <p>25+ years of deep travel-sector expertise. We understand operators, agents, and travellers like no generic agency can.</p>
-            <a class="service-link" href="#about">Our story →</a>
-          </li>
-
-        </ul>
+        <ServiceCards client:visible />
       </div>
     </section>
 
-    <!-- ===================== NUMBERS ===================== -->
+    <!-- ===================== NUMBERS BAND ===================== -->
     <section class="numbers-band">
-      <div class="container">
-        <ul class="numbers-row" role="list">
-          <li>
-            <strong class="number-val">25<span>+</span></strong>
-            <span class="number-label">Years travel experience</span>
-          </li>
-          <li>
-            <strong class="number-val">100<span>+</span></strong>
-            <span class="number-label">Brands launched</span>
-          </li>
-          <li>
-            <strong class="number-val">Weeks</strong>
-            <span class="number-label">Typical time to impact</span>
-          </li>
-          <li>
-            <strong class="number-val">Surrey</strong>
-            <span class="number-label">Based in Walton-on-Thames</span>
-          </li>
-        </ul>
+      <video
+        class="numbers-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        aria-hidden="true"
+      >
+        <source src="/numbers-band.webm" type="video/webm" />
+      </video>
+      <div class="numbers-content">
+        <div class="container">
+          <ul class="numbers-row" role="list">
+            <li>
+              <strong class="number-val">25<span>+</span></strong>
+              <span class="number-label">Years travel experience</span>
+            </li>
+            <li>
+              <strong class="number-val">100<span>+</span></strong>
+              <span class="number-label">Brands launched</span>
+            </li>
+            <li>
+              <strong class="number-val">Weeks</strong>
+              <span class="number-label">Typical time to impact</span>
+            </li>
+            <li>
+              <strong class="number-val">Surrey</strong>
+              <span class="number-label">Based in Walton-on-Thames</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -224,14 +168,21 @@ import '../styles/global.css';
           <h2 class="section-title">Ideas made real.</h2>
           <p class="section-sub">
             A selection of projects we're proud of — each one built to solve
-            a specific business problem.
+            a specific business problem and deliver measurable results.
           </p>
         </div>
 
         <ul class="work-grid" role="list">
+
           <li class="work-card work-card--wide">
             <div class="work-card-inner">
-              <div class="work-card-bg" style="--hue:195"></div>
+              <img
+                class="work-card-photo"
+                src="https://images.unsplash.com/photo-1467232004584-a241de8b1d1f?w=1200&auto=format&fit=crop&q=75"
+                alt="Bespoke website on laptop"
+                loading="lazy"
+              />
+              <div class="work-card-overlay"></div>
               <div class="work-card-content">
                 <span class="work-tag">Branding + Web</span>
                 <h3>Full brand refresh &amp; bespoke build</h3>
@@ -243,7 +194,13 @@ import '../styles/global.css';
 
           <li class="work-card">
             <div class="work-card-inner">
-              <div class="work-card-bg" style="--hue:220"></div>
+              <img
+                class="work-card-photo"
+                src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&auto=format&fit=crop&q=75"
+                alt="SEO analytics results"
+                loading="lazy"
+              />
+              <div class="work-card-overlay"></div>
               <div class="work-card-content">
                 <span class="work-tag">SEO</span>
                 <h3>Organic traffic +340%</h3>
@@ -254,7 +211,13 @@ import '../styles/global.css';
 
           <li class="work-card">
             <div class="work-card-inner">
-              <div class="work-card-bg" style="--hue:160"></div>
+              <img
+                class="work-card-photo"
+                src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&auto=format&fit=crop&q=75"
+                alt="Digital transformation travel brand"
+                loading="lazy"
+              />
+              <div class="work-card-overlay"></div>
               <div class="work-card-content">
                 <span class="work-tag">Strategy + Digital Marketing</span>
                 <h3>Digital transformation for a heritage travel brand</h3>
@@ -265,7 +228,13 @@ import '../styles/global.css';
 
           <li class="work-card work-card--wide">
             <div class="work-card-inner">
-              <div class="work-card-bg" style="--hue:250"></div>
+              <img
+                class="work-card-photo"
+                src="https://images.unsplash.com/photo-1581291518857-4f2be5d6b28f?w=1200&auto=format&fit=crop&q=75"
+                alt="Custom web platform on multiple devices"
+                loading="lazy"
+              />
+              <div class="work-card-overlay"></div>
               <div class="work-card-content">
                 <span class="work-tag">Web Development</span>
                 <h3>Custom web platform for a professional membership body</h3>
@@ -277,7 +246,7 @@ import '../styles/global.css';
         </ul>
 
         <div class="work-cta">
-          <a class="btn btn--primary" href="#contact">Discuss your project →</a>
+          <a class="btn btn--primary btn--lg" href="#contact">Discuss your project →</a>
         </div>
       </div>
     </section>
@@ -305,30 +274,52 @@ import '../styles/global.css';
           <a class="btn btn--primary" href="#contact">Talk to a travel specialist →</a>
         </div>
 
-        <div class="travel-visual" aria-hidden="true">
-          <!-- Decorative cloud rings + floating stat cards -->
-          <svg class="travel-rings" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="210" cy="210" r="200" stroke="rgba(79,197,213,0.10)" stroke-width="1"/>
-            <circle cx="210" cy="210" r="158" stroke="rgba(79,197,213,0.14)" stroke-width="1"/>
-            <circle cx="210" cy="210" r="112" stroke="rgba(79,197,213,0.20)" stroke-width="1.5"/>
-            <circle cx="210" cy="210" r="66" fill="rgba(79,197,213,0.07)" stroke="rgba(79,197,213,0.30)" stroke-width="1.5"/>
-            <!-- cloud mark centred -->
-            <path d="M183 218a16 16 0 0 1-1.4-31.9A20.5 20.5 0 0 1 222 187a14.8 14.8 0 0 1-.9 31H193l-9.6 11.8c-1.1 1.4-3.4.5-3.2-1.4Z" fill="#4fc5d5" fill-opacity=".9"/>
-            <!-- orbit dots -->
-            <circle cx="210" cy="10"  r="4" fill="#4fc5d5" fill-opacity=".7"/>
-            <circle cx="410" cy="210" r="3" fill="#8fe3ee" fill-opacity=".5"/>
-            <circle cx="52"  cy="320" r="3" fill="#4fc5d5" fill-opacity=".4"/>
-            <circle cx="348" cy="70"  r="2.5" fill="#8fe3ee" fill-opacity=".5"/>
-          </svg>
+        <div class="travel-photo-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&auto=format&fit=crop&q=80"
+            alt="Travel landscape — planes and destinations"
+            loading="lazy"
+          />
+          <div class="travel-photo-badge">
+            <strong>25+</strong>
+            <span>Years in travel</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="travel-stat-card">
-            <span class="travel-stat-num">25+</span>
-            <span class="travel-stat-lbl">Years in travel</span>
+    <!-- ===================== SURREY GEO ===================== -->
+    <section class="section surrey-section">
+      <div class="container surrey-inner">
+        <div class="surrey-photo-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=900&auto=format&fit=crop&q=80"
+            alt="Surrey and surrounding areas"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="surrey-copy">
+          <p class="section-label">Local to Surrey</p>
+          <h2 class="section-title">
+            Your local digital<br />agency in Surrey.
+          </h2>
+          <p class="travel-body">
+            Based in Walton-on-Thames, we serve ambitious businesses across Surrey
+            and the South East. We know the local market, the competition, and the
+            opportunities — and we bring national-agency quality to your doorstep.
+          </p>
+          <div class="surrey-areas">
+            <span class="surrey-tag">Walton-on-Thames</span>
+            <span class="surrey-tag">Guildford</span>
+            <span class="surrey-tag">Weybridge</span>
+            <span class="surrey-tag">Woking</span>
+            <span class="surrey-tag">Epsom</span>
+            <span class="surrey-tag">Kingston</span>
+            <span class="surrey-tag">Reigate</span>
+            <span class="surrey-tag">London</span>
           </div>
-          <div class="travel-stat-card travel-stat-card--2">
-            <span class="travel-stat-num">Weeks</span>
-            <span class="travel-stat-lbl">To measurable impact</span>
-          </div>
+          <a class="btn btn--primary" href="#contact">Get a free consultation →</a>
         </div>
       </div>
     </section>
@@ -339,35 +330,65 @@ import '../styles/global.css';
         <div class="section-header">
           <p class="section-label">What clients say</p>
           <h2 class="section-title">Results speak first.</h2>
+          <p class="section-sub">
+            We measure success by what our clients achieve — not just what we deliver.
+          </p>
         </div>
 
         <ul class="testi-grid" role="list">
           <li class="testi-card">
+            <div class="testi-stars" aria-label="5 stars">★★★★★</div>
             <blockquote>
               <p>"Cumulus completely transformed how we look online. The new brand and website have made a real difference to how clients perceive us — and the enquiries have followed."</p>
               <footer>
-                <strong>CEO</strong>
-                <span>Surrey Professional Services</span>
+                <img
+                  class="testi-avatar"
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&auto=format&fit=crop&q=80"
+                  alt="Client photo"
+                  loading="lazy"
+                />
+                <div class="testi-meta">
+                  <strong>James M.</strong>
+                  <span>CEO, Surrey Professional Services</span>
+                </div>
               </footer>
             </blockquote>
           </li>
 
           <li class="testi-card testi-card--featured">
+            <div class="testi-stars" aria-label="5 stars">★★★★★</div>
             <blockquote>
               <p>"Their travel industry knowledge is a genuine advantage. They understood what our customers needed before we'd even finished explaining it — and delivered an SEO strategy that continues to drive bookings."</p>
               <footer>
-                <strong>MD</strong>
-                <span>UK Tour Operator</span>
+                <img
+                  class="testi-avatar"
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=88&auto=format&fit=crop&q=80"
+                  alt="Client photo"
+                  loading="lazy"
+                />
+                <div class="testi-meta">
+                  <strong>Sarah K.</strong>
+                  <span>MD, UK Tour Operator</span>
+                </div>
               </footer>
             </blockquote>
           </li>
 
           <li class="testi-card">
+            <div class="testi-stars" aria-label="5 stars">★★★★★</div>
             <blockquote>
               <p>"Professional, responsive, and technically excellent. The website they built for us is fast, clean, and exactly what we asked for — actually delivered on time."</p>
               <footer>
-                <strong>Director</strong>
-                <span>Membership Organisation</span>
+                <img
+                  class="testi-avatar"
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=88&auto=format&fit=crop&q=80"
+                  alt="Client photo"
+                  loading="lazy"
+                />
+                <div class="testi-meta">
+                  <strong>Rachel T.</strong>
+                  <span>Director, Membership Organisation</span>
+                </div>
               </footer>
             </blockquote>
           </li>
@@ -407,13 +428,11 @@ import '../styles/global.css';
       <div class="container footer-inner">
         <div class="footer-brand">
           <a class="brand" href="/" aria-label="Cumulus Digital home">
-            <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-              <path
-                d="M11 27a7 7 0 0 1-.6-13.97A9 9 0 0 1 28.4 14.2 6.5 6.5 0 0 1 28 27H15l-4.2 5.2c-.5.6-1.5.2-1.4-.6L10 27Z"
-                fill="#4fc5d5"
-              />
-            </svg>
-            <span class="brand-text">cumulus<small>digital</small></span>
+            <img
+              class="brand-logo"
+              src="/cumulus-logo.png"
+              alt="Cumulus Digital"
+            />
           </a>
           <p class="footer-tagline">It's about making ideas happen.</p>
         </div>
@@ -462,7 +481,6 @@ import '../styles/global.css';
       import '../scripts/hero.js';
     </script>
 
-    <!-- mobile nav toggle -->
     <script>
       const burger = document.querySelector('.nav-burger');
       const navLinks = document.querySelector('.nav');
