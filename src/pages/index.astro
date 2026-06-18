@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import ServiceCards from '../components/ServiceCards';
+import TestimonialCarousel from '../components/TestimonialCarousel';
 ---
 
 <!doctype html>
@@ -24,18 +25,11 @@ import ServiceCards from '../components/ServiceCards';
 
   <body>
 
-    <!-- ===================== HERO ===================== -->
-    <section class="hero" id="home">
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>
-      <div class="hero-scrim" aria-hidden="true"></div>
-
+    <!-- ===================== STICKY HEADER ===================== -->
+    <div class="site-head-wrap" id="site-head-wrap">
       <header class="site-head">
         <a class="brand" href="/" aria-label="Cumulus Digital home">
-          <img
-            class="brand-logo"
-            src="/cumulus-logo.png"
-            alt="Cumulus Digital"
-          />
+          <img class="brand-logo" src="/cumulus-logo.png" alt="Cumulus Digital" />
         </a>
 
         <nav class="nav" aria-label="Primary">
@@ -53,6 +47,12 @@ import ServiceCards from '../components/ServiceCards';
           <span></span><span></span><span></span>
         </button>
       </header>
+    </div>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-scrim" aria-hidden="true"></div>
 
       <div class="hero-body">
         <div class="hero-copy">
@@ -156,6 +156,39 @@ import ServiceCards from '../components/ServiceCards';
               <span class="number-label">Based in Walton-on-Thames</span>
             </li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VALUES ===================== -->
+    <section class="section values-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">How we work</p>
+          <h2 class="section-title">Our principles.</h2>
+          <p class="section-sub">Four things we believe that shape everything we do.</p>
+        </div>
+        <div class="values-grid">
+          <div class="value-card">
+            <span class="value-num">01</span>
+            <h3>We build, not bolt together</h3>
+            <p>Custom code, not plugin stacks. Every site we build is hand-crafted for speed, security and longevity — so you never outgrow it.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-num">02</span>
+            <h3>We know your industry</h3>
+            <p>25+ years inside the travel sector means we ask smarter questions and skip the expensive learning curve most agencies charge you for.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-num">03</span>
+            <h3>We move fast</h3>
+            <p>Most clients see measurable impact within weeks, not quarters. We're built for momentum — not endless rounds of revisions and bureaucracy.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-num">04</span>
+            <h3>We stay partners</h3>
+            <p>We don't disappear post-launch. We're on hand for ongoing growth, iteration and support — because your success is how we measure ours.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -334,65 +367,7 @@ import ServiceCards from '../components/ServiceCards';
             We measure success by what our clients achieve — not just what we deliver.
           </p>
         </div>
-
-        <ul class="testi-grid" role="list">
-          <li class="testi-card">
-            <div class="testi-stars" aria-label="5 stars">★★★★★</div>
-            <blockquote>
-              <p>"Cumulus completely transformed how we look online. The new brand and website have made a real difference to how clients perceive us — and the enquiries have followed."</p>
-              <footer>
-                <img
-                  class="testi-avatar"
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&auto=format&fit=crop&q=80"
-                  alt="Client photo"
-                  loading="lazy"
-                />
-                <div class="testi-meta">
-                  <strong>James M.</strong>
-                  <span>CEO, Surrey Professional Services</span>
-                </div>
-              </footer>
-            </blockquote>
-          </li>
-
-          <li class="testi-card testi-card--featured">
-            <div class="testi-stars" aria-label="5 stars">★★★★★</div>
-            <blockquote>
-              <p>"Their travel industry knowledge is a genuine advantage. They understood what our customers needed before we'd even finished explaining it — and delivered an SEO strategy that continues to drive bookings."</p>
-              <footer>
-                <img
-                  class="testi-avatar"
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=88&auto=format&fit=crop&q=80"
-                  alt="Client photo"
-                  loading="lazy"
-                />
-                <div class="testi-meta">
-                  <strong>Sarah K.</strong>
-                  <span>MD, UK Tour Operator</span>
-                </div>
-              </footer>
-            </blockquote>
-          </li>
-
-          <li class="testi-card">
-            <div class="testi-stars" aria-label="5 stars">★★★★★</div>
-            <blockquote>
-              <p>"Professional, responsive, and technically excellent. The website they built for us is fast, clean, and exactly what we asked for — actually delivered on time."</p>
-              <footer>
-                <img
-                  class="testi-avatar"
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=88&auto=format&fit=crop&q=80"
-                  alt="Client photo"
-                  loading="lazy"
-                />
-                <div class="testi-meta">
-                  <strong>Rachel T.</strong>
-                  <span>Director, Membership Organisation</span>
-                </div>
-              </footer>
-            </blockquote>
-          </li>
-        </ul>
+        <TestimonialCarousel client:visible />
       </div>
     </section>
 
@@ -482,12 +457,17 @@ import ServiceCards from '../components/ServiceCards';
     </script>
 
     <script>
+      const headWrap = document.getElementById('site-head-wrap');
+      window.addEventListener('scroll', () => {
+        headWrap?.classList.toggle('scrolled', window.scrollY > 60);
+      }, { passive: true });
+
       const burger = document.querySelector('.nav-burger');
-      const navLinks = document.querySelector('.nav');
+      const nav = document.querySelector('.nav');
       burger?.addEventListener('click', () => {
         const open = burger.getAttribute('aria-expanded') === 'true';
         burger.setAttribute('aria-expanded', String(!open));
-        navLinks?.classList.toggle('nav--open', !open);
+        nav?.classList.toggle('nav--open', !open);
       });
     </script>
 
