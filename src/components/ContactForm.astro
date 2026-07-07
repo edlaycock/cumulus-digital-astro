@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content';
+import { EMAIL, FORM_ENDPOINT } from '../consts';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<form
+  class="contact-form"
+  id="contact-form"
+  method="POST"
+  action={FORM_ENDPOINT || undefined}
+  data-endpoint={FORM_ENDPOINT}
+  data-email={EMAIL}
+>
+  <div class="form-row">
+    <div class="form-field">
+      <label for="cf-name">Name</label>
+      <input id="cf-name" name="name" type="text" required autocomplete="name" />
+    </div>
+    <div class="form-field">
+      <label for="cf-email">Email</label>
+      <input id="cf-email" name="email" type="email" required autocomplete="email" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-field">
+      <label for="cf-phone">Phone <span class="form-optional">(optional)</span></label>
+      <input id="cf-phone" name="phone" type="tel" autocomplete="tel" />
+    </div>
+    <div class="form-field">
+      <label for="cf-service">What do you need?</label>
+      <select id="cf-service" name="service">
+        <option value="">Not sure yet</option>
+        {services.map((s) => <option value={s.data.title}>{s.data.title}</option>)}
+        <option value="Travel industry project">Travel industry project</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="cf-message">Tell us about your project</label>
+    <textarea id="cf-message" name="message" rows="6" required></textarea>
+  </div>
+
+  <!-- honeypot -->
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-honeypot" aria-hidden="true" />
+
+  <div class="form-actions">
+    <button class="btn btn--primary btn--lg" type="submit">Send message →</button>
+    <p class="form-alt">
+      Prefer email? <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    </p>
+  </div>
+
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const endpoint = form.dataset.endpoint;
+    const status = form.querySelector('.form-status') as HTMLElement;
+    const data = new FormData(form);
+    if ((data.get('_gotcha') as string)?.length) return;
+
+    if (!endpoint) {
+      // No form service configured yet — fall back to the user's email client
+      const subject = encodeURIComponent(`Project enquiry — ${data.get('service') || 'general'}`);
+      const body = encodeURIComponent(
+        `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nPhone: ${data.get('phone') || '-'}\n\n${data.get('message')}`
+      );
+      window.location.href = `mailto:${form.dataset.email}?subject=${subject}&body=${body}`;
+      return;
+    }
+
+    status.textContent = 'Sending…';
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        form.reset();
+        status.textContent = "Thanks — we'll come back to you within one working day.";
+        status.classList.remove('form-status--error');
+      } else {
+        throw new Error(String(res.status));
+      }
+    } catch {
+      status.textContent = `Something went wrong sending the form — please email us at ${form.dataset.email}.`;
+      status.classList.add('form-status--error');
+    }
+  });
+</script>

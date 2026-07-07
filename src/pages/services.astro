@@ -1,0 +1,72 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(
+  services.map(async (entry) => ({ entry, Content: (await render(entry)).Content }))
+);
+---
+
+<BaseLayout
+  title="Services — Web Design, SEO & Branding in Surrey | Cumulus Digital"
+  description="Bespoke web design, development, SEO, branding, strategy and hosting for small and local businesses in Surrey. Most clients see a positive impact within weeks."
+>
+  <PageHero
+    eyebrow="What we do"
+    lede="Strategy, design, code and marketing that work together — every service below is delivered hands-on by people who've done it for 25+ years."
+  >
+    Everything you need<br />to grow <em class="glow">online</em>.
+  </PageHero>
+
+  <section class="section services-hub">
+    <div class="container">
+      {rendered.map(({ entry, Content }) => (
+        <article class="service-detail" id={entry.id} data-reveal>
+          <div class="service-detail-head">
+            <div class="service-detail-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path
+                  d={entry.data.iconPath}
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  fill="none"
+                />
+              </svg>
+            </div>
+            <h2>{entry.data.title}</h2>
+            <div class="service-detail-prose">
+              <Content />
+            </div>
+          </div>
+          <ul class="service-outcomes">
+            {entry.data.outcomes.map((o) => <li>{o}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- travel cross-link -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <p class="section-label">Travel industry?</p>
+        <h2 class="cta-headline">
+          25+ years inside<br />your <em class="glow">sector</em>.
+        </h2>
+        <p class="cta-sub">
+          Operators, agents, DMOs and travel tech — we know the industry from the inside.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/about/#travel">Our travel story →</a>
+          <a class="btn btn--ghost btn--lg" href="/contact/">Start a project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
