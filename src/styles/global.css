@@ -445,25 +445,26 @@ h1.headline em.glow, .cta-headline em.glow {
   transform: translateY(-5px);
   border-color: rgba(79,197,213,.4);
 }
-.service-card-img {
+.service-card-tile {
   width: 100%;
-  height: 192px;
-  object-fit: cover;
-  display: block;
+  height: 150px;
   flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+  background:
+    radial-gradient(340px 200px at 85% -30%, rgba(79,197,213,.28), transparent 65%),
+    radial-gradient(300px 190px at -10% 130%, rgba(143,227,238,.12), transparent 60%),
+    linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 70%, var(--navy-soft) 100%);
 }
+.service-card-tile svg { width: 56px; height: 56px; }
 .service-card-body {
   padding: 1.6rem 1.8rem 2rem;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
-.service-icon {
-  width: 40px; height: 40px;
-  color: var(--cyan);
-  margin-bottom: 1rem;
-}
-.service-icon svg { width: 100%; height: 100%; }
 .service-card-body h3 {
   font-family: var(--font-h);
   font-weight: 900;
@@ -573,6 +574,29 @@ h1.headline em.glow, .cta-headline em.glow {
   object-fit: cover;
   display: block;
 }
+/* branded backdrop used until a real project screenshot exists */
+.work-card-visual {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(560px 340px at 88% -20%, rgba(79,197,213,.30), transparent 62%),
+    radial-gradient(480px 320px at -8% 120%, rgba(143,227,238,.12), transparent 58%),
+    linear-gradient(140deg, var(--navy-deep) 0%, var(--navy) 65%, var(--navy-soft) 100%);
+}
+.work-card-monogram {
+  position: absolute;
+  top: 2rem; right: 2.2rem;
+  font-family: var(--font-h);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  letter-spacing: -.04em;
+  color: rgba(79,197,213,.28);
+  line-height: 1;
+}
+.work-card--placeholder .work-card-inner {
+  border: 1.5px dashed rgba(79,197,213,.45);
+}
+.work-card--placeholder .work-card-visual { opacity: .55; }
 .work-card-overlay {
   position: absolute;
   inset: 0;
@@ -673,6 +697,35 @@ h1.headline em.glow, .cta-headline em.glow {
   height: 520px;
   object-fit: cover;
   display: block;
+}
+/* branded panel used in place of stock photography */
+.brand-panel {
+  width: 100%;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(620px 420px at 82% -12%, rgba(79,197,213,.32), transparent 60%),
+    radial-gradient(520px 380px at -6% 112%, rgba(143,227,238,.14), transparent 56%),
+    linear-gradient(140deg, var(--navy-deep) 0%, var(--navy) 62%, var(--navy-soft) 100%);
+}
+.brand-panel--short { height: 480px; }
+.brand-panel img {
+  width: min(58%, 300px);
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: .85;
+}
+.brand-panel .panel-caption {
+  position: absolute;
+  bottom: 2rem; right: 2rem;
+  font-family: var(--font-m);
+  font-size: .68rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(143,227,238,.75);
 }
 .travel-photo-badge {
   position: absolute;
@@ -1006,12 +1059,13 @@ h1.headline em.glow, .cta-headline em.glow {
   border: 1px solid var(--lt-border);
   border-radius: 24px;
 }
-.testi-carousel-card .testi-stars {
-  font-size: 1.2rem;
-  color: #f59e0b;
-  margin-bottom: 1.6rem;
-  letter-spacing: .08em;
-  display: block;
+.testi-mark {
+  font-family: var(--font-h);
+  font-weight: 900;
+  font-size: 3.4rem;
+  line-height: .5;
+  color: var(--cyan);
+  margin-bottom: 1.2rem;
 }
 .testi-carousel-quote {
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);
@@ -1028,14 +1082,8 @@ h1.headline em.glow, .cta-headline em.glow {
   justify-content: center;
   gap: .9rem;
 }
-.testi-carousel-author .testi-avatar {
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex: none;
-}
 .testi-carousel-author .testi-meta {
-  text-align: left;
+  text-align: center;
   display: flex;
   flex-direction: column;
   gap: .15rem;

@@ -1,48 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const testimonials = [
-  {
-    stars: 5,
-    quote: "Cumulus completely transformed how we look online. The new brand and website have made a real difference to how clients perceive us — and the enquiries have followed.",
-    name: "James M.",
-    company: "CEO, Surrey Professional Services",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&auto=format&fit=crop&q=80",
-  },
-  {
-    stars: 5,
-    quote: "Their travel industry knowledge is a genuine advantage. They understood what our customers needed before we'd even finished explaining it — and delivered an SEO strategy that continues to drive bookings.",
-    name: "Sarah K.",
-    company: "MD, UK Tour Operator",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=88&auto=format&fit=crop&q=80",
-  },
-  {
-    stars: 5,
-    quote: "Professional, responsive, and technically excellent. The website they built for us is fast, clean, and exactly what we asked for — actually delivered on time.",
-    name: "Rachel T.",
-    company: "Director, Membership Organisation",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=88&auto=format&fit=crop&q=80",
-  },
-  {
-    stars: 5,
-    quote: "We'd worked with two agencies before Cumulus. Night and day difference. They gave us real strategic input, not just execution. The results speak for themselves.",
-    name: "Daniel F.",
-    company: "Founder, B2B SaaS Start-up",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=88&auto=format&fit=crop&q=80",
-  },
-];
+export interface Testimonial {
+  quote: string;
+  attribution: string;
+}
 
-export default function TestimonialCarousel() {
+export default function TestimonialCarousel({ items }: { items: Testimonial[] }) {
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDir(1);
-      setIndex((i) => (i + 1) % testimonials.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
 
   const go = (next: number) => {
     setDir(next > index ? 1 : -1);
@@ -51,19 +17,24 @@ export default function TestimonialCarousel() {
 
   const prev = () => {
     setDir(-1);
-    setIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
+    setIndex((i) => (i - 1 + items.length) % items.length);
   };
 
   const next = () => {
     setDir(1);
-    setIndex((i) => (i + 1) % testimonials.length);
+    setIndex((i) => (i + 1) % items.length);
   };
 
-  const t = testimonials[index];
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") prev();
+    if (e.key === "ArrowRight") next();
+  };
+
+  const t = items[index];
 
   return (
-    <div className="testi-carousel">
-      <div className="testi-carousel-stage">
+    <div className="testi-carousel" onKeyDown={onKeyDown}>
+      <div className="testi-carousel-stage" aria-live="polite">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={index}
@@ -74,22 +45,13 @@ export default function TestimonialCarousel() {
             exit={{ opacity: 0, x: dir * -60 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="testi-stars" aria-label={`${t.stars} stars`}>
-              {"★".repeat(t.stars)}
-            </div>
+            <div className="testi-mark" aria-hidden="true">&ldquo;</div>
             <blockquote className="testi-carousel-quote">
-              &ldquo;{t.quote}&rdquo;
+              {t.quote}
             </blockquote>
             <div className="testi-carousel-author">
-              <img
-                className="testi-avatar"
-                src={t.avatar}
-                alt={t.name}
-                loading="lazy"
-              />
               <div className="testi-meta">
-                <strong>{t.name}</strong>
-                <span>{t.company}</span>
+                <strong>{t.attribution}</strong>
               </div>
             </div>
           </motion.div>
@@ -104,7 +66,7 @@ export default function TestimonialCarousel() {
         </button>
 
         <div className="testi-dots" role="tablist">
-          {testimonials.map((_, i) => (
+          {items.map((_, i) => (
             <button
               key={i}
               className={`testi-dot${i === index ? " testi-dot--active" : ""}`}
