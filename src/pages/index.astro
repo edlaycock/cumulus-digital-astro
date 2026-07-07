@@ -1,55 +1,14 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceCards from '../components/ServiceCards';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 ---
 
-<!doctype html>
-<html lang="en-GB">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#141b38" />
-    <title>Cumulus Digital — Digital Marketing &amp; Web Design, Surrey</title>
-    <meta
-      name="description"
-      content="Bespoke branding, hand-built websites and SEO for ambitious UK businesses. 25+ years travel industry experience. Based in Walton-on-Thames, Surrey."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-
-  <body>
-
-    <!-- ===================== STICKY HEADER ===================== -->
-    <div class="site-head-wrap" id="site-head-wrap">
-      <header class="site-head">
-        <a class="brand" href="/" aria-label="Cumulus Digital home">
-          <img class="brand-logo" src="/cumulus-logo.png" alt="Cumulus Digital" />
-        </a>
-
-        <nav class="nav" aria-label="Primary">
-          <div class="nav-links">
-            <a href="#services">Services</a>
-            <a href="#work">Our Work</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </div>
-          <a class="nav-phone" href="tel:02080504754">020 8050 4754</a>
-          <a class="btn btn--primary" href="#contact">Start a project</a>
-        </nav>
-
-        <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-          <span></span><span></span><span></span>
-        </button>
-      </header>
-    </div>
-
-    <!-- ===================== HERO ===================== -->
+<BaseLayout
+  title="Cumulus Digital — Digital Marketing & Web Design, Surrey"
+  description="Bespoke branding, hand-built websites and SEO for ambitious UK businesses. 25+ years travel industry experience. Based in Hersham, Walton-on-Thames, Surrey."
+>
+<!-- ===================== HERO ===================== -->
     <section class="hero" id="home">
       <canvas id="hero-canvas" aria-hidden="true"></canvas>
       <div class="hero-scrim" aria-hidden="true"></div>
@@ -398,78 +357,7 @@ import TestimonialCarousel from '../components/TestimonialCarousel';
       </div>
     </section>
 
-    <!-- ===================== FOOTER ===================== -->
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-brand">
-          <a class="brand" href="/" aria-label="Cumulus Digital home">
-            <img
-              class="brand-logo"
-              src="/cumulus-logo.png"
-              alt="Cumulus Digital"
-            />
-          </a>
-          <p class="footer-tagline">It's about making ideas happen.</p>
-        </div>
-
-        <nav class="footer-nav" aria-label="Footer">
-          <div class="footer-col">
-            <h4>Services</h4>
-            <a href="#services">Branding</a>
-            <a href="#services">Web Design</a>
-            <a href="#services">Web Development</a>
-            <a href="#services">Digital Marketing</a>
-            <a href="#services">Strategy &amp; Consulting</a>
-            <a href="#services">Travel Industry</a>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <a href="#about">About Us</a>
-            <a href="#work">Our Work</a>
-            <a href="#contact">Contact</a>
-          </div>
-          <div class="footer-col">
-            <h4>Contact</h4>
-            <a href="tel:02080504754">020 8050 4754</a>
-            <a href="mailto:hello@cumulusdigital.co.uk">hello@cumulusdigital.co.uk</a>
-            <p class="footer-address">
-              Burwood Road, Hersham<br />
-              Walton-on-Thames<br />
-              Surrey KT12 4AG
-            </p>
-          </div>
-        </nav>
-      </div>
-
-      <div class="footer-base">
-        <div class="container footer-base-inner">
-          <p>&copy; 2025 Cumulus Digital Limited. All rights reserved.</p>
-          <div class="footer-legal">
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/terms">Terms of Use</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      import '../scripts/hero.js';
-    </script>
-
-    <script>
-      const headWrap = document.getElementById('site-head-wrap');
-      window.addEventListener('scroll', () => {
-        headWrap?.classList.toggle('scrolled', window.scrollY > 60);
-      }, { passive: true });
-
-      const burger = document.querySelector('.nav-burger');
-      const nav = document.querySelector('.nav');
-      burger?.addEventListener('click', () => {
-        const open = burger.getAttribute('aria-expanded') === 'true';
-        burger.setAttribute('aria-expanded', String(!open));
-        nav?.classList.toggle('nav--open', !open);
-      });
-    </script>
-
-  </body>
-</html>
+  <script>
+    import '../scripts/hero.js';
+  </script>
+</BaseLayout>
