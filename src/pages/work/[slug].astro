@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
+import WorkPreview from '../../components/WorkPreview.astro';
 
 export async function getStaticPaths() {
   const work = await getCollection('work');
@@ -10,29 +11,65 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const initials = entry.data.client.split(' ').map((w) => w[0]).slice(0, 3).join('');
+const d = entry.data;
+const initials = d.client.split(' ').map((w) => w[0]).slice(0, 3).join('');
+const hasStructured = Boolean(d.challenge || d.approach || d.result);
 ---
 
 <BaseLayout
-  title={`${entry.data.client} — Case Study | Cumulus Digital`}
-  description={entry.data.summary}
+  title={`${d.client} — Case Study | Cumulus Digital`}
+  description={d.summary}
 >
-  <PageHero eyebrow={`Case study · ${entry.data.client}`}>
-    {entry.data.title}
+  <PageHero eyebrow={`Case study · ${d.client}`}>
+    {d.title}
   </PageHero>
 
-  <section class="section">
+  <section class="casestudy-preview-section">
+    <div class="container">
+      <div class="casestudy-preview" data-reveal>
+        <WorkPreview client={d.client} url={d.url} image={d.image} eager />
+      </div>
+    </div>
+  </section>
+
+  <section class="section casestudy-body">
     <div class="container casestudy">
       <div class="casestudy-main">
         <ul class="casestudy-tags" role="list">
-          {entry.data.services.map((s) => <li class="work-tag">{s}</li>)}
+          {d.services.map((s) => <li class="work-tag">{s}</li>)}
         </ul>
-        <div class="prose">
-          <Content />
-        </div>
+
+        {hasStructured ? (
+          <div class="casestudy-sections">
+            <p class="casestudy-lede">{d.summary}</p>
+            {d.challenge && (
+              <div class="casestudy-block"><h2>The challenge</h2><p>{d.challenge}</p></div>
+            )}
+            {d.approach && (
+              <div class="casestudy-block"><h2>What we did</h2><p>{d.approach}</p></div>
+            )}
+            {d.result && (
+              <div class="casestudy-block"><h2>The result</h2><p>{d.result}</p></div>
+            )}
+          </div>
+        ) : (
+          <div class="prose"><Content /></div>
+        )}
+
+        {d.metrics && d.metrics.length > 0 && (
+          <ul class="casestudy-metrics" role="list">
+            {d.metrics.map((m) => (
+              <li>
+                <strong>{m.value}</strong>
+                <span>{m.label}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
         <div class="casestudy-actions">
-          {entry.data.url && (
-            <a class="btn btn--outline btn--lg" href={entry.data.url} target="_blank" rel="noopener">
+          {d.url && (
+            <a class="btn btn--outline btn--lg" href={d.url} target="_blank" rel="noopener">
               Visit the live site →
             </a>
           )}
@@ -46,9 +83,15 @@ const initials = entry.data.client.split(' ').map((w) => w[0]).slice(0, 3).join(
           <div class="casestudy-monogram" aria-hidden="true">{initials}</div>
           <dl>
             <dt>Client</dt>
-            <dd>{entry.data.client}</dd>
+            <dd>{d.client}</dd>
             <dt>What we did</dt>
-            <dd>{entry.data.services.join(', ')}</dd>
+            <dd>{d.services.join(', ')}</dd>
+            {d.url && (
+              <>
+                <dt>Live site</dt>
+                <dd><a href={d.url} target="_blank" rel="noopener">{d.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a></dd>
+              </>
+            )}
           </dl>
         </div>
       </aside>
