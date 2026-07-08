@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import WorkPreview from '../components/WorkPreview.astro';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -21,23 +22,17 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     <div class="container">
       <ul class="work-grid" role="list">
         {work.map((item) => (
-          <li class={`work-card${item.data.wide ? ' work-card--wide' : ''}${item.data.placeholder ? ' work-card--placeholder' : ''}`}>
-            <div class="work-card-inner">
-              <div class="work-card-visual" aria-hidden="true"></div>
-              <span class="work-card-monogram" aria-hidden="true">
-                {item.data.client.split(' ').map((w) => w[0]).slice(0, 3).join('')}
-              </span>
-              <div class="work-card-overlay"></div>
+          <li class={`work-card${item.data.wide ? ' work-card--wide' : ''}`}>
+            <a class="work-card-inner" href={`/work/${item.id}/`}>
+              <WorkPreview client={item.data.client} url={item.data.url} image={item.data.image} />
               <div class="work-card-content">
                 <span class="work-tag">{item.data.services.join(' + ')}</span>
                 <span class="work-client">{item.data.client}</span>
                 <h3>{item.data.title}</h3>
                 <p>{item.data.summary}</p>
-                <a class="btn btn--ghost" href={`/work/${item.id}/`}>
-                  View case study →
-                </a>
+                <span class="work-card-cta">View case study →</span>
               </div>
-            </div>
+            </a>
           </li>
         ))}
       </ul>

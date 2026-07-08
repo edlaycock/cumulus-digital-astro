@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  client: string;
+  url?: string;
+  image?: ImageMetadata;
+  eager?: boolean;
+}
+
+const { client, url, image, eager = false } = Astro.props;
+const initials = client.split(' ').map((w) => w[0]).slice(0, 3).join('');
+const domain = url ? url.replace(/^https?:\/\//, '').replace(/\/$/, '') : null;
+---
+
+<div class="work-cover">
+  {image ? (
+    <Image
+      class="work-cover-img"
+      src={image}
+      alt={`${client} project`}
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 720px) 100vw, 620px"
+      loading={eager ? 'eager' : 'lazy'}
+    />
+  ) : (
+    <div class="work-cover-ph"><span class="work-cover-monogram">{initials}</span></div>
+  )}
+  <span class="work-cover-scrim" aria-hidden="true"></span>
+  {domain && <span class="work-cover-chip">{domain}</span>}
+</div>
