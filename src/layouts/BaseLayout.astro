@@ -83,11 +83,14 @@ const jsonLd = {
   </head>
 
   <body>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
     <Header />
     <slot />
     <Footer />
     <script>
       import '../scripts/reveal.js';
+      import '../scripts/interactions.js';
     </script>
   </body>
 </html>

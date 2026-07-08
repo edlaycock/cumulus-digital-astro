@@ -1416,3 +1416,156 @@ h1.headline em.glow, .cta-headline em.glow {
   margin-bottom: .9rem;
 }
 .notfound p { color: var(--muted); margin-bottom: 2rem; }
+
+/* ============================================================
+   MICRO-INTERACTIONS  (scroll bar, cursor, magnetic, grain)
+   ============================================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 100%;
+  z-index: 300;
+  background: linear-gradient(90deg, var(--cyan), var(--cyan-lt));
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 34px; height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(79,197,213,.7);
+  background: rgba(79,197,213,.04);
+  pointer-events: none;
+  z-index: 290;
+  opacity: 0;
+  transition: opacity .3s, width .25s var(--ease), height .25s var(--ease),
+              margin .25s var(--ease), background .25s;
+  will-change: transform;
+  display: none;
+}
+.has-cursor-dot .cursor-dot { display: block; opacity: 1; }
+.cursor-dot--active {
+  width: 54px; height: 54px;
+  margin: -27px 0 0 -27px;
+  background: rgba(79,197,213,.1);
+}
+@media (pointer: coarse) { .cursor-dot { display: none !important; } }
+
+/* subtle film grain to break up flat gradients on the decorative panels */
+.service-card-tile, .brand-panel { position: relative; overflow: hidden; }
+.service-card-tile::after,
+.work-card-visual::after,
+.brand-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .4;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   ANIMATED MESH  (slow drift on brand panels + page hero)
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  .hero, .page-hero, .brand-panel, .service-card-tile, .work-card-visual,
+  .cta-inner, .notfound {
+    background-size: 160% 160%, 160% 160%, 100% 100%;
+    animation: mesh-drift 22s var(--ease) infinite alternate;
+  }
+  @keyframes mesh-drift {
+    0%   { background-position: 0% 0%, 100% 100%, 0 0; }
+    100% { background-position: 30% 20%, 70% 80%, 0 0; }
+  }
+}
+
+/* ============================================================
+   CLIENT MARQUEE  (replaces static trust text)
+   ============================================================ */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 1.6rem 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 3.5rem;
+  animation: marquee 34s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -.01em;
+  color: var(--lt-muted);
+  white-space: nowrap;
+  transition: color .25s;
+}
+.marquee-item:hover { color: var(--navy); }
+.marquee-item::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  flex: none;
+}
+@keyframes marquee { to { transform: translateX(calc(-50% - 1.75rem)); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; }
+}
+
+/* ============================================================
+   RICHER WORK-CARD HOVER
+   ============================================================ */
+.work-card-inner { position: relative; overflow: hidden; }
+.work-card-visual {
+  transition: transform .6s var(--ease);
+  will-change: transform;
+}
+.work-card-inner:hover .work-card-visual { transform: scale(1.08); }
+.work-card-monogram { transition: transform .6s var(--ease), color .3s; }
+.work-card-inner:hover .work-card-monogram {
+  transform: translateY(-6px);
+  color: rgba(79,197,213,.42);
+}
+/* sheen sweep on hover */
+.work-card-inner::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -60%;
+  width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.08), transparent);
+  transform: skewX(-18deg);
+  transition: left .7s var(--ease);
+  pointer-events: none;
+  z-index: 2;
+}
+.work-card-inner:hover::after { left: 130%; }
+
+/* ============================================================
+   SERVICE-CARD ICON MOTION
+   ============================================================ */
+.service-card-tile svg { transition: transform .5s var(--ease); }
+.service-card:hover .service-card-tile svg { transform: scale(1.12) rotate(-4deg); }
+
+/* ============================================================
+   NUMBERS BAND — count-up + reveal
+   ============================================================ */
+.numbers-row li { position: relative; }
+@media (prefers-reduced-motion: no-preference) {
+  .numbers-band .number-val { transition: transform .3s var(--ease); }
+}
