@@ -27,9 +27,9 @@ const serviceItems = [
   },
 ];
 
-const work = (await getCollection('work'))
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 5);
+const sortedWork = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const work = sortedWork.slice(0, 5);
+const clients = sortedWork.map((w) => w.data.client);
 const testimonials = (await getCollection('testimonials')).map((t) => t.data);
 ---
 
@@ -61,7 +61,7 @@ const testimonials = (await getCollection('testimonials')).map((t) => t.data);
         </p>
 
         <div class="cta-row reveal d4">
-          <a class="btn btn--primary btn--lg" href="/contact/">Start a project →</a>
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
           <a class="btn btn--ghost btn--lg" href="/work/">See our work</a>
         </div>
 
@@ -79,13 +79,18 @@ const testimonials = (await getCollection('testimonials')).map((t) => t.data);
     </div>
   </section>
 
-  <!-- ===================== TRUST BAND ===================== -->
-  <!-- TODO(owner): supply client logo files to turn this into a proper logo band -->
-  <section class="logos-band" aria-label="Who we work with">
+  <!-- ===================== CLIENT MARQUEE ===================== -->
+  <!-- TODO(owner): supply client logo files to swap these names for real logos -->
+  <section class="logos-band" aria-label="Clients we've worked with">
     <div class="container">
-      <p class="logos-label">
-        Trusted by Surrey businesses and travel brands — including Surrey Hills Surfacing
-      </p>
+      <p class="logos-label">Trusted by Surrey businesses &amp; travel brands</p>
+    </div>
+    <div class="marquee">
+      <div class="marquee-track">
+        {[...clients, ...clients].map((name) => (
+          <span class="marquee-item">{name}</span>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -123,11 +128,11 @@ const testimonials = (await getCollection('testimonials')).map((t) => t.data);
       <div class="container">
         <ul class="numbers-row" role="list">
           <li>
-            <strong class="number-val">25<span>+</span></strong>
+            <strong class="number-val"><span data-count="25">25</span><span>+</span></strong>
             <span class="number-label">Years travel experience</span>
           </li>
           <li>
-            <strong class="number-val">2015</strong>
+            <strong class="number-val"><span data-count="2015">2015</span></strong>
             <span class="number-label">Serving Surrey since</span>
           </li>
           <li>
@@ -320,7 +325,7 @@ const testimonials = (await getCollection('testimonials')).map((t) => t.data);
           Tell us about your project — we'll come back within one working day.
         </p>
         <div class="cta-actions">
-          <a class="btn btn--primary btn--lg" href="/contact/">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>
             Start a project →
           </a>
           <a class="btn btn--ghost btn--lg" href={`tel:${PHONE_TEL}`}>
