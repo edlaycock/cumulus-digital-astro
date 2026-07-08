@@ -1,13 +1,14 @@
 ---
-title: Portfolio-led website for an award-winning builder
-client: Castellum
-services: [Web Design, Web Development]
-summary: "A ground-up redesign for a prime Design & Build contractor whose old site no longer worked on modern devices — rebuilt around the portfolio of projects they're proud of."
-url: https://castellum.co.uk
+title: "Portfolio-led website for an award-winning builder"
+client: "Castellum"
+services: ["Web Design", "Web Development"]
+summary: "An award-winning prime construction company offering a turnkey Design & Build service across London, Surrey and the Home Counties — rebuilt around the portfolio of projects they're proud of."
 order: 1
+image: ../../assets/work/castellum.jpg
+url: https://castellum.co.uk
 wide: true
 ---
 
-<!-- TODO(owner): supply a screenshot of the Castellum site for src/assets/work/. -->
+<!-- Artwork and copy from cumulusdigital.co.uk/project/castellum/ · TODO(owner): expand with challenge/approach/result. -->
 
-Castellum is an award-winning prime construction company offering a turnkey Design and Build solution and outstanding levels of service across London, Surrey and the Home Counties. Their existing website was no longer suited to modern devices and needed a refresh, so we rebuilt it with a clear focus on showcasing the magnificent projects they've completed.
+An award-winning prime construction company offering a turnkey Design & Build service across London, Surrey and the Home Counties — rebuilt around the portfolio of projects they're proud of.
