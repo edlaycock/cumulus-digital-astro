@@ -1,0 +1,57 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+
+export async function getStaticPaths() {
+  const work = await getCollection('work');
+  return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const initials = entry.data.client.split(' ').map((w) => w[0]).slice(0, 3).join('');
+---
+
+<BaseLayout
+  title={`${entry.data.client} — Case Study | Cumulus Digital`}
+  description={entry.data.summary}
+>
+  <PageHero eyebrow={`Case study · ${entry.data.client}`}>
+    {entry.data.title}
+  </PageHero>
+
+  <section class="section">
+    <div class="container casestudy">
+      <div class="casestudy-main">
+        <ul class="casestudy-tags" role="list">
+          {entry.data.services.map((s) => <li class="work-tag">{s}</li>)}
+        </ul>
+        <div class="prose">
+          <Content />
+        </div>
+        <div class="casestudy-actions">
+          {entry.data.url && (
+            <a class="btn btn--outline btn--lg" href={entry.data.url} target="_blank" rel="noopener">
+              Visit the live site →
+            </a>
+          )}
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project like this →</a>
+        </div>
+        <a class="casestudy-back" href="/work/">← Back to all work</a>
+      </div>
+
+      <aside class="casestudy-aside">
+        <div class="casestudy-card">
+          <div class="casestudy-monogram" aria-hidden="true">{initials}</div>
+          <dl>
+            <dt>Client</dt>
+            <dd>{entry.data.client}</dd>
+            <dt>What we did</dt>
+            <dd>{entry.data.services.join(', ')}</dd>
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

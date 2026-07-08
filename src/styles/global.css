@@ -249,15 +249,36 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   .nav--open .nav-links {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     position: absolute;
-    top: 5rem; right: 1.25rem;
-    background: rgba(11,16,38,.96);
+    top: 4.6rem; right: 1.25rem;
+    min-width: 210px;
+    background: rgba(11,16,38,.98);
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(79,197,213,.22);
     border-radius: 16px;
-    padding: 1.5rem 2rem;
-    gap: 1.2rem;
-    z-index: 99;
+    padding: 1.4rem 1.6rem;
+    gap: .3rem;
+    z-index: 210;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,.6);
+  }
+  /* menu links are always light — the panel is dark even when the header is scrolled */
+  .nav--open .nav-links a,
+  .site-head-wrap.scrolled .nav--open .nav-links a {
+    color: var(--paper);
+    width: 100%;
+    padding: .7rem .2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .nav--open .nav-links a:last-child { border-bottom: none; }
+  .nav--open .nav-links a:hover,
+  .nav--open .nav-links a[aria-current="page"],
+  .site-head-wrap.scrolled .nav--open .nav-links a:hover,
+  .site-head-wrap.scrolled .nav--open .nav-links a[aria-current="page"] {
+    color: var(--cyan-lt);
   }
 }
 
@@ -1569,3 +1590,68 @@ h1.headline em.glow, .cta-headline em.glow {
 @media (prefers-reduced-motion: no-preference) {
   .numbers-band .number-val { transition: transform .3s var(--ease); }
 }
+
+/* ============================================================
+   CASE STUDY DETAIL PAGE
+   ============================================================ */
+.casestudy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: start;
+}
+@media (max-width: 860px) { .casestudy { grid-template-columns: 1fr; } }
+
+.casestudy-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: 1.8rem;
+}
+.casestudy-tags .work-tag { margin: 0; color: var(--cyan); background: rgba(79,197,213,.1); }
+
+.casestudy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  margin: 2.4rem 0 1.6rem;
+}
+.casestudy-back {
+  display: inline-block;
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--lt-muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.casestudy-back:hover { color: var(--cyan); }
+
+.casestudy-aside { position: sticky; top: 6.5rem; }
+.casestudy-card {
+  border-radius: var(--radius);
+  border: 1px solid var(--lt-border);
+  background: var(--grey-50);
+  padding: 1.8rem;
+  overflow: hidden;
+  position: relative;
+}
+.casestudy-monogram {
+  font-family: var(--font-h);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 6vw, 3.6rem);
+  letter-spacing: -.04em;
+  color: var(--cyan);
+  opacity: .28;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.casestudy-card dl { display: grid; gap: .3rem; }
+.casestudy-card dt {
+  font-family: var(--font-m);
+  font-size: .66rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--lt-muted);
+  margin-top: 1rem;
+}
+.casestudy-card dd { font-weight: 600; color: var(--lt-text); }
