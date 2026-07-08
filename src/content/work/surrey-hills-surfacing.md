@@ -4,8 +4,8 @@ client: Surrey Hills Surfacing
 services: [Web Design, Web Development, Hosting]
 summary: "Design, build and ongoing hosting for a local driveways and surfacing contractor — a fast, mobile-first site built to win local enquiries."
 url: https://shs.cumulusdigital.co.uk
-order: 1
-wide: true
+order: 7
+wide: false
 ---
 
 <!-- TODO(owner): supply a screenshot of the SHS site for src/assets/work/ and any results you're happy to publish (enquiry volumes, rankings). -->

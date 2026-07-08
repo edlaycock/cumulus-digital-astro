@@ -623,6 +623,16 @@ h1.headline em.glow, .cta-headline em.glow {
   padding: .25rem .75rem;
   margin-bottom: .9rem;
 }
+.work-client {
+  display: block;
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--cyan-lt);
+  margin-bottom: .4rem;
+}
 .work-card-content h3 {
   font-family: var(--font-h);
   font-weight: 900;
@@ -638,7 +648,12 @@ h1.headline em.glow, .cta-headline em.glow {
   color: rgba(234,242,246,.78);
   margin-bottom: 1.3rem;
 }
-.work-cta { text-align: center; }
+.work-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  justify-content: center;
+}
 
 /* ============================================================
    TRAVEL / ABOUT  (white, 2-col with photo)
