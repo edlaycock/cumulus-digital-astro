@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="About — 25+ Years in Travel & Digital | Cumulus Digital"
+  description="Cumulus Digital is a Surrey digital agency founded by Ed Laycock, with over 25 years' experience in the travel industry and dotcom world. Based in Hersham, Walton-on-Thames."
+>
+  <PageHero
+    eyebrow="About us"
+    lede="Cumulus Digital was founded on a simple idea: small businesses deserve the calibre of digital thinking that big companies take for granted."
+  >
+    Experience you can<br /><em class="glow">build</em> on.
+  </PageHero>
+
+  <!-- ===================== STORY ===================== -->
+  <section class="section">
+    <div class="container travel-inner">
+      <div class="travel-copy" data-reveal>
+        <p class="section-label">Our story</p>
+        <h2 class="section-title">Making ideas happen<br />since 2015.</h2>
+        <p class="travel-body">
+          Cumulus Digital is a Surrey-based digital agency founded by Ed Laycock,
+          bringing over 25 years' experience in the travel industry and the dotcom
+          world — across operations, marketing, product, IT and general management.
+        </p>
+        <p class="travel-body">
+          We advise CEOs, Managing Directors and business owners of all sizes, and
+          we build the brands, websites and marketing that turn that advice into
+          results. Clients who joined us in 2016 are still with us today — because
+          we stay partners long after launch.
+        </p>
+        <a class="btn btn--primary" href="/contact/">Work with us →</a>
+      </div>
+
+      <div class="travel-photo-wrap" data-reveal>
+        <div class="brand-panel">
+          <img src="/cumulus-logo.png" alt="" loading="lazy" />
+        </div>
+        <div class="travel-photo-badge">
+          <strong>2015</strong>
+          <span>Founded in Surrey</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VALUES ===================== -->
+  <section class="section values-section" style="background: var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How we work</p>
+        <h2 class="section-title">Our principles.</h2>
+        <p class="section-sub">Four things we believe that shape everything we do.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card" data-reveal>
+          <span class="value-num">01</span>
+          <h3>We build, not bolt together</h3>
+          <p>Custom code, not plugin stacks. Every site we build is hand-crafted for speed, security and longevity — so you never outgrow it.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.1s">
+          <span class="value-num">02</span>
+          <h3>We know your industry</h3>
+          <p>25+ years inside the travel sector means we ask smarter questions and skip the expensive learning curve most agencies charge you for.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.2s">
+          <span class="value-num">03</span>
+          <h3>We move fast</h3>
+          <p>Most clients see measurable impact within weeks, not quarters. We're built for momentum — not endless rounds of revisions and bureaucracy.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.3s">
+          <span class="value-num">04</span>
+          <h3>We stay partners</h3>
+          <p>We don't disappear post-launch. We're on hand for ongoing growth, iteration and support — because your success is how we measure ours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TRAVEL SPECIALISM ===================== -->
+  <section class="section travel-section" id="travel">
+    <div class="container travel-inner">
+      <div class="travel-copy" data-reveal>
+        <p class="section-label">Travel industry specialists</p>
+        <h2 class="section-title">
+          We know your<br />industry from the inside.
+        </h2>
+        <p class="travel-body">
+          Most digital agencies learn your sector from a brief. We've spent over
+          two decades working inside the travel industry — with operators, agents,
+          and destination brands. That means we ask better questions, spot the right
+          opportunities, and skip the expensive learning curve.
+        </p>
+        <ul class="travel-checklist">
+          <li>Tour operators &amp; travel agents</li>
+          <li>Destination marketing &amp; DMOs</li>
+          <li>Hospitality &amp; accommodation brands</li>
+          <li>Travel technology companies</li>
+        </ul>
+        <a class="btn btn--primary" href="/contact/">Talk to a travel specialist →</a>
+      </div>
+
+      <div class="travel-photo-wrap" data-reveal>
+        <div class="brand-panel">
+          <img src="/cumulus-logo.png" alt="" loading="lazy" />
+        </div>
+        <div class="travel-photo-badge">
+          <strong>25+</strong>
+          <span>Years in travel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SURREY ===================== -->
+  <section class="section surrey-section">
+    <div class="container surrey-inner">
+      <div class="surrey-photo-wrap" data-reveal>
+        <div class="brand-panel brand-panel--short">
+          <img src="/cumulus-logo.png" alt="" loading="lazy" />
+        </div>
+        <div class="travel-photo-badge">
+          <strong>KT12</strong>
+          <span>Hersham, Surrey</span>
+        </div>
+      </div>
+
+      <div class="surrey-copy" data-reveal>
+        <p class="section-label">Local to Surrey</p>
+        <h2 class="section-title">
+          Your local digital<br />agency in Surrey.
+        </h2>
+        <p class="travel-body">
+          Based in Hersham, Walton-on-Thames, we serve ambitious businesses across
+          Surrey and the South East. We know the local market, the competition, and
+          the opportunities — and we bring national-agency quality to your doorstep.
+        </p>
+        <div class="surrey-areas">
+          <span class="surrey-tag">Walton-on-Thames</span>
+          <span class="surrey-tag">Hersham</span>
+          <span class="surrey-tag">Esher</span>
+          <span class="surrey-tag">Weybridge</span>
+          <span class="surrey-tag">Woking</span>
+          <span class="surrey-tag">Epsom</span>
+          <span class="surrey-tag">Kingston</span>
+          <span class="surrey-tag">London</span>
+        </div>
+        <a class="btn btn--primary" href="/contact/">Get a free consultation →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

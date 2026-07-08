@@ -1,0 +1,52 @@
+---
+import { NAV_LINKS, PHONE_DISPLAY, PHONE_TEL } from '../consts';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path === href.replace(/\/$/, '');
+---
+
+<div class="site-head-wrap" id="site-head-wrap">
+  <header class="site-head">
+    <a class="brand" href="/" aria-label="Cumulus Digital home">
+      <img class="brand-logo" src="/cumulus-logo.png" alt="Cumulus Digital" />
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <div class="nav-links" id="mobile-menu">
+        {NAV_LINKS.map((link) => (
+          <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
+            {link.label}
+          </a>
+        ))}
+      </div>
+      <a class="nav-phone" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+      <a class="btn btn--primary" href="/contact/">Start a project</a>
+    </nav>
+
+    <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+</div>
+
+<script>
+  const headWrap = document.getElementById('site-head-wrap');
+  const setScrolled = () => headWrap?.classList.toggle('scrolled', window.scrollY > 60);
+  window.addEventListener('scroll', setScrolled, { passive: true });
+  setScrolled();
+
+  const burger = document.querySelector('.nav-burger');
+  const nav = document.querySelector('.nav');
+  const setOpen = (open: boolean) => {
+    burger?.setAttribute('aria-expanded', String(open));
+    burger?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    nav?.classList.toggle('nav--open', open);
+  };
+  burger?.addEventListener('click', () => {
+    setOpen(burger.getAttribute('aria-expanded') !== 'true');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+  nav?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+</script>

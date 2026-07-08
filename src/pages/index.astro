@@ -1,475 +1,341 @@
 ---
-import '../styles/global.css';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceCards from '../components/ServiceCards';
 import TestimonialCarousel from '../components/TestimonialCarousel';
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL, ADDRESS } from '../consts';
+
+const services = (await getCollection('services'))
+  .filter((s) => s.data.showOnHome)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const serviceItems = [
+  ...services.map((s) => ({
+    title: s.data.title,
+    summary: s.data.summary,
+    iconPath: s.data.iconPath,
+    href: `/services/#${s.id}`,
+    linkText: 'Learn more →',
+  })),
+  {
+    title: 'Travel Industry',
+    summary:
+      '25+ years of deep travel-sector expertise. We understand operators, agents, and travellers like no generic agency can.',
+    iconPath: 'M10 32Q18 10 24 28Q30 46 40 20M20 14L24 8L28 14',
+    href: '/about/#travel',
+    linkText: 'Our story →',
+  },
+];
+
+const work = (await getCollection('work'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 5);
+const testimonials = (await getCollection('testimonials')).map((t) => t.data);
 ---
 
-<!doctype html>
-<html lang="en-GB">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#141b38" />
-    <title>Cumulus Digital — Digital Marketing &amp; Web Design, Surrey</title>
-    <meta
-      name="description"
-      content="Bespoke branding, hand-built websites and SEO for ambitious UK businesses. 25+ years travel industry experience. Based in Walton-on-Thames, Surrey."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+<BaseLayout
+  title="Cumulus Digital — Digital Marketing & Web Design, Surrey"
+  description="Bespoke branding, hand-built websites and SEO for ambitious UK businesses. 25+ years travel industry experience. Based in Hersham, Walton-on-Thames, Surrey."
+>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="home">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-scrim" aria-hidden="true"></div>
 
-  <body>
+    <div class="hero-body">
+      <div class="hero-copy">
+        <p class="eyebrow reveal d1">
+          <span class="eyebrow-dot"></span>
+          Digital marketing &amp; web · Surrey, UK
+        </p>
 
-    <!-- ===================== STICKY HEADER ===================== -->
-    <div class="site-head-wrap" id="site-head-wrap">
-      <header class="site-head">
-        <a class="brand" href="/" aria-label="Cumulus Digital home">
-          <img class="brand-logo" src="/cumulus-logo.png" alt="Cumulus Digital" />
-        </a>
+        <h1 class="headline reveal d2">
+          It's about making<br />
+          ideas <em class="glow">happen</em>.
+        </h1>
 
-        <nav class="nav" aria-label="Primary">
-          <div class="nav-links">
-            <a href="#services">Services</a>
-            <a href="#work">Our Work</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </div>
-          <a class="nav-phone" href="tel:02080504754">020 8050 4754</a>
-          <a class="btn btn--primary" href="#contact">Start a project</a>
-        </nav>
+        <p class="lede reveal d3">
+          Bespoke branding, fast hand-built websites and search marketing
+          for ambitious UK businesses — backed by 25&nbsp;years in the
+          travel sector. Most clients see real impact within weeks.
+        </p>
 
-        <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-          <span></span><span></span><span></span>
-        </button>
-      </header>
+        <div class="cta-row reveal d4">
+          <a class="btn btn--primary btn--lg" href="/contact/">Start a project →</a>
+          <a class="btn btn--ghost btn--lg" href="/work/">See our work</a>
+        </div>
+
+        <ul class="trust reveal d5" aria-label="Trust signals">
+          <li><span class="tick" aria-hidden="true">✦</span> Bespoke, hand-built websites</li>
+          <li><span class="tick" aria-hidden="true">✦</span> 25+ yrs travel specialists</li>
+          <li><span class="tick" aria-hidden="true">✦</span> Hersham, Surrey</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- ===================== HERO ===================== -->
-    <section class="hero" id="home">
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>
-      <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-scroll-hint reveal d5" aria-hidden="true">
+      <span class="scroll-line"></span>
+      <span class="scroll-label">scroll</span>
+    </div>
+  </section>
 
-      <div class="hero-body">
-        <div class="hero-copy">
-          <p class="eyebrow reveal d1">
-            <span class="eyebrow-dot"></span>
-            Digital marketing &amp; web · Surrey, UK
-          </p>
+  <!-- ===================== TRUST BAND ===================== -->
+  <!-- TODO(owner): supply client logo files to turn this into a proper logo band -->
+  <section class="logos-band" aria-label="Who we work with">
+    <div class="container">
+      <p class="logos-label">
+        Trusted by Surrey businesses and travel brands — including Surrey Hills Surfacing
+      </p>
+    </div>
+  </section>
 
-          <h1 class="headline reveal d2">
-            It's about making<br />
-            ideas <em class="glow">happen</em>.
-          </h1>
-
-          <p class="lede reveal d3">
-            Bespoke branding, fast hand-built websites and search marketing
-            for ambitious UK businesses — backed by 25&nbsp;years in the
-            travel sector. Most clients see real impact within weeks.
-          </p>
-
-          <div class="cta-row reveal d4">
-            <a class="btn btn--primary btn--lg" href="#contact">Start a project →</a>
-            <a class="btn btn--ghost btn--lg" href="#work">See our work</a>
-          </div>
-
-          <ul class="trust reveal d5" aria-label="Trust signals">
-            <li><span class="tick" aria-hidden="true">✦</span> Google Partner</li>
-            <li><span class="tick" aria-hidden="true">✦</span> 25+ yrs travel specialists</li>
-            <li><span class="tick" aria-hidden="true">✦</span> Walton-on-Thames, Surrey</li>
-          </ul>
-        </div>
+  <!-- ===================== SERVICES ===================== -->
+  <section class="section services-section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we do</p>
+        <h2 class="section-title">
+          Everything you need<br />to grow online.
+        </h2>
+        <p class="section-sub">
+          From first impression to lasting impact — strategy, design, code,
+          and marketing that works together seamlessly.
+        </p>
       </div>
 
-      <div class="hero-scroll-hint reveal d5" aria-hidden="true">
-        <span class="scroll-line"></span>
-        <span class="scroll-label">scroll</span>
-      </div>
-    </section>
+      <ServiceCards items={serviceItems} client:visible />
+    </div>
+  </section>
 
-    <!-- ===================== CLIENT LOGOS ===================== -->
-    <section class="logos-band" aria-label="Clients we've worked with">
+  <!-- ===================== NUMBERS BAND ===================== -->
+  <section class="numbers-band">
+    <video
+      class="numbers-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      aria-hidden="true"
+    >
+      <source src="/numbers-band.webm" type="video/webm" />
+    </video>
+    <div class="numbers-content">
       <div class="container">
-        <p class="logos-label">Trusted by ambitious brands</p>
-        <ul class="logos-row" role="list">
-          <li><span class="logo-placeholder">OakBridge Group</span></li>
-          <li><span class="logo-placeholder">PSD Solutions</span></li>
-          <li><span class="logo-placeholder">Heritage Tours</span></li>
-          <li><span class="logo-placeholder">Surrey Ventures</span></li>
-          <li><span class="logo-placeholder">TravelCo</span></li>
-          <li><span class="logo-placeholder">Apex Media</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ===================== SERVICES ===================== -->
-    <section class="section services-section" id="services">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">What we do</p>
-          <h2 class="section-title">
-            Everything you need<br />to grow online.
-          </h2>
-          <p class="section-sub">
-            From first impression to lasting impact — strategy, design, code,
-            and marketing that works together seamlessly.
-          </p>
-        </div>
-
-        <ServiceCards client:visible />
-      </div>
-    </section>
-
-    <!-- ===================== NUMBERS BAND ===================== -->
-    <section class="numbers-band">
-      <video
-        class="numbers-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        aria-hidden="true"
-      >
-        <source src="/numbers-band.webm" type="video/webm" />
-      </video>
-      <div class="numbers-content">
-        <div class="container">
-          <ul class="numbers-row" role="list">
-            <li>
-              <strong class="number-val">25<span>+</span></strong>
-              <span class="number-label">Years travel experience</span>
-            </li>
-            <li>
-              <strong class="number-val">100<span>+</span></strong>
-              <span class="number-label">Brands launched</span>
-            </li>
-            <li>
-              <strong class="number-val">Weeks</strong>
-              <span class="number-label">Typical time to impact</span>
-            </li>
-            <li>
-              <strong class="number-val">Surrey</strong>
-              <span class="number-label">Based in Walton-on-Thames</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== VALUES ===================== -->
-    <section class="section values-section">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">How we work</p>
-          <h2 class="section-title">Our principles.</h2>
-          <p class="section-sub">Four things we believe that shape everything we do.</p>
-        </div>
-        <div class="values-grid">
-          <div class="value-card">
-            <span class="value-num">01</span>
-            <h3>We build, not bolt together</h3>
-            <p>Custom code, not plugin stacks. Every site we build is hand-crafted for speed, security and longevity — so you never outgrow it.</p>
-          </div>
-          <div class="value-card">
-            <span class="value-num">02</span>
-            <h3>We know your industry</h3>
-            <p>25+ years inside the travel sector means we ask smarter questions and skip the expensive learning curve most agencies charge you for.</p>
-          </div>
-          <div class="value-card">
-            <span class="value-num">03</span>
-            <h3>We move fast</h3>
-            <p>Most clients see measurable impact within weeks, not quarters. We're built for momentum — not endless rounds of revisions and bureaucracy.</p>
-          </div>
-          <div class="value-card">
-            <span class="value-num">04</span>
-            <h3>We stay partners</h3>
-            <p>We don't disappear post-launch. We're on hand for ongoing growth, iteration and support — because your success is how we measure ours.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== WORK ===================== -->
-    <section class="section work-section" id="work">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">Our work</p>
-          <h2 class="section-title">Ideas made real.</h2>
-          <p class="section-sub">
-            A selection of projects we're proud of — each one built to solve
-            a specific business problem and deliver measurable results.
-          </p>
-        </div>
-
-        <ul class="work-grid" role="list">
-
-          <li class="work-card work-card--wide">
-            <div class="work-card-inner">
-              <img
-                class="work-card-photo"
-                src="https://images.unsplash.com/photo-1467232004584-a241de8b1d1f?w=1200&auto=format&fit=crop&q=75"
-                alt="Bespoke website on laptop"
-                loading="lazy"
-              />
-              <div class="work-card-overlay"></div>
-              <div class="work-card-content">
-                <span class="work-tag">Branding + Web</span>
-                <h3>Full brand refresh &amp; bespoke build</h3>
-                <p>End-to-end identity and website for a Surrey professional services firm — from strategy through to launch.</p>
-                <a class="btn btn--ghost" href="#contact">Enquire about this →</a>
-              </div>
-            </div>
+        <ul class="numbers-row" role="list">
+          <li>
+            <strong class="number-val">25<span>+</span></strong>
+            <span class="number-label">Years travel experience</span>
           </li>
-
-          <li class="work-card">
-            <div class="work-card-inner">
-              <img
-                class="work-card-photo"
-                src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&auto=format&fit=crop&q=75"
-                alt="SEO analytics results"
-                loading="lazy"
-              />
-              <div class="work-card-overlay"></div>
-              <div class="work-card-content">
-                <span class="work-tag">SEO</span>
-                <h3>Organic traffic +340%</h3>
-                <p>Sustained SEO programme that tripled organic search visibility for a travel operator within six months.</p>
-              </div>
-            </div>
+          <li>
+            <strong class="number-val">2015</strong>
+            <span class="number-label">Serving Surrey since</span>
           </li>
-
-          <li class="work-card">
-            <div class="work-card-inner">
-              <img
-                class="work-card-photo"
-                src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&auto=format&fit=crop&q=75"
-                alt="Digital transformation travel brand"
-                loading="lazy"
-              />
-              <div class="work-card-overlay"></div>
-              <div class="work-card-content">
-                <span class="work-tag">Strategy + Digital Marketing</span>
-                <h3>Digital transformation for a heritage travel brand</h3>
-                <p>Advisory and execution across web, SEO, and paid channels — moving a traditional business online.</p>
-              </div>
-            </div>
+          <li>
+            <strong class="number-val">Weeks</strong>
+            <span class="number-label">Typical time to impact</span>
           </li>
-
-          <li class="work-card work-card--wide">
-            <div class="work-card-inner">
-              <img
-                class="work-card-photo"
-                src="https://images.unsplash.com/photo-1581291518857-4f2be5d6b28f?w=1200&auto=format&fit=crop&q=75"
-                alt="Custom web platform on multiple devices"
-                loading="lazy"
-              />
-              <div class="work-card-overlay"></div>
-              <div class="work-card-content">
-                <span class="work-tag">Web Development</span>
-                <h3>Custom web platform for a professional membership body</h3>
-                <p>Secure, fast, accessible — hand-built to spec, not stretched from a template.</p>
-                <a class="btn btn--ghost" href="#contact">Start something similar →</a>
-              </div>
-            </div>
+          <li>
+            <strong class="number-val">Surrey</strong>
+            <span class="number-label">Based in Hersham</span>
           </li>
         </ul>
+      </div>
+    </div>
+  </section>
 
-        <div class="work-cta">
-          <a class="btn btn--primary btn--lg" href="#contact">Discuss your project →</a>
+  <!-- ===================== VALUES ===================== -->
+  <section class="section values-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How we work</p>
+        <h2 class="section-title">Our principles.</h2>
+        <p class="section-sub">Four things we believe that shape everything we do.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card" data-reveal>
+          <span class="value-num">01</span>
+          <h3>We build, not bolt together</h3>
+          <p>Custom code, not plugin stacks. Every site we build is hand-crafted for speed, security and longevity — so you never outgrow it.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.1s">
+          <span class="value-num">02</span>
+          <h3>We know your industry</h3>
+          <p>25+ years inside the travel sector means we ask smarter questions and skip the expensive learning curve most agencies charge you for.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.2s">
+          <span class="value-num">03</span>
+          <h3>We move fast</h3>
+          <p>Most clients see measurable impact within weeks, not quarters. We're built for momentum — not endless rounds of revisions and bureaucracy.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.3s">
+          <span class="value-num">04</span>
+          <h3>We stay partners</h3>
+          <p>We don't disappear post-launch. We're on hand for ongoing growth, iteration and support — because your success is how we measure ours.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ===================== TRAVEL SPECIALISM ===================== -->
-    <section class="section travel-section" id="about">
-      <div class="container travel-inner">
-        <div class="travel-copy">
-          <p class="section-label">25+ years in travel</p>
-          <h2 class="section-title">
-            We know your<br />industry from the inside.
-          </h2>
-          <p class="travel-body">
-            Most digital agencies learn your sector from a brief. We've spent over
-            two decades working inside the travel industry — with operators, agents,
-            and destination brands. That means we ask better questions, spot the right
-            opportunities, and skip the expensive learning curve.
-          </p>
-          <ul class="travel-checklist">
-            <li>Tour operators &amp; travel agents</li>
-            <li>Destination marketing &amp; DMOs</li>
-            <li>Hospitality &amp; accommodation brands</li>
-            <li>Travel technology companies</li>
-          </ul>
-          <a class="btn btn--primary" href="#contact">Talk to a travel specialist →</a>
+  <!-- ===================== WORK ===================== -->
+  <section class="section work-section" id="work">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Our work</p>
+        <h2 class="section-title">Ideas made real.</h2>
+        <p class="section-sub">
+          Real websites and brands for Surrey businesses — from award-winning
+          builders to independent pubs and local trades.
+        </p>
+      </div>
+
+      <ul class="work-grid" role="list">
+        {work.map((item) => (
+          <li class={`work-card${item.data.wide ? ' work-card--wide' : ''}${item.data.placeholder ? ' work-card--placeholder' : ''}`}>
+            <div class="work-card-inner">
+              <div class="work-card-visual" aria-hidden="true"></div>
+              <span class="work-card-monogram" aria-hidden="true">
+                {item.data.client.split(' ').map((w) => w[0]).slice(0, 3).join('')}
+              </span>
+              <div class="work-card-overlay"></div>
+              <div class="work-card-content">
+                <span class="work-tag">{item.data.services.join(' + ')}</span>
+                <span class="work-client">{item.data.client}</span>
+                <h3>{item.data.title}</h3>
+                <p>{item.data.summary}</p>
+                {item.data.url && (
+                  <a class="btn btn--ghost" href={item.data.url} target="_blank" rel="noopener">
+                    Visit the site →
+                  </a>
+                )}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div class="work-cta">
+        <a class="btn btn--primary btn--lg" href="/work/">See all our work →</a>
+        <a class="btn btn--outline btn--lg" href="/contact/">Discuss your project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TRAVEL SPECIALISM ===================== -->
+  <section class="section travel-section" id="about">
+    <div class="container travel-inner">
+      <div class="travel-copy">
+        <p class="section-label">25+ years in travel</p>
+        <h2 class="section-title">
+          We know your<br />industry from the inside.
+        </h2>
+        <p class="travel-body">
+          Most digital agencies learn your sector from a brief. We've spent over
+          two decades working inside the travel industry — across operations,
+          marketing, product, IT and general management. That means we ask better
+          questions, spot the right opportunities, and skip the expensive learning curve.
+        </p>
+        <ul class="travel-checklist">
+          <li>Tour operators &amp; travel agents</li>
+          <li>Destination marketing &amp; DMOs</li>
+          <li>Hospitality &amp; accommodation brands</li>
+          <li>Travel technology companies</li>
+        </ul>
+        <a class="btn btn--primary" href="/about/#travel">Talk to a travel specialist →</a>
+      </div>
+
+      <div class="travel-photo-wrap" data-reveal>
+        <div class="brand-panel">
+          <img src="/cumulus-logo.png" alt="" loading="lazy" />
         </div>
-
-        <div class="travel-photo-wrap">
-          <img
-            src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&auto=format&fit=crop&q=80"
-            alt="Travel landscape — planes and destinations"
-            loading="lazy"
-          />
-          <div class="travel-photo-badge">
-            <strong>25+</strong>
-            <span>Years in travel</span>
-          </div>
+        <div class="travel-photo-badge">
+          <strong>25+</strong>
+          <span>Years in travel</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ===================== SURREY GEO ===================== -->
-    <section class="section surrey-section">
-      <div class="container surrey-inner">
-        <div class="surrey-photo-wrap">
-          <img
-            src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=900&auto=format&fit=crop&q=80"
-            alt="Surrey and surrounding areas"
-            loading="lazy"
-          />
+  <!-- ===================== SURREY GEO ===================== -->
+  <section class="section surrey-section">
+    <div class="container surrey-inner">
+      <div class="surrey-photo-wrap" data-reveal>
+        <div class="brand-panel brand-panel--short">
+          <img src="/cumulus-logo.png" alt="" loading="lazy" />
         </div>
-
-        <div class="surrey-copy">
-          <p class="section-label">Local to Surrey</p>
-          <h2 class="section-title">
-            Your local digital<br />agency in Surrey.
-          </h2>
-          <p class="travel-body">
-            Based in Walton-on-Thames, we serve ambitious businesses across Surrey
-            and the South East. We know the local market, the competition, and the
-            opportunities — and we bring national-agency quality to your doorstep.
-          </p>
-          <div class="surrey-areas">
-            <span class="surrey-tag">Walton-on-Thames</span>
-            <span class="surrey-tag">Guildford</span>
-            <span class="surrey-tag">Weybridge</span>
-            <span class="surrey-tag">Woking</span>
-            <span class="surrey-tag">Epsom</span>
-            <span class="surrey-tag">Kingston</span>
-            <span class="surrey-tag">Reigate</span>
-            <span class="surrey-tag">London</span>
-          </div>
-          <a class="btn btn--primary" href="#contact">Get a free consultation →</a>
+        <div class="travel-photo-badge">
+          <strong>KT12</strong>
+          <span>Hersham, Surrey</span>
         </div>
       </div>
-    </section>
 
-    <!-- ===================== TESTIMONIALS ===================== -->
-    <section class="section testimonials-section">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">What clients say</p>
-          <h2 class="section-title">Results speak first.</h2>
-          <p class="section-sub">
-            We measure success by what our clients achieve — not just what we deliver.
-          </p>
+      <div class="surrey-copy">
+        <p class="section-label">Local to Surrey</p>
+        <h2 class="section-title">
+          Your local digital<br />agency in Surrey.
+        </h2>
+        <p class="travel-body">
+          Based in Hersham, Walton-on-Thames, we serve ambitious businesses across
+          Surrey and the South East. We know the local market, the competition, and
+          the opportunities — and we bring national-agency quality to your doorstep.
+        </p>
+        <div class="surrey-areas">
+          <span class="surrey-tag">Walton-on-Thames</span>
+          <span class="surrey-tag">Hersham</span>
+          <span class="surrey-tag">Esher</span>
+          <span class="surrey-tag">Weybridge</span>
+          <span class="surrey-tag">Woking</span>
+          <span class="surrey-tag">Epsom</span>
+          <span class="surrey-tag">Kingston</span>
+          <span class="surrey-tag">London</span>
         </div>
-        <TestimonialCarousel client:visible />
+        <a class="btn btn--primary" href="/contact/">Get a free consultation →</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ===================== CTA ===================== -->
-    <section class="cta-section" id="contact">
-      <div class="container">
-        <div class="cta-inner">
-          <div class="cta-glow" aria-hidden="true"></div>
-          <p class="section-label">Ready to start?</p>
-          <h2 class="cta-headline">
-            Let's make your<br />idea <em class="glow">happen</em>.
-          </h2>
-          <p class="cta-sub">
-            Tell us about your project — we'll come back within one working day.
-          </p>
-          <div class="cta-actions">
-            <a class="btn btn--primary btn--lg" href="mailto:hello@cumulusdigital.co.uk">
-              Email us directly →
-            </a>
-            <a class="btn btn--ghost btn--lg" href="tel:02080504754">
-              020 8050 4754
-            </a>
-          </div>
-          <p class="cta-location">
-            Burwood Road, Hersham, Walton-on-Thames, Surrey KT12 4AG
-          </p>
-        </div>
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section class="section testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What clients say</p>
+        <h2 class="section-title">Results speak first.</h2>
+        <p class="section-sub">
+          We measure success by what our clients achieve — not just what we deliver.
+        </p>
       </div>
-    </section>
+      <TestimonialCarousel items={testimonials} client:visible />
+    </div>
+  </section>
 
-    <!-- ===================== FOOTER ===================== -->
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-brand">
-          <a class="brand" href="/" aria-label="Cumulus Digital home">
-            <img
-              class="brand-logo"
-              src="/cumulus-logo.png"
-              alt="Cumulus Digital"
-            />
+  <!-- ===================== CTA ===================== -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <p class="section-label">Ready to start?</p>
+        <h2 class="cta-headline">
+          Let's make your<br />idea <em class="glow">happen</em>.
+        </h2>
+        <p class="cta-sub">
+          Tell us about your project — we'll come back within one working day.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/">
+            Start a project →
           </a>
-          <p class="footer-tagline">It's about making ideas happen.</p>
+          <a class="btn btn--ghost btn--lg" href={`tel:${PHONE_TEL}`}>
+            {PHONE_DISPLAY}
+          </a>
         </div>
-
-        <nav class="footer-nav" aria-label="Footer">
-          <div class="footer-col">
-            <h4>Services</h4>
-            <a href="#services">Branding</a>
-            <a href="#services">Web Design</a>
-            <a href="#services">Web Development</a>
-            <a href="#services">Digital Marketing</a>
-            <a href="#services">Strategy &amp; Consulting</a>
-            <a href="#services">Travel Industry</a>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <a href="#about">About Us</a>
-            <a href="#work">Our Work</a>
-            <a href="#contact">Contact</a>
-          </div>
-          <div class="footer-col">
-            <h4>Contact</h4>
-            <a href="tel:02080504754">020 8050 4754</a>
-            <a href="mailto:hello@cumulusdigital.co.uk">hello@cumulusdigital.co.uk</a>
-            <p class="footer-address">
-              Burwood Road, Hersham<br />
-              Walton-on-Thames<br />
-              Surrey KT12 4AG
-            </p>
-          </div>
-        </nav>
+        <p class="cta-location">
+          {ADDRESS.street}, {ADDRESS.locality}, {ADDRESS.region} {ADDRESS.postcode}
+          &nbsp;·&nbsp; <a href={`mailto:${EMAIL}`} style="color:inherit">{EMAIL}</a>
+        </p>
       </div>
+    </div>
+  </section>
 
-      <div class="footer-base">
-        <div class="container footer-base-inner">
-          <p>&copy; 2025 Cumulus Digital Limited. All rights reserved.</p>
-          <div class="footer-legal">
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/terms">Terms of Use</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      import '../scripts/hero.js';
-    </script>
-
-    <script>
-      const headWrap = document.getElementById('site-head-wrap');
-      window.addEventListener('scroll', () => {
-        headWrap?.classList.toggle('scrolled', window.scrollY > 60);
-      }, { passive: true });
-
-      const burger = document.querySelector('.nav-burger');
-      const nav = document.querySelector('.nav');
-      burger?.addEventListener('click', () => {
-        const open = burger.getAttribute('aria-expanded') === 'true';
-        burger.setAttribute('aria-expanded', String(!open));
-        nav?.classList.toggle('nav--open', !open);
-      });
-    </script>
-
-  </body>
-</html>
+  <script>
+    import '../scripts/hero.js';
+  </script>
+</BaseLayout>

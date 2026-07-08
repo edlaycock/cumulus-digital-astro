@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { COMPANY_LEGAL_NAME, COMPANY_NUMBER, EMAIL, ADDRESS } from '../consts';
+---
+
+<!-- TODO(owner): have these terms reviewed before launch. -->
+
+<BaseLayout
+  title="Terms of Use | Cumulus Digital"
+  description="Terms of use for the Cumulus Digital website."
+>
+  <PageHero eyebrow="Legal" lede="The terms that apply when you use this website.">
+    Terms of <em class="glow">use</em>.
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="prose">
+        <p>
+          This website is operated by {COMPANY_LEGAL_NAME}, registered in England &amp;
+          Wales (company no. {COMPANY_NUMBER}) at {ADDRESS.street}, {ADDRESS.locality},
+          {ADDRESS.region} {ADDRESS.postcode}. By using this site you accept these terms.
+        </p>
+
+        <h2>Use of this site</h2>
+        <p>
+          The content of this website is for general information about our services.
+          You may browse, and print or save pages for your own use. You may not copy,
+          republish or reuse content from this site for commercial purposes without
+          our written permission.
+        </p>
+
+        <h2>Intellectual property</h2>
+        <p>
+          Unless stated otherwise, the design, text, graphics and logos on this site
+          are owned by or licensed to {COMPANY_LEGAL_NAME}. Client names and logos
+          shown remain the property of their respective owners.
+        </p>
+
+        <h2>Accuracy and availability</h2>
+        <p>
+          We work to keep this site accurate and available, but we provide it "as is"
+          and don't guarantee it will be uninterrupted or error-free. Nothing on this
+          site constitutes professional advice for your specific circumstances —
+          contact us and we'll advise properly.
+        </p>
+
+        <h2>Links to other sites</h2>
+        <p>
+          Where we link to third-party websites (including client sites), we're not
+          responsible for their content or privacy practices.
+        </p>
+
+        <h2>Liability</h2>
+        <p>
+          To the extent permitted by law, we exclude liability for any loss arising
+          from use of this website. Nothing in these terms excludes liability that
+          cannot be excluded under English law.
+        </p>
+
+        <h2>Governing law</h2>
+        <p>
+          These terms are governed by the laws of England and Wales, and any disputes
+          are subject to the exclusive jurisdiction of the English courts.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about these terms? Email <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

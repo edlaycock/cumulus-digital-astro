@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL, ADDRESS } from '../consts';
+---
+
+<BaseLayout
+  title="Contact — Start a Project | Cumulus Digital"
+  description="Get in touch with Cumulus Digital, your Surrey web design and digital marketing agency. Call 020 8050 4754 or send us a message — we reply within one working day."
+>
+  <PageHero
+    eyebrow="Contact"
+    lede="Tell us about your project — we'll come back within one working day."
+  >
+    Let's make your<br />idea <em class="glow">happen</em>.
+  </PageHero>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <ContactForm />
+
+      <aside class="contact-aside">
+        <h3>Prefer to talk?</h3>
+        <div class="contact-aside-item">
+          <span class="label">Phone</span>
+          <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        </div>
+        <div class="contact-aside-item">
+          <span class="label">Email</span>
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        </div>
+        <div class="contact-aside-item">
+          <span class="label">Studio</span>
+          <address>
+            {ADDRESS.street}<br />
+            {ADDRESS.locality}<br />
+            {ADDRESS.region} {ADDRESS.postcode}
+          </address>
+        </div>
+        <div class="contact-aside-item">
+          <span class="label">Hours</span>
+          <address>Monday–Friday, 9am–5:30pm</address>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
