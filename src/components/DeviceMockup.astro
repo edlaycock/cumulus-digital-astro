@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  client: string;
+  url?: string;
+  desktop?: ImageMetadata;
+  mobile?: ImageMetadata;
+  eager?: boolean;
+}
+
+const { client, url, desktop, mobile, eager = false } = Astro.props;
+const domain = url ? url.replace(/^https?:\/\//, '').replace(/\/$/, '') : null;
+const loading = eager ? 'eager' : 'lazy';
+---
+
+<div class={`device-mockup${mobile ? ' device-mockup--pair' : ''}`}>
+  <div class="device-laptop">
+    <div class="device-laptop-screen">
+      {desktop ? (
+        <Image src={desktop} alt={`${client} website — desktop`} widths={[600, 1000, 1600]} sizes="(max-width: 720px) 90vw, 900px" loading={loading} />
+      ) : (
+        <div class="device-ph">
+          <span class="device-ph-dot" aria-hidden="true"></span>
+          {domain && <span class="device-ph-url">{domain}</span>}
+          <span class="device-ph-note">site preview</span>
+        </div>
+      )}
+    </div>
+    <div class="device-laptop-base" aria-hidden="true"><span></span></div>
+  </div>
+
+  {mobile && (
+    <div class="device-phone">
+      <div class="device-phone-screen">
+        <Image src={mobile} alt={`${client} website — mobile`} widths={[240, 420]} sizes="220px" loading={loading} />
+      </div>
+    </div>
+  )}
+</div>
