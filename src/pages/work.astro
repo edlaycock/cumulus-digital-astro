@@ -24,7 +24,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
         {work.map((item) => (
           <li class={`work-card${item.data.wide ? ' work-card--wide' : ''}`}>
             <a class="work-card-inner" href={`/work/${item.id}/`}>
-              <WorkPreview client={item.data.client} url={item.data.url} image={item.data.image} />
+              <WorkPreview client={item.data.client} url={item.data.url} image={item.data.mockup ?? item.data.image} />
               <div class="work-card-content">
                 <span class="work-tag">{item.data.services.join(' + ')}</span>
                 <span class="work-client">{item.data.client}</span>

@@ -27,9 +27,18 @@ const work = defineCollection({
       wide: z.boolean().default(false),
       // true → rendered as an explicit "your project here" slot, never as a real case study
       placeholder: z.boolean().default(false),
-      // real site screenshot; when absent the browser frame shows the branded monogram
+      // brand/hero photo; darkened hero-background fallback
       image: image().optional(),
-      // optional structured case-study fields (filled once the owner supplies detail)
+      // finished device-mockup image (laptop/phones) — used as work thumbnail AND case-study hero background
+      mockup: image().optional(),
+      // raw site screenshots for the CSS DeviceMockup fallback (when no finished mockup)
+      screenshotDesktop: image().optional(),
+      screenshotMobile: image().optional(),
+      // short sector label, e.g. "Construction · Groundworks & Surfacing"
+      sector: z.string().optional(),
+      // brand palette swatches as hex strings, e.g. ["#E6A91A", "#1A1A1A"]
+      brandColors: z.array(z.string()).optional(),
+      // structured case-study narrative (Damteq-style)
       challenge: z.string().optional(),
       approach: z.string().optional(),
       result: z.string().optional(),

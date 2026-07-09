@@ -1,7 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
+import DeviceMockup from '../../components/DeviceMockup.astro';
 import WorkPreview from '../../components/WorkPreview.astro';
 
 export async function getStaticPaths() {
@@ -12,89 +13,111 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
-const initials = d.client.split(' ').map((w) => w[0]).slice(0, 3).join('');
-const hasStructured = Boolean(d.challenge || d.approach || d.result);
+
+const heroImg = d.mockup ?? d.image;
+const hasMockupDevices = Boolean(d.screenshotDesktop);
+const domain = d.url ? d.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : null;
+
+const related = (await getCollection('work'))
+  .filter((w) => w.id !== entry.id && !w.data.placeholder)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
 ---
 
-<BaseLayout
-  title={`${d.client} — Case Study | Cumulus Digital`}
-  description={d.summary}
->
-  <PageHero eyebrow={`Case study · ${d.client}`}>
-    {d.title}
-  </PageHero>
-
-  <section class="casestudy-preview-section">
-    <div class="container">
-      <div class="casestudy-preview" data-reveal>
-        <WorkPreview client={d.client} url={d.url} image={d.image} eager />
+<BaseLayout title={`${d.client} — Case Study | Cumulus Digital`} description={d.summary}>
+  <!-- HERO -->
+  <section class="cs-hero">
+    {heroImg && (
+      <Image class="cs-hero-bg" src={heroImg} alt="" widths={[800, 1400, 2000]} sizes="100vw" loading="eager" />
+    )}
+    <div class="cs-hero-scrim" aria-hidden="true"></div>
+    <div class="container cs-hero-inner">
+      <nav class="cs-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a> <span>›</span> <a href="/work/">Case Studies</a> <span>›</span> <span>{d.client}</span>
+      </nav>
+      {d.sector && <p class="cs-eyebrow">{d.sector}</p>}
+      <h1 class="cs-title">{d.title}</h1>
+      <ul class="cs-tags" role="list">{d.services.map((s) => <li>{s}</li>)}</ul>
+      <div class="cs-hero-cta">
+        {d.url && (
+          <a class="btn btn--primary btn--lg" href={d.url} target="_blank" rel="noopener" data-magnetic>Visit the live site →</a>
+        )}
+        <a class="btn btn--ghost btn--lg" href="/contact/">Start a project like this</a>
       </div>
     </div>
   </section>
 
-  <section class="section casestudy-body">
-    <div class="container casestudy">
-      <div class="casestudy-main">
-        <ul class="casestudy-tags" role="list">
-          {d.services.map((s) => <li class="work-tag">{s}</li>)}
-        </ul>
+  <!-- BODY -->
+  <section class="section cs-overview">
+    <div class="container cs-grid">
+      <div class="cs-body">
+        <p class="cs-lede">{d.summary}</p>
+        <div class="prose"><Content /></div>
 
-        {hasStructured ? (
-          <div class="casestudy-sections">
-            <p class="casestudy-lede">{d.summary}</p>
-            {d.challenge && (
-              <div class="casestudy-block"><h2>The challenge</h2><p>{d.challenge}</p></div>
-            )}
-            {d.approach && (
-              <div class="casestudy-block"><h2>What we did</h2><p>{d.approach}</p></div>
-            )}
-            {d.result && (
-              <div class="casestudy-block"><h2>The result</h2><p>{d.result}</p></div>
-            )}
+        {d.challenge && (<div class="cs-block" data-reveal><h2>The challenge</h2><p>{d.challenge}</p></div>)}
+
+        {hasMockupDevices && (
+          <div class="cs-devices" data-reveal>
+            <DeviceMockup client={d.client} url={d.url} desktop={d.screenshotDesktop} mobile={d.screenshotMobile} />
           </div>
-        ) : (
-          <div class="prose"><Content /></div>
         )}
 
+        {d.approach && (<div class="cs-block" data-reveal><h2>What we did</h2><p set:html={d.approach} /></div>)}
+
+        {d.brandColors && d.brandColors.length > 0 && (
+          <div class="cs-block cs-swatches-block" data-reveal>
+            <h2>Brand palette</h2>
+            <ul class="cs-swatches" role="list">
+              {d.brandColors.map((c) => (<li><span class="cs-swatch" style={`background:${c}`}></span><code>{c}</code></li>))}
+            </ul>
+          </div>
+        )}
+
+        {d.result && (<div class="cs-block" data-reveal><h2>The result</h2><p set:html={d.result} /></div>)}
+
         {d.metrics && d.metrics.length > 0 && (
-          <ul class="casestudy-metrics" role="list">
-            {d.metrics.map((m) => (
-              <li>
-                <strong>{m.value}</strong>
-                <span>{m.label}</span>
-              </li>
-            ))}
+          <ul class="cs-metrics" role="list">
+            {d.metrics.map((m) => (<li><strong>{m.value}</strong><span>{m.label}</span></li>))}
           </ul>
         )}
 
-        <div class="casestudy-actions">
-          {d.url && (
-            <a class="btn btn--outline btn--lg" href={d.url} target="_blank" rel="noopener">
-              Visit the live site →
-            </a>
-          )}
+        <div class="cs-actions">
+          {d.url && (<a class="btn btn--outline btn--lg" href={d.url} target="_blank" rel="noopener">Visit the live site →</a>)}
           <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project like this →</a>
         </div>
-        <a class="casestudy-back" href="/work/">← Back to all work</a>
       </div>
 
-      <aside class="casestudy-aside">
-        <div class="casestudy-card">
-          <div class="casestudy-monogram" aria-hidden="true">{initials}</div>
+      <aside class="cs-aside">
+        <div class="cs-card">
           <dl>
-            <dt>Client</dt>
-            <dd>{d.client}</dd>
-            <dt>What we did</dt>
-            <dd>{d.services.join(', ')}</dd>
-            {d.url && (
-              <>
-                <dt>Live site</dt>
-                <dd><a href={d.url} target="_blank" rel="noopener">{d.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a></dd>
-              </>
-            )}
+            <dt>Client</dt><dd>{d.client}</dd>
+            {d.sector && (<><dt>Sector</dt><dd>{d.sector}</dd></>)}
+            <dt>What we did</dt><dd>{d.services.join(', ')}</dd>
+            {domain && (<><dt>Live site</dt><dd><a href={d.url} target="_blank" rel="noopener">{domain}</a></dd></>)}
           </dl>
         </div>
       </aside>
+    </div>
+  </section>
+
+  <!-- RELATED -->
+  <section class="section cs-related">
+    <div class="container">
+      <div class="section-header"><h2 class="section-title">Explore other case studies</h2></div>
+      <ul class="work-grid" role="list">
+        {related.map((item) => (
+          <li class="work-card">
+            <a class="work-card-inner" href={`/work/${item.id}/`}>
+              <WorkPreview client={item.data.client} url={item.data.url} image={item.data.mockup ?? item.data.image} />
+              <div class="work-card-content">
+                <span class="work-client">{item.data.client}</span>
+                <h3>{item.data.title}</h3>
+                <span class="work-card-cta">View case study →</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </BaseLayout>
