@@ -7,9 +7,7 @@ summary: "A bold, credibility-first website for a Leatherhead demolition, ground
 order: 7.1
 url: https://surreycontracting.co.uk
 image: ../../assets/work/surrey-contracting.jpg
-# TODO(owner): commit the finished device mockup to src/assets/work/surrey-contracting-mockup.png
-# then uncomment the next line — it becomes the work thumbnail AND the case-study hero background.
-# mockup: ../../assets/work/surrey-contracting-mockup.png
+mockup: ../../assets/work/surrey-contracting-mockup.jpg
 brandColors: ["#E6A91A", "#1A1A1A", "#F5F5F0"]
 challenge: "Surrey Contracting Limited has 15+ years on site and self-delivers every job — demolition, groundworks, bulk earthworks and commercial surfacing across Surrey, London and the South East. Their standing with commercial clients and developers had outgrown their web presence: the old site didn't convey the scale of the work, made their four core disciplines hard to tell apart, and gave serious buyers little reason to trust or enquire."
 approach: "We designed and built a confident, industrial brand-led website. The palette — a strong safety-gold against near-black charcoal — was pulled straight from their livery and plant. A bold 'Built on Experience. Driven by Quality.' hero sets the tone, then clear, separated sections break down each discipline. We foregrounded the things buyers actually check: accreditations (CHAS, SafeContractor, SSIP), a plain-English four-step delivery process, and a projects gallery drawn from real sites. A prominent, low-friction 'Request a quote' flow runs throughout, and the whole build is fast and fully responsive."
