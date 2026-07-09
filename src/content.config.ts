@@ -31,6 +31,8 @@ const work = defineCollection({
       image: image().optional(),
       // finished device-mockup image (laptop/phones) — used as work thumbnail AND case-study hero background
       mockup: image().optional(),
+      // extra device-mockup images shown in the case-study body showcase
+      gallery: z.array(image()).optional(),
       // raw site screenshots for the CSS DeviceMockup fallback (when no finished mockup)
       screenshotDesktop: image().optional(),
       screenshotMobile: image().optional(),

@@ -1824,3 +1824,23 @@ h1.headline em.glow, .cta-headline em.glow {
 .cs-card dd { font-weight: 600; color: var(--lt-text); }
 .cs-card dd a { color: var(--cyan); text-decoration: none; }
 .cs-related { background: var(--grey-50); }
+
+/* ============================================================
+   CASE STUDY — device showcase gallery
+   ============================================================ */
+.cs-showcase { background: var(--grey-50); }
+.cs-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.2rem, 3vw, 2.4rem);
+}
+@media (max-width: 720px) { .cs-gallery { grid-template-columns: 1fr; } }
+.cs-shot {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--lt-border);
+}
+.cs-shot--wide { grid-column: 1 / -1; }
+.cs-shot img { width: 100%; height: auto; display: block; }
