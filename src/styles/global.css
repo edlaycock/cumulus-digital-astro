@@ -1830,11 +1830,11 @@ h1.headline em.glow, .cta-headline em.glow {
    ============================================================ */
 .cs-showcase { background: var(--grey-50); }
 .cs-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: clamp(1.2rem, 3vw, 2.4rem);
 }
-@media (max-width: 720px) { .cs-gallery { grid-template-columns: 1fr; } }
 .cs-shot {
   margin: 0;
   border-radius: var(--radius);
@@ -1842,5 +1842,6 @@ h1.headline em.glow, .cta-headline em.glow {
   background: var(--white);
   border: 1px solid var(--lt-border);
 }
-.cs-shot--wide { grid-column: 1 / -1; }
 .cs-shot img { width: 100%; height: auto; display: block; }
+.cs-shot--wide { flex: 1 1 100%; }
+.cs-shot--portrait { flex: 0 1 360px; max-width: 360px; }

@@ -107,8 +107,8 @@ const related = (await getCollection('work'))
         <div class="section-header"><p class="section-label">A closer look</p><h2 class="section-title">The site, on every screen.</h2></div>
         <div class="cs-gallery">
           {d.gallery.map((img, i) => (
-            <figure class={`cs-shot${i === 0 ? ' cs-shot--wide' : ''}`} data-reveal style={`--reveal-delay:${i * 0.08}s`}>
-              <Image src={img} alt={`${d.client} website mockup`} widths={[600, 1000, 1600]} sizes="(max-width: 860px) 100vw, 900px" loading="lazy" />
+            <figure class={`cs-shot ${img.height > img.width ? 'cs-shot--portrait' : 'cs-shot--wide'}`} data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+              <Image src={img} alt={`${d.client} website mockup`} widths={[420, 900, 1400]} sizes="(max-width: 860px) 100vw, 900px" loading="lazy" />
             </figure>
           ))}
         </div>
