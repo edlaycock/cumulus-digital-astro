@@ -28,7 +28,9 @@ const serviceItems = [
   },
 ];
 
-const sortedWork = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const sortedWork = (await getCollection('work'))
+  .filter((w) => !w.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
 const work = sortedWork.slice(0, 5);
 const clients = sortedWork.map((w) => w.data.client);
 const testimonials = (await getCollection('testimonials')).map((t) => t.data);

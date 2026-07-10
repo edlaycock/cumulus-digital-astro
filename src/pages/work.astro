@@ -4,7 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import WorkPreview from '../components/WorkPreview.astro';
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const work = (await getCollection('work'))
+  .filter((w) => !w.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout

@@ -27,6 +27,8 @@ const work = defineCollection({
       wide: z.boolean().default(false),
       // true → rendered as an explicit "your project here" slot, never as a real case study
       placeholder: z.boolean().default(false),
+      // true → excluded from the site (e.g. projects that are still Lorem-Ipsum placeholders on the live site)
+      draft: z.boolean().default(false),
       // brand/hero photo; darkened hero-background fallback
       image: image().optional(),
       // finished device-mockup image (laptop/phones) — used as work thumbnail AND case-study hero background

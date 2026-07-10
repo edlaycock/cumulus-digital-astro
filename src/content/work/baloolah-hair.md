@@ -1,17 +1,18 @@
 ---
-title: "Brand & website for a Cobham hair salon"
-client: "Baloolah Hair"
-sector: "Beauty · Hair Salon"
-services: ["Branding", "Web Design"]
-summary: "A Cobham hair salon that treats every client individually — branding and a website reflecting their personal, tailored approach."
+title: Brand & website for a Cobham hair salon
+client: Baloolah Hair
+sector: Beauty · Hair Salon
+services:
+- Branding
+- Web Design
+summary: A Cobham hair salon that treats every client individually — branding and a website reflecting their personal, tailored approach.
 order: 9
 image: ../../assets/work/baloolah-hair.jpg
-brandColors: ["#EDA13B", "#B9A794", "#2A2622"]
-challenge: "There has been a hair salon on Bray Road in Cobham for more than 30 years, and under new ownership it was relaunching as Baloolah Hair. The salon needed a fresh identity and website that carried the warmth of its established reputation while signalling a more personal, tailored approach for every client."
-approach: "Cumulus created a clean brand mark built around a soft amber circle and gentle lettering, then carried that identity into a calm, uncluttered website. Photography of the salon's bright, mirror-lined interior does the heavy lifting, with the warm orange accent and generous neutral space reflecting the relaxed, individual attention the salon is known for."
-result: "The relaunch gave Baloolah a cohesive new identity and an inviting website that reflects its friendly, one-to-one style."
+brandColors:
+- '#f39200'
+- '#949092'
+- '#000000'
+challenge: There has been a hair salon on Bray Road in Cobham for more than 30 years, and under new ownership it was relaunching as Baloolah Hair. The salon needed a fresh identity and website that carried the warmth of its established reputation while signalling a more personal, tailored approach for every client.
+approach: Baloolah is another business where we upgraded their outdated website, and as they are located in Elmbridge, they took advantage of the "Digital High Street" fund which allowed them to dive into the world of e-commerce. This enabled Baloolah to take its offering of selling hair and lifestyle products from their shop in Cobham to an online shop. Baloolah has been through a journey of rebranding and refurbishment since February 2016 it’s with a name, look, feel and now new website.
+result: Baloolah moved from a Cobham salon to selling hair and lifestyle products online — backed by a rebrand and a new e-commerce website, part of a journey of rebranding and refurbishment the business has been on since 2016.
 ---
-
-<!-- Copy inferred from Baloolah Hair's public brand & site · TODO(owner): confirm and expand. -->
-
-A Cobham hair salon that treats every client individually — branding and a website reflecting their personal, tailored approach.
