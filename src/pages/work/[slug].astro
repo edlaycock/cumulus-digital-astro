@@ -6,7 +6,7 @@ import DeviceMockup from '../../components/DeviceMockup.astro';
 import WorkPreview from '../../components/WorkPreview.astro';
 
 export async function getStaticPaths() {
-  const work = await getCollection('work');
+  const work = (await getCollection('work')).filter((w) => !w.data.draft);
   return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 
@@ -19,7 +19,7 @@ const hasMockupDevices = Boolean(d.screenshotDesktop);
 const domain = d.url ? d.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : null;
 
 const related = (await getCollection('work'))
-  .filter((w) => w.id !== entry.id && !w.data.placeholder)
+  .filter((w) => w.id !== entry.id && !w.data.placeholder && !w.data.draft)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 ---
