@@ -1,13 +1,5 @@
 # CLAUDE.md — Premium Site Project
 
-> Drop this file in the same folder as the PDF that came with it, then open that folder in Claude. Claude reads it automatically and uses it to bias every choice toward premium output.
->
-> No setup needed. You only do this once per project.
->
-> **You never need to read or understand what's below — it's a note for Claude, not for you.** It's here so Claude builds the technical side well while you stay focused on the taste and the direction.
-
----
-
 ## What this project builds
 
 Modern, motion-driven websites with a premium agency feel. Editorial typography, scroll-triggered animations, video-first or image-first heroes, restraint over decoration. The output should look like a $2k+ client site — not a template.
@@ -45,40 +37,9 @@ When relevant, use the skills the user installed (official ones from the "+" ins
 
 If a skill isn't installed, suggest the user install it. Don't refuse the task without it.
 
-## Visual generation prompts (Nano Banana 2 / Google AI Studio)
+## Visual and motion asset prompts
 
-When the user wants a hero image, an illustration, or any visual asset, **don't ask them to write the prompt themselves**. Write it for them.
-
-The user gives a casual brief in one line ("a perfume bottle floating mid-air, soft blurred background"). Take that and expand it into a complete prompt with:
-
-- **Subject** — what's the focal object
-- **Lighting** — direction, hardness, color temperature
-- **Mood** — cinematic, editorial, gritty, soft
-- **Composition** — rule of thirds, centered, off-center, depth of field
-- **Aspect ratio** — 16:9 for hero, 1:1 for square, 9:16 for mobile-vertical
-- **Style cues** — "cinematic film still", "editorial photography", "matte 3D render"
-
-Hand the user the full prompt. They paste it into Google AI Studio with Nano Banana 2 selected and generate 3–4 variations.
-
-**Settings vs prompt** — important. Aspect ratio and resolution are controlled by the **right-side panel** in Google AI Studio, not by the prompt. Always remind the user to:
-
-1. Set the **aspect ratio** in the right-side panel (16:9 hero, 1:1 square, 9:16 vertical) to match the prompt
-2. Bump **resolution to 4K** for premium output (the default is lower)
-
-Keep the aspect ratio in the prompt too — it's a hint the model honors better when reinforced — but the selector is what actually controls the output dimensions.
-
-## Motion / video prompts (Kling AI)
-
-Same pattern for animating a still into a video.
-
-The user uploads an image to Kling. You write the **motion prompt** with:
-
-- **One motion only** per prompt (multiple motions confuse the model)
-- Duration: 5 seconds, looped
-- Camera move described in plain words (slow push-in, gentle pan-right, subtle parallax)
-- "Make it loop" explicitly stated
-
-For more ambitious shots (scene morph, start frame + end frame), tell the user about Kling's "Image-to-Video with End Frame" feature and have them generate a second image to use as the end frame. Then you stitch the clips together inside the project — no external editor needed.
+When the user wants an image generated (Nano Banana 2) or a still animated into video (Kling AI), use the skills `nano-banana-prompts` and `kling-motion-prompts` in `.claude/skills/` — write the full prompt for the user, never ask them to write it themselves.
 
 ## Hero section guidelines
 
@@ -216,11 +177,7 @@ If they paste a screenshot or URL of a site they like:
 
 ## Deploying
 
-When the user is ready to put the site online:
-
-1. Tell them to sign up at [vercel.com](https://vercel.com) (free, no card needed)
-2. Offer to deploy for them: *"I can connect this project to Vercel and put it online. You'll just need to click 'yes' on Vercel a couple of times when it asks for permission."*
-3. After the first deploy, every change can be redeployed with a single *"redeploy"* in chat — no manual uploads.
+Deployment target is Vercel. When the user is ready to put the site online, use the `deploy-vercel` skill in `.claude/skills/`.
 
 ## Anti-patterns (don't do these)
 
@@ -236,27 +193,9 @@ When the user is ready to put the site online:
 - ❌ Hero text smaller than 40px on desktop
 - ❌ Pure black `#000000` or pure white `#FFFFFF` backgrounds
 
-## File structure (Next.js App Router default)
+## File structure
 
-```
-project/
-├── app/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   └── globals.css
-├── components/
-│   ├── hero.tsx
-│   ├── about.tsx
-│   ├── footer.tsx
-│   └── ui/        ← imported from 21st.dev
-├── public/
-│   ├── hero.mp4
-│   └── og-image.jpg
-├── tailwind.config.ts
-└── package.json
-```
-
-Keep components small. One file per section. If a section grows past 80 lines, split it.
+Follow the layout already in the repo. Keep components small. One file per section. If a section grows past 80 lines, split it.
 
 ## Tone for code comments
 
