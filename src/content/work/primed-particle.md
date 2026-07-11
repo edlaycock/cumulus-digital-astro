@@ -8,6 +8,10 @@ services:
 summary: Freshly-made particles and high-quality hookbaits for carp anglers — an online shop built to capture the brand's explosive energy and sell direct.
 order: 4
 image: ../../assets/work/primed-particle.jpg
+gallery:
+- ../../assets/work/primed-particle-shot1.png
+- ../../assets/work/primed-particle-shot2.png
+- ../../assets/work/primed-particle-shot3.png
 brandColors:
 - '#222620'
 - '#514934'

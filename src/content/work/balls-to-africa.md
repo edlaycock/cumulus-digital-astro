@@ -7,6 +7,9 @@ services:
 summary: A charity collecting second-hand sports balls and kits and distributing them to orphanages and communities in Africa.
 order: 20
 image: ../../assets/work/balls-to-africa.jpg
+gallery:
+- ../../assets/work/balls-to-africa-shot1.jpg
+- ../../assets/work/balls-to-africa-shot2.jpg
 brandColors:
 - '#901914'
 - '#000000'
