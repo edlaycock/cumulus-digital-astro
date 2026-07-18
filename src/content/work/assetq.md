@@ -12,6 +12,8 @@ gallery:
 - ../../assets/work/assetq-shot1.jpg
 - ../../assets/work/assetq-shot2.png
 - ../../assets/work/assetq-shot3.png
+screenshotDesktop: ../../assets/work/assetq-desktop.jpg
+screenshotMobile: ../../assets/work/assetq-mobile.jpg
 url: https://www.assetq.com
 brandColors:
 - '#bfb79e'

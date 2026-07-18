@@ -10,6 +10,8 @@ order: 7.5
 image: ../../assets/work/hersham-village.jpg
 gallery:
 - ../../assets/work/hersham-village-home.jpg
+screenshotDesktop: ../../assets/work/hersham-village-desktop.jpg
+screenshotMobile: ../../assets/work/hersham-village-mobile.jpg
 url: https://hershamvillage.co.uk
 brandColors:
 - '#ee7133'
