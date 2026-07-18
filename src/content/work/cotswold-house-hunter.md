@@ -5,6 +5,8 @@ sector: "Property · Buying Agent"
 services: ["Branding", "Web Design"]
 summary: "An independent buying agent finding exceptional and off-market homes across Gloucestershire, Oxfordshire and Wiltshire — an elegant website befitting the premium Cotswold market."
 order: 7.2
+screenshotDesktop: ../../assets/work/cotswold-house-hunter-desktop.jpg
+screenshotMobile: ../../assets/work/cotswold-house-hunter-mobile.jpg
 url: https://www.cotswoldhousehunter.co.uk
 image: ../../assets/work/cotswold-house-hunter.jpg
 brandColors: ["#C2A878", "#3F4A3A", "#F3EEE5"]

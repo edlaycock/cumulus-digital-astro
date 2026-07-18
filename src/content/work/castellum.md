@@ -10,6 +10,8 @@ order: 1
 image: ../../assets/work/castellum.jpg
 gallery:
 - ../../assets/work/castellum-projects.jpg
+screenshotDesktop: ../../assets/work/castellum-desktop.jpg
+screenshotMobile: ../../assets/work/castellum-mobile.jpg
 url: https://castellum.co.uk
 brandColors:
 - '#986a4d'

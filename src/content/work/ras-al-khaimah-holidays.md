@@ -10,6 +10,8 @@ order: 3.6
 image: ../../assets/work/ras-al-khaimah-holidays.jpg
 gallery:
 - ../../assets/work/ras-al-khaimah-holidays-home.jpg
+screenshotDesktop: ../../assets/work/ras-al-khaimah-holidays-desktop.jpg
+screenshotMobile: ../../assets/work/ras-al-khaimah-holidays-mobile.jpg
 url: https://rasalkhaimahholidays.co.uk
 brandColors:
 - '#a5323c'

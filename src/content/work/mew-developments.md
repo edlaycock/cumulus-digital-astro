@@ -12,6 +12,8 @@ gallery:
 - ../../assets/work/mew-developments-shot1.jpg
 - ../../assets/work/mew-developments-shot2.jpg
 - ../../assets/work/mew-developments-shot3.jpg
+screenshotDesktop: ../../assets/work/mew-developments-desktop.jpg
+screenshotMobile: ../../assets/work/mew-developments-mobile.jpg
 url: https://mewdevelopments.com
 brandColors:
 - '#03A5DB'

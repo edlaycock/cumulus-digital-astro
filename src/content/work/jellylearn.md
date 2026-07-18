@@ -5,6 +5,8 @@ sector: "Road Safety · EdTech"
 services: ["Web Design", "Web Development"]
 summary: "The world leader in hazard-perception training and testing — evidence-based road-safety content used in the UK theory test and by learners across 30+ countries."
 order: 7.3
+screenshotDesktop: ../../assets/work/jellylearn-desktop.jpg
+screenshotMobile: ../../assets/work/jellylearn-mobile.jpg
 url: https://www.jellylearn.com
 image: ../../assets/work/jellylearn.png
 brandColors: ["#152A4A", "#C0392B", "#F4F5F7"]
