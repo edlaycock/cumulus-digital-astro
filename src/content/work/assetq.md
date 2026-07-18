@@ -8,6 +8,10 @@ services:
 summary: The leading semi-automated solution for suitability checks on client investments — a data-rich regtech platform presented clearly for a demanding professional audience.
 order: 2
 image: ../../assets/work/assetq.jpg
+gallery:
+- ../../assets/work/assetq-shot1.jpg
+- ../../assets/work/assetq-shot2.png
+- ../../assets/work/assetq-shot3.png
 url: https://www.assetq.com
 brandColors:
 - '#bfb79e'

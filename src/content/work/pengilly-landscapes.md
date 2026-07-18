@@ -7,6 +7,8 @@ services:
 summary: An experienced Surrey landscape-gardening company offering complete garden design and build — a website to showcase their projects.
 order: 12
 image: ../../assets/work/pengilly-landscapes.jpg
+gallery:
+- ../../assets/work/pengilly-landscapes-shot1.jpg
 brandColors:
 - '#0d6734'
 - '#000000'
