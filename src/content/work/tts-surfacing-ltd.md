@@ -7,8 +7,8 @@ services:
 summary: An experienced surfacing contractor with a strong reputation for quality and a friendly, professional approach.
 order: 17
 image: ../../assets/work/tts-surfacing-ltd.jpg
+mockup: ../../assets/work/tts-surfacing-ltd-shot1.jpg
 gallery:
-- ../../assets/work/tts-surfacing-ltd-shot1.jpg
 - ../../assets/work/tts-surfacing-ltd-shot2.jpeg
 brandColors:
 - '#ffb600'

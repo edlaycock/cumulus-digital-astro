@@ -8,8 +8,8 @@ services:
 summary: A division of MBO-Power bringing electric vehicles to motocross — a custom online shop themed around the fiery energy of the sport.
 order: 6
 image: ../../assets/work/electric-mx.jpg
+mockup: ../../assets/work/electric-mx-shot1.jpg
 gallery:
-- ../../assets/work/electric-mx-shot1.jpg
 - ../../assets/work/electric-mx-shot2.jpg
 - ../../assets/work/electric-mx-shot3.png
 brandColors:

@@ -7,8 +7,8 @@ services:
 summary: A contractor determined to be the best in the area — a bold website that carries their ambition and full range of services.
 order: 15
 image: ../../assets/work/abbey-group-services.jpg
+mockup: ../../assets/work/abbey-group-services-shot1.jpg
 gallery:
-- ../../assets/work/abbey-group-services-shot1.jpg
 - ../../assets/work/abbey-group-services-shot2.png
 brandColors:
 - '#e13b40'

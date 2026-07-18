@@ -8,8 +8,7 @@ services:
 summary: A Cobham hair salon that treats every client individually — branding and a website reflecting their personal, tailored approach.
 order: 9
 image: ../../assets/work/baloolah-hair.jpg
-gallery:
-- ../../assets/work/baloolah-hair-shot1.jpg
+mockup: ../../assets/work/baloolah-hair-shot1.jpg
 brandColors:
 - '#f39200'
 - '#949092'

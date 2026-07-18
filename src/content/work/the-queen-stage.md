@@ -9,8 +9,8 @@ services:
 summary: An independent cycling-themed pub at the gateway to the Surrey Hills — brand, website and social creative pulled straight from the venue's own interior and exterior.
 order: 3
 image: ../../assets/work/the-queen-stage.jpg
+mockup: ../../assets/work/the-queen-stage-shot1.png
 gallery:
-- ../../assets/work/the-queen-stage-shot1.png
 - ../../assets/work/the-queen-stage-shot2.png
 - ../../assets/work/the-queen-stage-shot3.png
 url: https://www.thequeenstage.co.uk
