@@ -7,8 +7,8 @@ services:
 summary: A simple one-page website for a new development of four contemporary mews houses in a gated community in Effingham, Surrey.
 order: 18
 image: ../../assets/work/the-mews-effingham.jpg
+mockup: ../../assets/work/the-mews-effingham-shot1.jpg
 gallery:
-- ../../assets/work/the-mews-effingham-shot1.jpg
 - ../../assets/work/the-mews-effingham-shot2.jpeg
 - ../../assets/work/the-mews-effingham-shot3.jpeg
 brandColors:

@@ -7,8 +7,7 @@ services:
 summary: A Cobham-based fencing company serving homes across Surrey — a straightforward, trustworthy website for local domestic work.
 order: 14
 image: ../../assets/work/macdonald-fencing-sons.jpg
-gallery:
-- ../../assets/work/macdonald-fencing-sons-shot1.jpg
+mockup: ../../assets/work/macdonald-fencing-sons-shot1.jpg
 brandColors:
 - '#a2c046'
 - '#000000'

@@ -8,10 +8,10 @@ services:
 summary: A Surrey and South London home-renovation specialist that transforms homes with expert craftsmanship — a website reflecting their established brand.
 order: 5
 image: ../../assets/work/mew-developments.jpg
+mockup: ../../assets/work/mew-developments-shot3.jpg
 gallery:
 - ../../assets/work/mew-developments-shot1.jpg
 - ../../assets/work/mew-developments-shot2.jpg
-- ../../assets/work/mew-developments-shot3.jpg
 screenshotDesktop: ../../assets/work/mew-developments-desktop.jpg
 screenshotMobile: ../../assets/work/mew-developments-mobile.jpg
 url: https://mewdevelopments.com

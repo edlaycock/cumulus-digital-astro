@@ -8,8 +8,8 @@ services:
 summary: A division of MBO-Power supplying vehicle awnings — an online store for a specialist product range.
 order: 21
 image: ../../assets/work/vehicle-awnings.jpg
+mockup: ../../assets/work/vehicle-awnings-shot1.jpg
 gallery:
-- ../../assets/work/vehicle-awnings-shot1.jpg
 - ../../assets/work/vehicle-awnings-shot2.jpg
 brandColors:
 - '#0c9ec5'

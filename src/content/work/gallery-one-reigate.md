@@ -7,8 +7,8 @@ services:
 summary: A contemporary art gallery selling paintings direct from artists' studios — a clean, quality-led website to showcase the work.
 order: 10
 image: ../../assets/work/gallery-one-reigate.jpg
+mockup: ../../assets/work/gallery-one-reigate-shot1.jpg
 gallery:
-- ../../assets/work/gallery-one-reigate-shot1.jpg
 - ../../assets/work/gallery-one-reigate-shot2.png
 - ../../assets/work/gallery-one-reigate-shot3.png
 brandColors:

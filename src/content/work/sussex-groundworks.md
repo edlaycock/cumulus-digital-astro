@@ -7,8 +7,7 @@ services:
 summary: Lancing-based groundworks specialists covering demolition, land clearance, footings and substructures across Sussex.
 order: 16
 image: ../../assets/work/sussex-groundworks.jpg
-gallery:
-- ../../assets/work/sussex-groundworks-shot1.jpg
+mockup: ../../assets/work/sussex-groundworks-shot1.jpg
 brandColors:
 - '#019bd7'
 - '#000000'
