@@ -6,7 +6,7 @@ services:
 - Web Design
 - E-commerce
 summary: A division of MBO-Power supplying vehicle awnings — an online store for a specialist product range.
-order: 21
+order: 25
 image: ../../assets/work/vehicle-awnings.jpg
 mockup: ../../assets/work/vehicle-awnings-shot1.jpg
 gallery:

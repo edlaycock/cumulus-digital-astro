@@ -6,7 +6,7 @@ services:
 - Branding
 - Web Design
 summary: A new brand and division of DG Installations specialising in internal steel-and-glass doors — 'letting light into your space' — brand and website.
-order: 13
+order: 16
 image: ../../assets/work/prestige-steel-doors.jpg
 mockup: ../../assets/work/prestige-steel-doors-shot1.jpg
 gallery:

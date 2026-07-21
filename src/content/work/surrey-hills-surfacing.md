@@ -7,7 +7,8 @@ services:
 - Web Development
 - Hosting
 summary: A Cobham-based tarmac and surfacing contractor serving homes, businesses and schools across Surrey — a fast, mobile-first site built to win local enquiries, hosted and cared for by Cumulus.
-order: 17.5
+order: 21
+mockup: ../../assets/work/surrey-hills-surfacing-mockup.jpg
 screenshotDesktop: ../../assets/work/surrey-hills-surfacing-desktop.jpg
 screenshotMobile: ../../assets/work/surrey-hills-surfacing-mobile.jpg
 url: https://surreyhillssurfacing.co.uk

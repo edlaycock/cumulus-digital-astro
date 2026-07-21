@@ -5,7 +5,7 @@ sector: Arts · Contemporary Art Gallery
 services:
 - Web Design
 summary: A contemporary art gallery selling paintings direct from artists' studios — a clean, quality-led website to showcase the work.
-order: 10
+order: 14
 image: ../../assets/work/gallery-one-reigate.jpg
 mockup: ../../assets/work/gallery-one-reigate-shot1.jpg
 gallery:

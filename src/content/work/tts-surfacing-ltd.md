@@ -5,7 +5,7 @@ sector: Construction · Surfacing & Tarmac Contractor
 services:
 - Web Design
 summary: An experienced surfacing contractor with a strong reputation for quality and a friendly, professional approach.
-order: 17
+order: 20
 image: ../../assets/work/tts-surfacing-ltd.jpg
 mockup: ../../assets/work/tts-surfacing-ltd-shot1.jpg
 gallery:

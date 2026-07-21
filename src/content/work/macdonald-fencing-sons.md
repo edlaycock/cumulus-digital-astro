@@ -5,7 +5,7 @@ sector: Trades & Construction · Fencing & Landscaping
 services:
 - Web Design
 summary: A Cobham-based fencing company serving homes across Surrey — a straightforward, trustworthy website for local domestic work.
-order: 14
+order: 17
 image: ../../assets/work/macdonald-fencing-sons.jpg
 mockup: ../../assets/work/macdonald-fencing-sons-shot1.jpg
 brandColors:

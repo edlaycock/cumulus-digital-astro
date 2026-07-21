@@ -5,7 +5,7 @@ sector: Property · New-Build Residential Development
 services:
 - Web Design
 summary: A simple one-page website for a new development of four contemporary mews houses in a gated community in Effingham, Surrey.
-order: 18
+order: 22
 image: ../../assets/work/the-mews-effingham.jpg
 mockup: ../../assets/work/the-mews-effingham-shot1.jpg
 gallery:

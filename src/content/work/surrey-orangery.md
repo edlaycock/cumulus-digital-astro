@@ -5,7 +5,7 @@ sector: Home Improvement · Orangeries & Garden Rooms
 services:
 - Web Design
 summary: Surrey's leading orangery company, specialising in traditional, contemporary and fascia luxury orangeries — a website befitting the craft.
-order: 11
+order: 15
 image: ../../assets/work/surrey-orangery.jpg
 mockup: ../../assets/work/surrey-orangery-shot1.jpg
 gallery:
