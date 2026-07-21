@@ -9,6 +9,7 @@ screenshotDesktop: ../../assets/work/jellylearn-desktop.jpg
 screenshotMobile: ../../assets/work/jellylearn-mobile.jpg
 url: https://www.jellylearn.com
 image: ../../assets/work/jellylearn.png
+mockup: ../../assets/work/jellylearn-mockup.jpg
 brandColors: ["#152A4A", "#C0392B", "#F4F5F7"]
 challenge: "JellyLearn has been reducing deaths on the road since 2012 — its evidence-based hazard-perception content sits behind the UK theory test and reaches learners in more than 30 countries, with millions of tests taken every year. A global authority in road-safety science needed a web presence to match: one that could explain a technical, research-led product to governments, driving authorities and partners without burying them in jargon."
 approach: "We designed and built a clean, authoritative website around JellyLearn's brand — a deep, trustworthy navy anchored by a confident signal-red accent that nods to road safety itself. A bold 'World Leader in Hazard Perception Solutions' hero states the position plainly, backed by the numbers that prove it: 3.5M+ tests a year, 30+ countries, 12+ years. Clear sections separate the training, testing and content offerings, and the whole build is fast and fully responsive so it holds up for a global audience."
