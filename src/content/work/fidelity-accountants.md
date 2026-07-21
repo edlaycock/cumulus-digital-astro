@@ -6,7 +6,7 @@ services:
 - Web Design
 - Web Development
 summary: Trusted accounting and tax support for local businesses — a clean, confident new site for an ICAEW-chartered practice in Hersham, in final testing ahead of launch.
-order: 3.5
+order: 4
 image: ../../assets/work/fidelity-accountants-desktop.jpg
 screenshotDesktop: ../../assets/work/fidelity-accountants-desktop.jpg
 screenshotMobile: ../../assets/work/fidelity-accountants-mobile.jpg

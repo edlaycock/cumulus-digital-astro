@@ -6,7 +6,7 @@ services:
 - Web Design
 - E-commerce
 summary: Freshly-made particles and high-quality hookbaits for carp anglers — an online shop built to capture the brand's explosive energy and sell direct.
-order: 4
+order: 8
 image: ../../assets/work/primed-particle.jpg
 mockup: ../../assets/work/primed-particle-shot1.png
 gallery:

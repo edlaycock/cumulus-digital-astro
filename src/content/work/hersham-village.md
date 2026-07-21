@@ -6,7 +6,7 @@ services:
 - Web Design
 - Web Development
 summary: A community website for the village Cumulus calls home — a searchable directory of local businesses, events, village news and campaigns, with self-service listings for business owners.
-order: 7.5
+order: 12
 image: ../../assets/work/hersham-village.jpg
 gallery:
 - ../../assets/work/hersham-village-home.jpg

@@ -6,7 +6,7 @@ services:
 - Web Design
 - Web Development
 summary: A dedicated holiday-booking site for the UAE's adventure emirate — luxury resorts from the Ritz-Carlton to the Waldorf Astoria, live offers and packages, built by travel-industry specialists.
-order: 3.6
+order: 7
 image: ../../assets/work/ras-al-khaimah-holidays.jpg
 gallery:
 - ../../assets/work/ras-al-khaimah-holidays-home.jpg

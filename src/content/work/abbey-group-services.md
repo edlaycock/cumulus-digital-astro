@@ -5,7 +5,7 @@ sector: Construction · Contracting & Renewables
 services:
 - Web Design
 summary: A contractor determined to be the best in the area — a bold website that carries their ambition and full range of services.
-order: 15
+order: 18
 image: ../../assets/work/abbey-group-services.jpg
 mockup: ../../assets/work/abbey-group-services-shot1.jpg
 gallery:

@@ -5,7 +5,7 @@ sector: Home & Garden · Landscaping & Garden Design
 services:
 - Web Design
 summary: An experienced Surrey landscape-gardening company offering complete garden design and build — a website to showcase their projects.
-order: 12
+order: 28
 image: ../../assets/work/pengilly-landscapes.jpg
 mockup: ../../assets/work/pengilly-landscapes-shot1.jpg
 brandColors:
