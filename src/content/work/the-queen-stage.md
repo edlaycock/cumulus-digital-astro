@@ -7,7 +7,7 @@ services:
 - Web Design
 - Social Media
 summary: An independent cycling-themed pub at the gateway to the Surrey Hills — brand, website and social creative pulled straight from the venue's own interior and exterior.
-order: 3
+order: 11
 image: ../../assets/work/the-queen-stage.jpg
 mockup: ../../assets/work/the-queen-stage-shot1.png
 gallery:
