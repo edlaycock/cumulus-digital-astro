@@ -4,7 +4,7 @@ client: "Surrey Contracting"
 sector: "Construction · Groundworks & Surfacing"
 services: ["Web Design", "Web Development", "Branding"]
 summary: "A bold, credibility-first website for a Leatherhead demolition, groundworks, earthworks and surfacing contractor — built to win larger commercial and developer work across the South East."
-order: 11
+order: 3
 url: https://surreycontracting.co.uk
 image: ../../assets/work/surrey-contracting.jpg
 mockup: ../../assets/work/surrey-contracting-mockup.jpg
