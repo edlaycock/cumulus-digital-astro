@@ -1,5 +1,5 @@
 ---
-// Alternative homepage concept: light palette + floating collage of real client sites.
+// Alternative homepage concept: light palette + one client site per screen.
 // Not linked from navigation — reachable at /home-2/ for review only.
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
@@ -8,10 +8,13 @@ import ServiceCards from '../components/ServiceCards';
 import WorkPreview from '../components/WorkPreview.astro';
 
 import scDesktop from '../assets/work/surrey-contracting-desktop.jpg';
+import scMobile from '../assets/work/surrey-contracting-mobile.jpg';
 import jlDesktop from '../assets/work/jellylearn-desktop.jpg';
 import jlMobile from '../assets/work/jellylearn-mobile.jpg';
-import castellum from '../assets/work/castellum.jpg';
+import castDesktop from '../assets/work/castellum-desktop.jpg';
+import castMobile from '../assets/work/castellum-mobile.jpg';
 import chhDesktop from '../assets/work/cotswold-house-hunter-desktop.jpg';
+import chhMobile from '../assets/work/cotswold-house-hunter-mobile.jpg';
 import shsDesktop from '../assets/work/surrey-hills-surfacing-desktop.jpg';
 import shsMobile from '../assets/work/surrey-hills-surfacing-mobile.jpg';
 
@@ -32,21 +35,19 @@ const work = (await getCollection('work'))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 4);
 
-// Collage: every card is a real client site we built.
-const collage = [
-  { img: scDesktop,  client: 'Surrey Contracting',    slot: 'centre', delay: '0s'    },
-  { img: jlDesktop,  client: 'JellyLearn',            slot: 'tl',     delay: '-1.2s' },
-  { img: castellum,  client: 'Castellum',             slot: 'tr',     delay: '-2.5s' },
-  { img: chhDesktop, client: 'Cotswold House Hunter', slot: 'br',     delay: '-3.5s' },
-  { img: shsDesktop, client: 'Surrey Hills Surfacing',slot: 'bl',     delay: '-4.4s' },
-  { img: jlMobile,   client: 'JellyLearn',            slot: 'far-l',  delay: '-5.2s', phone: true },
-  { img: shsMobile,  client: 'Surrey Hills Surfacing',slot: 'far-r',  delay: '-6s',   phone: true },
+// One client per screen: each slide pairs that site's desktop and mobile view.
+const showcase = [
+  { client: 'Surrey Contracting',     sector: 'Groundworks & surfacing', desktop: scDesktop,   mobile: scMobile,   href: '/work/surrey-contracting/' },
+  { client: 'JellyLearn',             sector: 'Road-safety EdTech',      desktop: jlDesktop,   mobile: jlMobile,   href: '/work/jellylearn/' },
+  { client: 'Cotswold House Hunter',  sector: 'Property buying agent',   desktop: chhDesktop,  mobile: chhMobile,  href: '/work/cotswold-house-hunter/' },
+  { client: 'Castellum',              sector: 'Luxury construction',     desktop: castDesktop, mobile: castMobile, href: '/work/castellum/' },
+  { client: 'Surrey Hills Surfacing', sector: 'Driveways & surfacing',   desktop: shsDesktop,  mobile: shsMobile,  href: '/work/surrey-hills-surfacing/' },
 ];
 ---
 
 <BaseLayout
   title="Home concept 2 — Cumulus Digital"
-  description="Alternative homepage concept: lighter palette with a floating collage of recent client websites."
+  description="Alternative homepage concept: lighter palette showing one recent client website at a time, on desktop and mobile."
 >
   <Fragment slot="head"><meta name="robots" content="noindex" /></Fragment>
 
@@ -55,49 +56,70 @@ const collage = [
     <section class="h2-hero">
       <div class="h2-wash" aria-hidden="true"></div>
 
-      <div class="container h2-hero-copy">
-        <p class="h2-eyebrow"><span class="h2-dot"></span> Digital marketing &amp; web · Surrey, UK</p>
-        <h1 class="h2-title">Websites that make<br />ideas <em>happen</em>.</h1>
-        <p class="h2-lede">
-          Bespoke branding, fast hand-built websites and search marketing for ambitious
-          UK businesses — backed by 25&nbsp;years in the travel sector.
-        </p>
-        <div class="h2-cta">
-          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
-          <a class="btn btn--outline btn--lg" href="/work/">See our work</a>
+      <div class="container h2-hero-grid">
+        <div class="h2-hero-copy">
+          <p class="h2-eyebrow"><span class="h2-dot"></span> Digital marketing &amp; web · Surrey, UK</p>
+          <h1 class="h2-title">Websites that make ideas <em>happen</em>.</h1>
+          <p class="h2-lede">
+            Bespoke branding and fast, hand-built websites for ambitious UK
+            businesses — backed by 25&nbsp;years in the travel sector.
+          </p>
+          <div class="h2-cta">
+            <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
+            <a class="btn btn--outline btn--lg" href="/work/">See our work</a>
+          </div>
+          <ul class="h2-stats" role="list">
+            <li><strong>28</strong><span>Projects</span></li>
+            <li><strong>25+</strong><span>Years in travel</span></li>
+            <li><strong>2015</strong><span>Serving Surrey</span></li>
+          </ul>
         </div>
-      </div>
 
-      <!-- Floating collage of real client sites -->
-      <div class="h2-stage" aria-label="Recent websites built by Cumulus Digital">
-        <div class="h2-stage-inner">
-          {collage.map((c) => (
-            <figure
-              class={`h2-shot h2-shot--${c.slot} ${c.phone ? 'h2-shot--phone' : 'h2-shot--laptop'}`}
-              style={`--d:${c.delay}`}
-            >
-              <div class="h2-screen">
-                <Image
-                  src={c.img}
-                  alt={`${c.client} website built by Cumulus Digital`}
-                  widths={c.phone ? [180, 360] : [420, 840]}
-                  sizes={c.phone ? '150px' : '380px'}
-                  loading={c.slot === 'centre' ? 'eager' : 'lazy'}
-                />
+        <!-- One client site per screen: desktop and mobile together -->
+        <div class="h2-showcase">
+          <div class="h2-slides">
+            {showcase.map((s, i) => (
+              <div class={`h2-slide${i === 0 ? ' is-active' : ''}`} data-slide={i} aria-hidden={i !== 0}>
+                <figure class="h2-dev h2-dev--laptop">
+                  <div class="h2-screen">
+                    <Image src={s.desktop} alt={`${s.client} website on desktop`}
+                           widths={[520, 1040]} sizes="480px" loading={i === 0 ? 'eager' : 'lazy'} />
+                  </div>
+                  <div class="h2-base" aria-hidden="true"></div>
+                </figure>
+                <figure class="h2-dev h2-dev--phone">
+                  <div class="h2-screen">
+                    <Image src={s.mobile} alt={`${s.client} website on mobile`}
+                           widths={[200, 400]} sizes="130px" loading={i === 0 ? 'eager' : 'lazy'} />
+                  </div>
+                </figure>
               </div>
-              {!c.phone && <div class="h2-base" aria-hidden="true"></div>}
-              {!c.phone && <figcaption>{c.client}</figcaption>}
-            </figure>
-          ))}
-        </div>
-      </div>
+            ))}
+          </div>
 
-      <div class="container">
-        <ul class="h2-stats" role="list">
-          <li><strong>28</strong><span>Projects in our portfolio</span></li>
-          <li><strong>25+</strong><span>Years travel experience</span></li>
-          <li><strong>2015</strong><span>Serving Surrey since</span></li>
-        </ul>
+          <script type="application/json" id="h2-showcase-data" set:html={JSON.stringify(showcase.map((s) => ({ client: s.client, sector: s.sector, href: s.href })))} />
+
+          <div class="h2-showcase-meta">
+            <p class="h2-showcase-name">
+              <a href={showcase[0].href} data-name-link>
+                <strong data-name>{showcase[0].client}</strong>
+                <span data-sector>{showcase[0].sector}</span>
+              </a>
+            </p>
+            <div class="h2-dots" role="tablist" aria-label="Choose a project">
+              {showcase.map((s, i) => (
+                <button
+                  class={`h2-dot-btn${i === 0 ? ' is-active' : ''}`}
+                  type="button"
+                  data-go={i}
+                  role="tab"
+                  aria-selected={i === 0}
+                  aria-label={s.client}
+                ></button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -178,33 +200,42 @@ const collage = [
     background: var(--h2-ground);
   }
 
-  /* ---- hero ---- */
+  /* ---- hero: everything inside the first screen ---- */
   .h2-hero {
     position: relative;
-    padding: clamp(7rem, 14vh, 11rem) 0 clamp(3rem, 6vh, 5rem);
+    display: flex; align-items: center;
+    min-height: 100svh;
+    padding: clamp(5.5rem, 11vh, 7.5rem) 0 clamp(1.5rem, 4vh, 3rem);
     overflow: hidden;
     background: var(--h2-ground);
   }
   .h2-wash {
     position: absolute;
-    inset: -20% -10% auto -10%;
-    height: 90%;
+    inset: -25% -10% auto -10%;
+    height: 100%;
     background:
-      radial-gradient(60% 55% at 50% 8%, rgba(79, 197, 213, .20), transparent 70%),
-      radial-gradient(40% 40% at 88% 30%, rgba(120, 160, 255, .14), transparent 70%);
+      radial-gradient(50% 55% at 22% 12%, rgba(79, 197, 213, .20), transparent 70%),
+      radial-gradient(45% 45% at 86% 40%, rgba(120, 160, 255, .16), transparent 70%);
     pointer-events: none;
   }
-  .h2-hero-copy { position: relative; z-index: 2; text-align: center; }
+  .h2-hero-grid {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    width: 100%;
+  }
 
   .h2-eyebrow {
     display: inline-flex; align-items: center; gap: .55rem;
     font-family: var(--font-m);
-    font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
     color: var(--h2-accent);
     background: rgba(79, 197, 213, .1);
     border: 1px solid rgba(13, 127, 146, .18);
-    padding: .45rem .9rem; border-radius: 999px;
-    margin: 0 0 1.4rem;
+    padding: .4rem .85rem; border-radius: 999px;
+    margin: 0 0 1.1rem;
   }
   .h2-dot {
     width: 6px; height: 6px; border-radius: 50%;
@@ -215,66 +246,54 @@ const collage = [
   .h2-title {
     font-family: var(--font-h);
     font-weight: 900;
-    font-size: clamp(2.4rem, 6.4vw, 4.5rem);
-    line-height: 1.02;
+    font-size: clamp(2.1rem, 4.2vw, 3.5rem);
+    line-height: 1.04;
     letter-spacing: -.025em;
     color: var(--h2-text);
-    margin: 0 0 1.1rem;
+    margin: 0 0 .9rem;
     text-wrap: balance;
   }
   .h2-title em { font-style: normal; color: var(--h2-accent); }
 
   .h2-lede {
-    max-width: 46ch; margin: 0 auto;
+    max-width: 42ch; margin: 0;
     color: var(--h2-body);
-    font-size: clamp(1rem, 1.6vw, 1.15rem);
-    line-height: 1.62;
+    font-size: clamp(.98rem, 1.2vw, 1.1rem);
+    line-height: 1.6;
   }
-  .h2-cta {
-    display: flex; flex-wrap: wrap; gap: .8rem;
-    justify-content: center; margin-top: 2rem;
-  }
+  .h2-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.6rem; }
 
-  /* ---- collage ---- */
-  .h2-stage {
-    position: relative; z-index: 1;
-    margin-top: clamp(2rem, 5vw, 3.5rem);
-    height: clamp(320px, 37vw, 500px);
-  }
-  .h2-stage-inner {
+  /* ---- one-site showcase ---- */
+  .h2-showcase { position: relative; }
+  .h2-slides {
     position: relative;
-    height: 100%;
-    max-width: 1240px;
-    margin: 0 auto;
+    /* reserve the tallest slide's height so nothing jumps when it changes */
+    aspect-ratio: 16 / 11;
   }
+  .h2-slide {
+    position: absolute; inset: 0;
+    opacity: 0; transform: scale(.97);
+    transition: opacity .55s var(--ease), transform .55s var(--ease);
+    pointer-events: none;
+  }
+  .h2-slide.is-active { opacity: 1; transform: none; pointer-events: auto; }
 
-  /* Each shot is a device. Bezels are sized in cqw so the frame scales with
-     the card rather than needing a magic number per position. */
-  .h2-shot {
-    position: absolute;
-    margin: 0;
-    container-type: inline-size;
-    filter: drop-shadow(0 22px 34px rgba(20, 27, 56, .28));
-    animation: h2-float 7s ease-in-out infinite;
-    animation-delay: var(--d);
-  }
+  .h2-dev { margin: 0; container-type: inline-size; filter: drop-shadow(0 20px 30px rgba(20, 27, 56, .26)); }
   .h2-screen { position: relative; background: #141b2e; }
-  .h2-shot :global(img) { display: block; width: 100%; height: auto; }
+  .h2-dev :global(img) { display: block; width: 100%; height: auto; }
 
-  /* ---- laptop ---- */
-  .h2-shot--laptop .h2-screen {
-    padding: 2.4cqw 2.4cqw 2cqw;
-    border-radius: 2.4cqw 2.4cqw 0 0;
+  .h2-dev--laptop { position: absolute; left: 0; top: 0; width: 88%; }
+  .h2-dev--laptop .h2-screen {
+    padding: 2.5cqw 2.5cqw 2cqw;
+    border-radius: 2.6cqw 2.6cqw 0 0;
     background: linear-gradient(160deg, #1e2740, #10162a);
   }
-  .h2-shot--laptop .h2-screen :global(img) { border-radius: .7cqw; }
-  /* camera */
-  .h2-shot--laptop .h2-screen::before {
-    content: ''; position: absolute; top: 1cqw; left: 50%; transform: translateX(-50%);
+  .h2-dev--laptop .h2-screen :global(img) { border-radius: .7cqw; }
+  .h2-dev--laptop .h2-screen::before {
+    content: ''; position: absolute; top: .9cqw; left: 50%; transform: translateX(-50%);
     width: .7cqw; height: .7cqw; border-radius: 50%; background: #38415c;
   }
-  .h2-base {
-    /* base sits slightly wider than the lid, as on a real laptop */
+  .h2-dev--laptop .h2-base {
     width: 108%; margin-left: -4%;
     height: 3cqw;
     background: linear-gradient(180deg, #eef2f7 0%, #cbd3e0 55%, #9fabbf 100%);
@@ -282,73 +301,67 @@ const collage = [
     position: relative;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8);
   }
-  /* the little lip on the front edge */
-  .h2-base::after {
+  .h2-dev--laptop .h2-base::after {
     content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
     width: 15%; height: 1.1cqw; background: #aeb8c9;
     border-radius: 0 0 1cqw 1cqw;
   }
 
-  /* ---- phone ---- */
-  .h2-shot--phone .h2-screen {
-    padding: 3.4cqw;
-    border-radius: 11cqw;
+  .h2-dev--phone { position: absolute; right: 0; bottom: 0; width: 21%; }
+  .h2-dev--phone .h2-screen {
+    padding: 5cqw;
+    border-radius: 15cqw;
     background: linear-gradient(160deg, #232c45, #0e1424);
   }
-  .h2-shot--phone .h2-screen :global(img) { border-radius: 8cqw; }
-  /* notch */
-  .h2-shot--phone .h2-screen::after {
-    content: ''; position: absolute; top: 3.4cqw; left: 50%; transform: translateX(-50%);
-    width: 34%; height: 3.4cqw; background: #0e1424;
-    border-radius: 0 0 2.4cqw 2.4cqw; z-index: 2;
+  .h2-dev--phone .h2-screen :global(img) { border-radius: 11cqw; }
+  .h2-dev--phone .h2-screen::after {
+    content: ''; position: absolute; top: 5cqw; left: 50%; transform: translateX(-50%);
+    width: 36%; height: 4.5cqw; background: #0e1424;
+    border-radius: 0 0 3cqw 3cqw; z-index: 2;
   }
 
-  /* right-hand cards label on their outer edge, so the centre laptop
-     can never sit over the name */
-  .h2-shot--tr figcaption,
-  .h2-shot--br figcaption { left: auto !important; right: 3.4cqw; }
-
-  .h2-shot figcaption {
-    position: absolute; left: 3.4cqw; bottom: 4.4cqw;
-    font-family: var(--font-m); font-size: .58rem; letter-spacing: .06em;
-    color: #fff; background: rgba(10, 14, 30, .74);
-    padding: .26rem .48rem; border-radius: 5px;
-    backdrop-filter: blur(6px);
+  .h2-showcase-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; margin-top: 1.1rem;
   }
-
-  /* landscape browser shots */
-  .h2-shot--centre { width: 33%;   left: 50%;   top: 50%; transform: translate(-50%, -50%); z-index: 5; }
-  .h2-shot--tl     { width: 26%;   left: 13%;   top: 1%;    z-index: 3; }
-  .h2-shot--tr     { width: 24%;   right: 13%;  top: 0;     z-index: 3; }
-  .h2-shot--br     { width: 27%;   right: 11%;  bottom: 2%; z-index: 4; }
-  .h2-shot--bl     { width: 26%;   left: 11%;   bottom: 0;  z-index: 4; }
-  /* portrait phone shots */
-  .h2-shot--far-l  { width: 11%;   left: 1%;    top: 26%;   z-index: 6; }
-  .h2-shot--far-r  { width: 11%;   right: 1%;   top: 20%;   z-index: 6; }
-
-  @keyframes h2-float {
-    0%, 100% { translate: 0 0; }
-    50%      { translate: 0 -16px; }
+  .h2-showcase-name { margin: 0; }
+  .h2-showcase-name a { display: flex; flex-direction: column; gap: .1rem; text-decoration: none; }
+  .h2-showcase-name strong {
+    font-family: var(--font-h); font-weight: 700; font-size: .98rem;
+    color: var(--h2-text);
   }
+  .h2-showcase-name span {
+    font-family: var(--font-m); font-size: .68rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--h2-muted);
+  }
+  .h2-showcase-name a:hover strong { color: var(--h2-accent); }
+
+  .h2-dots { display: flex; gap: .45rem; }
+  .h2-dot-btn {
+    width: 8px; height: 8px; padding: 0; border-radius: 50%;
+    border: 0; background: #c3cddb; cursor: pointer;
+    transition: background .25s, width .25s;
+  }
+  .h2-dot-btn.is-active { background: var(--h2-accent); width: 22px; border-radius: 999px; }
+  .h2-dot-btn:focus-visible { outline: 2px solid var(--h2-accent); outline-offset: 3px; }
 
   /* ---- stats ---- */
   .h2-stats {
-    display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 1.6rem clamp(2rem, 6vw, 4.5rem);
-    margin: clamp(2rem, 5vw, 3.5rem) 0 0; padding: 0;
-    list-style: none; position: relative; z-index: 2;
+    display: flex; flex-wrap: wrap;
+    gap: .9rem clamp(1.4rem, 3vw, 2.6rem);
+    margin: 1.8rem 0 0; padding: 0;
+    list-style: none;
   }
-  .h2-stats li { text-align: center; }
   .h2-stats strong {
     display: block;
     font-family: var(--font-h); font-weight: 800;
-    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
     color: var(--h2-accent); line-height: 1;
     font-variant-numeric: tabular-nums;
   }
   .h2-stats span {
-    display: block; margin-top: .4rem;
-    font-size: .82rem; color: var(--h2-muted);
+    display: block; margin-top: .25rem;
+    font-size: .76rem; color: var(--h2-muted);
   }
 
   /* ---- sections lightened ---- */
@@ -372,25 +385,49 @@ const collage = [
     text-transform: uppercase; color: var(--h2-muted); margin: 1.6rem 0 0 !important;
   }
 
-  /* ---- responsive: collage becomes a grid on small screens ---- */
-  @media (max-width: 900px) {
-    .h2-stage { height: auto; }
-    .h2-stage-inner {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      padding: 0 clamp(16px, 5vw, 32px);
+  /* ---- responsive: stack, keeping both devices in the first screen ---- */
+  @media (max-width: 1000px) {
+    .h2-hero {
+      min-height: 100svh;
+      padding-top: clamp(4.75rem, 10vh, 6rem);
+      padding-bottom: 1.25rem;
     }
-    .h2-shot {
-      position: static; width: auto !important;
-      transform: none !important; animation: none;
+    .h2-hero-grid {
+      grid-template-columns: 1fr;
+      gap: clamp(1.1rem, 3.5vh, 2rem);
+      align-content: center;
     }
-    .h2-shot--far-l, .h2-shot--far-r { display: none; }
-    .h2-shot--centre { grid-column: 1 / -1; }
+    .h2-title { font-size: clamp(1.85rem, 7.4vw, 2.6rem); }
+    .h2-lede { font-size: .95rem; max-width: 46ch; }
+    .h2-cta { margin-top: 1.1rem; }
+    .h2-cta .btn { flex: 1 1 auto; justify-content: center; }
+    /* stats sit under the devices on small screens, kept compact */
+    .h2-stats { order: 2; margin-top: 1.1rem; gap: .6rem 1.4rem; }
+    .h2-stats strong { font-size: 1.25rem; }
+    .h2-stats span { font-size: .7rem; }
+    .h2-showcase-meta { margin-top: .8rem; }
+  }
+
+  @media (max-width: 620px) {
+    .h2-eyebrow { font-size: .62rem; margin-bottom: .8rem; padding: .32rem .7rem; }
+    .h2-title { margin-bottom: .6rem; }
+    .h2-lede { font-size: .9rem; }
+    .h2-showcase-name strong { font-size: .88rem; }
+  }
+
+  /* very short screens: drop the stats and tighten, rather than push the
+     devices or the project dots under the fold */
+  @media (max-height: 700px) and (max-width: 1000px) {
+    .h2-stats { display: none; }
+    .h2-hero { padding-top: 4.5rem; padding-bottom: .6rem; }
+    .h2-hero-grid { gap: .9rem; }
+    .h2-showcase-meta { margin-top: .55rem; }
+    .h2-lede { display: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .h2-shot { animation: none; }
+    .h2-slide { transition: none; }
+    .h2-dot-btn { transition: none; }
   }
 </style>
 
@@ -430,3 +467,67 @@ const collage = [
   body:has(.h2-hero) .work-client { color: #0d7f92; }
   body:has(.h2-hero) .work-card-cta { color: #0d7f92; }
 </style>
+
+<script>
+  (() => {
+    const slides = [...document.querySelectorAll('.h2-slide')];
+    const dots = [...document.querySelectorAll('[data-go]')];
+    if (slides.length < 2) return;
+
+    const nameEl = document.querySelector('[data-name]');
+    const sectorEl = document.querySelector('[data-sector]');
+    const linkEl = document.querySelector('[data-name-link]');
+    const meta = slides.map((s) => {
+      const i = Number(s.dataset.slide);
+      const dot = dots[i];
+      return { client: dot?.getAttribute('aria-label') ?? '' };
+    });
+    // sector + href come from the markup of the first render; read them off the dots' order
+    const sectors = JSON.parse(document.getElementById('h2-showcase-data')?.textContent ?? '[]');
+
+    let index = 0;
+    let timer = null;
+    const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const show = (next) => {
+      index = (next + slides.length) % slides.length;
+      slides.forEach((s, i) => {
+        const on = i === index;
+        s.classList.toggle('is-active', on);
+        s.setAttribute('aria-hidden', String(!on));
+      });
+      dots.forEach((d, i) => {
+        d.classList.toggle('is-active', i === index);
+        d.setAttribute('aria-selected', String(i === index));
+      });
+      const info = sectors[index];
+      if (info) {
+        if (nameEl) nameEl.textContent = info.client;
+        if (sectorEl) sectorEl.textContent = info.sector;
+        if (linkEl) linkEl.setAttribute('href', info.href);
+      } else if (nameEl) {
+        nameEl.textContent = meta[index].client;
+      }
+    };
+
+    const start = () => {
+      if (REDUCED) return;
+      stop();
+      timer = window.setInterval(() => show(index + 1), 5000);
+    };
+    const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+
+    dots.forEach((d) =>
+      d.addEventListener('click', () => { show(Number(d.dataset.go)); start(); })
+    );
+
+    // don't animate in a background tab, and pause while someone is looking closely
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    const showcase = document.querySelector('.h2-showcase');
+    showcase?.addEventListener('mouseenter', stop);
+    showcase?.addEventListener('mouseleave', start);
+    showcase?.addEventListener('focusin', stop);
+
+    start();
+  })();
+</script>
