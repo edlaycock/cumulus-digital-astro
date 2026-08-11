@@ -72,15 +72,21 @@ const collage = [
       <div class="h2-stage" aria-label="Recent websites built by Cumulus Digital">
         <div class="h2-stage-inner">
           {collage.map((c) => (
-            <figure class={`h2-shot h2-shot--${c.slot}${c.phone ? ' h2-shot--phone' : ''}`} style={`--d:${c.delay}`}>
-              <Image
-                src={c.img}
-                alt={`${c.client} website built by Cumulus Digital`}
-                widths={c.phone ? [180, 360] : [420, 840]}
-                sizes={c.phone ? '150px' : '380px'}
-                loading={c.slot === 'centre' ? 'eager' : 'lazy'}
-              />
-              <figcaption>{c.client}</figcaption>
+            <figure
+              class={`h2-shot h2-shot--${c.slot} ${c.phone ? 'h2-shot--phone' : 'h2-shot--laptop'}`}
+              style={`--d:${c.delay}`}
+            >
+              <div class="h2-screen">
+                <Image
+                  src={c.img}
+                  alt={`${c.client} website built by Cumulus Digital`}
+                  widths={c.phone ? [180, 360] : [420, 840]}
+                  sizes={c.phone ? '150px' : '380px'}
+                  loading={c.slot === 'centre' ? 'eager' : 'lazy'}
+                />
+              </div>
+              {!c.phone && <div class="h2-base" aria-hidden="true"></div>}
+              {!c.phone && <figcaption>{c.client}</figcaption>}
             </figure>
           ))}
         </div>
@@ -233,7 +239,7 @@ const collage = [
   .h2-stage {
     position: relative; z-index: 1;
     margin-top: clamp(2rem, 5vw, 3.5rem);
-    height: clamp(320px, 42vw, 560px);
+    height: clamp(320px, 37vw, 500px);
   }
   .h2-stage-inner {
     position: relative;
@@ -242,36 +248,83 @@ const collage = [
     margin: 0 auto;
   }
 
+  /* Each shot is a device. Bezels are sized in cqw so the frame scales with
+     the card rather than needing a magic number per position. */
   .h2-shot {
     position: absolute;
     margin: 0;
-    border-radius: 14px;
-    overflow: hidden;
-    background: var(--h2-panel);
-    border: 1px solid rgba(20, 27, 56, .07);
-    box-shadow: 0 24px 48px -18px rgba(20, 27, 56, .30);
+    container-type: inline-size;
+    filter: drop-shadow(0 22px 34px rgba(20, 27, 56, .28));
     animation: h2-float 7s ease-in-out infinite;
     animation-delay: var(--d);
   }
+  .h2-screen { position: relative; background: #141b2e; }
   .h2-shot :global(img) { display: block; width: 100%; height: auto; }
+
+  /* ---- laptop ---- */
+  .h2-shot--laptop .h2-screen {
+    padding: 2.4cqw 2.4cqw 2cqw;
+    border-radius: 2.4cqw 2.4cqw 0 0;
+    background: linear-gradient(160deg, #1e2740, #10162a);
+  }
+  .h2-shot--laptop .h2-screen :global(img) { border-radius: .7cqw; }
+  /* camera */
+  .h2-shot--laptop .h2-screen::before {
+    content: ''; position: absolute; top: 1cqw; left: 50%; transform: translateX(-50%);
+    width: .7cqw; height: .7cqw; border-radius: 50%; background: #38415c;
+  }
+  .h2-base {
+    /* base sits slightly wider than the lid, as on a real laptop */
+    width: 108%; margin-left: -4%;
+    height: 3cqw;
+    background: linear-gradient(180deg, #eef2f7 0%, #cbd3e0 55%, #9fabbf 100%);
+    border-radius: 0 0 1.8cqw 1.8cqw;
+    position: relative;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8);
+  }
+  /* the little lip on the front edge */
+  .h2-base::after {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 15%; height: 1.1cqw; background: #aeb8c9;
+    border-radius: 0 0 1cqw 1cqw;
+  }
+
+  /* ---- phone ---- */
+  .h2-shot--phone .h2-screen {
+    padding: 3.4cqw;
+    border-radius: 11cqw;
+    background: linear-gradient(160deg, #232c45, #0e1424);
+  }
+  .h2-shot--phone .h2-screen :global(img) { border-radius: 8cqw; }
+  /* notch */
+  .h2-shot--phone .h2-screen::after {
+    content: ''; position: absolute; top: 3.4cqw; left: 50%; transform: translateX(-50%);
+    width: 34%; height: 3.4cqw; background: #0e1424;
+    border-radius: 0 0 2.4cqw 2.4cqw; z-index: 2;
+  }
+
+  /* right-hand cards label on their outer edge, so the centre laptop
+     can never sit over the name */
+  .h2-shot--tr figcaption,
+  .h2-shot--br figcaption { left: auto !important; right: 3.4cqw; }
+
   .h2-shot figcaption {
-    position: absolute; left: 8px; bottom: 8px;
+    position: absolute; left: 3.4cqw; bottom: 4.4cqw;
     font-family: var(--font-m); font-size: .58rem; letter-spacing: .06em;
-    color: #fff; background: rgba(10, 14, 30, .72);
-    padding: .28rem .5rem; border-radius: 6px;
+    color: #fff; background: rgba(10, 14, 30, .74);
+    padding: .26rem .48rem; border-radius: 5px;
     backdrop-filter: blur(6px);
   }
-  .h2-shot--phone { border-radius: 20px; }
 
   /* landscape browser shots */
-  .h2-shot--centre { width: 31%;   left: 50%;   top: 50%; transform: translate(-50%, -50%); z-index: 5; }
-  .h2-shot--tl     { width: 24%;   left: 12%;   top: 3%;    z-index: 3; }
-  .h2-shot--tr     { width: 22%;   right: 13%;  top: 0;     z-index: 3; }
-  .h2-shot--br     { width: 25%;   right: 10%;  bottom: 4%; z-index: 4; }
-  .h2-shot--bl     { width: 24%;   left: 10%;   bottom: 2%; z-index: 4; }
+  .h2-shot--centre { width: 33%;   left: 50%;   top: 50%; transform: translate(-50%, -50%); z-index: 5; }
+  .h2-shot--tl     { width: 26%;   left: 13%;   top: 1%;    z-index: 3; }
+  .h2-shot--tr     { width: 24%;   right: 13%;  top: 0;     z-index: 3; }
+  .h2-shot--br     { width: 27%;   right: 11%;  bottom: 2%; z-index: 4; }
+  .h2-shot--bl     { width: 26%;   left: 11%;   bottom: 0;  z-index: 4; }
   /* portrait phone shots */
-  .h2-shot--far-l  { width: 10.5%; left: 0;     top: 30%;   z-index: 2; }
-  .h2-shot--far-r  { width: 10.5%; right: 0;    top: 23%;   z-index: 2; }
+  .h2-shot--far-l  { width: 11%;   left: 1%;    top: 26%;   z-index: 6; }
+  .h2-shot--far-r  { width: 11%;   right: 1%;   top: 20%;   z-index: 6; }
 
   @keyframes h2-float {
     0%, 100% { translate: 0 0; }
