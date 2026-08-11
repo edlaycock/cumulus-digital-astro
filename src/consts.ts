@@ -23,6 +23,11 @@ export const COMPANY_NUMBER = '09893216';
 // TODO(owner): create a free Formspree account and set PUBLIC_FORM_ENDPOINT in .env
 export const FORM_ENDPOINT = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 
+// Google Analytics 4 measurement ID, e.g. G-XXXXXXXXXX.
+// Loaded only after the visitor accepts analytics in the cookie banner.
+// TODO(owner): create a GA4 property and set PUBLIC_GA_ID in Vercel's env vars.
+export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? '';
+
 export const NAV_LINKS = [
   { href: '/services/', label: 'Services' },
   { href: '/work/', label: 'Our Work' },

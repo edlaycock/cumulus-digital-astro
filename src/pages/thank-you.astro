@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL } from '../consts';
+---
+
+<BaseLayout
+  title="Thank You | Cumulus Digital"
+  description="Thanks for getting in touch with Cumulus Digital. We'll come back to you within one working day."
+>
+  <Fragment slot="head"><meta name="robots" content="noindex" /></Fragment>
+
+  <section class="notfound thankyou">
+    <div>
+      <p class="thankyou-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" width="48" height="48">
+          <circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="2.5" opacity=".35"></circle>
+          <path d="M15 24.5l6.5 6.5L33 19" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </p>
+      <h1>Message received.</h1>
+      <p>
+        Thanks for getting in touch — we read every enquiry ourselves and will come
+        back to you <strong>within one working day</strong>.
+      </p>
+      <p class="thankyou-alt">
+        Need us sooner? Call <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        or email <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+      </p>
+      <div class="thankyou-actions">
+        <a class="btn btn--primary btn--lg" href="/work/">See our work →</a>
+        <a class="btn btn--ghost btn--lg" href="/">Back to the homepage</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

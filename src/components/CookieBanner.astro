@@ -1,0 +1,72 @@
+---
+// Consent banner. Analytics only ever loads after an explicit "Accept" —
+// nothing is set before the visitor chooses, which is what UK/EU rules require.
+//
+// The banner renders only when PUBLIC_GA_ID is configured: with no analytics
+// running there is nothing to consent to, and asking anyway would claim we set
+// cookies we don't. Set the env var and the banner appears automatically.
+import { GA_ID } from '../consts';
+---
+
+{GA_ID && (
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie choices" hidden>
+  <div class="cookie-inner">
+    <div class="cookie-copy">
+      <p class="cookie-title">We'd like to measure how the site is used</p>
+      <p class="cookie-text">
+        We use anonymous analytics to see which pages are useful. Nothing is stored
+        until you choose. See our <a href="/privacy/">privacy policy</a>.
+      </p>
+    </div>
+    <div class="cookie-actions">
+      <button class="btn btn--ghost cookie-btn" type="button" data-consent="denied">Essential only</button>
+      <button class="btn btn--primary cookie-btn" type="button" data-consent="granted">Accept analytics</button>
+    </div>
+  </div>
+</div>
+)}
+
+<script define:vars={{ GA_ID }}>
+  (() => {
+    const KEY = 'cd-consent';
+    const banner = document.getElementById('cookie-banner');
+
+    const loadAnalytics = () => {
+      if (!GA_ID || window.__cdAnalytics) return;
+      window.__cdAnalytics = true;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      // IP anonymisation on, no ad personalisation
+      gtag('config', GA_ID, { anonymize_ip: true, allow_google_signals: false });
+    };
+
+    const decide = (value) => {
+      try { localStorage.setItem(KEY, value); } catch {}
+      banner?.setAttribute('hidden', '');
+      document.body.classList.remove('has-cookie-banner');
+      if (value === 'granted') loadAnalytics();
+    };
+
+    let saved = null;
+    try { saved = localStorage.getItem(KEY); } catch {}
+
+    if (saved === 'granted') {
+      loadAnalytics();
+    } else if (saved !== 'denied' && banner) {
+      // only claim the screen when there is actually a banner to show —
+      // otherwise the sticky mobile CTA stays suppressed forever
+      banner.removeAttribute('hidden');
+      document.body.classList.add('has-cookie-banner');
+    }
+
+    banner?.querySelectorAll('[data-consent]').forEach((btn) => {
+      btn.addEventListener('click', () => decide(btn.dataset.consent));
+    });
+  })();
+</script>
