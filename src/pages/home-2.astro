@@ -9,11 +9,11 @@ import WorkPreview from '../components/WorkPreview.astro';
 
 import scDesktop from '../assets/work/surrey-contracting-desktop.jpg';
 import jlDesktop from '../assets/work/jellylearn-desktop.jpg';
-import jlMobile from '../assets/work/jellylearn-mobile.jpg';
-import castellum from '../assets/work/castellum.jpg';
+import castDesktop from '../assets/work/castellum-desktop.jpg';
 import chhDesktop from '../assets/work/cotswold-house-hunter-desktop.jpg';
 import shsDesktop from '../assets/work/surrey-hills-surfacing-desktop.jpg';
-import shsMobile from '../assets/work/surrey-hills-surfacing-mobile.jpg';
+import fidMobile from '../assets/work/fidelity-accountants-mobile.jpg';
+import rakMobile from '../assets/work/ras-al-khaimah-holidays-mobile.jpg';
 
 const services = (await getCollection('services'))
   .filter((s) => s.data.showOnHome)
@@ -32,15 +32,15 @@ const work = (await getCollection('work'))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 4);
 
-// Collage: every card is a real client site we built.
+// Collage: seven screens, seven different client sites — no project appears twice.
 const collage = [
-  { img: scDesktop,  client: 'Surrey Contracting',    slot: 'centre', delay: '0s'    },
-  { img: jlDesktop,  client: 'JellyLearn',            slot: 'tl',     delay: '-1.2s' },
-  { img: castellum,  client: 'Castellum',             slot: 'tr',     delay: '-2.5s' },
-  { img: chhDesktop, client: 'Cotswold House Hunter', slot: 'br',     delay: '-3.5s' },
-  { img: shsDesktop, client: 'Surrey Hills Surfacing',slot: 'bl',     delay: '-4.4s' },
-  { img: jlMobile,   client: 'JellyLearn',            slot: 'far-l',  delay: '-5.2s', phone: true },
-  { img: shsMobile,  client: 'Surrey Hills Surfacing',slot: 'far-r',  delay: '-6s',   phone: true },
+  { img: scDesktop,   client: 'Surrey Contracting',     slot: 'centre', delay: '0s'    },
+  { img: jlDesktop,   client: 'JellyLearn',             slot: 'tl',     delay: '-1.2s' },
+  { img: castDesktop, client: 'Castellum',              slot: 'tr',     delay: '-2.5s' },
+  { img: chhDesktop,  client: 'Cotswold House Hunter',  slot: 'br',     delay: '-3.5s' },
+  { img: shsDesktop,  client: 'Surrey Hills Surfacing', slot: 'bl',     delay: '-4.4s' },
+  { img: fidMobile,   client: 'Fidelity Accountants',   slot: 'far-l',  delay: '-5.2s', phone: true, label: 'Fidelity' },
+  { img: rakMobile,   client: 'Ras Al Khaimah Holidays',slot: 'far-r',  delay: '-6s',   phone: true, label: 'Ras Al Khaimah' },
 ];
 ---
 
@@ -86,7 +86,7 @@ const collage = [
                 />
               </div>
               {!c.phone && <div class="h2-base" aria-hidden="true"></div>}
-              {!c.phone && <figcaption>{c.client}</figcaption>}
+              <figcaption>{c.label ?? c.client}</figcaption>
             </figure>
           ))}
         </div>
@@ -316,6 +316,12 @@ const collage = [
     color: #fff; background: rgba(10, 14, 30, .74);
     padding: .26rem .48rem; border-radius: 5px;
     backdrop-filter: blur(6px);
+  }
+
+  /* the phone frames are far narrower, so their label centres and shrinks */
+  .h2-shot--phone figcaption {
+    left: 50%; right: auto; transform: translateX(-50%);
+    bottom: 8cqw; font-size: .48rem; white-space: nowrap;
   }
 
   /* landscape browser shots */
