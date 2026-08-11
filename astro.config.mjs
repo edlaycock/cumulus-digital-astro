@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://cumulusdigital.co.uk',
-  integrations: [react(), sitemap()],
+  // /home-2/ is an unlinked design concept — keep it out of the sitemap
+  integrations: [react(), sitemap({ filter: (page) => !page.includes('/home-2') })],
   trailingSlash: 'ignore',
   // Best-effort mapping from the old WordPress URLs.
   // TODO(owner): confirm exact live-site slugs before launch.
