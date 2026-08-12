@@ -1,0 +1,27 @@
+---
+// Continuously scrolling band of clients, driven by the work collection so it
+// stays in step with the portfolio.
+//
+// Names are used because we hold no client logo files. Drop logos into
+// src/assets/clients/ and add a `logo` field to the work entries and this
+// becomes a logo wall without touching the slider itself.
+import { getCollection } from 'astro:content';
+import { InfiniteSlider } from './ui/infinite-slider';
+
+const clients = (await getCollection('work'))
+  .filter((w) => !w.data.draft)
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((w) => w.data.client);
+---
+
+<section class="client-band" aria-label="Clients we have worked with">
+  <div class="container">
+    <p class="client-band-label">Trusted by {clients.length} Surrey businesses &amp; travel brands</p>
+  </div>
+
+  <InfiniteSlider gap={0} duration={55} durationOnHover={140} className="client-slider" client:visible>
+    {clients.map((name) => (
+      <span class="client-chip">{name}</span>
+    ))}
+  </InfiniteSlider>
+</section>

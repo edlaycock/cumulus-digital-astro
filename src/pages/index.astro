@@ -6,6 +6,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceCards from '../components/ServiceCards';
 import WorkPreview from '../components/WorkPreview.astro';
 import ReviewCarousel from '../components/ReviewCarousel.astro';
+import ClientBand from '../components/ClientBand.astro';
 
 import scDesktop from '../assets/work/surrey-contracting-desktop.jpg';
 import jlDesktop from '../assets/work/jellylearn-desktop.jpg';
@@ -57,7 +58,7 @@ const collage = [
 
       <div class="container h2-hero-copy">
         <p class="h2-eyebrow"><span class="h2-dot"></span> Digital marketing &amp; web · Surrey, UK</p>
-        <h1 class="h2-title">Web design in Surrey<br />that make ideas <em>happen</em>.</h1>
+        <h1 class="h2-title">Web design in Surrey<br />that makes ideas <em>happen</em>.</h1>
         <p class="h2-lede">
           Bespoke branding, fast hand-built websites and search marketing for ambitious
           UK businesses — backed by 25&nbsp;years in the travel sector.
@@ -100,6 +101,8 @@ const collage = [
         </ul>
       </div>
     </section>
+
+    <ClientBand />
 
     <!-- ===================== SERVICES ===================== -->
     <section class="section h2-services">
