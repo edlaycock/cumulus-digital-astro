@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import WorkPreview from '../../components/WorkPreview.astro';
+import { getCollection } from 'astro:content';
+import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
+
+// Real trade and construction clients — proof, not stock claims.
+const TRADE_SLUGS = [
+  'surrey-contracting',
+  'surrey-hills-surfacing',
+  'oakbridge-group',
+  'macdonald-fencing-sons',
+  'sussex-groundworks',
+  'tts-surfacing-ltd',
+];
+const all = await getCollection('work');
+const proof = TRADE_SLUGS.map((s) => all.find((w) => w.id === s)).filter(Boolean);
+const tradeCount = all.filter(
+  (w) => !w.data.draft && /construction|trades|groundworks|surfacing|landscap|fencing|home improvement/i.test(w.data.sector ?? '')
+).length;
+
+const problems = [
+  {
+    n: '01',
+    h: 'The enquiry never gets made',
+    p: 'Someone finds you on a phone, standing in the garden they want dug out. If your number is buried three taps deep, they ring the next contractor instead.',
+  },
+  {
+    n: '02',
+    h: 'You look smaller than you are',
+    p: 'Serious commercial and developer clients check whether you can handle the job. A thin site makes an experienced firm look like a one-van operation.',
+  },
+  {
+    n: '03',
+    h: 'Nobody can see the work',
+    p: 'Trades sell on finished jobs. If the gallery is six photos from 2019, the site is arguing against you.',
+  },
+  {
+    n: '04',
+    h: 'You are invisible locally',
+    p: 'Most trade work starts with a local search. Without proper location pages and a maintained Google Business Profile, you are missing the enquiries entirely.',
+  },
+];
+
+const services = [
+  { name: 'Local SEO & Google Business Profile', body: 'Ranking for "groundworks near me" and the towns you actually cover, with a profile that stays current.' },
+  { name: 'Service-area pages', body: 'A real page per town and per discipline — the pages that win local searches instead of one catch-all services page.' },
+  { name: 'Accreditation & trust signals', body: 'CHAS, SafeContractor, SSIP, Gas Safe, NICEIC, insurance — the things commercial buyers check before they call.' },
+  { name: 'Project galleries', body: 'Your finished work, properly photographed and easy for your team to add to without a developer.' },
+  { name: 'Quote request flows', body: 'Short, mobile-first forms and tap-to-call, because most trade enquiries start on a phone on site.' },
+  { name: 'Google Ads', body: 'Paid search for the jobs you want more of, with the timewasters filtered out by negative keywords.' },
+];
+
+const faqs = [
+  {
+    q: 'We get all our work by word of mouth. Why do we need a website?',
+    a: 'Because word of mouth still ends with someone looking you up. A recommendation gets your name mentioned; your website decides whether they call. It also lets you go after the larger commercial and developer work that referrals rarely reach.',
+  },
+  {
+    q: 'Can we update the project gallery ourselves?',
+    a: 'Yes. We build the projects area so your team can add a job with photos from a phone, without going back to a developer each time. OakBridge Group came to us specifically for that.',
+  },
+  {
+    q: 'Do you understand construction terminology?',
+    a: 'We have built for groundworks, surfacing, demolition, fencing, landscaping, orangeries and steel glazing firms. We know the difference between enabling works and external works, and we will not write copy that makes you sound like a marketing brochure.',
+  },
+  {
+    q: 'How quickly can we be live?',
+    a: 'A focused trade website is usually a matter of weeks, not months. Castellum was turned around in two weeks because they had PR going out and needed the site to match.',
+  },
+];
+---
+
+<BaseLayout
+  title="Digital Marketing for Trades | Cumulus Digital, Surrey"
+  description="Websites, local SEO and Google Ads for groundworks, surfacing, fencing, landscaping and construction firms across Surrey and the South East."
+>
+  <PageHero
+    eyebrow="Trades & construction · Surrey, UK"
+    lede="Websites, local SEO and paid search for groundworks, surfacing, fencing, landscaping and construction firms — built to win the enquiries and the larger contracts."
+  >
+    Digital marketing for <em class="glow">trades</em>.
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we see</p>
+        <h2 class="section-title">Good firms losing work<br />to worse websites.</h2>
+        <p class="section-sub">
+          The quality of the work on the ground is rarely the problem. It's everything that
+          happens before the phone rings.
+        </p>
+      </div>
+      <div class="values-grid">
+        {problems.map((x, i) => (
+          <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="value-num">{x.n}</span>
+            <h3>{x.h}</h3>
+            <p>{x.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we do</p>
+        <h2 class="section-title">Built for how trade<br />customers actually search.</h2>
+      </div>
+      <ul class="services-grid" role="list">
+        {services.map((s) => (
+          <li class="service-card">
+            <div class="service-card-body"><h3>{s.name}</h3><p>{s.body}</p></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Proof</p>
+        <h2 class="section-title">{tradeCount} trade &amp; construction<br />projects in our portfolio.</h2>
+        <p class="section-sub">A few of the contractors we've built for.</p>
+      </div>
+      <ul class="work-grid" role="list">
+        {proof.map((item) => (
+          <li class="work-card">
+            <a class="work-card-inner" href={`/work/${item!.id}/`}>
+              <WorkPreview client={item!.data.client} url={item!.data.url} image={item!.data.mockup ?? item!.data.image} />
+              <div class="work-card-content">
+                <span class="work-client">{item!.data.client}</span>
+                <h3>{item!.data.title}</h3>
+                <span class="work-card-cta">View case study →</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="work-cta">
+        <a class="btn btn--outline btn--lg" href="/work/">See all case studies →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Common questions</p>
+        <h2 class="section-title">Straight answers.</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item" data-reveal><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <p class="section-label">Trades &amp; construction</p>
+        <h2 class="cta-headline">Let's win you<br />better <em class="glow">work</em>.</h2>
+        <p class="cta-sub">Tell us what you do and where you cover. We'll tell you honestly what would move the needle first.</p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
+          <a class="btn btn--ghost btn--lg" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
