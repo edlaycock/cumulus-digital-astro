@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
+
+// What we actually do on an account, in the order we do it.
+const process = [
+  {
+    step: '01',
+    title: 'Audit what’s running',
+    body: 'Before touching budgets we go through the account: search terms, match types, negatives, conversion tracking, landing pages and competitor activity. You get a plain-English picture of where the money is currently going.',
+  },
+  {
+    step: '02',
+    title: 'Fix the tracking',
+    body: 'Most underperforming accounts we inherit are optimising towards the wrong thing — or nothing at all. We set up conversion tracking properly so a "conversion" means a real enquiry, call or sale, not a page view.',
+  },
+  {
+    step: '03',
+    title: 'Build or rebuild the campaigns',
+    body: 'Tight campaign and ad-group structure around the searches that genuinely turn into work, with negative keyword lists to keep the irrelevant traffic out and responsive ads written for your customers, not for Google.',
+  },
+  {
+    step: '04',
+    title: 'Optimise and report',
+    body: 'Ongoing bid, budget and search-term management, plus reporting that answers the only question that matters: what did an enquiry cost, and is it worth it? No jargon, no vanity metrics.',
+  },
+];
+
+const campaigns = [
+  { name: 'Search', body: 'The core of most accounts — catching people at the moment they search for what you do.' },
+  { name: 'Performance Max', body: 'Google’s automated, all-inventory campaign type. Powerful with the right feeds, guardrails and exclusions — expensive without them.' },
+  { name: 'Shopping', body: 'Product listings driven by a clean, well-structured merchant feed for e-commerce businesses.' },
+  { name: 'Remarketing', body: 'Bringing back the people who visited, looked and left without enquiring.' },
+  { name: 'Display', body: 'Awareness and re-engagement across Google’s network, kept tightly targeted so budget isn’t sprayed around.' },
+  { name: 'YouTube & Demand Gen', body: 'Video and discovery placements for businesses with creative worth putting in front of people.' },
+];
+
+const faqs = [
+  {
+    q: 'What budget do I need for Google Ads to work?',
+    a: 'It depends entirely on your industry and how competitive the clicks are — a local trade in Surrey is a very different picture to national e-commerce. We would rather look at your numbers and tell you honestly whether the budget you have is enough, than take on an account that was never going to work.',
+  },
+  {
+    q: 'Am I locked into a long contract?',
+    a: 'No. We work month to month. If paid search is not earning its keep, you should be free to stop — and we will tell you before you have to.',
+  },
+  {
+    q: 'Do I own the account?',
+    a: 'Yes, always. The Google Ads account is yours, in your name, and stays with you if we ever part ways. Some agencies keep accounts hostage; we do not.',
+  },
+  {
+    q: 'How quickly will I see results?',
+    a: 'Faster than SEO — ads can start bringing enquiries within days. But the first few weeks are about gathering search-term data and cutting waste, so judge it over the first couple of months rather than the first week.',
+  },
+  {
+    q: 'Can you work with my existing account?',
+    a: 'Usually yes, and it is often better — an established account carries history that helps performance. We audit it first and tell you whether it is worth rebuilding or refining.',
+  },
+];
+---
+
+<BaseLayout
+  title="Google Ads Agency in Surrey | Cumulus Digital"
+  description="Google Ads management for Surrey businesses — Search, Shopping, Performance Max and remarketing built to bring in enquiries. Based in Hersham, Walton-on-Thames."
+>
+  <PageHero
+    eyebrow="Google Ads · Surrey, UK"
+    lede="Search, Shopping, Performance Max and remarketing campaigns built around the searches that turn into real work — managed from Hersham, for businesses across Surrey and the South East."
+  >
+    Google Ads Agency in <em class="glow">Surrey</em>.
+  </PageHero>
+
+  <!-- what's wrong with most accounts -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Why accounts underperform</p>
+        <h2 class="section-title">Most of the budget<br />goes to the wrong clicks.</h2>
+        <p class="section-sub">
+          When we audit an account that isn't working, it's nearly always the same handful of
+          things — and all of them are fixable.
+        </p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card" data-reveal>
+          <span class="value-num">01</span>
+          <h3>Conversion tracking isn't right</h3>
+          <p>If Google is optimising towards page views instead of enquiries, it will confidently spend your budget on the wrong people.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.1s">
+          <span class="value-num">02</span>
+          <h3>Broad match with no negatives</h3>
+          <p>Left unchecked, broad match will happily buy clicks for searches that have nothing to do with your business.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.2s">
+          <span class="value-num">03</span>
+          <h3>One campaign for everything</h3>
+          <p>Bundling every service into a single ad group means no control over budget, message or bids — and worse quality scores.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.3s">
+          <span class="value-num">04</span>
+          <h3>Traffic lands on the wrong page</h3>
+          <p>Sending every ad to the homepage wastes the click. The page has to answer the search that earned it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- process -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How we work</p>
+        <h2 class="section-title">Audit first.<br />Spend second.</h2>
+      </div>
+
+      <div class="values-grid">
+        {process.map((p, i) => (
+          <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="value-num">{p.step}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- campaign types -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we run</p>
+        <h2 class="section-title">The right campaign<br />for the job.</h2>
+        <p class="section-sub">
+          Not every business needs every campaign type. We'll recommend the mix that suits your
+          market and budget — and say no to the ones that don't.
+        </p>
+      </div>
+
+      <ul class="services-grid" role="list">
+        {campaigns.map((c) => (
+          <li class="service-card">
+            <div class="service-card-body">
+              <h3>{c.name}</h3>
+              <p>{c.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- faqs -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Common questions</p>
+        <h2 class="section-title">The things worth<br />asking first.</h2>
+      </div>
+
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item" data-reveal>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <p class="section-label">Already running ads?</p>
+        <h2 class="cta-headline">
+          We'll show you where<br />the budget <em class="glow">goes</em>.
+        </h2>
+        <p class="cta-sub">
+          Send us your account and we'll come back with an honest read on what's working, what's
+          wasting money, and whether it's worth changing.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Request an audit →</a>
+          <a class="btn btn--ghost btn--lg" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

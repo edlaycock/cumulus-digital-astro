@@ -1,6 +1,6 @@
 ---
 title: Hosting & Maintenance
-order: 6
+order: 7
 showOnHome: false
 iconPath: "M12 30a6 6 0 0 1 0-12 9 9 0 0 1 17.5-2.5A7 7 0 0 1 36 30ZM16 38h16M24 30v8"
 summary: "Fast, secure hosting with proactive care — so your site stays healthy long after launch."

@@ -28,6 +28,11 @@ export const FORM_ENDPOINT = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 // TODO(owner): create a GA4 property and set PUBLIC_GA_ID in Vercel's env vars.
 export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? '';
 
+// Public link to the Google Business Profile reviews. Shown under the review
+// carousel only when at least one review is marked `source: 'google'`.
+// TODO(owner): paste the "Write a review"/profile URL from Google Business Profile.
+export const GOOGLE_REVIEWS_URL = import.meta.env.PUBLIC_GOOGLE_REVIEWS_URL ?? '';
+
 export const NAV_LINKS = [
   { href: '/services/', label: 'Services' },
   { href: '/work/', label: 'Our Work' },

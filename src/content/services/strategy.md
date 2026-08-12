@@ -1,6 +1,6 @@
 ---
 title: Strategy & Consulting
-order: 5
+order: 6
 iconPath: "M8 38L16 26L22 32L30 18L40 38"
 summary: "Digital advisory for CEOs and business owners navigating transformation — clear direction, practical steps."
 outcomes:

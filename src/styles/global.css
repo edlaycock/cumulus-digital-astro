@@ -215,10 +215,14 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   flex: none;
 }
 .brand-logo {
-  height: 38px;
+  height: 40px;
   width: auto;
+  /* full-colour artwork by default; inverted to white only over dark heroes */
   filter: brightness(0) invert(1);
 }
+/* light page grounds keep the brand colours */
+body:has(.h2-hero) .brand-logo,
+.site-head-wrap.scrolled .brand-logo { filter: none; }
 .nav {
   display: flex;
   align-items: center;
@@ -1951,4 +1955,95 @@ h1.headline em.glow, .cta-headline em.glow {
 .thankyou-actions {
   display: flex; flex-wrap: wrap; gap: .7rem;
   justify-content: center; margin-top: 1.8rem;
+}
+
+
+/* ---- review carousel ---- */
+.reviews { position: relative; }
+.reviews-track {
+  display: flex; gap: 20px;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px 4px 18px;
+  scrollbar-width: none;
+}
+.reviews-track::-webkit-scrollbar { display: none; }
+.review-card {
+  scroll-snap-align: start;
+  flex: 0 0 min(360px, 82%);
+  display: flex; flex-direction: column; gap: .9rem;
+  background: #fff;
+  border: 1px solid var(--lt-border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.6rem;
+  box-shadow: 0 10px 26px -18px rgba(20, 27, 56, .4);
+}
+.review-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.review-stars { display: inline-flex; gap: 2px; color: #f5a623; }
+.review-source {
+  display: inline-flex; align-items: center; gap: .35rem;
+  font-family: var(--font-m); font-size: .68rem; color: var(--lt-muted);
+}
+.review-quote {
+  margin: 0; color: var(--lt-body); line-height: 1.6; font-size: .95rem;
+}
+.review-quote::before { content: '\201C'; }
+.review-quote::after { content: '\201D'; }
+.review-by {
+  margin: 0; margin-top: auto;
+  font-weight: 600; font-size: .86rem; color: var(--lt-text);
+}
+.reviews-controls {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  margin-top: .4rem;
+}
+.reviews-arrow {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--lt-border); background: #fff;
+  color: var(--lt-text); cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.reviews-arrow:hover { border-color: var(--cyan); color: var(--cyan); }
+.reviews-arrow:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.reviews-all { font-size: .85rem; color: var(--lt-body); }
+
+/* ---- FAQ accordion ---- */
+.faq-list {
+  display: grid; gap: .7rem;
+  max-width: 860px;
+}
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--lt-border);
+  border-radius: 12px;
+  padding: 0 1.3rem;
+  transition: border-color .2s;
+}
+.faq-item[open] { border-color: rgba(79, 197, 213, .5); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.1rem 2rem 1.1rem 0;
+  position: relative;
+  font-family: var(--font-h);
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--lt-text);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: ''; position: absolute; right: .2rem; top: 50%;
+  width: 9px; height: 9px; margin-top: -6px;
+  border-right: 2px solid var(--lt-muted);
+  border-bottom: 2px solid var(--lt-muted);
+  transform: rotate(45deg);
+  transition: transform .25s var(--ease);
+}
+.faq-item[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+.faq-item summary:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 6px; }
+.faq-item p {
+  margin: 0 0 1.2rem;
+  color: var(--lt-body);
+  line-height: 1.62;
+  max-width: 68ch;
 }
