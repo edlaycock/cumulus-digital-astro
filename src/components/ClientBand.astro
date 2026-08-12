@@ -34,7 +34,7 @@ const nameOf = (slug: string) =>
   <InfiniteSlider gap={0} duration={45} durationOnHover={120} className="client-slider" client:visible>
     {logos.map((l) => (
       <span class="client-logo">
-        <Image src={l.src} alt={`${nameOf(l.slug)} logo`} height={44} densities={[1, 2]} loading="lazy" />
+        <Image src={l.src} alt={`${nameOf(l.slug)} logo`} height={44} densities={[1, 2]} loading="eager" />
       </span>
     ))}
   </InfiniteSlider>
