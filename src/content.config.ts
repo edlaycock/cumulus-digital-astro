@@ -56,6 +56,11 @@ const testimonials = defineCollection({
     id: z.string(),
     quote: z.string(),
     attribution: z.string(),
+    // star rating shown on the review card
+    rating: z.number().min(1).max(5).default(5),
+    // set to 'google' ONLY for reviews genuinely left on the Google Business
+    // Profile — it is what puts the Google mark on the card
+    source: z.enum(['google']).optional(),
   }),
 });
 

@@ -1,0 +1,90 @@
+---
+// Review carousel.
+//
+// The Google mark only appears on a card whose review has `source: 'google'`
+// in testimonials.json — so the branding can never claim a review came from
+// Google when it didn't. Set that field once the Business Profile reviews are
+// confirmed and the badge appears by itself.
+import { GOOGLE_REVIEWS_URL } from '../consts';
+
+interface Review {
+  id: string;
+  quote: string;
+  attribution: string;
+  rating?: number;
+  source?: 'google';
+}
+interface Props {
+  reviews: Review[];
+}
+const { reviews: items } = Astro.props as Props;
+const anyGoogle = items.some((r) => r.source === 'google');
+---
+
+<div class="reviews" data-reviews>
+  <div class="reviews-track" data-reviews-track>
+    {items.map((r) => (
+      <article class="review-card">
+        <div class="review-top">
+          <span class="review-stars" role="img" aria-label={`${r.rating ?? 5} out of 5 stars`}>
+            {Array.from({ length: r.rating ?? 5 }).map(() => (
+              <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+                <path d="M10 1.6l2.5 5.2 5.7.8-4.1 4 1 5.7L10 14.6 4.9 17.3l1-5.7-4.1-4 5.7-.8L10 1.6Z" fill="currentColor"/>
+              </svg>
+            ))}
+          </span>
+          {r.source === 'google' && (
+            <span class="review-source" title="Review left on Google">
+              <svg viewBox="0 0 48 48" width="16" height="16" aria-hidden="true">
+                <path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.3h12.1c-.2 2-1.6 5-4.5 7l6.9 5.3c4.1-3.8 6.6-9.4 6.6-15.6Z"/>
+                <path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.3c-1.8 1.3-4.3 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.700l-7.1 5.5C8.1 40.8 15.4 46 24 46Z"/>
+                <path fill="#FBBC05" d="M11.5 27.9c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7.1-5.5A22 22 0 0 0 2 23.5c0 3.5.8 6.9 2.4 9.9l7.1-5.5Z"/>
+                <path fill="#EA4335" d="M24 9.9c3.2 0 5.4 1.4 6.7 2.6l6.1-6C33 3.1 29.9 2 24 2 15.4 2 8.1 7.2 4.4 14.1l7.1 5.5C13.3 13.7 18.2 9.9 24 9.9Z"/>
+              </svg>
+              Google
+            </span>
+          )}
+        </div>
+        <blockquote class="review-quote">{r.quote}</blockquote>
+        <p class="review-by">{r.attribution}</p>
+      </article>
+    ))}
+  </div>
+
+  <div class="reviews-controls">
+    <button class="reviews-arrow" type="button" data-reviews-prev aria-label="Previous review">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    {anyGoogle && GOOGLE_REVIEWS_URL && (
+      <a class="reviews-all" href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener">Read all reviews on Google →</a>
+    )}
+    <button class="reviews-arrow" type="button" data-reviews-next aria-label="Next review">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('[data-reviews]').forEach((root) => {
+    const track = root.querySelector('[data-reviews-track]') as HTMLElement | null;
+    if (!track) return;
+    const step = () => {
+      const card = track.querySelector('.review-card') as HTMLElement | null;
+      return card ? card.offsetWidth + 20 : track.clientWidth;
+    };
+    const go = (dir: number) => {
+      const max = track.scrollWidth - track.clientWidth;
+      let next = track.scrollLeft + dir * step();
+      // wrap round rather than dead-ending at either edge
+      if (next > max + 4) next = 0;
+      if (next < -4) next = max;
+      track.scrollTo({ left: next, behavior: 'smooth' });
+    };
+    root.querySelector('[data-reviews-prev]')?.addEventListener('click', () => go(-1));
+    root.querySelector('[data-reviews-next]')?.addEventListener('click', () => go(1));
+  });
+</script>
