@@ -2057,7 +2057,7 @@ h1.headline em.glow, .cta-headline em.glow {
   overflow: hidden;
 }
 .client-band-label {
-  margin: 0 0 1.2rem;
+  margin: 0 0 1.4rem;
   text-align: center;
   font-family: var(--font-m);
   font-size: .7rem;
@@ -2067,29 +2067,35 @@ h1.headline em.glow, .cta-headline em.glow {
 }
 /* the slider's own two classes */
 .slider-viewport { overflow: hidden; }
-.slider-track { display: flex; width: max-content; }
+.slider-track { display: flex; width: max-content; align-items: center; }
 
-/* fade the band out at both edges so items enter and leave softly */
+/* fade the band out at both edges so logos enter and leave softly */
 .client-slider {
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
-.client-chip {
+
+.client-logo {
   display: inline-flex;
   align-items: center;
-  padding: 0 clamp(1.1rem, 2.4vw, 2rem);
-  font-family: var(--font-h);
-  font-weight: 600;
-  font-size: clamp(.95rem, 1.5vw, 1.15rem);
-  color: var(--lt-muted);
-  white-space: nowrap;
-  transition: color .25s;
+  justify-content: center;
+  padding: 0 clamp(1.6rem, 3.5vw, 3rem);
+  flex: 0 0 auto;
 }
-.client-chip:hover { color: var(--lt-text); }
-.client-chip::after {
-  content: '';
-  margin-left: clamp(1.1rem, 2.4vw, 2rem);
-  width: 4px; height: 4px; border-radius: 50%;
-  background: var(--cyan);
-  opacity: .55;
+.client-logo img {
+  height: 44px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  /* single-colour silhouette: client logos are a mix of white and dark
+     artwork, so normalise rather than let half of them disappear */
+  filter: brightness(0);
+  opacity: .42;
+  transition: opacity .3s var(--ease);
+}
+.client-logo:hover img { opacity: .78; }
+
+@media (max-width: 620px) {
+  .client-logo { padding: 0 1.2rem; }
+  .client-logo img { height: 34px; max-width: 140px; }
 }

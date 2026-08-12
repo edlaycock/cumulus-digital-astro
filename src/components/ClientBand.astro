@@ -1,27 +1,41 @@
 ---
-// Continuously scrolling band of clients, driven by the work collection so it
-// stays in step with the portfolio.
+// Continuously scrolling band of real client logos, pulled from each client's
+// own website.
 //
-// Names are used because we hold no client logo files. Drop logos into
-// src/assets/clients/ and add a `logo` field to the work entries and this
-// becomes a logo wall without touching the slider itself.
-import { getCollection } from 'astro:content';
+// The logos are a mix of light and dark artwork (many are white, drawn for dark
+// headers), so they are rendered as single-colour silhouettes. That keeps every
+// mark legible on one ground and reads as a deliberate logo wall rather than a
+// jumble of boxes. Drop a new PNG/SVG into src/assets/clients/ named after the
+// work slug and it joins the band automatically.
+import { Image } from 'astro:assets';
 import { InfiniteSlider } from './ui/infinite-slider';
 
-const clients = (await getCollection('work'))
-  .filter((w) => !w.data.draft)
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((w) => w.data.client);
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/clients/*.{png,svg,jpg,webp}',
+  { eager: true }
+);
+
+const logos = Object.entries(files)
+  .map(([path, mod]) => ({
+    slug: path.split('/').pop()!.replace(/\.\w+$/, ''),
+    src: mod.default,
+  }))
+  .sort((a, b) => a.slug.localeCompare(b.slug));
+
+const nameOf = (slug: string) =>
+  slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 ---
 
 <section class="client-band" aria-label="Clients we have worked with">
   <div class="container">
-    <p class="client-band-label">Trusted by {clients.length} Surrey businesses &amp; travel brands</p>
+    <p class="client-band-label">Trusted by businesses across Surrey for over 15 years</p>
   </div>
 
-  <InfiniteSlider gap={0} duration={55} durationOnHover={140} className="client-slider" client:visible>
-    {clients.map((name) => (
-      <span class="client-chip">{name}</span>
+  <InfiniteSlider gap={0} duration={45} durationOnHover={120} className="client-slider" client:visible>
+    {logos.map((l) => (
+      <span class="client-logo">
+        <Image src={l.src} alt={`${nameOf(l.slug)} logo`} height={44} densities={[1, 2]} loading="lazy" />
+      </span>
     ))}
   </InfiniteSlider>
 </section>
