@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import WorkPreview from '../../components/WorkPreview.astro';
+import { getCollection } from 'astro:content';
+import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
+
+const all = await getCollection('work');
+const proof = ['ras-al-khaimah-holidays'].map((s) => all.find((w) => w.id === s)).filter(Boolean);
+
+const problems = [
+  {
+    n: '01',
+    h: 'The OTAs outspend you',
+    p: 'You cannot outbid Booking.com on brand terms. Direct bookings come from the searches the big platforms handle badly — destination detail, specific resorts, the questions only an operator can answer.',
+  },
+  {
+    n: '02',
+    h: 'The site sells a product, not a place',
+    p: 'People book a holiday because they can picture themselves there. A grid of room rates and a booking widget is not that.',
+  },
+  {
+    n: '03',
+    h: 'Seasonality is ignored',
+    p: 'Travel demand moves in waves and campaigns need to move with it. A site and ad account that look the same in January and August are leaving money on the table.',
+  },
+  {
+    n: '04',
+    h: 'Trust is left implicit',
+    p: 'ATOL, ABTA, financial protection and a real phone number are the difference between a browse and a booking on a four-figure purchase.',
+  },
+];
+
+const services = [
+  { name: 'Destination-led websites', body: 'Sites structured around the place and the experience, with the resort detail and pricing a traveller actually needs to decide.' },
+  { name: 'Direct-booking journeys', body: 'Clear routes from inspiration to enquiry or booking, with prominent phone contact for the questions that need a human.' },
+  { name: 'Seasonal campaigns', body: 'Search and paid activity planned around booking windows, not run flat all year.' },
+  { name: 'Destination content & SEO', body: 'The guides, resort pages and "things to do" content that win the long-tail searches the OTAs never target properly.' },
+  { name: 'Trust & protection signals', body: 'ATOL, ABTA and financial-protection messaging placed where it reassures rather than clutters.' },
+  { name: 'Trade & B2B sites', body: 'Agent-facing portals and brochureware for operators selling through the trade as well as direct.' },
+];
+
+const faqs = [
+  {
+    q: 'What does "25 years in travel" actually mean?',
+    a: 'It means we have worked inside the sector rather than read about it — so we already understand booking windows, trade versus direct, commission structures, ATOL and how a tour operator differs from an agent. You spend the first meeting talking about your business, not explaining the industry.',
+  },
+  {
+    q: 'Can you integrate with our booking system?',
+    a: 'Usually. Tell us what you run — a reservation platform, a bedbank feed, a third-party booking engine — and we will scope how it connects. Where a full integration is not worth the cost, we will say so and build a strong enquiry route instead.',
+  },
+  {
+    q: 'We sell through agents, not direct. Is this still for us?',
+    a: 'Yes. Trade-facing sites have a different job: making it easy for agents to find rates, itineraries and support material. We build for both models.',
+  },
+  {
+    q: 'Do you handle the destination content too?',
+    a: 'We can. Destination and resort content is what wins the searches the big platforms are weakest on, and it needs writing by someone who understands what a traveller is actually deciding between.',
+  },
+];
+---
+
+<BaseLayout
+  title="Digital Marketing for the Travel Industry | Cumulus Digital"
+  description="Websites, SEO and paid search for tour operators, travel agents and destination brands — backed by 25+ years working inside the travel sector."
+>
+  <PageHero
+    eyebrow="Travel industry · 25+ years"
+    lede="Websites, search and campaigns for tour operators, agents and destination brands — from a team that has spent 25 years inside the sector rather than reading about it."
+  >
+    Digital marketing for the <em class="glow">travel industry</em>.
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we see</p>
+        <h2 class="section-title">Competing with the OTAs<br />on their terms.</h2>
+        <p class="section-sub">
+          Travel is the most competitive search market there is. Winning direct business means
+          playing where the big platforms are weakest.
+        </p>
+      </div>
+      <div class="values-grid">
+        {problems.map((x, i) => (
+          <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="value-num">{x.n}</span>
+            <h3>{x.h}</h3>
+            <p>{x.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we do</p>
+        <h2 class="section-title">Built around how<br />people book travel.</h2>
+      </div>
+      <ul class="services-grid" role="list">
+        {services.map((s) => (
+          <li class="service-card">
+            <div class="service-card-body"><h3>{s.name}</h3><p>{s.body}</p></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {proof.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Proof</p>
+          <h2 class="section-title">Travel work.</h2>
+          <p class="section-sub">A destination booking site built for the UAE's adventure emirate.</p>
+        </div>
+        <ul class="work-grid" role="list">
+          {proof.map((item) => (
+            <li class="work-card work-card--wide">
+              <a class="work-card-inner" href={`/work/${item!.id}/`}>
+                <WorkPreview client={item!.data.client} url={item!.data.url} image={item!.data.mockup ?? item!.data.image} />
+                <div class="work-card-content">
+                  <span class="work-client">{item!.data.client}</span>
+                  <h3>{item!.data.title}</h3>
+                  <p>{item!.data.summary}</p>
+                  <span class="work-card-cta">View case study →</span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Common questions</p>
+        <h2 class="section-title">Straight answers.</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item" data-reveal><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <p class="section-label">Travel industry</p>
+        <h2 class="cta-headline">We already know<br />your <em class="glow">sector</em>.</h2>
+        <p class="cta-sub">Operators, agents, resorts and destination brands — tell us what you sell and who you sell it to.</p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
+          <a class="btn btn--ghost btn--lg" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
