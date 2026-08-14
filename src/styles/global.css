@@ -37,6 +37,11 @@
   --ease:   cubic-bezier(0.22, 1, 0.36, 1);
   --section-pad: clamp(5rem, 10vh, 9rem);
   --radius: 16px;
+
+  /* Height of the fixed .site-head-wrap. Driven by the "Start a project"
+     button (45px) plus .site-head's 1.2rem padding — not the 40px logo.
+     Anything sitting at the top of a page must clear this. */
+  --head-h: 5.25rem;
 }
 
 /* ---- reset ---- */
@@ -203,6 +208,9 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   justify-content: space-between;
   gap: 2rem;
   padding: 1.2rem clamp(1.25rem, 4vw, 3.5rem);
+  /* Pins the header to --head-h so page content that offsets by that variable
+     stays correct even if the nav's contents change height. */
+  min-height: var(--head-h);
   max-width: var(--maxw);
   width: 100%;
   margin: 0 auto;

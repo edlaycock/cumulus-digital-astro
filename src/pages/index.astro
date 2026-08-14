@@ -95,7 +95,7 @@ const collage = [
 
       <div class="container">
         <ul class="h2-stats" role="list">
-          <li><strong>28</strong><span>Projects in our portfolio</span></li>
+          <li><strong>100s</strong><span>Projects in our portfolio</span></li>
           <li><strong>25+</strong><span>Years travel experience</span></li>
           <li><strong>2015</strong><span>Serving Surrey since</span></li>
         </ul>
@@ -198,7 +198,10 @@ const collage = [
     position: relative;
     display: flex; flex-direction: column; justify-content: center;
     min-height: 100svh;
-    padding: clamp(5.25rem, 10vh, 7rem) 0 clamp(1rem, 2.5vh, 2rem);
+    /* Lower bound clears --head-h with room to spare; on a short desktop window
+       10vh would otherwise drop the copy flush against the fixed nav. Taller
+       viewports are unaffected. */
+    padding: clamp(calc(var(--head-h) + .75rem), 10vh, 7rem) 0 clamp(1rem, 2.5vh, 2rem);
     overflow: hidden;
     background: var(--h2-ground);
   }
@@ -407,7 +410,11 @@ const collage = [
   /* Below 900px the floating layout gets cramped, so the devices become a
      grid — still every site on its own screen, still inside the first view. */
   @media (max-width: 900px) {
-    .h2-hero { padding-top: clamp(4.75rem, 9vh, 5.75rem); }
+    /* The old clamp bottomed out at 4.75rem, which is shorter than the fixed
+       header (--head-h, 5.25rem). On short viewports 9vh fell to that minimum
+       and the eyebrow slid underneath the nav. Offset from the header itself
+       so the gap holds at any height. */
+    .h2-hero { padding-top: calc(var(--head-h) + clamp(.75rem, 2vh, 1.5rem)); }
     .h2-title { font-size: clamp(1.75rem, 6.6vw, 2.4rem); }
     .h2-lede { font-size: .92rem; max-width: 40ch; }
     .h2-cta { margin-top: 1rem; }
