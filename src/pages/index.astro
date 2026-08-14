@@ -53,7 +53,7 @@ const collage = [
 >
   <div class="h2">
     <!-- ===================== HERO ===================== -->
-    <section class="h2-hero">
+    <section class="h2-hero" data-light-hero>
       <div class="h2-wash" aria-hidden="true"></div>
 
       <div class="container h2-hero-copy">
@@ -464,27 +464,8 @@ const collage = [
 </style>
 
 <style is:global>
-  /* The header is transparent-over-dark by default; this page's hero is light,
-     so borrow the existing scrolled treatment from the top. Guarded by :has()
-     so it can only ever apply on this page. */
-  body:has(.h2-hero) .site-head-wrap {
-    background: rgba(255, 255, 255, .92);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: 0 1px 0 rgba(20, 27, 56, .08);
-  }
-  body:has(.h2-hero) .nav-links a { color: var(--lt-text); }
-  body:has(.h2-hero) .nav-links a:hover { color: var(--cyan); }
-
-  /* The burger panel is dark even on this light page, so the dark-text rule
-     above must not follow the links into it — otherwise the open mobile menu
-     is navy text on a navy panel. */
-  body:has(.h2-hero) .nav--open .nav-links a { color: var(--paper); }
-  body:has(.h2-hero) .nav--open .nav-links a:hover,
-  body:has(.h2-hero) .nav--open .nav-links a[aria-current="page"] { color: var(--cyan-lt); }
-  body:has(.h2-hero) .nav-phone { color: var(--lt-body); }
-  body:has(.h2-hero) .nav-burger span { background: var(--lt-text); }
-  body:has(.h2-hero) .brand-logo { filter: none; }
+  /* The light-hero header treatment now lives in global.css, keyed on the
+     data-light-hero attribute this page's hero carries. */
 
   /* Service icon tiles ship dark navy — the only dark blocks on an otherwise
      light page. Swap to a pale cyan tint so the section stays light. */
