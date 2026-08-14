@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import DeviceMockup from '../../components/DeviceMockup.astro';
+import WorkPreview from '../../components/WorkPreview.astro';
+import ReviewCarousel from '../../components/ReviewCarousel.astro';
+import { getCollection } from 'astro:content';
+import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
+
+const all = await getCollection('work');
+const live = all.filter((w) => !w.data.draft);
+const buildCount = live.filter((w) => w.data.services.includes('Web Development')).length;
+
+// Hersham Village is the most development-heavy build in the portfolio —
+// searchable directory, self-service accounts, events — so it fronts the page.
+const feature = live.find((w) => w.id === 'hersham-village');
+
+const PROOF = ['hersham-village', 'assetq', 'jellylearn', 'surrey-contracting', 'fidelity-accountants', 'castellum'];
+const proof = PROOF.map((s) => live.find((w) => w.id === s)).filter(Boolean);
+
+const reviews = (await getCollection('testimonials')).map((t) => t.data);
+
+const problems = [
+  {
+    n: '01',
+    h: 'Forty plugins holding it together',
+    p: 'Every plugin is someone else’s code running on your site. Stack enough of them and you inherit their bugs, their security holes and their update schedule — and one bad release can take the whole thing down.',
+  },
+  {
+    n: '02',
+    h: 'It gets slower every month',
+    p: 'Uncompressed images, scripts loading in the wrong order, a database nobody has tidied since launch. Speed decays quietly until visitors start leaving before the page has drawn.',
+  },
+  {
+    n: '03',
+    h: 'Nobody has touched it since launch',
+    p: 'Out-of-date software is how most small business sites get compromised. If no one is patching it, the site is not standing still — it is slowly becoming a liability.',
+  },
+  {
+    n: '04',
+    h: 'You cannot change anything yourself',
+    p: 'A build that needs a developer for every price change or new page will not keep up with your business. The parts you want to edit should be yours to edit.',
+  },
+];
+
+const included = [
+  { name: 'Hand-written code', body: 'Built to do exactly what your site needs — not a general-purpose theme carrying features you will never use.' },
+  { name: 'A CMS you can actually run', body: 'Pages, projects, news and team set up as editable content, so your team keeps the site current without us.' },
+  { name: 'E-commerce', body: 'Product catalogues, payments and shipping, built to handle a real order flow rather than a demo one.' },
+  { name: 'Accounts and directories', body: 'Logins, self-service listings, search and filtering when your site needs to do more than present pages.' },
+  { name: 'Integrations', body: 'Booking systems, CRMs, payment providers and third-party APIs wired in so data moves without anyone re-typing it.' },
+  { name: 'Performance and security', body: 'Compressed images, optimised script loading, HTTPS, hardened configuration and monitoring from day one.' },
+];
+
+const process = [
+  { step: '01', title: 'Scope the build properly', body: 'What the site has to do, what it has to talk to, and what you need to manage yourself. Getting this right is what stops a build sprawling later.' },
+  { step: '02', title: 'Choose the right foundation', body: 'WordPress where you need to manage a lot of content, hand-coded where speed and security matter more. We recommend the one that fits, not the one we would rather sell.' },
+  { step: '03', title: 'Build and test on real devices', body: 'Responsive across real phones, tablets and browsers — not just a narrow window on a desktop. Forms, payments and integrations tested end to end before launch.' },
+  { step: '04', title: 'Launch, then look after it', body: 'Migration, redirects and search setup handled. Then patching, image compression, speed checks and security monitoring so the site stays healthy.' },
+];
+
+const care = [
+  'Third-party software, plugins and themes kept patched and up to date',
+  'Images compressed and scripts loading optimally as the site grows',
+  'Regular security checks so a compromise is caught early, not by your customers',
+  'Content and page changes handled for you on the fuller plans',
+];
+
+const faqs = [
+  {
+    q: 'Do you build on WordPress or hand-code from scratch?',
+    a: 'Both, depending on the job. Where you need to manage a lot of content yourself, a properly built WordPress site makes sense — AssetQ and Castellum are both CMS-driven. Where speed and security matter more than day-to-day editing, hand-coded is better. We will tell you which fits rather than defaulting to one.',
+  },
+  {
+    q: 'Can you take over a site somebody else built?',
+    a: 'Usually, yes. We start with an audit of what is there — how it was built, what is out of date, what is holding back speed — and give you an honest view on whether it is worth improving or rebuilding. We have taken over and migrated existing sites before, including moving AssetQ into a Google Cloud hosting environment with downtime monitoring.',
+  },
+  {
+    q: 'Can you build an online shop?',
+    a: 'Yes. We have built e-commerce for a Cobham salon moving its hair and lifestyle products online, and for an electric motocross brand with a wide and varied product range. Catalogue, payments, shipping and stock all get set up so you can run orders properly from day one.',
+  },
+  {
+    q: 'What about logins, directories and things more complex than pages?',
+    a: 'That is the development end of what we do. Hersham Village runs a searchable business directory where owners claim and manage their own listings through self-service accounts, alongside village news and events. If your site needs to do something rather than just say something, tell us what.',
+  },
+  {
+    q: 'What happens after launch?',
+    a: 'A website is not a fire-and-forget purchase. Our maintenance plans keep software patched, images compressed and scripts optimised, with regular checks that the site has not been compromised. Plans run from bare-bones cover for simple sites to monthly care including content changes and new pages.',
+  },
+  {
+    q: 'Do I own the code and the hosting?',
+    a: 'Yes, entirely. The site, the domain and the hosting account are yours, and they stay yours if we ever part ways.',
+  },
+];
+---
+
+<BaseLayout
+  title="Web Development in Surrey | Cumulus Digital"
+  description="Custom web development in Surrey — hand-built, fast, secure websites, e-commerce and web apps. CMS builds, integrations and ongoing maintenance. Based in Hersham, Walton-on-Thames."
+>
+  <PageHero
+    eyebrow="Web development · Surrey, UK"
+    lede="Fast, secure, hand-built websites and web apps for businesses across Surrey and beyond — properly engineered, and looked after long after launch."
+  >
+    Web development<br />that <em class="glow">lasts</em>.
+    <Fragment slot="actions">
+      <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
+      <a class="btn btn--outline btn--lg" href="/work/">See our work</a>
+    </Fragment>
+  </PageHero>
+
+  <!-- the work itself, in device frames -->
+  {feature && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <DeviceMockup
+          client={feature.data.client}
+          url={feature.data.url}
+          desktop={feature.data.screenshotDesktop}
+          mobile={feature.data.screenshotMobile}
+          eager
+        />
+        <p class="wd-caption">
+          <a href={`/work/${feature.id}/`}>{feature.data.client}</a> — a searchable business
+          directory with self-service accounts, village news and events.
+        </p>
+      </div>
+    </section>
+  )}
+
+  <!-- what goes wrong -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Why builds fail</p>
+        <h2 class="section-title">Most sites do not break.<br />They rot.</h2>
+        <p class="section-sub">
+          When we are asked to rescue a site, it is rarely one dramatic fault. It is four ordinary
+          ones that were never dealt with.
+        </p>
+      </div>
+      <div class="values-grid">
+        {problems.map((x, i) => (
+          <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="value-num">{x.n}</span>
+            <h3>{x.h}</h3>
+            <p>{x.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- what we build -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we build</p>
+        <h2 class="section-title">From brochure sites<br />to working software.</h2>
+      </div>
+      <ul class="services-grid" role="list">
+        {included.map((s) => (
+          <li class="service-card">
+            <div class="service-card-body"><h3>{s.name}</h3><p>{s.body}</p></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- process -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How we work</p>
+        <h2 class="section-title">Four steps, no mystery.</h2>
+      </div>
+      <div class="values-grid">
+        {process.map((p, i) => (
+          <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="value-num">{p.step}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ongoing care -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">After launch</p>
+        <h2 class="section-title">We do not disappear<br />the week after go-live.</h2>
+        <p class="section-sub">
+          Every plan is tailored to how your site is actually built. Tell us what yours needs.
+        </p>
+      </div>
+      <ul class="care-list" role="list">
+        {care.map((c) => (
+          <li class="care-item" data-reveal><span aria-hidden="true">✦</span><p>{c}</p></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- proof -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Proof</p>
+        <h2 class="section-title">{buildCount} sites<br />we have built.</h2>
+        <p class="section-sub">A few where the development did the heavy lifting.</p>
+      </div>
+      <ul class="work-grid" role="list">
+        {proof.map((item) => (
+          <li class="work-card">
+            <a class="work-card-inner" href={`/work/${item!.id}/`}>
+              <WorkPreview client={item!.data.client} url={item!.data.url} image={item!.data.mockup ?? item!.data.image} />
+              <div class="work-card-content">
+                <span class="work-client">{item!.data.client}</span>
+                <h3>{item!.data.title}</h3>
+                <span class="work-card-cta">View case study →</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="work-cta">
+        <a class="btn btn--outline btn--lg" href="/work/">See all case studies →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- reviews -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Reviews</p>
+        <h2 class="section-title">What our clients say.</h2>
+      </div>
+      <ReviewCarousel reviews={reviews} />
+    </div>
+  </section>
+
+  <!-- faqs -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Common questions</p>
+        <h2 class="section-title">The things people<br />ask us first.</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item" data-reveal><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <p class="section-label">Web development</p>
+        <h2 class="cta-headline">Let's build it<br />properly this <em class="glow">time</em>.</h2>
+        <p class="cta-sub">
+          Tell us what the site needs to do — and what it needs to talk to. We will come back with
+          an honest view and a straight price.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
+          <a class="btn btn--outline btn--lg" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .wd-caption {
+    margin: 1.6rem auto 0;
+    max-width: 44rem;
+    text-align: center;
+    font-size: .92rem;
+    color: var(--lt-muted);
+  }
+  .wd-caption a { color: var(--cyan); text-decoration: none; font-weight: 500; }
+  .wd-caption a:hover { text-decoration: underline; }
+
+  .care-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid var(--lt-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    max-width: 60rem;
+    margin-inline: auto;
+  }
+  .care-item {
+    display: flex;
+    gap: .9rem;
+    padding: 1.6rem 1.8rem;
+    border-right: 1px solid var(--lt-border);
+    border-bottom: 1px solid var(--lt-border);
+    background: var(--white);
+  }
+  .care-item:nth-child(even) { border-right: none; }
+  .care-item:nth-child(3),
+  .care-item:nth-child(4) { border-bottom: none; }
+  .care-item span { color: var(--cyan); flex: none; }
+  .care-item p { margin: 0; font-size: .95rem; line-height: 1.5; color: var(--lt-body); }
+
+  @media (max-width: 720px) {
+    .care-list { grid-template-columns: 1fr; }
+    .care-item { border-right: none; }
+    .care-item:nth-child(3) { border-bottom: 1px solid var(--lt-border); }
+    .care-item:last-child { border-bottom: none; }
+  }
+</style>

@@ -14,5 +14,8 @@ const { eyebrow, lede } = Astro.props;
     </p>
     <h1 class="page-hero-title reveal d2"><slot /></h1>
     {lede && <p class="lede reveal d3">{lede}</p>}
+    {Astro.slots.has('actions') && (
+      <div class="page-hero-actions reveal d4"><slot name="actions" /></div>
+    )}
   </div>
 </section>

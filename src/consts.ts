@@ -41,6 +41,7 @@ export const NAV_LINKS = [
     children: [
       { href: '/services/', label: 'All services' },
       { href: '/services/web-design/', label: 'Web Design' },
+      { href: '/services/web-development/', label: 'Web Development' },
       { href: '/services/google-ads/', label: 'Google Ads' },
       { href: '/services/travel-industry/', label: 'Travel Industry' },
       { href: '/services/trades/', label: 'Trades & Construction' },

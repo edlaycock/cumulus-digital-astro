@@ -1285,6 +1285,13 @@ h1.headline em.glow, .cta-headline em.glow {
   text-shadow: none;
 }
 .page-hero .lede { margin-bottom: 0; }
+.page-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
 
 /* ============================================================
    SERVICES HUB PAGE
