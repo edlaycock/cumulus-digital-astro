@@ -2164,3 +2164,18 @@ h1.headline em.glow, .cta-headline em.glow {
   .client-logo { padding: 0 1.2rem; }
   .client-logo img { height: 34px; max-width: 140px; }
 }
+
+/* link from a service section to its own page */
+.service-detail-more {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1.1rem;
+  font-family: var(--font-m);
+  font-size: .8rem;
+  letter-spacing: .06em;
+  color: var(--cyan);
+  border-bottom: 1px solid rgba(79, 197, 213, .4);
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.service-detail-more:hover { color: var(--lt-text); border-color: var(--lt-text); }

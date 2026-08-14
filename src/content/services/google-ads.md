@@ -1,6 +1,7 @@
 ---
 title: Google Ads
 order: 5
+href: /services/google-ads/
 iconPath: "M24 6 8 34h10l6-10 6 10h10L24 6Zm-9 32a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
 summary: "Search, Shopping, Performance Max and remarketing campaigns built to bring in enquiries — not just clicks."
 outcomes:
