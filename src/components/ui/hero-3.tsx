@@ -11,7 +11,7 @@ interface AnimatedMarqueeHeroProps {
   tagline: string;
   /** plain string so it can be passed from an .astro template (no JSX there) */
   title: string;
-  /** word within the title to highlight in the accent colour */
+  /** word or phrase within the title to highlight in the accent colour */
   accent?: string;
   description: string;
   ctaText: string;
@@ -43,6 +43,16 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
   // duplicated so the strip can loop seamlessly
   const strip = [...images, ...images];
 
+  // The title animates word by word, so the accent phrase is matched as a run
+  // of words rather than a substring.
+  const words = title.split(' ');
+  const accentWords = accent ? accent.split(' ') : [];
+  const accentStart = accentWords.length
+    ? words.findIndex((_, i) =>
+        accentWords.every((a, j) => words[i + j]?.replace(/[^\w'&]/g, '') === a)
+      )
+    : -1;
+
   return (
     <section className={cn('amh', className)} data-light-hero>
       <div className="amh-copy">
@@ -56,8 +66,9 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
           className="amh-title"
         >
-          {title.split(' ').map((word, i) => {
-            const isAccent = accent && word.replace(/[^\w']/g, '') === accent;
+          {words.map((word, i) => {
+            const isAccent =
+              accentStart >= 0 && i >= accentStart && i < accentStart + accentWords.length;
             return (
               <motion.span key={i} variants={FADE} className="amh-word">
                 {isAccent ? <em>{word}</em> : word}&nbsp;
