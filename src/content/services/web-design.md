@@ -1,6 +1,7 @@
 ---
 title: Web Design
 order: 2
+href: /services/web-design/
 iconPath: "M8 14h32v20H8zM16 34v4M32 34v4M12 38h24M15 22h18M15 27h12"
 summary: "Distinctive, responsive websites designed from scratch — no templates, no compromise on quality."
 outcomes:
