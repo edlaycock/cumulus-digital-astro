@@ -24,8 +24,8 @@ const serviceItems = services.map((s) => ({
   title: s.data.title,
   summary: s.data.summary,
   iconPath: s.data.iconPath,
-  href: `/services/#${s.id}`,
-  linkText: 'Learn more →',
+  href: s.data.href ?? `/services/#${s.id}`,
+  linkText: s.data.href ? 'See the full service →' : 'Learn more →',
 }));
 
 const reviews = (await getCollection('testimonials')).map((t) => t.data);

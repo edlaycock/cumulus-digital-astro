@@ -45,6 +45,11 @@ const rendered = await Promise.all(
           <ul class="service-outcomes">
             {entry.data.outcomes.map((o) => <li>{o}</li>)}
           </ul>
+          {entry.data.href && (
+            <a class="service-detail-more" href={entry.data.href}>
+              See the full {entry.data.title} service →
+            </a>
+          )}
         </article>
       ))}
     </div>

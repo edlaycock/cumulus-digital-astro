@@ -11,6 +11,9 @@ const services = defineCollection({
     summary: z.string(),
     outcomes: z.array(z.string()),
     showOnHome: z.boolean().default(true),
+    // set when the service has its own page; otherwise it links to its
+    // section anchor on /services/
+    href: z.string().optional(),
   }),
 });
 
