@@ -475,6 +475,13 @@ const collage = [
   }
   body:has(.h2-hero) .nav-links a { color: var(--lt-text); }
   body:has(.h2-hero) .nav-links a:hover { color: var(--cyan); }
+
+  /* The burger panel is dark even on this light page, so the dark-text rule
+     above must not follow the links into it — otherwise the open mobile menu
+     is navy text on a navy panel. */
+  body:has(.h2-hero) .nav--open .nav-links a { color: var(--paper); }
+  body:has(.h2-hero) .nav--open .nav-links a:hover,
+  body:has(.h2-hero) .nav--open .nav-links a[aria-current="page"] { color: var(--cyan-lt); }
   body:has(.h2-hero) .nav-phone { color: var(--lt-body); }
   body:has(.h2-hero) .nav-burger span { background: var(--lt-text); }
   body:has(.h2-hero) .brand-logo { filter: none; }

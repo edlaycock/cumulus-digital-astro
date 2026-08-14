@@ -34,7 +34,17 @@ export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? '';
 export const GOOGLE_REVIEWS_URL = import.meta.env.PUBLIC_GOOGLE_REVIEWS_URL ?? '';
 
 export const NAV_LINKS = [
-  { href: '/services/', label: 'Services' },
+  {
+    href: '/services/',
+    label: 'Services',
+    // dedicated service pages — surfaced in a dropdown under Services
+    children: [
+      { href: '/services/', label: 'All services' },
+      { href: '/services/google-ads/', label: 'Google Ads' },
+      { href: '/services/travel-industry/', label: 'Travel Industry' },
+      { href: '/services/trades/', label: 'Trades & Construction' },
+    ],
+  },
   { href: '/work/', label: 'Our Work' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
