@@ -13,11 +13,32 @@ const isActive = (href: string) => path === href || path === href.replace(/\/$/,
 
     <nav class="nav" aria-label="Primary">
       <div class="nav-links" id="mobile-menu">
-        {NAV_LINKS.map((link) => (
-          <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
-            {link.label}
-          </a>
-        ))}
+        {NAV_LINKS.map((link) =>
+          link.children ? (
+            <div class="nav-item nav-item--sub">
+              <a
+                href={link.href}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                aria-haspopup="true"
+              >
+                {link.label}
+                <svg class="nav-caret" viewBox="0 0 12 8" width="10" height="7" aria-hidden="true">
+                  <path d="M1 1.5 6 6.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+              <div class="nav-sub">
+                {link.children.map((c) => (
+                  <a href={c.href} aria-current={isActive(c.href) ? 'page' : undefined}>{c.label}</a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
+              {link.label}
+            </a>
+          )
+        )}
       </div>
       <a class="nav-phone" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
       <a class="btn btn--primary" href="/contact/">Start a project</a>
