@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
+import { getImage } from 'astro:assets';
+import { AnimatedMarqueeHero } from '../../components/ui/hero-3';
 import WorkPreview from '../../components/WorkPreview.astro';
 import ReviewCarousel from '../../components/ReviewCarousel.astro';
 import { getCollection } from 'astro:content';
@@ -14,6 +15,29 @@ const PROOF = ['castellum', 'surrey-contracting', 'fidelity-accountants', 'cotsw
 const proof = PROOF.map((s) => live.find((w) => w.id === s)).filter(Boolean);
 
 const reviews = (await getCollection('testimonials')).map((t) => t.data);
+
+// Marquee: real screenshots of sites we've built, most recent first (portfolio
+// order is curated newest-and-strongest first). Optimised at build time and
+// passed to the React island as plain URLs.
+const shots = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/work/*-desktop.jpg',
+  { eager: true }
+);
+const bySlug = new Map(
+  Object.entries(shots).map(([path, mod]) => [
+    path.split('/').pop()!.replace('-desktop.jpg', ''),
+    mod.default,
+  ])
+);
+const marquee = await Promise.all(
+  live
+    .sort((a, b) => a.data.order - b.data.order)
+    .filter((w) => bySlug.has(w.id))
+    .map(async (w) => ({
+      src: (await getImage({ src: bySlug.get(w.id)!, width: 680, format: 'webp' })).src,
+      alt: `${w.data.client} website designed by Cumulus Digital`,
+    }))
+);
 
 const problems = [
   {
@@ -86,12 +110,18 @@ const faqs = [
   title="Web Design in Surrey | Cumulus Digital"
   description="Bespoke web design in Surrey — hand-built, mobile-first websites for businesses across Surrey and the South East. No templates. Based in Hersham, Walton-on-Thames."
 >
-  <PageHero
-    eyebrow="Web design · Surrey, UK"
-    lede="Bespoke, hand-built websites for businesses across Surrey and beyond — designed from a blank page around your business, built to be fast, and made to bring in enquiries."
-  >
-    Web design in <em class="glow">Surrey</em>.
-  </PageHero>
+  <AnimatedMarqueeHero
+    client:load
+    tagline="Web design · Surrey, UK"
+    title="Web design in Surrey."
+    accent="Surrey"
+    description="Bespoke, hand-built websites for businesses across Surrey and beyond — designed from a blank page around your business, built to be fast, and made to bring in enquiries."
+    ctaText="Start a project →"
+    ctaHref="/contact/"
+    secondaryText="See our work"
+    secondaryHref="/work/"
+    images={marquee}
+  />
 
   <!-- why sites underperform -->
   <section class="section">
