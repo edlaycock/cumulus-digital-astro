@@ -1,6 +1,7 @@
 ---
 title: Web Development
 order: 3
+href: /services/web-development/
 iconPath: "M14 22L10 26L14 30M34 22L38 26L34 30M27 16L21 36"
 summary: "Custom-built, fast, secure websites and web apps. Hand-coded for performance — not bolted together from plugins."
 outcomes:
@@ -10,3 +11,5 @@ outcomes:
 ---
 
 We build websites properly: fast, secure and maintainable, not bolted together from a stack of plugins. And we don't disappear after launch — ongoing care covers keeping software patched and up to date, images compressed, scripts loading optimally, and regular checks to make sure your website stays healthy and secure.
+
+[See our full Web Development service →](/services/web-development/)
