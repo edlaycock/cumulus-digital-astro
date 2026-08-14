@@ -40,6 +40,7 @@ export const NAV_LINKS = [
     // dedicated service pages — surfaced in a dropdown under Services
     children: [
       { href: '/services/', label: 'All services' },
+      { href: '/services/web-design/', label: 'Web Design' },
       { href: '/services/google-ads/', label: 'Google Ads' },
       { href: '/services/travel-industry/', label: 'Travel Industry' },
       { href: '/services/trades/', label: 'Trades & Construction' },

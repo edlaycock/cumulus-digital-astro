@@ -1,0 +1,227 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import WorkPreview from '../../components/WorkPreview.astro';
+import ReviewCarousel from '../../components/ReviewCarousel.astro';
+import { getCollection } from 'astro:content';
+import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
+
+const all = await getCollection('work');
+const live = all.filter((w) => !w.data.draft);
+const designCount = live.filter((w) => w.data.services.includes('Web Design')).length;
+
+const PROOF = ['castellum', 'surrey-contracting', 'fidelity-accountants', 'cotswold-house-hunter', 'jellylearn', 'the-queen-stage'];
+const proof = PROOF.map((s) => live.find((w) => w.id === s)).filter(Boolean);
+
+const reviews = (await getCollection('testimonials')).map((t) => t.data);
+
+const problems = [
+  {
+    n: '01',
+    h: 'It looks like everyone else',
+    p: 'A theme bought off the shelf gives you the same site as a thousand other businesses, with your logo dropped in the corner. Customers notice, even if they could not tell you why.',
+  },
+  {
+    n: '02',
+    h: 'It is slow',
+    p: 'Page builders stack plugin on plugin until a simple page pulls a megabyte of code nobody needed. Slow sites lose visitors before they have read a word — and Google counts it against you.',
+  },
+  {
+    n: '03',
+    h: 'It was never built for phones',
+    p: 'Most of your visitors arrive on a phone. A design squeezed down from desktop rather than planned for mobile makes them pinch, scroll and give up.',
+  },
+  {
+    n: '04',
+    h: 'It does not ask for the enquiry',
+    p: 'A beautiful site that buries the contact route is decoration. Every page should make the next step obvious.',
+  },
+];
+
+const included = [
+  { name: 'Bespoke design', body: 'Designed around your business and customers from a blank page — never stretched from a template.' },
+  { name: 'Mobile-first build', body: 'Planned for the phone screen first, because that is where most of your visitors are.' },
+  { name: 'Hand-written code', body: 'Fast, secure and lean — not forty plugins bolted together and hoping for the best.' },
+  { name: 'A CMS you can run', body: 'Update your own pages, projects and news without coming back to us every time.' },
+  { name: 'Search foundations', body: 'Proper structure, headings, metadata and speed so the site can actually rank.' },
+  { name: 'Clear enquiry routes', body: 'Forms, tap-to-call and calls to action placed where they will get used.' },
+];
+
+const process = [
+  { step: '01', title: 'Understand the business', body: 'What you sell, who buys it, who you are up against and what a good enquiry actually looks like. We will tell you honestly if your current branding is holding the site back.' },
+  { step: '02', title: 'Design it properly', body: 'Layouts and visual direction built around your content, reviewed with you before a line of code is written. Changes are cheap at this stage and expensive later.' },
+  { step: '03', title: 'Build it fast and clean', body: 'Hand-coded, responsive, tested across real devices and browsers, with the CMS set up so your team can keep it current.' },
+  { step: '04', title: 'Launch and stay on hand', body: 'Migration, redirects and search setup handled, then we stay available. We do not disappear the week after go-live.' },
+];
+
+const faqs = [
+  {
+    q: 'How much does a website cost?',
+    a: 'It depends on how many pages, whether you need e-commerce and whether the branding exists yet — so we quote per project rather than publishing a number that would be wrong for most people. Tell us what you need and you will get a straight figure with no surprises later.',
+  },
+  {
+    q: 'How long does it take?',
+    a: 'Most sites take a few weeks rather than months. Castellum was designed, built and live in two weeks because they had PR going out. The usual hold-up is content and photography, not the build.',
+  },
+  {
+    q: 'Do you use WordPress or build from scratch?',
+    a: 'Both, depending on what suits you. Where you need to manage a lot of content yourself, a properly built CMS makes sense. Where speed and security matter more, hand-coded is better. We will recommend the one that fits rather than the one we would rather sell.',
+  },
+  {
+    q: 'Can I update the site myself?',
+    a: 'Yes. We set up the pages and sections you will actually want to change — projects, news, team, services — so you can update them without a developer. OakBridge Group came to us specifically for that.',
+  },
+  {
+    q: 'Do I own the website?',
+    a: 'Yes, entirely. The site, the domain and the hosting account are yours, and they stay yours if we ever part ways.',
+  },
+  {
+    q: 'Can you redesign our existing site?',
+    a: 'Often that is the better option — an established site carries search history worth keeping. We will audit what you have and tell you whether it is worth rebuilding or refining.',
+  },
+];
+---
+
+<BaseLayout
+  title="Web Design in Surrey | Cumulus Digital"
+  description="Bespoke web design in Surrey — hand-built, mobile-first websites for businesses across Surrey and the South East. No templates. Based in Hersham, Walton-on-Thames."
+>
+  <PageHero
+    eyebrow="Web design · Surrey, UK"
+    lede="Bespoke, hand-built websites for businesses across Surrey and beyond — designed from a blank page around your business, built to be fast, and made to bring in enquiries."
+  >
+    Web design in <em class="glow">Surrey</em>.
+  </PageHero>
+
+  <!-- why sites underperform -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Why sites underperform</p>
+        <h2 class="section-title">A website is not a brochure.<br />It is your best salesperson.</h2>
+        <p class="section-sub">
+          When we take over a site that is not pulling its weight, it is usually one of these four
+          things — and all of them are fixable.
+        </p>
+      </div>
+      <div class="values-grid">
+        {problems.map((x, i) => (
+          <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="value-num">{x.n}</span>
+            <h3>{x.h}</h3>
+            <p>{x.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- what's included -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What you get</p>
+        <h2 class="section-title">Every site, built<br />the same careful way.</h2>
+      </div>
+      <ul class="services-grid" role="list">
+        {included.map((s) => (
+          <li class="service-card">
+            <div class="service-card-body"><h3>{s.name}</h3><p>{s.body}</p></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- process -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How we work</p>
+        <h2 class="section-title">Four steps, no mystery.</h2>
+      </div>
+      <div class="values-grid">
+        {process.map((p, i) => (
+          <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="value-num">{p.step}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- proof -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Proof</p>
+        <h2 class="section-title">{designCount} websites<br />in our portfolio.</h2>
+        <p class="section-sub">A few we are particularly proud of.</p>
+      </div>
+      <ul class="work-grid" role="list">
+        {proof.map((item) => (
+          <li class="work-card">
+            <a class="work-card-inner" href={`/work/${item!.id}/`}>
+              <WorkPreview client={item!.data.client} url={item!.data.url} image={item!.data.mockup ?? item!.data.image} />
+              <div class="work-card-content">
+                <span class="work-client">{item!.data.client}</span>
+                <h3>{item!.data.title}</h3>
+                <span class="work-card-cta">View case study →</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="work-cta">
+        <a class="btn btn--outline btn--lg" href="/work/">See all case studies →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- reviews -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Reviews</p>
+        <h2 class="section-title">What our clients say.</h2>
+      </div>
+      <ReviewCarousel reviews={reviews} />
+    </div>
+  </section>
+
+  <!-- faqs -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Common questions</p>
+        <h2 class="section-title">The things people<br />ask us first.</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item" data-reveal><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <p class="section-label">Web design</p>
+        <h2 class="cta-headline">Let's build you<br />a proper <em class="glow">website</em>.</h2>
+        <p class="cta-sub">
+          Tell us about your business and what the site needs to do. We will come back with an
+          honest view and a straight price.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
+          <a class="btn btn--ghost btn--lg" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
