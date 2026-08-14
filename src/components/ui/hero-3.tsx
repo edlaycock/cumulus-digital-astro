@@ -45,16 +45,17 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
 
   // The title animates word by word, so the accent phrase is matched as a run
   // of words rather than a substring.
+  const bare = (w: string) => w.replace(/[^\w'&]/g, '');
   const words = title.split(' ');
-  const accentWords = accent ? accent.split(' ') : [];
+  const accentWords = accent ? accent.split(' ').map(bare) : [];
   const accentStart = accentWords.length
     ? words.findIndex((_, i) =>
-        accentWords.every((a, j) => words[i + j]?.replace(/[^\w'&]/g, '') === a)
+        accentWords.every((a, j) => words[i + j] !== undefined && bare(words[i + j]) === a)
       )
     : -1;
 
   return (
-    <section className={cn('amh', className)} data-light-hero>
+    <section className={cn('amh', className)}>
       <div className="amh-copy">
         <motion.div initial="hidden" animate="show" variants={FADE} className="amh-tag">
           {tagline}

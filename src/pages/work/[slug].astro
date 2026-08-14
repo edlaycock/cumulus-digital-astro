@@ -27,10 +27,6 @@ const related = (await getCollection('work'))
 <BaseLayout title={`${d.client} — Case Study | Cumulus Digital`} description={d.summary}>
   <!-- HERO -->
   <section class="cs-hero">
-    {heroImg && (
-      <Image class="cs-hero-bg" src={heroImg} alt="" widths={[800, 1400, 2000]} sizes="100vw" loading="eager" />
-    )}
-    <div class="cs-hero-scrim" aria-hidden="true"></div>
     <div class="container cs-hero-inner">
       <nav class="cs-crumb" aria-label="Breadcrumb">
         <a href="/">Home</a> <span>›</span> <a href="/work/">Case Studies</a> <span>›</span> <span>{d.client}</span>
@@ -42,9 +38,18 @@ const related = (await getCollection('work'))
         {d.url && (
           <a class="btn btn--primary btn--lg" href={d.url} target="_blank" rel="noopener" data-magnetic>Visit the live site →</a>
         )}
-        <a class="btn btn--ghost btn--lg" href="/contact/">Start a project like this</a>
+        <a class="btn btn--outline btn--lg" href="/contact/">Start a project like this</a>
       </div>
     </div>
+
+    {/* the work itself, framed — the only imagery the system allows */}
+    {heroImg && (
+      <div class="container">
+        <figure class="cs-hero-shot">
+          <Image src={heroImg} alt={`${d.client} website`} widths={[800, 1400, 2000]} sizes="(max-width: 1200px) 100vw, 1200px" loading="eager" />
+        </figure>
+      </div>
+    )}
   </section>
 
   <!-- BODY -->
