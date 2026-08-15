@@ -5,8 +5,8 @@ import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import ImpactHero from '../components/ImpactHero.astro';
 import { ScreenshotMarquee } from '../components/ui/screenshot-marquee';
-import castellumDesktop from '../assets/work/castellum-desktop.jpg';
-import castellumMobile from '../assets/work/castellum-mobile.jpg';
+import heroDesktop from '../assets/work/surrey-contracting-desktop.jpg';
+import heroMobile from '../assets/work/surrey-contracting-mobile.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceCards from '../components/ServiceCards';
 import WorkPreview from '../components/WorkPreview.astro';
@@ -34,10 +34,10 @@ const work = (await getCollection('work'))
   .slice(0, 4);
 
 // Marquee: every client site we have a desktop capture for, in portfolio
-// order (most recent first), optimised at build time. Castellum is skipped —
-// it is already the site in the hero device, and seeing it twice within one
-// screen reads as a mistake.
-const HERO_SLUG = 'castellum';
+// order (most recent first), optimised at build time. The hero client is
+// skipped — it is already the site in the hero device, and seeing it twice
+// within one screen reads as a mistake.
+const HERO_SLUG = 'surrey-contracting';
 const shots = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/work/*-desktop.jpg',
   { eager: true }
@@ -68,19 +68,20 @@ const marquee = await Promise.all(
     <ImpactHero
       badge="Digital marketing &amp; web · Surrey, UK"
       title="Web design in Surrey"
-      titleAccent="that makes ideas happen."
+      titleAccent="&amp; beyond."
+      titleAccentAlt="&amp; London."
       lede="Bespoke branding, fast hand-built websites and search marketing for ambitious UK businesses — backed by 25 years in the travel sector."
       ticks={['28 projects delivered', 'Serving Surrey since 2015', 'No long-term contracts']}
       ctaText="Start a project →"
       ctaHref="/contact/"
       secondaryText="See our work"
       secondaryHref="/work/"
-      desktop={castellumDesktop}
-      mobile={castellumMobile}
-      alt="The Castellum website, designed and built by Cumulus Digital"
+      desktop={heroDesktop}
+      mobile={heroMobile}
+      alt="The Surrey Contracting website, designed and built by Cumulus Digital"
       chips={[
         { text: 'Live in two weeks', at: 'tr' },
-        { text: 'Built for Castellum', at: 'bl' },
+        { text: 'Built for Surrey Contracting', at: 'bl' },
       ]}
     />
 

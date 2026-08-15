@@ -9,6 +9,7 @@
 // different layout with the device dropped.
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import { FlippingWordSwap } from './ui/flipping-word-swap';
 
 interface Chip {
   text: string;
@@ -24,6 +25,8 @@ interface Props {
   title: string;
   /** second half of the headline, rendered in the accent colour */
   titleAccent: string;
+  /** when set, the accent flips to this phrase on hover, focus or tap */
+  titleAccentAlt?: string;
   lede: string;
   ticks?: string[];
   ctaText: string;
@@ -37,7 +40,7 @@ interface Props {
 }
 
 const {
-  badge, title, titleAccent, lede, ticks = [],
+  badge, title, titleAccent, titleAccentAlt, lede, ticks = [],
   ctaText, ctaHref, secondaryText, secondaryHref,
   desktop, mobile, alt, chips = [],
 } = Astro.props;
@@ -49,7 +52,16 @@ const {
   <div class="container ih-copy">
     <p class="ih-badge"><span class="ih-badge-dot" aria-hidden="true"></span>{badge}</p>
 
-    <h1 class="ih-title">{title} <em>{titleAccent}</em></h1>
+    <h1 class="ih-title">
+      {title}{' '}
+      <em>
+        {titleAccentAlt ? (
+          <FlippingWordSwap word1={titleAccent} word2={titleAccentAlt} client:visible />
+        ) : (
+          titleAccent
+        )}
+      </em>
+    </h1>
 
     <p class="ih-lede">{lede}</p>
 
