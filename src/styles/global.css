@@ -2169,6 +2169,9 @@ h1.headline em.glow, .cta-headline em.glow {
 .amh-marquee {
   position: relative;
   width: 100%;
+  /* the track is wider than the viewport by design; it used to be clipped by
+     the hero section, so standing alone it has to clip itself */
+  overflow: hidden;
   margin-top: clamp(2.5rem, 6vh, 4.5rem);
   padding-bottom: clamp(2rem, 5vh, 3.5rem);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
@@ -2199,4 +2202,286 @@ h1.headline em.glow, .cta-headline em.glow {
 }
 @media (prefers-reduced-motion: reduce) {
   .amh-track { transform: none !important; }
+}
+
+/* =========================================================
+   IMPACT HERO
+   Badge, two-tone display headline, tick row, two actions, and a large
+   perspective-tilted device carrying the real product. Modelled on the
+   YourTradeQuotes hero.
+   ========================================================= */
+.ih {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(7rem, 15vh, 9.5rem) 0 0;
+  background: var(--white);
+  overflow: hidden;
+  text-align: center;
+}
+/* the only colour on the canvas: two very soft corner washes */
+.ih-wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(52% 40% at 0% 0%, rgba(79, 197, 213, .16), transparent 68%),
+    radial-gradient(48% 38% at 100% 22%, rgba(13, 127, 146, .09), transparent 66%);
+}
+
+.ih-copy { position: relative; z-index: 2; }
+
+.ih-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .42rem 1rem;
+  margin-bottom: 1.4rem;
+  border: 1px solid var(--lt-border);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  font-size: .84rem;
+  font-weight: 500;
+  color: var(--cyan);
+}
+.ih-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); flex: none; }
+
+.ih-title {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: clamp(2.3rem, 6.6vw, 4.6rem);
+  line-height: .97;
+  letter-spacing: -.055em;
+  color: var(--ink-black);
+  margin: 0 auto 1.3rem;
+  max-width: 20ch;
+  text-wrap: balance;
+}
+.ih-title em { font-style: normal; color: var(--cyan); }
+
+.ih-lede {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.5;
+  color: var(--lt-muted);
+  max-width: 44ch;
+  margin: 0 auto;
+}
+
+.ih-ticks {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem 1.5rem;
+  margin: 1.4rem auto 0;
+  font-size: .9rem;
+  color: var(--lt-muted);
+}
+.ih-ticks li { display: inline-flex; align-items: center; gap: .45rem; }
+.ih-tick { color: var(--cyan); font-weight: 700; }
+
+.ih-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem;
+  margin-top: 2rem;
+}
+
+/* ---- the tilted device ---- */
+.ih-stage {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  /* the phone overhangs the laptop, so the bottom padding has to clear it
+     or the section's overflow:hidden crops it */
+  padding: 0 clamp(1rem, 4vw, 3rem) clamp(4.5rem, 9vw, 7rem);
+  perspective: 2200px;
+}
+.ih-device {
+  position: relative;
+  width: min(1040px, 100%);
+  margin: 0 auto;
+  /* a gentle lean only — more than this and the near border reads as a
+      thick black wedge */
+  transform: rotateX(6deg);
+  transform-style: preserve-3d;
+}
+.ih-laptop {
+  border-radius: clamp(14px, 1.6vw, 22px);
+  overflow: hidden;
+  background: var(--ink-black);
+  border: clamp(6px, .9vw, 12px) solid var(--ink-black);
+  /* the one shadow the system allows: at this scale a border alone cannot
+     separate the device from the canvas */
+  box-shadow: 0 40px 70px -40px rgba(0, 0, 0, .55);
+}
+.ih-laptop img { display: block; width: 100%; height: auto; }
+
+.ih-phone {
+  position: absolute;
+  right: 3%;
+  bottom: -12%;
+  width: 16%;
+  border-radius: clamp(10px, 1.4vw, 18px);
+  overflow: hidden;
+  background: var(--ink-black);
+  border: clamp(4px, .55vw, 7px) solid var(--ink-black);
+  box-shadow: 0 24px 44px -26px rgba(0, 0, 0, .5);
+  transform: translateZ(60px);
+}
+.ih-phone img { display: block; width: 100%; height: auto; }
+
+/* floating status chips, pinned to the device corners */
+.ih-chip {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .9rem;
+  border-radius: var(--radius-pill);
+  background: var(--ink-black);
+  color: var(--white);
+  font-size: clamp(.68rem, .95vw, .82rem);
+  font-weight: 500;
+  white-space: nowrap;
+  transform: translateZ(90px);
+  animation: ih-float 5s var(--ease) infinite;
+}
+.ih-chip-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex: none; }
+.ih-chip--tl { top: 7%;  left: -3%; }
+.ih-chip--tr { top: 5%;  right: -3%; animation-delay: -1.6s; }
+.ih-chip--bl { bottom: 8%; left: -3%; animation-delay: -3.2s; }
+.ih-chip--br { bottom: 6%; right: -3%; animation-delay: -2.4s; }
+
+@keyframes ih-float { 50% { transform: translateZ(90px) translateY(-7px); } }
+@keyframes ih-float-sm { 50% { transform: translateY(-5px); } }
+
+@media (max-width: 900px) {
+  .ih { padding-top: clamp(6rem, 12vh, 7.5rem); }
+  .ih-title { max-width: 16ch; }
+  /* the tilt reads as a wobble at small sizes — flatten it and keep the
+     same composition, just smaller */
+  .ih-stage { perspective: none; padding-bottom: 2.5rem; }
+  .ih-device { transform: none; }
+  .ih-chip { transform: none; animation-name: ih-float-sm; }
+  .ih-phone { transform: none; width: 20%; bottom: -10%; right: 2%; }
+}
+@media (max-width: 560px) {
+  .ih-ticks { gap: .35rem 1rem; font-size: .82rem; }
+  .ih-actions .btn { flex: 1 1 auto; justify-content: center; }
+  /* at this width a chip on each side would collide with the device */
+  .ih-chip--tr, .ih-chip--bl { display: none; }
+  .ih-chip--tl { left: -1%; top: 5%; }
+  .ih-chip--br { right: -1%; bottom: 4%; }
+}
+@media (prefers-reduced-motion: reduce) { .ih-chip { animation: none; } }
+
+/* =========================================================
+   OUR OWN PRODUCTS  (trades page)
+   ========================================================= */
+.ytp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+@media (max-width: 820px) { .ytp-grid { grid-template-columns: 1fr; } }
+
+.ytp-card {
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+  padding: 2rem;
+  background: var(--white);
+  border: 1px solid var(--lt-rule);
+  border-radius: var(--radius);
+}
+.ytp-logo { width: auto; height: 40px; object-fit: contain; align-self: flex-start; }
+.ytp-price { font-size: .95rem; color: var(--lt-muted); margin: 0; }
+.ytp-price strong { color: var(--ink-black); font-weight: 700; }
+.ytp-card > p { margin: 0; font-size: .98rem; line-height: 1.55; color: var(--lt-body); }
+.ytp-card ul { list-style: none; display: grid; gap: .5rem; margin: 0; }
+.ytp-card li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: .92rem;
+  line-height: 1.5;
+  color: var(--lt-muted);
+}
+.ytp-card li::before { content: '✓'; position: absolute; left: 0; color: var(--cyan); font-weight: 700; }
+.ytp-link {
+  margin-top: auto;
+  align-self: flex-start;
+  font-weight: 500;
+  color: var(--cyan);
+  text-decoration: none;
+  border-bottom: 1px solid var(--cyan);
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.ytp-link:hover { color: var(--lt-text); border-color: var(--lt-text); }
+
+.ytp-flow-title {
+  margin: clamp(3rem, 6vw, 4.5rem) 0 1.6rem;
+  text-align: center;
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  letter-spacing: -.04em;
+  color: var(--ink-black);
+}
+.ytp-flow {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--lt-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+@media (max-width: 860px) { .ytp-flow { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .ytp-flow { grid-template-columns: 1fr; } }
+
+.ytp-step {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  padding: 1.5rem 1.6rem;
+  background: var(--white);
+  border-right: 1px solid var(--lt-border);
+  border-bottom: 1px solid var(--lt-border);
+}
+.ytp-step-n {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: -.05em;
+  color: var(--cyan);
+  line-height: 1;
+  margin-bottom: .3rem;
+}
+.ytp-step strong { font-size: 1rem; color: var(--ink-black); }
+.ytp-step span:last-child { font-size: .9rem; line-height: 1.5; color: var(--lt-muted); }
+/* the grid reflows at three breakpoints, so clear the trailing rules per column count */
+.ytp-flow > :nth-child(3n) { border-right: none; }
+.ytp-flow > :nth-child(n + 4) { border-bottom: none; }
+@media (max-width: 860px) {
+  .ytp-flow > :nth-child(3n) { border-right: 1px solid var(--lt-border); }
+  .ytp-flow > :nth-child(2n) { border-right: none; }
+  .ytp-flow > :nth-child(n + 4) { border-bottom: 1px solid var(--lt-border); }
+  .ytp-flow > :nth-child(n + 5) { border-bottom: none; }
+}
+@media (max-width: 520px) {
+  .ytp-flow > * { border-right: none; border-bottom: 1px solid var(--lt-border); }
+  .ytp-flow > :last-child { border-bottom: none; }
+}
+
+.ytp-note {
+  margin: 2rem auto 0;
+  max-width: 46rem;
+  text-align: center;
+  font-size: .95rem;
+  line-height: 1.6;
+  color: var(--lt-muted);
 }

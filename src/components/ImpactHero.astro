@@ -1,0 +1,93 @@
+---
+// Hero modelled on the YourTradeQuotes pattern: badge, two-tone display
+// headline, tick row, two actions, and a large perspective-tilted device
+// showing the real product. The device is the point — it carries the impact
+// that flat type alone does not.
+//
+// The whole assembly scales with one custom property (--ih-scale) so the
+// phone-sized version is the same composition, just smaller — not a
+// different layout with the device dropped.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Chip {
+  text: string;
+  /** corner to pin to */
+  at: 'tl' | 'tr' | 'bl' | 'br';
+  /** small filled dot before the text */
+  dot?: boolean;
+}
+
+interface Props {
+  badge: string;
+  /** plain lead-in, rendered near-black */
+  title: string;
+  /** second half of the headline, rendered in the accent colour */
+  titleAccent: string;
+  lede: string;
+  ticks?: string[];
+  ctaText: string;
+  ctaHref: string;
+  secondaryText?: string;
+  secondaryHref?: string;
+  desktop: ImageMetadata;
+  mobile?: ImageMetadata;
+  alt: string;
+  chips?: Chip[];
+}
+
+const {
+  badge, title, titleAccent, lede, ticks = [],
+  ctaText, ctaHref, secondaryText, secondaryHref,
+  desktop, mobile, alt, chips = [],
+} = Astro.props;
+---
+
+<section class="ih">
+  <div class="ih-wash" aria-hidden="true"></div>
+
+  <div class="container ih-copy">
+    <p class="ih-badge"><span class="ih-badge-dot" aria-hidden="true"></span>{badge}</p>
+
+    <h1 class="ih-title">{title} <em>{titleAccent}</em></h1>
+
+    <p class="ih-lede">{lede}</p>
+
+    {ticks.length > 0 && (
+      <ul class="ih-ticks" role="list">
+        {ticks.map((t) => (
+          <li><span class="ih-tick" aria-hidden="true">✓</span>{t}</li>
+        ))}
+      </ul>
+    )}
+
+    <div class="ih-actions">
+      <a class="btn btn--primary btn--lg" href={ctaHref} data-magnetic>{ctaText}</a>
+      {secondaryText && (
+        <a class="btn btn--outline btn--lg" href={secondaryHref ?? '/work/'}>{secondaryText}</a>
+      )}
+    </div>
+  </div>
+
+  <!-- the product, tilted -->
+  <div class="ih-stage">
+    <div class="ih-device">
+      <div class="ih-laptop">
+        <Image src={desktop} alt={alt} widths={[720, 1100, 1600]} sizes="(max-width: 760px) 96vw, 1040px" loading="eager" />
+      </div>
+
+      {mobile && (
+        <div class="ih-phone">
+          <Image src={mobile} alt="" widths={[220, 440]} sizes="200px" loading="eager" />
+        </div>
+      )}
+
+      {chips.map((c) => (
+        <span class={`ih-chip ih-chip--${c.at}`}>
+          {c.dot !== false && <span class="ih-chip-dot" aria-hidden="true"></span>}
+          {c.text}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
