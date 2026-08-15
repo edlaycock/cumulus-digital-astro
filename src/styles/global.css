@@ -2485,3 +2485,48 @@ h1.headline em.glow, .cta-headline em.glow {
   line-height: 1.6;
   color: var(--lt-muted);
 }
+
+/* =========================================================
+   FLIPPING WORD SWAP
+   The highlighted phrase in a hero headline. Both words occupy the same
+   grid cell so the layout never shifts; the box sizes to the longer one.
+   ========================================================= */
+.fws {
+  position: relative;
+  display: inline-grid;
+  cursor: pointer;
+  user-select: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  vertical-align: baseline;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  border-radius: .08em;
+}
+.fws:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+}
+.fws-stage {
+  grid-area: 1 / 1;
+  display: inline-grid;
+  overflow: hidden;
+  perspective: 800px;
+}
+.fws-layer {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: .012em;
+  white-space: pre;
+}
+.fws-char {
+  display: inline-block;
+  white-space: pre;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
