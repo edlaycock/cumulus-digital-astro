@@ -1,11 +1,8 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '../../lib/utils';
-
-export interface MarqueeShot {
-  src: string;
-  alt: string;
-}
+import { ScreenshotMarquee } from './screenshot-marquee';
+export type { MarqueeShot } from './screenshot-marquee';
 
 interface AnimatedMarqueeHeroProps {
   tagline: string;
@@ -40,8 +37,6 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
   className,
 }) => {
   const reduce = useReducedMotion();
-  // duplicated so the strip can loop seamlessly
-  const strip = [...images, ...images];
 
   // The title animates word by word, so the accent phrase is matched as a run
   // of words rather than a substring.
@@ -111,21 +106,8 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
         </motion.div>
       </div>
 
-      {/* real client sites, scrolling */}
-      <div className="amh-marquee" aria-label="Websites we have designed">
-        <motion.div
-          className="amh-track"
-          animate={reduce ? undefined : { x: ['-50%', '0%'] }}
-          transition={reduce ? undefined : { ease: 'linear', duration: 55, repeat: Infinity }}
-        >
-          {strip.map((shot, i) => (
-            <figure key={i} className="amh-shot" style={{ rotate: `${i % 2 === 0 ? -2 : 2.5}deg` }}>
-              {/* eager: a lazy tile in a scrolling strip pops in blank as it arrives */}
-              <img src={shot.src} alt={shot.alt} loading="eager" />
-            </figure>
-          ))}
-        </motion.div>
-      </div>
+      <ScreenshotMarquee images={images} />
+
     </section>
   );
 };

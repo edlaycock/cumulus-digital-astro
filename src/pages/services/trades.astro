@@ -1,7 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
+import ImpactHero from '../../components/ImpactHero.astro';
 import WorkPreview from '../../components/WorkPreview.astro';
+import { Image } from 'astro:assets';
+import ytqDesktop from '../../assets/products/ytq-dashboard-desktop.png';
+import ytqMobile from '../../assets/products/ytq-dashboard-mobile.png';
+import ytqLogo from '../../assets/products/ytq-logo.png';
+import ytwLogo from '../../assets/products/ytw-logo.png';
 import { getCollection } from 'astro:content';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
 
@@ -19,6 +24,16 @@ const proof = TRADE_SLUGS.map((s) => all.find((w) => w.id === s)).filter(Boolean
 const tradeCount = all.filter(
   (w) => !w.data.draft && /construction|trades|groundworks|surfacing|landscap|fencing|home improvement/i.test(w.data.sector ?? '')
 ).length;
+
+// The enquiry-to-paid flow the two products cover between them.
+const flow = [
+  { h: 'Enquiry captured', p: 'Website forms land straight in a live pipeline, with real-time alerts.' },
+  { h: 'Customer created', p: 'One click turns an enquiry into a customer record — no re-typing.' },
+  { h: 'Quote built and sent', p: 'Itemised, branded, sent as a PDF by email or WhatsApp.' },
+  { h: 'Accepted and signed', p: 'Customers sign digitally on any device. Name, signature, timestamp.' },
+  { h: 'Job scheduled', p: 'Accepted quotes become jobs on a drag-and-drop calendar.' },
+  { h: 'Invoiced and paid', p: 'Invoice raised against the job, with a Stripe payment link.' },
+];
 
 const problems = [
   {
@@ -76,12 +91,24 @@ const faqs = [
   title="Digital Marketing for Trades | Cumulus Digital, Surrey"
   description="Websites, local SEO and Google Ads for groundworks, surfacing, fencing, landscaping and construction firms across Surrey and the South East."
 >
-  <PageHero
-    eyebrow="Trades & construction · Surrey, UK"
-    lede="Websites, local SEO and paid search for groundworks, surfacing, fencing, landscaping and construction firms — built to win the enquiries and the larger contracts."
-  >
-    Digital marketing for <em class="glow">trades</em>.
-  </PageHero>
+  <ImpactHero
+    badge="Built for UK tradespeople"
+    title="Win the enquiry."
+    titleAccent="Get paid faster."
+    lede="Websites, local SEO and paid search for trades — plus our own platform to turn those enquiries into quotes, scheduled jobs and paid invoices."
+    ticks={['Websites from £499', 'Quote system from £19/month', 'No long-term contracts']}
+    ctaText="Talk to us →"
+    ctaHref="/contact/"
+    secondaryText="See the platform"
+    secondaryHref="#products"
+    desktop={ytqDesktop}
+    mobile={ytqMobile}
+    alt="The YourTradeQuotes dashboard, showing enquiries, quotes and job pipeline"
+    chips={[
+      { text: 'New enquiry', at: 'tr' },
+      { text: 'Quote accepted · Signed', at: 'bl' },
+    ]}
+  />
 
   <section class="section">
     <div class="container">
@@ -118,6 +145,76 @@ const faqs = [
           </li>
         ))}
       </ul>
+    </div>
+  </section>
+
+  <!-- our own products -->
+  <section class="section ytp" id="products">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Our own platform</p>
+        <h2 class="section-title">We didn't just build this<br />for trades. We built it ourselves.</h2>
+        <p class="section-sub">
+          YourTradeWebsites.com and YourTradeQuotes.com are our own products — both trading
+          names of Cumulus Digital. A website that wins the enquiry, and a system that turns it
+          into a paid invoice.
+        </p>
+      </div>
+
+      <div class="ytp-grid">
+        <article class="ytp-card" data-reveal>
+          <Image class="ytp-logo" src={ytwLogo} alt="YourTradeWebsites.com" widths={[220, 440]} sizes="200px" />
+          <p class="ytp-price">Websites from <strong>£499</strong> +VAT · live in 2&ndash;3 weeks</p>
+          <p>
+            Professional, mobile-first websites built for a specific trade rather than dropped on
+            a template. Local SEO built in, lead-capture forms that feed straight into the quote
+            system, hosting and SSL included.
+          </p>
+          <ul role="list">
+            <li>Three-, five- and eight-page packages</li>
+            <li>Built for local search from the start</li>
+            <li>Care plans from £29/month, no long-term contract</li>
+          </ul>
+          <a class="ytp-link" href="https://yourtradewebsites.com" target="_blank" rel="noopener">
+            Visit YourTradeWebsites.com &rarr;
+          </a>
+        </article>
+
+        <article class="ytp-card" data-reveal style="--reveal-delay:.1s">
+          <Image class="ytp-logo" src={ytqLogo} alt="YourTradeQuotes.com" widths={[220, 440]} sizes="200px" />
+          <p class="ytp-price">From <strong>£19</strong>/month +VAT · 14-day free trial</p>
+          <p>
+            The job runs from one place: enquiries land in a live pipeline, quotes are built in
+            minutes and signed digitally, accepted quotes become scheduled jobs, and invoices go
+            out against the job.
+          </p>
+          <ul role="list">
+            <li>Real-time enquiry alerts and an itemised quote builder</li>
+            <li>Digital signatures, Stripe payment links, automatic invoicing</li>
+            <li>Drag-and-drop scheduling, job photos and field sign-off</li>
+          </ul>
+          <a class="ytp-link" href="https://yourtradequotes.com" target="_blank" rel="noopener">
+            Visit YourTradeQuotes.com &rarr;
+          </a>
+        </article>
+      </div>
+
+      <!-- the flow between the two -->
+      <h3 class="ytp-flow-title">Enquiry to paid, without the WhatsApp chaos</h3>
+      <ol class="ytp-flow" role="list">
+        {flow.map((f, i) => (
+          <li class="ytp-step" data-reveal style={`--reveal-delay:${i * 0.06}s`}>
+            <span class="ytp-step-n">{String(i + 1).padStart(2, '0')}</span>
+            <strong>{f.h}</strong>
+            <span>{f.p}</span>
+          </li>
+        ))}
+      </ol>
+
+      <p class="ytp-note">
+        Both products are ours, so if something needs changing for your business we can change
+        it &mdash; you are not filing a ticket with a company on the other side of the world.
+      </p>
     </div>
   </section>
 
