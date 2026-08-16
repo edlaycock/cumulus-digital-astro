@@ -9,7 +9,6 @@ import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
 
 const all = await getCollection('work');
 const live = all.filter((w) => !w.data.draft);
-const buildCount = live.filter((w) => w.data.services.includes('Web Development')).length;
 
 // Hersham Village is the most development-heavy build in the portfolio —
 // searchable directory, self-service accounts, events — so it fronts the page.
@@ -210,7 +209,7 @@ const faqs = [
     <div class="container">
       <div class="section-header">
         <p class="section-label">Proof</p>
-        <h2 class="section-title">{buildCount} sites<br />we have built.</h2>
+        <h2 class="section-title">100's of sites<br />built and looked after.</h2>
         <p class="section-sub">A few where the development did the heavy lifting.</p>
       </div>
       <ul class="work-grid" role="list">

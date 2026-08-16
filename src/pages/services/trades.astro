@@ -21,9 +21,6 @@ const TRADE_SLUGS = [
 ];
 const all = await getCollection('work');
 const proof = TRADE_SLUGS.map((s) => all.find((w) => w.id === s)).filter(Boolean);
-const tradeCount = all.filter(
-  (w) => !w.data.draft && /construction|trades|groundworks|surfacing|landscap|fencing|home improvement/i.test(w.data.sector ?? '')
-).length;
 
 // The enquiry-to-paid flow the two products cover between them.
 const flow = [
@@ -222,7 +219,7 @@ const faqs = [
     <div class="container">
       <div class="section-header">
         <p class="section-label">Proof</p>
-        <h2 class="section-title">{tradeCount} trade &amp; construction<br />projects in our portfolio.</h2>
+        <h2 class="section-title">100's of trade &amp; construction<br />projects delivered.</h2>
         <p class="section-sub">A few of the contractors we've built for.</p>
       </div>
       <ul class="work-grid" role="list">
