@@ -9,7 +9,6 @@ import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
 
 const all = await getCollection('work');
 const live = all.filter((w) => !w.data.draft);
-const designCount = live.filter((w) => w.data.services.includes('Web Design')).length;
 
 const PROOF = ['castellum', 'surrey-contracting', 'fidelity-accountants', 'cotswold-house-hunter', 'jellylearn', 'the-queen-stage'];
 const proof = PROOF.map((s) => live.find((w) => w.id === s)).filter(Boolean);
@@ -187,7 +186,7 @@ const faqs = [
     <div class="container">
       <div class="section-header">
         <p class="section-label">Proof</p>
-        <h2 class="section-title">{designCount} websites<br />in our portfolio.</h2>
+        <h2 class="section-title">100's of websites<br />delivered.</h2>
         <p class="section-sub">A few we are particularly proud of.</p>
       </div>
       <ul class="work-grid" role="list">
