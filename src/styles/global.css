@@ -2514,7 +2514,11 @@ h1.headline em.glow, .cta-headline em.glow {
 .fws-stage {
   grid-area: 1 / 1;
   display: inline-grid;
+  /* the flip needs a clip box, but a tight one cuts the descenders off an
+     italic serif — pad it out, then pull the extra space back. */
   overflow: hidden;
+  padding: .12em .06em .2em;
+  margin: -.12em -.06em -.2em;
   perspective: 800px;
 }
 .fws-layer {
@@ -2553,8 +2557,11 @@ h1.headline em,
   font-family: var(--font-accent);
   font-style: italic;
   font-weight: 400;
-  font-size: 1.08em;
-  letter-spacing: -.015em;
+  font-size: 1.22em;
+  letter-spacing: -.01em;
+  /* the bigger inline size would otherwise push the line box open on a
+     heading set at .97 — hold the leading to the heading's own */
+  line-height: .9;
   color: var(--cyan);
 }
 
