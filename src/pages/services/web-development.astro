@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
-import DeviceMockup from '../../components/DeviceMockup.astro';
+import { ContainerScroll } from '../../components/ui/container-scroll-animation';
+import { Image } from 'astro:assets';
 import WorkPreview from '../../components/WorkPreview.astro';
 import ReviewCarousel from '../../components/ReviewCarousel.astro';
 import { getCollection } from 'astro:content';
@@ -97,34 +97,37 @@ const faqs = [
   title="Web Development in Surrey | Cumulus Digital"
   description="Custom web development in Surrey — hand-built, fast, secure websites, e-commerce and web apps. CMS builds, integrations and ongoing maintenance. Based in Hersham, Walton-on-Thames."
 >
-  <PageHero
-    eyebrow="Web development · Surrey, UK"
-    lede="Fast, secure, hand-built websites and web apps for businesses across Surrey and beyond — properly engineered, and looked after long after launch."
-  >
-    Web development<br />that <em class="glow">lasts</em>.
-    <Fragment slot="actions">
-      <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
-      <a class="btn btn--outline btn--lg" href="/work/">See our work</a>
-    </Fragment>
-  </PageHero>
-
-  <!-- the work itself, in device frames -->
-  {feature && (
-    <section class="section" style="padding-top:0">
-      <div class="container">
-        <DeviceMockup
-          client={feature.data.client}
-          url={feature.data.url}
-          desktop={feature.data.screenshotDesktop}
-          mobile={feature.data.screenshotMobile}
-          eager
-        />
-        <p class="wd-caption">
-          <a href={`/work/${feature.id}/`}>{feature.data.client}</a> — a searchable business
-          directory with self-service accounts, village news and events.
-        </p>
+  <!-- heading, then the work tilting flat as you scroll -->
+  <ContainerScroll client:load>
+    <Fragment slot="titleComponent">
+      <p class="eyebrow"><span class="eyebrow-dot"></span>Web development · Surrey, UK</p>
+      <h1 class="page-hero-title cs-title">Web development<br />that <em class="glow">lasts</em>.</h1>
+      <p class="lede cs-lede">
+        Fast, secure, hand-built websites and web apps for businesses across Surrey and
+        beyond — properly engineered, and looked after long after launch.
+      </p>
+      <div class="page-hero-actions">
+        <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
+        <a class="btn btn--outline btn--lg" href="/work/">See our work</a>
       </div>
-    </section>
+    </Fragment>
+
+    {feature?.data.screenshotDesktop && (
+      <Image
+        src={feature.data.screenshotDesktop}
+        alt={`The ${feature.data.client} website, built by Cumulus Digital`}
+        widths={[720, 1100, 1600]}
+        sizes="(max-width: 768px) 96vw, 1024px"
+        loading="eager"
+      />
+    )}
+  </ContainerScroll>
+
+  {feature && (
+    <p class="wd-caption">
+      <a href={`/work/${feature.id}/`}>{feature.data.client}</a> — a searchable business
+      directory with self-service accounts, village news and events.
+    </p>
   )}
 
   <!-- what goes wrong -->

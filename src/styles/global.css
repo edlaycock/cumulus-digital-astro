@@ -2574,3 +2574,80 @@ h1.headline em,
 
 /* the flip-swap inherits the accent face from its heading */
 .ih-title em .fws { font: inherit; letter-spacing: inherit; }
+
+/* =========================================================
+   CONTAINER SCROLL  (services/web-development)
+   Screen starts tilted back and lies flat as the section scrolls
+   through. The frame is the site's black-bezel device treatment rather
+   than the original's dark grey chrome.
+   ========================================================= */
+.cs {
+  position: relative;
+  display: flex;
+  /* top-aligned: centring inside a 130vh track pushes the heading down the
+     page and leaves a dead band above it */
+  align-items: flex-start;
+  justify-content: center;
+  /* the tall track is what gives the scroll something to animate across */
+  height: 132vh;
+  min-height: 52rem;
+  padding: 0 clamp(.5rem, 3vw, 3rem);
+}
+.cs-inner {
+  position: relative;
+  width: 100%;
+  padding: clamp(5.5rem, 12vh, 8rem) 0 0;
+  perspective: 1000px;
+}
+.cs-header {
+  max-width: 64rem;
+  margin: 0 auto;
+  text-align: center;
+}
+/* the heading block is the page hero, so it borrows the hero's type but
+   drops the hero's own top padding — the track supplies that */
+.cs-header .eyebrow { margin-bottom: 1.2rem; }
+.cs-title { margin-inline: auto; }
+.cs-lede { margin: 0 auto; }
+.cs-header .page-hero-actions { margin-top: 1.8rem; }
+.cs-card {
+  position: relative;
+  width: 100%;
+  max-width: 64rem;
+  height: clamp(20rem, 46vh, 34rem);
+  margin: clamp(1rem, 3vh, 2rem) auto 0;
+  padding: clamp(.4rem, .8vw, .7rem);
+  background: var(--ink-black);
+  border: clamp(4px, .55vw, 8px) solid var(--ink-black);
+  border-radius: clamp(18px, 2vw, 30px);
+  /* the one shadow the system allows — the tilt needs the ground shadow to
+     read as depth rather than a skew */
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .5);
+  will-change: transform;
+}
+.cs-screen {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: clamp(12px, 1.4vw, 20px);
+  background: var(--grey-100);
+}
+.cs-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+}
+
+@media (max-width: 768px) {
+  /* still needs a scroll track, or progress never leaves 0 and the screen
+     sits frozen part-way through the animation */
+  .cs { height: 128vh; min-height: 40rem; }
+  .cs-inner { padding-top: clamp(5rem, 11vh, 6.5rem); }
+  .cs-card { height: clamp(14rem, 34vh, 20rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* no animation to scroll through, so the track collapses */
+  .cs { height: auto; min-height: 0; padding-bottom: clamp(2rem, 6vh, 3.5rem); }
+}
