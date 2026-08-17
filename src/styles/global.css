@@ -43,6 +43,9 @@
   --font-h: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
   --font-b: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
   --font-m: 'Satoshi', 'Inter', system-ui, sans-serif;
+  /* accent face — italic serif, used only on the highlighted words in a
+     heading. Never for body copy or a whole heading. */
+  --font-accent: 'Instrument Serif', Georgia, 'Times New Roman', serif;
 
   --maxw:   1200px;
   --ease:   cubic-bezier(0.22, 1, 0.36, 1);
@@ -365,7 +368,6 @@ h1.headline {
 }
 /* the accent word — flat colour, no glow; the system has no effects */
 h1.headline em.glow, .cta-headline em.glow {
-  font-style: normal;
   color: var(--cyan);
   text-shadow: none;
 }
@@ -1280,7 +1282,6 @@ h1.headline em.glow, .cta-headline em.glow {
   text-wrap: balance;
 }
 .page-hero-title em.glow {
-  font-style: normal;
   color: var(--cyan);
   text-shadow: none;
 }
@@ -2155,7 +2156,7 @@ h1.headline em.glow, .cta-headline em.glow {
   text-wrap: balance;
 }
 .amh-word { display: inline-block; }
-.amh-title em { font-style: normal; color: #0d7f92; }
+.amh-title em { color: var(--cyan); }
 .amh-desc {
   margin: 1.3rem 0 0;
   max-width: 46ch;
@@ -2257,7 +2258,7 @@ h1.headline em.glow, .cta-headline em.glow {
   max-width: 20ch;
   text-wrap: balance;
 }
-.ih-title em { font-style: normal; color: var(--cyan); }
+.ih-title em { color: var(--cyan); }
 
 .ih-lede {
   font-size: clamp(1rem, 1.4vw, 1.2rem);
@@ -2530,3 +2531,32 @@ h1.headline em.glow, .cta-headline em.glow {
   backface-visibility: hidden;
   will-change: transform, opacity;
 }
+
+/* =========================================================
+   ACCENT FACE
+   The highlighted words in a heading are set in italic Instrument Serif
+   against the Satoshi around them. One rule covers every heading that
+   carries an <em>, so the device stays consistent site-wide.
+
+   The serif sits optically smaller than the sans at the same size and
+   needs far less negative tracking, so both are corrected here.
+   ========================================================= */
+h1.headline em,
+.page-hero-title em,
+.cta-headline em,
+.section-title em,
+.amh-title em,
+.ih-title em,
+.h2-close h2 em,
+.ytp-flow-title em,
+.cs-title em {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.08em;
+  letter-spacing: -.015em;
+  color: var(--cyan);
+}
+
+/* the flip-swap inherits the accent face from its heading */
+.ih-title em .fws { font: inherit; letter-spacing: inherit; }
