@@ -49,7 +49,10 @@
 
   --maxw:   1200px;
   --ease:   cubic-bezier(0.22, 1, 0.36, 1);
-  --section-pad: clamp(4.5rem, 9vh, 7.5rem);
+  /* section rhythm. The vh term is what blew the gaps out on tall phones:
+     9vh of padding top AND bottom stacked to ~240px of dead space between
+     every pair of sections. */
+  --section-pad: clamp(3rem, 5.5vh, 5.5rem);
 
   /* ---- radii: pill or generous, nothing in between ---- */
   --radius:      22px;   /* images, feature cards */
@@ -150,7 +153,7 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
 }
 .section-header {
   max-width: 52rem;
-  margin: 0 auto clamp(2.75rem, 5vw, 4rem);
+  margin: 0 auto clamp(2rem, 3.5vw, 3rem);
   text-align: center;
 }
 .section-title {
@@ -517,7 +520,7 @@ h1.headline em.glow, .cta-headline em.glow {
 }
 .service-card-tile {
   width: 100%;
-  height: 150px;
+  height: clamp(96px, 13vw, 128px);
   flex: none;
   display: flex;
   align-items: center;
@@ -767,7 +770,7 @@ h1.headline em.glow, .cta-headline em.glow {
   gap: clamp(3rem, 6vw, 7rem);
   align-items: center;
 }
-@media (max-width: 860px) { .travel-inner { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .travel-inner { grid-template-columns: 1fr; gap: 1.75rem; } }
 
 .travel-copy .section-title { margin-bottom: 1.3rem; }
 .travel-body {
@@ -812,14 +815,16 @@ h1.headline em.glow, .cta-headline em.glow {
 }
 .travel-photo-wrap > img {
   width: 100%;
-  height: 520px;
+  height: clamp(320px, 44vw, 520px);
   object-fit: cover;
   display: block;
 }
 /* branded panel used in place of stock photography */
 .brand-panel {
   width: 100%;
-  height: 520px;
+  /* a fixed 520px panel holding one small centred logo left a huge empty
+     band above and below it, worst on a phone */
+  height: clamp(320px, 44vw, 520px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -827,7 +832,18 @@ h1.headline em.glow, .cta-headline em.glow {
   border: 1px solid var(--lt-border);
   border-radius: var(--radius);
 }
-.brand-panel--short { height: 480px; }
+.brand-panel--short { height: clamp(300px, 40vw, 480px); }
+
+/* the corner badge is absolutely placed, so on a phone it rides up over the
+   centred logo once the panel is short — pull the logo in to clear it */
+@media (max-width: 620px) {
+  /* the badge is pinned bottom-left, so sit the logo in the upper half
+     rather than dead-centre where the two collide on a short panel */
+  .brand-panel { align-items: flex-start; padding-top: 2.25rem; }
+  .brand-panel img { width: min(46%, 190px); }
+  .travel-photo-badge { bottom: 1.1rem; left: 1.1rem; padding: .85rem 1.1rem; }
+  .travel-photo-badge strong { font-size: 1.55rem; }
+}
 .brand-panel img {
   width: min(58%, 300px);
   height: auto;
@@ -879,7 +895,7 @@ h1.headline em.glow, .cta-headline em.glow {
   gap: clamp(3rem, 6vw, 7rem);
   align-items: center;
 }
-@media (max-width: 860px) { .surrey-inner { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .surrey-inner { grid-template-columns: 1fr; gap: 1.75rem; } }
 
 .surrey-photo-wrap {
   position: relative;
@@ -1041,8 +1057,8 @@ h1.headline em.glow, .cta-headline em.glow {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 4rem;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
   align-items: start;
 }
 @media (max-width: 720px) { .footer-inner { grid-template-columns: 1fr; gap: 3rem; } }
@@ -1272,7 +1288,7 @@ h1.headline em.glow, .cta-headline em.glow {
 /* Centred display headline on the bare canvas — no gradient, no panel. */
 .page-hero {
   position: relative;
-  padding: clamp(8.5rem, 20vh, 12rem) 0 clamp(3rem, 7vh, 4.5rem);
+  padding: clamp(7rem, 14vh, 9.5rem) 0 clamp(2.25rem, 5vh, 3.5rem);
   background: var(--white);
   text-align: center;
 }
@@ -1308,12 +1324,12 @@ h1.headline em.glow, .cta-headline em.glow {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
   gap: clamp(2.5rem, 5vw, 5rem);
-  padding: clamp(3rem, 7vh, 5rem) 0;
+  padding: clamp(2.25rem, 5vh, 3.75rem) 0;
   border-bottom: 1px solid var(--lt-border);
   scroll-margin-top: 6.5rem;
 }
 .service-detail:last-of-type { border-bottom: none; }
-@media (max-width: 860px) { .service-detail { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .service-detail { grid-template-columns: 1fr; gap: 1.75rem; } }
 
 .service-detail-head { display: flex; flex-direction: column; align-items: flex-start; }
 .service-detail-icon {
@@ -1328,6 +1344,7 @@ h1.headline em.glow, .cta-headline em.glow {
   border: 1px solid var(--lt-border);
 }
 .service-detail-icon svg { width: 38px; height: 38px; }
+@media (max-width: 860px) { .service-detail-icon { margin-bottom: 1rem; } }
 .service-detail h2 {
   font-family: var(--font-h);
   font-weight: 700;
@@ -2131,8 +2148,7 @@ h1.headline em.glow, .cta-headline em.glow {
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 100svh;
-  padding: clamp(6rem, 12vh, 8.5rem) 1.25rem 0;
+  padding: clamp(5.5rem, 10vh, 7.5rem) 1.25rem 0;
   overflow: hidden;
   background: var(--white);
 }
@@ -2180,8 +2196,8 @@ h1.headline em.glow, .cta-headline em.glow {
   /* the track is wider than the viewport by design; it used to be clipped by
      the hero section, so standing alone it has to clip itself */
   overflow: hidden;
-  margin-top: clamp(2.5rem, 6vh, 4.5rem);
-  padding-bottom: clamp(2rem, 5vh, 3.5rem);
+  margin-top: clamp(2rem, 4vh, 3.25rem);
+  padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
@@ -2303,7 +2319,7 @@ h1.headline em.glow, .cta-headline em.glow {
   margin-top: clamp(2.5rem, 5vw, 4rem);
   /* the phone overhangs the laptop, so the bottom padding has to clear it
      or the section's overflow:hidden crops it */
-  padding: 0 clamp(1rem, 4vw, 3rem) clamp(4.5rem, 9vw, 7rem);
+  padding: 0 clamp(1rem, 4vw, 3rem) clamp(3.25rem, 6vw, 5rem);
   perspective: 2200px;
 }
 .ih-device {
@@ -2589,8 +2605,8 @@ h1.headline em,
   align-items: flex-start;
   justify-content: center;
   /* the tall track is what gives the scroll something to animate across */
-  height: 132vh;
-  min-height: 52rem;
+  height: 116vh;
+  min-height: 46rem;
   padding: 0 clamp(.5rem, 3vw, 3rem);
 }
 .cs-inner {
@@ -2643,7 +2659,7 @@ h1.headline em,
 @media (max-width: 768px) {
   /* still needs a scroll track, or progress never leaves 0 and the screen
      sits frozen part-way through the animation */
-  .cs { height: 128vh; min-height: 40rem; }
+  .cs { height: 112vh; min-height: 34rem; }
   .cs-inner { padding-top: clamp(5rem, 11vh, 6.5rem); }
   .cs-card { height: clamp(14rem, 34vh, 20rem); }
 }
@@ -2730,4 +2746,12 @@ h1.headline em,
 
 @media (prefers-reduced-motion: reduce) {
   .amh-dev { rotate: none !important; }
+}
+
+/* Phones stack sections in a much narrower column, so the same padding reads
+   as far more empty space. Tighten the rhythm rather than letting the vh
+   term run. */
+@media (max-width: 620px) {
+  :root { --section-pad: clamp(2.5rem, 4vh, 3.5rem); }
+  .section-header { margin-bottom: 1.75rem; }
 }
