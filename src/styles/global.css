@@ -220,37 +220,20 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   transition: color .2s;
 }
 
-/* ---- services dropdown ---- */
+/* ---- services dropdown ----
+   The floating panel is a desktop behaviour only. Below the burger
+   breakpoint the submenu is a plain indented list inside the mobile panel,
+   so it is defined that way by default and the floating treatment is added
+   back at width. Previously the hover rule lived outside a media query and
+   out-specified the mobile reset — on a touch device the tap left :hover
+   parked on Services, which re-applied translateX(-50%) and threw the
+   submenu out of the panel. */
 .nav-item--sub { position: relative; }
 .nav-item--sub > a { display: inline-flex; align-items: center; gap: .32rem; }
 .nav-caret { transition: transform .22s var(--ease); opacity: .75; }
-.nav-item--sub:hover .nav-caret,
-.nav-item--sub:focus-within .nav-caret { transform: rotate(180deg); }
 
-.nav-sub {
-  position: absolute;
-  top: 100%; left: 50%;
-  transform: translateX(-50%) translateY(6px);
-  min-width: 232px;
-  display: flex; flex-direction: column;
-  padding: .55rem;
-  margin-top: .7rem;
-  background: var(--white);
-  border: 1px solid var(--lt-rule);
-  border-radius: var(--radius-card);
-  opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
-  z-index: 220;
-}
-/* bridge the gap so the menu survives the cursor crossing into it */
-.nav-sub::before {
-  content: ''; position: absolute; left: 0; right: 0; top: -.75rem; height: .75rem;
-}
-.nav-item--sub:hover .nav-sub,
-.nav-item--sub:focus-within .nav-sub {
-  opacity: 1; visibility: visible; pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
-}
+.nav-sub { display: flex; flex-direction: column; }
+
 .nav-links .nav-sub a {
   color: var(--lt-text) !important;
   padding: .58rem .7rem;
@@ -263,6 +246,36 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   background: var(--wash);
   color: var(--cyan) !important;
 }
+
+@media (min-width: 881px) {
+  .nav-item--sub:hover .nav-caret,
+  .nav-item--sub:focus-within .nav-caret { transform: rotate(180deg); }
+
+  .nav-sub {
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    min-width: 232px;
+    padding: .55rem;
+    margin-top: .7rem;
+    background: var(--white);
+    border: 1px solid var(--lt-rule);
+    border-radius: var(--radius-card);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+    z-index: 220;
+  }
+  /* bridge the gap so the menu survives the cursor crossing into it */
+  .nav-sub::before {
+    content: ''; position: absolute; left: 0; right: 0; top: -.75rem; height: .75rem;
+  }
+  .nav-item--sub:hover .nav-sub,
+  .nav-item--sub:focus-within .nav-sub {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nav-sub, .nav-caret { transition: none; }
 }
@@ -304,16 +317,10 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   }
   .nav--open .nav-links a:last-child { border-bottom: none; }
 
-  /* dropdown becomes an indented inline list inside the burger panel */
+  /* the submenu is an indented list inside the burger panel */
   .nav--open .nav-item--sub { width: 100%; }
   .nav--open .nav-caret { display: none; }
-  .nav--open .nav-sub {
-    position: static; transform: none; opacity: 1; visibility: visible;
-    pointer-events: auto; background: none; border: 0; box-shadow: none;
-    backdrop-filter: none; -webkit-backdrop-filter: none;
-    min-width: 0; margin: 0; padding: 0 0 .3rem .8rem;
-  }
-  .nav--open .nav-sub::before { display: none; }
+  .nav--open .nav-sub { padding: 0 0 .3rem .8rem; }
   .nav--open .nav-links .nav-sub a {
     font-size: .95rem; font-weight: 400; padding: .5rem .2rem;
     border-bottom: 1px solid var(--lt-border);
