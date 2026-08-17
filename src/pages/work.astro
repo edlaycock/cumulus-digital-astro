@@ -9,38 +9,34 @@ const work = (await getCollection('work'))
   .filter((w) => !w.data.draft)
   .sort((a, b) => a.data.order - b.data.order);
 
-// Marquee: the real captures, dressed as MacBooks and iPhones. Desktop and
-// mobile shots are interleaved so the strip alternates between the two
-// rather than running all the laptops then all the phones.
-const files = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/work/*-{desktop,mobile}.jpg',
+// Marquee: purpose-shot captures of four client sites, taken at exactly the
+// frame aspect ratios (16:10 for the MacBook, 9:19.5 for the iPhone) so the
+// screen fills its bezel without being cropped or squashed.
+const FRAMED = [
+  { slug: 'cotswold-house-hunter', client: 'Cotswold House Hunter' },
+  { slug: 'jellylearn',            client: 'JellyLearn' },
+  { slug: 'surrey-contracting',    client: 'Surrey Contracting' },
+  { slug: 'abu-dhabi-holidays',    client: 'Abu Dhabi Holidays' },
+];
+const frames = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/frames/*.jpg',
   { eager: true }
 );
-const pick = (suffix: string) =>
-  work
-    .map((w) => {
-      const hit = files[`../assets/work/${w.id}-${suffix}.jpg`];
-      return hit ? { img: hit.default, client: w.data.client } : null;
-    })
-    .filter(Boolean) as { img: ImageMetadata; client: string }[];
-
-const desktops = pick('desktop');
-const phones = pick('mobile');
-
+// desktop and mobile alternate, so the strip never runs four laptops together
 const framed = await Promise.all(
-  Array.from({ length: Math.max(desktops.length, phones.length) }, (_, i) =>
-    [desktops[i], phones[i]].map((e, j) => (e ? { ...e, kind: j === 0 ? 'desktop' : 'mobile' } : null))
-  )
-    .flat()
-    .filter(Boolean)
+  FRAMED.flatMap(({ slug, client }) => [
+    { slug, client, kind: 'desktop' as const, file: `${slug}-mac.jpg`,   w: 760 },
+    { slug, client, kind: 'mobile'  as const, file: `${slug}-phone.jpg`, w: 320 },
+  ])
+    .filter((e) => frames[`../assets/frames/${e.file}`])
     .map(async (e) => ({
       src: (await getImage({
-        src: e!.img,
-        width: e!.kind === 'mobile' ? 300 : 640,
+        src: frames[`../assets/frames/${e.file}`].default,
+        width: e.w,
         format: 'webp',
       })).src,
-      alt: `${e!.client} website built by Cumulus Digital`,
-      kind: e!.kind as 'desktop' | 'mobile',
+      alt: `${e.client} website built by Cumulus Digital`,
+      kind: e.kind,
     }))
 );
 ---
