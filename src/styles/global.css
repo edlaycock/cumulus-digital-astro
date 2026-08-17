@@ -2690,18 +2690,24 @@ h1.headline em,
   overflow: hidden;
   background: var(--grey-100);
   border: 1px solid var(--ink-black);
+  /* aspect-ratio applies to the border box by default, so a thick bezel
+     skews the screen away from the capture's ratio and crops it. Size the
+     content box instead and let the bezel sit outside it. */
+  box-sizing: content-box;
 }
 .amh-dev-screen img {
   display: block;
   width: 100%;
   height: 100%;
+  /* the captures are shot at the frame's own aspect ratio, so this fills the
+     bezel edge to edge with nothing cropped */
   object-fit: cover;
-  object-position: top center;
+  object-position: top left;
 }
 
 /* ---- MacBook ---- */
 .amh-dev--mac .amh-dev-screen {
-  height: var(--dev-h);
+  height: calc(var(--dev-h) - clamp(12px, 1.8vw, 20px));
   aspect-ratio: 16 / 10;
   border: clamp(5px, .7vw, 9px) solid var(--ink-black);
   border-radius: clamp(8px, 1vw, 12px) clamp(8px, 1vw, 12px) 0 0;
@@ -2710,7 +2716,9 @@ h1.headline em,
 /* the lid sits on a lighter base bar, which is what reads as "laptop" */
 .amh-dev-base {
   display: block;
-  width: calc(var(--dev-h) * 1.72);
+  /* the figure sizes to the lid, so a percentage here tracks the lid exactly
+     instead of being re-derived from the height and drifting */
+  width: calc(100% + clamp(4px, .5vw, 8px));
   height: clamp(7px, .9vw, 11px);
   background: linear-gradient(#d6d6dc, #b3b3bd);
   border-radius: 0 0 clamp(5px, .7vw, 8px) clamp(5px, .7vw, 8px);
@@ -2727,7 +2735,7 @@ h1.headline em,
 
 /* ---- iPhone ---- */
 .amh-dev--phone .amh-dev-screen {
-  height: var(--dev-h);
+  height: calc(var(--dev-h) - clamp(8px, 1vw, 12px));
   aspect-ratio: 9 / 19.5;
   border: clamp(4px, .5vw, 6px) solid var(--ink-black);
   border-radius: clamp(14px, 1.8vw, 22px);
