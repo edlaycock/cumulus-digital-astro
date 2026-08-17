@@ -1,24 +1,66 @@
 ---
 import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
+import { AnimatedMarqueeHero } from '../components/ui/hero-3';
 import WorkPreview from '../components/WorkPreview.astro';
 
 const work = (await getCollection('work'))
   .filter((w) => !w.data.draft)
   .sort((a, b) => a.data.order - b.data.order);
+
+// Marquee: the real captures, dressed as MacBooks and iPhones. Desktop and
+// mobile shots are interleaved so the strip alternates between the two
+// rather than running all the laptops then all the phones.
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/work/*-{desktop,mobile}.jpg',
+  { eager: true }
+);
+const pick = (suffix: string) =>
+  work
+    .map((w) => {
+      const hit = files[`../assets/work/${w.id}-${suffix}.jpg`];
+      return hit ? { img: hit.default, client: w.data.client } : null;
+    })
+    .filter(Boolean) as { img: ImageMetadata; client: string }[];
+
+const desktops = pick('desktop');
+const phones = pick('mobile');
+
+const framed = await Promise.all(
+  Array.from({ length: Math.max(desktops.length, phones.length) }, (_, i) =>
+    [desktops[i], phones[i]].map((e, j) => (e ? { ...e, kind: j === 0 ? 'desktop' : 'mobile' } : null))
+  )
+    .flat()
+    .filter(Boolean)
+    .map(async (e) => ({
+      src: (await getImage({
+        src: e!.img,
+        width: e!.kind === 'mobile' ? 300 : 640,
+        format: 'webp',
+      })).src,
+      alt: `${e!.client} website built by Cumulus Digital`,
+      kind: e!.kind as 'desktop' | 'mobile',
+    }))
+);
 ---
 
 <BaseLayout
   title="Our Work — Web Design & Digital Projects | Cumulus Digital"
   description="Selected projects by Cumulus Digital: bespoke websites, branding and digital marketing for Surrey businesses and travel brands."
 >
-  <PageHero
-    eyebrow="Our work"
-    lede="Real websites, brands and marketing for Surrey businesses — from award-winning builders to independent pubs. Here's a selection we're proud of."
-  >
-    Ideas made <em class="glow">real</em>.
-  </PageHero>
+  <AnimatedMarqueeHero
+    client:load
+    tagline="Our work · Surrey, UK"
+    title="Ideas made real."
+    accent="real."
+    description="Real websites, brands and marketing for Surrey businesses — from award-winning builders to independent pubs. Here's a selection we're proud of."
+    ctaText="Discuss your project →"
+    ctaHref="/contact/"
+    secondaryText="What we do"
+    secondaryHref="/services/"
+    images={framed}
+  />
 
   <section class="section work-section">
     <div class="container">

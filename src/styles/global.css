@@ -2651,3 +2651,83 @@ h1.headline em,
   /* no animation to scroll through, so the track collapses */
   .cs { height: auto; min-height: 0; padding-bottom: clamp(2rem, 6vh, 3.5rem); }
 }
+
+/* =========================================================
+   MARQUEE DEVICE FRAMES
+   Screenshots dressed as a MacBook or an iPhone inside the scrolling
+   strip. Both size off one height so the strip stays aligned however the
+   two are interleaved.
+   ========================================================= */
+.amh-track:has(.amh-dev) { align-items: flex-end; }
+
+.amh-dev {
+  --dev-h: clamp(150px, 20vw, 250px);
+  flex: 0 0 auto;
+  margin: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.amh-dev-screen {
+  display: block;
+  overflow: hidden;
+  background: var(--grey-100);
+  border: 1px solid var(--ink-black);
+}
+.amh-dev-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* ---- MacBook ---- */
+.amh-dev--mac .amh-dev-screen {
+  height: var(--dev-h);
+  aspect-ratio: 16 / 10;
+  border: clamp(5px, .7vw, 9px) solid var(--ink-black);
+  border-radius: clamp(8px, 1vw, 12px) clamp(8px, 1vw, 12px) 0 0;
+  border-bottom: 0;
+}
+/* the lid sits on a lighter base bar, which is what reads as "laptop" */
+.amh-dev-base {
+  display: block;
+  width: calc(var(--dev-h) * 1.72);
+  height: clamp(7px, .9vw, 11px);
+  background: linear-gradient(#d6d6dc, #b3b3bd);
+  border-radius: 0 0 clamp(5px, .7vw, 8px) clamp(5px, .7vw, 8px);
+}
+.amh-dev-base::after {
+  content: '';
+  display: block;
+  width: 16%;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 0 0 4px 4px;
+  background: rgba(0, 0, 0, .16);
+}
+
+/* ---- iPhone ---- */
+.amh-dev--phone .amh-dev-screen {
+  height: var(--dev-h);
+  aspect-ratio: 9 / 19.5;
+  border: clamp(4px, .5vw, 6px) solid var(--ink-black);
+  border-radius: clamp(14px, 1.8vw, 22px);
+}
+.amh-notch {
+  position: absolute;
+  top: clamp(6px, .8vw, 9px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 34%;
+  height: clamp(5px, .7vw, 8px);
+  border-radius: 999px;
+  background: var(--ink-black);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amh-dev { rotate: none !important; }
+}
