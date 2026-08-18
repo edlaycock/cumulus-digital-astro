@@ -34,7 +34,9 @@ export const ScreenshotMarquee: React.FC<Props> = ({
         transition={reduce ? undefined : { ease: 'linear', duration: 55, repeat: Infinity }}
       >
         {strip.map((shot, i) => {
-          const tilt = `${i % 2 === 0 ? -2 : 2.5}deg`;
+          // Plain tiles read better with a little wobble; device frames do
+          // not — a tilted laptop looks broken, not casual.
+          const tilt = shot.kind ? '0deg' : `${i % 2 === 0 ? -2 : 2.5}deg`;
           // eager: a lazy tile in a scrolling strip pops in blank as it arrives
           const img = <img src={shot.src} alt={shot.alt} loading="eager" />;
 

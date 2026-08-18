@@ -1,8 +1,8 @@
 ---
 // Homepage: white canvas, monumental type, and a scrolling wall of the real
 // client sites we've built — the product is the visual content.
-import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import { clientMarquee } from '../lib/client-marquee';
 import ImpactHero from '../components/ImpactHero.astro';
 import { ScreenshotMarquee } from '../components/ui/screenshot-marquee';
 import heroDesktop from '../assets/work/surrey-contracting-desktop.jpg';
@@ -33,30 +33,11 @@ const work = (await getCollection('work'))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 4);
 
-// Marquee: every client site we have a desktop capture for, in portfolio
-// order (most recent first), optimised at build time. The hero client is
-// skipped — it is already the site in the hero device, and seeing it twice
-// within one screen reads as a mistake.
-const HERO_SLUG = 'surrey-contracting';
-const shots = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/work/*-desktop.jpg',
-  { eager: true }
-);
-const bySlug = new Map(
-  Object.entries(shots).map(([path, mod]) => [
-    path.split('/').pop()!.replace('-desktop.jpg', ''),
-    mod.default,
-  ])
-);
-const marquee = await Promise.all(
-  (await getCollection('work'))
-    .filter((w) => !w.data.draft && bySlug.has(w.id) && w.id !== HERO_SLUG)
-    .sort((a, b) => a.data.order - b.data.order)
-    .map(async (w) => ({
-      src: (await getImage({ src: bySlug.get(w.id)!, width: 680, format: 'webp' })).src,
-      alt: `${w.data.client} website designed by Cumulus Digital`,
-    }))
-);
+// The strip of client sites. The hero client is skipped — it is already the
+// site in the device above, and seeing it twice within one screen reads as a
+// mistake.
+const marquee = await clientMarquee(['surrey-contracting']);
+
 ---
 
 <BaseLayout

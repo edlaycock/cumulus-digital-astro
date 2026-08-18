@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ImpactHero from '../components/ImpactHero.astro';
 import { ScreenshotMarquee } from '../components/ui/screenshot-marquee';
-import { getImage } from 'astro:assets';
+import { clientMarquee } from '../lib/client-marquee';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const rendered = await Promise.all(
@@ -12,25 +12,8 @@ const rendered = await Promise.all(
 
 // The hub answers "what do you do" with "here is what it produced", so the
 // hero is followed by the real client sites rather than a stock device.
-const shots = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/work/*-desktop.jpg',
-  { eager: true }
-);
-const bySlug = new Map(
-  Object.entries(shots).map(([path, mod]) => [
-    path.split('/').pop()!.replace('-desktop.jpg', ''),
-    mod.default,
-  ])
-);
-const marquee = await Promise.all(
-  (await getCollection('work'))
-    .filter((w) => !w.data.draft && bySlug.has(w.id))
-    .sort((a, b) => a.data.order - b.data.order)
-    .map(async (w) => ({
-      src: (await getImage({ src: bySlug.get(w.id)!, width: 680, format: 'webp' })).src,
-      alt: `${w.data.client} website designed by Cumulus Digital`,
-    }))
-);
+const marquee = await clientMarquee();
+
 ---
 
 <BaseLayout
