@@ -12,6 +12,7 @@ import ServiceCards from '../components/ServiceCards';
 import WorkPreview from '../components/WorkPreview.astro';
 import ReviewCarousel from '../components/ReviewCarousel.astro';
 import ClientBand from '../components/ClientBand.astro';
+import PhoneShowcase from '../components/PhoneShowcase.astro';
 
 
 const services = (await getCollection('services'))
@@ -94,6 +95,9 @@ const marquee = await clientMarquee(['surrey-contracting']);
         <ServiceCards items={serviceItems} client:visible />
       </div>
     </section>
+
+    <!-- ===================== MOBILE-FIRST BREAK ===================== -->
+    <PhoneShowcase />
 
     <!-- ===================== WORK ===================== -->
     <section class="section h2-work">

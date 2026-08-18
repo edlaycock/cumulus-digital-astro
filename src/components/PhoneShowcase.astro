@@ -1,0 +1,49 @@
+---
+// Dark break in the white canvas: two angled iPhones showing real client
+// mobile builds, with the sites gently scrolling inside. Modelled on the
+// pop.site "phone or desktop" section.
+import { getImage } from 'astro:assets';
+import phoneFront from '../assets/frames/abu-dhabi-holidays-scroll-mobile.jpg';
+import phoneBack from '../assets/work/hersham-village-scroll-mobile.jpg';
+
+const front = await getImage({ src: phoneFront, width: 480, format: 'webp' });
+const back = await getImage({ src: phoneBack, width: 480, format: 'webp' });
+---
+
+<section class="duo">
+  <div class="container duo-grid">
+    <div class="duo-copy">
+      <p class="duo-badge"><span class="duo-badge-dot" aria-hidden="true"></span>Mobile-first, always</p>
+      <h2 class="duo-title">Built for the phone <em>in every pocket.</em></h2>
+      <p class="duo-lede">
+        Most of your visitors arrive on a phone. Every site we build is designed for that
+        screen first — fast, thumb-friendly and pixel-sharp — then scaled up to desktop.
+      </p>
+      <ul class="duo-ticks" role="list">
+        <li><span aria-hidden="true">✓</span>Designed mobile-first, not squeezed down</li>
+        <li><span aria-hidden="true">✓</span>Tested on real devices before launch</li>
+        <li><span aria-hidden="true">✓</span>Fast on 4G, not just office wi-fi</li>
+      </ul>
+      <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
+    </div>
+
+    <div class="duo-stage">
+      <div class="duo-phone duo-phone--back">
+        <div class="iphone">
+          <div class="iphone-screen">
+            <img class="site-pan" style="--pan-dur: 21s" src={back.src} alt="A Cumulus Digital client website shown on a phone" loading="lazy" decoding="async" />
+          </div>
+          <span class="iphone-frame" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="duo-phone duo-phone--front">
+        <div class="iphone">
+          <div class="iphone-screen">
+            <img class="site-pan" style="--pan-dur: 17s" src={front.src} alt="A Cumulus Digital client website shown on a phone" loading="lazy" decoding="async" />
+          </div>
+          <span class="iphone-frame" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
