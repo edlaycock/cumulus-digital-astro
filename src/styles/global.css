@@ -2819,3 +2819,16 @@ h1.headline em,
     background: var(--ink-black);
   }
 }
+
+/* =========================================================
+   CONTAINER SCROLL — type-only
+   No device in the frame, so the track only needs enough range for the
+   heading to drift. Much shorter than the device variants, or the hero
+   would be mostly empty canvas.
+   ========================================================= */
+.cs--bare {
+  height: auto;
+  min-height: 0;
+  padding-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+.cs--bare .cs-inner { padding-top: clamp(7rem, 15vh, 9.5rem); }

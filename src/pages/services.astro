@@ -1,11 +1,35 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
+import ImpactHero from '../components/ImpactHero.astro';
+import { ScreenshotMarquee } from '../components/ui/screenshot-marquee';
+import { getImage } from 'astro:assets';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const rendered = await Promise.all(
   services.map(async (entry) => ({ entry, Content: (await render(entry)).Content }))
+);
+
+// The hub answers "what do you do" with "here is what it produced", so the
+// hero is followed by the real client sites rather than a stock device.
+const shots = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/work/*-desktop.jpg',
+  { eager: true }
+);
+const bySlug = new Map(
+  Object.entries(shots).map(([path, mod]) => [
+    path.split('/').pop()!.replace('-desktop.jpg', ''),
+    mod.default,
+  ])
+);
+const marquee = await Promise.all(
+  (await getCollection('work'))
+    .filter((w) => !w.data.draft && bySlug.has(w.id))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async (w) => ({
+      src: (await getImage({ src: bySlug.get(w.id)!, width: 680, format: 'webp' })).src,
+      alt: `${w.data.client} website designed by Cumulus Digital`,
+    }))
 );
 ---
 
@@ -13,12 +37,20 @@ const rendered = await Promise.all(
   title="Services — Web Design, SEO & Branding in Surrey | Cumulus Digital"
   description="Bespoke web design, development, SEO, branding, strategy and hosting for small and local businesses in Surrey. Most clients see a positive impact within weeks."
 >
-  <PageHero
-    eyebrow="What we do"
+  <ImpactHero
+    badge="What we do · Surrey, UK"
+    title="Everything you need"
+    titleAccent="to grow online."
     lede="Strategy, design, code and marketing that work together — every service below is delivered hands-on by people who've done it for 25+ years."
-  >
-    Everything you need<br />to grow <em class="glow">online</em>.
-  </PageHero>
+    ticks={["100's of projects delivered", 'Serving Surrey since 2015', 'No long-term contracts']}
+    ctaText="Start a project →"
+    ctaHref="/contact/"
+    secondaryText="See our work"
+    secondaryHref="/work/"
+  />
+
+  <!-- what the services actually produced -->
+  <ScreenshotMarquee images={marquee} client:visible />
 
   <section class="section services-hub">
     <div class="container">

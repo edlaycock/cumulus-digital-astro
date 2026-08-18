@@ -33,9 +33,10 @@ interface Props {
   ctaHref: string;
   secondaryText?: string;
   secondaryHref?: string;
-  desktop: ImageMetadata;
+  /** omit for a type-only hero with no device stage */
+  desktop?: ImageMetadata;
   mobile?: ImageMetadata;
-  alt: string;
+  alt?: string;
   chips?: Chip[];
 }
 
@@ -81,25 +82,27 @@ const {
     </div>
   </div>
 
-  <!-- the product, tilted -->
-  <div class="ih-stage">
-    <div class="ih-device">
-      <div class="ih-laptop">
-        <Image src={desktop} alt={alt} widths={[720, 1100, 1600]} sizes="(max-width: 760px) 96vw, 1040px" loading="eager" />
-      </div>
-
-      {mobile && (
-        <div class="ih-phone">
-          <Image src={mobile} alt="" widths={[220, 440]} sizes="200px" loading="eager" />
+  {desktop && (
+    <!-- the product, tilted -->
+    <div class="ih-stage">
+      <div class="ih-device">
+        <div class="ih-laptop">
+          <Image src={desktop} alt={alt} widths={[720, 1100, 1600]} sizes="(max-width: 760px) 96vw, 1040px" loading="eager" />
         </div>
-      )}
 
-      {chips.map((c) => (
-        <span class={`ih-chip ih-chip--${c.at}`}>
-          {c.dot !== false && <span class="ih-chip-dot" aria-hidden="true"></span>}
-          {c.text}
-        </span>
-      ))}
+        {mobile && (
+          <div class="ih-phone">
+            <Image src={mobile} alt="" widths={[220, 440]} sizes="200px" loading="eager" />
+          </div>
+        )}
+
+        {chips.map((c) => (
+          <span class={`ih-chip ih-chip--${c.at}`}>
+            {c.dot !== false && <span class="ih-chip-dot" aria-hidden="true"></span>}
+            {c.text}
+          </span>
+        ))}
+      </div>
     </div>
-  </div>
+  )}
 </section>
