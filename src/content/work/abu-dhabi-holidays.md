@@ -6,6 +6,7 @@ services:
 - Web Design
 summary: A luxury travel brand — one of the travel-industry projects in our portfolio.
 order: 22
+url: https://abudhabiholidays.co.uk
 image: ../../assets/work/abu-dhabi-holidays.jpg
 brandColors:
 - '#3E9B94'
