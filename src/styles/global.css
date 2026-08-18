@@ -2591,7 +2591,8 @@ h1.headline em,
 .ih-title em,
 .h2-close h2 em,
 .ytp-flow-title em,
-.cs-title em {
+.cs-title em,
+.duo-title em {
   font-family: var(--font-accent);
   font-style: italic;
   font-weight: 400;
@@ -2878,6 +2879,76 @@ h1.headline em,
     pointer-events: none;
     background: url('/phone-frame.svg') center / 100% 100% no-repeat;
   }
+}
+
+/* =========================================================
+   PHONE SHOWCASE — dark two-phone break
+   A dark band that punctuates the white canvas, with two angled iPhones
+   showing real client mobile builds. Modelled on pop.site.
+   ========================================================= */
+.duo {
+  background: linear-gradient(155deg, #0b1f38 0%, #071624 55%, #0a1a30 100%);
+  color: #eef1f5;
+  padding: clamp(4rem, 9vw, 7rem) 0;
+  overflow: hidden;
+}
+.duo-grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.duo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font-m);
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #8fb4d6;
+  margin: 0 0 1.1rem;
+}
+.duo-badge-dot { width: .5rem; height: .5rem; border-radius: 999px; background: var(--cyan); }
+.duo-title {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -.04em;
+  margin: 0 0 1.2rem;
+  color: #fff;
+  text-wrap: balance;
+}
+/* the serif accent needs to lift off the dark ground */
+.duo-title em { color: #4fd1e6; }
+.duo-lede {
+  color: #b9c6d4;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.6;
+  max-width: 34rem;
+  margin: 0 0 1.5rem;
+}
+.duo-ticks { list-style: none; display: grid; gap: .55rem; margin: 0 0 2rem; padding: 0; }
+.duo-ticks li { display: flex; align-items: center; gap: .6rem; color: #d3dde7; font-size: .98rem; }
+.duo-ticks span { color: var(--cyan); font-weight: 700; }
+
+.duo-stage { position: relative; min-height: clamp(24rem, 42vw, 34rem); }
+.duo-phone { position: absolute; }
+.duo-phone .iphone { width: clamp(150px, 15vw, 220px); }
+.duo-phone--back { top: 1%; left: 5%; transform: rotate(-7deg); z-index: 1; }
+.duo-phone--front { top: 15%; left: 37%; transform: rotate(5deg); z-index: 2; }
+
+@media (max-width: 860px) {
+  .duo-grid { grid-template-columns: 1fr; }
+  .duo-stage { min-height: 25rem; margin-top: .5rem; }
+  .duo-phone .iphone { width: clamp(140px, 34vw, 190px); }
+  .duo-phone--back { left: 8%; }
+  .duo-phone--front { left: 44%; top: 13%; }
+}
+@media (max-width: 480px) {
+  .duo-phone--back { left: 2%; }
+  .duo-phone--front { left: 42%; }
 }
 
 /* =========================================================
