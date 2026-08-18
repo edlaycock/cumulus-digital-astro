@@ -34,15 +34,12 @@ export const ScreenshotMarquee: React.FC<Props> = ({
         transition={reduce ? undefined : { ease: 'linear', duration: 55, repeat: Infinity }}
       >
         {strip.map((shot, i) => {
-          // Plain tiles read better with a little wobble; device frames do
-          // not — a tilted laptop looks broken, not casual.
-          const tilt = shot.kind ? '0deg' : `${i % 2 === 0 ? -2 : 2.5}deg`;
           // eager: a lazy tile in a scrolling strip pops in blank as it arrives
           const img = <img src={shot.src} alt={shot.alt} loading="eager" />;
 
           if (shot.kind === 'mobile') {
             return (
-              <figure key={i} className="amh-dev amh-dev--phone" style={{ rotate: tilt }}>
+              <figure key={i} className="amh-dev amh-dev--phone">
                 <span className="amh-notch" aria-hidden="true" />
                 <span className="amh-dev-screen">{img}</span>
               </figure>
@@ -51,7 +48,7 @@ export const ScreenshotMarquee: React.FC<Props> = ({
 
           if (shot.kind === 'desktop') {
             return (
-              <figure key={i} className="amh-dev amh-dev--mac" style={{ rotate: tilt }}>
+              <figure key={i} className="amh-dev amh-dev--mac">
                 <span className="amh-dev-screen">{img}</span>
                 <span className="amh-dev-base" aria-hidden="true" />
               </figure>
@@ -59,7 +56,7 @@ export const ScreenshotMarquee: React.FC<Props> = ({
           }
 
           return (
-            <figure key={i} className="amh-shot" style={{ rotate: tilt }}>
+            <figure key={i} className="amh-shot">
               {img}
             </figure>
           );

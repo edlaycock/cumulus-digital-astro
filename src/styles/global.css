@@ -2201,7 +2201,10 @@ h1.headline em.glow, .cta-headline em.glow {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
-.amh-track { display: flex; gap: 1.15rem; width: max-content; }
+/* Level, not scattered. The tiles used to alternate a small tilt; against a
+   white canvas that reads as a row of crooked screens rather than a
+   deliberate collage. */
+.amh-track { display: flex; align-items: center; gap: 1.15rem; width: max-content; }
 .amh-shot {
   flex: 0 0 auto;
   margin: 0;
