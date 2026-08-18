@@ -2344,6 +2344,10 @@ h1.headline em.glow, .cta-headline em.glow {
   box-shadow: 0 40px 70px -40px rgba(0, 0, 0, .55);
 }
 .ih-laptop img { display: block; width: 100%; height: auto; }
+/* scroll variant: a fixed 16:10 window with the full-page capture panning
+   through it, so the site looks like it is being scrolled */
+.ih-laptop.is-pan { aspect-ratio: 16 / 10; }
+.ih-laptop.is-pan img { height: 100%; }
 
 .ih-phone {
   position: absolute;
@@ -2358,6 +2362,21 @@ h1.headline em.glow, .cta-headline em.glow {
   transform: translateZ(60px);
 }
 .ih-phone img { display: block; width: 100%; height: auto; }
+.ih-phone.is-pan { aspect-ratio: 9 / 19.5; }
+.ih-phone.is-pan img { height: 100%; }
+
+/* ---- Auto-scrolling site ----
+   A tall full-page capture panned inside a fixed device window so the site
+   inside looks alive. object-position is generic across capture heights;
+   --pan-dur is staggered per device so they don't move in lockstep. */
+@keyframes site-pan {
+  from { object-position: center top; }
+  to   { object-position: center bottom; }
+}
+.site-pan { object-fit: cover; object-position: center top; }
+@media (prefers-reduced-motion: no-preference) {
+  .site-pan { animation: site-pan var(--pan-dur, 16s) ease-in-out infinite alternate; }
+}
 
 /* floating status chips, pinned to the device corners */
 .ih-chip {

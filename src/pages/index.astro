@@ -5,8 +5,8 @@ import { getCollection } from 'astro:content';
 import { clientMarquee } from '../lib/client-marquee';
 import ImpactHero from '../components/ImpactHero.astro';
 import { ScreenshotMarquee } from '../components/ui/screenshot-marquee';
-import heroDesktop from '../assets/work/surrey-contracting-desktop.jpg';
-import heroMobile from '../assets/work/surrey-contracting-mobile.jpg';
+import heroDesktop from '../assets/work/surrey-contracting-scroll-desktop.jpg';
+import heroMobile from '../assets/work/surrey-contracting-scroll-mobile.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceCards from '../components/ServiceCards';
 import WorkPreview from '../components/WorkPreview.astro';
@@ -59,6 +59,7 @@ const marquee = await clientMarquee(['surrey-contracting']);
       secondaryHref="/work/"
       desktop={heroDesktop}
       mobile={heroMobile}
+      scroll
       alt="The Surrey Contracting website, designed and built by Cumulus Digital"
       chips={[
         { text: 'Live in two weeks', at: 'tr' },
