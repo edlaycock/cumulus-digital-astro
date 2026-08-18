@@ -2349,21 +2349,14 @@ h1.headline em.glow, .cta-headline em.glow {
 .ih-laptop.is-pan { aspect-ratio: 16 / 10; }
 .ih-laptop.is-pan img { height: 100%; }
 
+/* just positioning now — the realistic frame is .iphone inside */
 .ih-phone {
   position: absolute;
-  right: 3%;
-  bottom: -12%;
-  width: 16%;
-  border-radius: clamp(10px, 1.4vw, 18px);
-  overflow: hidden;
-  background: var(--ink-black);
-  border: clamp(4px, .55vw, 7px) solid var(--ink-black);
-  box-shadow: 0 24px 44px -26px rgba(0, 0, 0, .5);
+  right: 2%;
+  bottom: -13%;
+  width: 17%;
   transform: translateZ(60px);
 }
-.ih-phone img { display: block; width: 100%; height: auto; }
-.ih-phone.is-pan { aspect-ratio: 9 / 19.5; }
-.ih-phone.is-pan img { height: 100%; }
 
 /* ---- Auto-scrolling site ----
    A tall full-page capture panned inside a fixed device window so the site
@@ -2759,9 +2752,48 @@ h1.headline em,
   background: rgba(0, 0, 0, .16);
 }
 
-/* ---- iPhone ---- */
+/* =========================================================
+   REALISTIC iPhone FRAME
+   A crafted titanium-body iPhone (SVG rim + island + side buttons in
+   /public/phone-frame.svg) wrapping a screenshot. Scale it by setting a
+   width or height on .iphone — everything inside is proportional, so the
+   same frame reads right from a 120px strip tile to a 340px hero device.
+   ========================================================= */
+.iphone {
+  position: relative;
+  flex: 0 0 auto;
+  aspect-ratio: 100 / 205;
+  /* phone-shaped ground shadow (drop-shadow follows the silhouette, so the
+     transparent corners do not cast a boxy shadow the way box-shadow would) */
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, .26));
+}
+.iphone-screen {
+  position: absolute;
+  top: 2.5%; left: 4.9%; right: 4.9%; bottom: 2.5%;
+  border-radius: 17% / 7.8%;
+  overflow: hidden;
+  background: #000;
+}
+.iphone-screen img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.iphone-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: url('/phone-frame.svg') center / 100% 100% no-repeat;
+}
+
+/* ---- iPhone (marquee) ---- */
 /* a phone standing next to a laptop is shorter than the laptop, not the
    same height — matching them made the row read as a wall of slabs */
+.amh-phone { margin: 0; }
+.amh-phone .iphone { height: clamp(150px, 20vw, 250px); }
+
 .amh-dev--phone { --dev-h: clamp(126px, 16.8vw, 210px); }
 .amh-dev--phone .amh-dev-screen {
   height: calc(var(--dev-h) - clamp(8px, 1vw, 12px));
@@ -2814,34 +2846,37 @@ h1.headline em,
 @media (max-width: 768px) {
   .cs--device { height: auto; min-height: 0; padding-bottom: clamp(2.5rem, 7vh, 4rem); }
 
+  /* below the breakpoint the card becomes the realistic iPhone: a transparent
+     body carrying the SVG frame, with the capture in the screen window. */
   .cs--device .cs-card {
-    /* sized by the screen inside it rather than a fixed height, so the
-       9:19.5 capture fills the bezel exactly */
-    width: min(66vw, 270px);
+    width: min(64vw, 260px);
     max-width: none;
+    aspect-ratio: 100 / 205;
     height: auto;
-    margin-top: clamp(1.5rem, 5vh, 2.5rem);
-    padding: 5px;
-    border-width: 5px;
-    border-radius: 34px;
+    margin: clamp(1.5rem, 5vh, 2.5rem) auto 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    filter: drop-shadow(0 16px 26px rgba(0, 0, 0, .26));
   }
   .cs--device .cs-screen {
+    position: absolute;
+    inset: 2.5% 4.9%;
     height: auto;
-    aspect-ratio: 9 / 19.5;
-    border-radius: 28px;
+    aspect-ratio: auto;
+    border-radius: 17% / 7.8%;
+    overflow: hidden;
   }
-  /* the notch, so the frame reads as a phone rather than a tall card */
-  .cs--device .cs-card::before {
+  /* the titanium frame overlay */
+  .cs--device .cs-card::after {
     content: '';
     position: absolute;
+    inset: 0;
     z-index: 2;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 34%;
-    height: 7px;
-    border-radius: 999px;
-    background: var(--ink-black);
+    pointer-events: none;
+    background: url('/phone-frame.svg') center / 100% 100% no-repeat;
   }
 }
 
