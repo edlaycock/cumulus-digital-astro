@@ -38,12 +38,14 @@ interface Props {
   mobile?: ImageMetadata;
   alt?: string;
   chips?: Chip[];
+  /** when the captures are full-page, pan them inside the device window */
+  scroll?: boolean;
 }
 
 const {
   badge, title, titleAccent, titleAccentAlt, lede, ticks = [],
   ctaText, ctaHref, secondaryText, secondaryHref,
-  desktop, mobile, alt, chips = [],
+  desktop, mobile, alt, chips = [], scroll = false,
 } = Astro.props;
 ---
 
@@ -86,13 +88,13 @@ const {
     <!-- the product, tilted -->
     <div class="ih-stage">
       <div class="ih-device">
-        <div class="ih-laptop">
-          <Image src={desktop} alt={alt} widths={[720, 1100, 1600]} sizes="(max-width: 760px) 96vw, 1040px" loading="eager" />
+        <div class={`ih-laptop${scroll ? ' is-pan' : ''}`}>
+          <Image src={desktop} alt={alt} class={scroll ? 'site-pan' : undefined} style={scroll ? '--pan-dur: 22s' : undefined} widths={[720, 1100, 1600]} sizes="(max-width: 760px) 96vw, 1040px" loading="eager" />
         </div>
 
         {mobile && (
-          <div class="ih-phone">
-            <Image src={mobile} alt="" widths={[220, 440]} sizes="200px" loading="eager" />
+          <div class={`ih-phone${scroll ? ' is-pan' : ''}`}>
+            <Image src={mobile} alt="" class={scroll ? 'site-pan' : undefined} style={scroll ? '--pan-dur: 17s' : undefined} widths={[220, 440]} sizes="200px" loading="eager" />
           </div>
         )}
 

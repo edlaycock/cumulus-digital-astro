@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ContainerScroll } from '../../components/ui/container-scroll-animation';
 import { getImage } from 'astro:assets';
+import hershamScrollDesktop from '../../assets/work/hersham-village-scroll-desktop.jpg';
+import hershamScrollMobile from '../../assets/work/hersham-village-scroll-mobile.jpg';
 import WorkPreview from '../../components/WorkPreview.astro';
 import ReviewCarousel from '../../components/ReviewCarousel.astro';
 import { getCollection } from 'astro:content';
@@ -14,15 +16,11 @@ const live = all.filter((w) => !w.data.draft);
 // searchable directory, self-service accounts, events — so it fronts the page.
 const feature = live.find((w) => w.id === 'hersham-village');
 
-// Both captures are shot at their frame's own aspect ratio, so the reveal
-// shows the whole site rather than a cropped band. <picture> hands the
+// Full-page captures that pan inside the device window as you land on the
+// reveal, so the site looks like it is being scrolled. <picture> hands the
 // browser only the one it needs.
-const featDesk = feature?.data.screenshotDesktop
-  ? await getImage({ src: feature.data.screenshotDesktop, width: 1200, format: 'webp' })
-  : null;
-const featMob = feature?.data.screenshotMobile
-  ? await getImage({ src: feature.data.screenshotMobile, width: 420, format: 'webp' })
-  : null;
+const featDesk = await getImage({ src: hershamScrollDesktop, width: 1200, format: 'webp' });
+const featMob = await getImage({ src: hershamScrollMobile, width: 480, format: 'webp' });
 
 const PROOF = ['hersham-village', 'assetq', 'jellylearn', 'surrey-contracting', 'fidelity-accountants', 'castellum'];
 const proof = PROOF.map((s) => live.find((w) => w.id === s)).filter(Boolean);
@@ -128,6 +126,8 @@ const faqs = [
           <source media="(max-width: 768px)" srcset={featMob.src} width={featMob.attributes?.width} />
         )}
         <img
+          class="site-pan"
+          style="--pan-dur: 20s"
           src={featDesk.src}
           alt={`The ${feature!.data.client} website, built by Cumulus Digital`}
           loading="eager"
