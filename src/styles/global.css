@@ -2608,6 +2608,10 @@ h1.headline em,
   height: 116vh;
   min-height: 46rem;
   padding: 0 clamp(.5rem, 3vw, 3rem);
+  /* perspective projects the tilted card's near edge wider than its own box,
+     which pushed a horizontal scrollbar onto the page around 1024px. Clip
+     rather than hide so this never becomes a scroll container. */
+  overflow-x: clip;
 }
 .cs-inner {
   position: relative;
@@ -2762,4 +2766,56 @@ h1.headline em,
 @media (max-width: 620px) {
   :root { --section-pad: clamp(2.5rem, 4vh, 3.5rem); }
   .section-header { margin-bottom: 1.75rem; }
+}
+
+/* =========================================================
+   CONTAINER SCROLL — frame matched to the capture
+   The travel page shows a desktop capture in the laptop-style card above
+   the breakpoint, and the mobile capture in an iPhone bezel below it.
+   <picture> in the page decides which image loads; this decides the
+   shape of the frame around it.
+   ========================================================= */
+.cs .cs-screen picture { display: contents; }
+
+/* The default card is a fixed height and full width, so a 16:10 capture
+   gets cropped to a letterbox band. Here the screen carries the capture's
+   own ratio and the card sizes to it. */
+.cs--device .cs-card { height: auto; max-width: 58rem; }
+.cs--device .cs-screen { height: auto; aspect-ratio: 16 / 10; }
+/* a 16:10 card is taller than the fixed-height one, so the track needs to
+   clear it or the flattened screen laps over the next section */
+@media (min-width: 769px) { .cs--device { min-height: 80rem; } }
+
+@media (max-width: 768px) {
+  .cs--device { height: auto; min-height: 0; padding-bottom: clamp(2.5rem, 7vh, 4rem); }
+
+  .cs--device .cs-card {
+    /* sized by the screen inside it rather than a fixed height, so the
+       9:19.5 capture fills the bezel exactly */
+    width: min(66vw, 270px);
+    max-width: none;
+    height: auto;
+    margin-top: clamp(1.5rem, 5vh, 2.5rem);
+    padding: 5px;
+    border-width: 5px;
+    border-radius: 34px;
+  }
+  .cs--device .cs-screen {
+    height: auto;
+    aspect-ratio: 9 / 19.5;
+    border-radius: 28px;
+  }
+  /* the notch, so the frame reads as a phone rather than a tall card */
+  .cs--device .cs-card::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34%;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--ink-black);
+  }
 }

@@ -11,9 +11,11 @@ interface Props {
   /** heading block, passed from the .astro page as a named slot */
   titleComponent: React.ReactNode;
   children: React.ReactNode;
+  /** extra class on the track, e.g. cs--phone to swap the frame on mobile */
+  className?: string;
 }
 
-export const ContainerScroll: React.FC<Props> = ({ titleComponent, children }) => {
+export const ContainerScroll: React.FC<Props> = ({ titleComponent, children, className }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const reduce = useReducedMotion();
@@ -32,7 +34,7 @@ export const ContainerScroll: React.FC<Props> = ({ titleComponent, children }) =
   const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
-    <div className="cs" ref={containerRef}>
+    <div className={className ? `cs ${className}` : 'cs'} ref={containerRef}>
       <div className="cs-inner">
         <motion.div className="cs-header" style={reduce ? undefined : { translateY: translate }}>
           {titleComponent}
