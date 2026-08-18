@@ -39,9 +39,11 @@ export const ScreenshotMarquee: React.FC<Props> = ({
 
           if (shot.kind === 'mobile') {
             return (
-              <figure key={i} className="amh-dev amh-dev--phone">
-                <span className="amh-notch" aria-hidden="true" />
-                <span className="amh-dev-screen">{img}</span>
+              <figure key={i} className="amh-dev amh-phone">
+                <div className="iphone">
+                  <div className="iphone-screen">{img}</div>
+                  <span className="iphone-frame" aria-hidden="true" />
+                </div>
               </figure>
             );
           }

@@ -93,8 +93,13 @@ const {
         </div>
 
         {mobile && (
-          <div class={`ih-phone${scroll ? ' is-pan' : ''}`}>
-            <Image src={mobile} alt="" class={scroll ? 'site-pan' : undefined} style={scroll ? '--pan-dur: 17s' : undefined} widths={[220, 440]} sizes="200px" loading="eager" />
+          <div class="ih-phone">
+            <div class="iphone">
+              <div class="iphone-screen">
+                <Image src={mobile} alt="" class={scroll ? 'site-pan' : undefined} style={scroll ? '--pan-dur: 17s' : undefined} widths={[220, 440]} sizes="220px" loading="eager" />
+              </div>
+              <span class="iphone-frame" aria-hidden="true"></span>
+            </div>
           </div>
         )}
 
