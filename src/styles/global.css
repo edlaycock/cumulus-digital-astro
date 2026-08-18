@@ -2738,6 +2738,9 @@ h1.headline em,
 }
 
 /* ---- iPhone ---- */
+/* a phone standing next to a laptop is shorter than the laptop, not the
+   same height — matching them made the row read as a wall of slabs */
+.amh-dev--phone { --dev-h: clamp(126px, 16.8vw, 210px); }
 .amh-dev--phone .amh-dev-screen {
   height: calc(var(--dev-h) - clamp(8px, 1vw, 12px));
   aspect-ratio: 9 / 19.5;
