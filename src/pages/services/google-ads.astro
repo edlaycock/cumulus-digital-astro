@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
+import { ContainerScroll } from '../../components/ui/container-scroll-animation';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
 
 // What we actually do on an account, in the order we do it.
@@ -64,12 +64,23 @@ const faqs = [
   title="Google Ads Agency in Surrey | Cumulus Digital"
   description="Google Ads management for Surrey businesses — Search, Shopping, Performance Max and remarketing built to bring in enquiries. Based in Hersham, Walton-on-Thames."
 >
-  <PageHero
-    eyebrow="Google Ads · Surrey, UK"
-    lede="Search, Shopping, Performance Max and remarketing campaigns built around the searches that turn into real work — managed from Hersham, for businesses across Surrey and the South East."
-  >
-    Google Ads Agency in <em class="glow">Surrey</em>.
-  </PageHero>
+  <!-- type-only reveal: the heading drifts as you scroll. No device, because
+       nothing in the portfolio evidences a Google Ads account yet. -->
+  <ContainerScroll client:load className="cs--bare" parallax>
+    <Fragment slot="titleComponent">
+      <p class="eyebrow"><span class="eyebrow-dot"></span>Google Ads · Surrey, UK</p>
+      <h1 class="page-hero-title cs-title">Google Ads Agency in <em class="glow">Surrey</em>.</h1>
+      <p class="lede cs-lede">
+        Search, Shopping, Performance Max and remarketing campaigns built around the searches
+        that turn into real work — managed from Hersham, for businesses across Surrey and the
+        South East.
+      </p>
+      <div class="page-hero-actions">
+        <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Get an account audit →</a>
+        <a class="btn btn--outline btn--lg" href="/services/">See all services</a>
+      </div>
+    </Fragment>
+  </ContainerScroll>
 
   <!-- what's wrong with most accounts -->
   <section class="section">

@@ -10,14 +10,26 @@ import { useScroll, useTransform, motion, useReducedMotion, type MotionValue } f
 interface Props {
   /** heading block, passed from the .astro page as a named slot */
   titleComponent: React.ReactNode;
-  children: React.ReactNode;
-  /** extra class on the track, e.g. cs--phone to swap the frame on mobile */
+  /** the screen. Omit for a type-only reveal with no device. */
+  children?: React.ReactNode;
+  /** extra class on the track, e.g. cs--device to match the frame to the capture */
   className?: string;
+  /**
+   * Drive the motion from the section crossing the viewport rather than from
+   * scrolling through a tall track. Needed when there is no device, because
+   * the short track leaves the default offset with no range to animate over.
+   */
+  parallax?: boolean;
 }
 
-export const ContainerScroll: React.FC<Props> = ({ titleComponent, children, className }) => {
+export const ContainerScroll: React.FC<Props> = ({
+  titleComponent, children, className, parallax,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef });
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: parallax ? ['start start', 'end start'] : ['start start', 'end end'],
+  });
   const reduce = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -40,12 +52,14 @@ export const ContainerScroll: React.FC<Props> = ({ titleComponent, children, cla
           {titleComponent}
         </motion.div>
 
-        <motion.div
-          className="cs-card"
-          style={reduce ? undefined : { rotateX: rotate, scale }}
-        >
-          <div className="cs-screen">{children}</div>
-        </motion.div>
+        {children && (
+          <motion.div
+            className="cs-card"
+            style={reduce ? undefined : { rotateX: rotate, scale }}
+          >
+            <div className="cs-screen">{children}</div>
+          </motion.div>
+        )}
       </div>
     </div>
   );
