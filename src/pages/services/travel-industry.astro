@@ -1,12 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
+import { ContainerScroll } from '../../components/ui/container-scroll-animation';
+import { getImage } from 'astro:assets';
 import WorkPreview from '../../components/WorkPreview.astro';
 import { getCollection } from 'astro:content';
+import auhMac from '../../assets/frames/abu-dhabi-holidays-mac.jpg';
+import auhPhone from '../../assets/frames/abu-dhabi-holidays-phone.jpg';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
 
 const all = await getCollection('work');
 const proof = ['ras-al-khaimah-holidays'].map((s) => all.find((w) => w.id === s)).filter(Boolean);
+
+// The reveal shows a real travel build. Both captures are shot at their
+// frame's aspect ratio, and <picture> hands the browser only the one it
+// needs rather than downloading both.
+const auhDesk = await getImage({ src: auhMac, width: 1200, format: 'webp' });
+const auhMob = await getImage({ src: auhPhone, width: 420, format: 'webp' });
 
 const problems = [
   {
@@ -64,12 +73,33 @@ const faqs = [
   title="Digital Marketing for the Travel Industry | Cumulus Digital"
   description="Websites, SEO and paid search for tour operators, travel agents and destination brands — backed by 25+ years working inside the travel sector."
 >
-  <PageHero
-    eyebrow="Travel industry · 25+ years"
-    lede="Websites, search and campaigns for tour operators, agents and destination brands — from a team that has spent 25 years inside the sector rather than reading about it."
-  >
-    Digital marketing for the <em class="glow">travel industry</em>.
-  </PageHero>
+  <!-- heading, then a real travel build tilting flat as you scroll -->
+  <ContainerScroll client:load className="cs--device">
+    <Fragment slot="titleComponent">
+      <p class="eyebrow"><span class="eyebrow-dot"></span>Travel industry · 25+ years</p>
+      <h1 class="page-hero-title cs-title">
+        Digital marketing for the <em class="glow">travel industry</em>.
+      </h1>
+      <p class="lede cs-lede">
+        Websites, search and campaigns for tour operators, agents and destination brands — from
+        a team that has spent 25 years inside the sector rather than reading about it.
+      </p>
+      <div class="page-hero-actions">
+        <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Talk to a travel specialist →</a>
+        <a class="btn btn--outline btn--lg" href="/work/">See our work</a>
+      </div>
+    </Fragment>
+
+    <picture>
+      <source media="(max-width: 768px)" srcset={auhMob.src} width={auhMob.attributes?.width} />
+      <img
+        src={auhDesk.src}
+        alt="The Abu Dhabi Holidays website, built by Cumulus Digital"
+        loading="eager"
+        decoding="async"
+      />
+    </picture>
+  </ContainerScroll>
 
   <section class="section">
     <div class="container">
