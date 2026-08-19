@@ -13,10 +13,10 @@ const work = (await getCollection('work'))
 // frame aspect ratios (16:10 for the MacBook, 9:19.5 for the iPhone) so the
 // screen fills its bezel without being cropped or squashed.
 const FRAMED = [
+  { slug: 'elysian-collection',    client: 'Elysian Collection' },
   { slug: 'cotswold-house-hunter', client: 'Cotswold House Hunter' },
   { slug: 'jellylearn',            client: 'JellyLearn' },
   { slug: 'surrey-contracting',    client: 'Surrey Contracting' },
-  { slug: 'abu-dhabi-holidays',    client: 'Abu Dhabi Holidays' },
 ];
 const frames = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/frames/*.jpg',
