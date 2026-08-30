@@ -1648,9 +1648,25 @@ h1.headline em.glow, .cta-headline em.glow {
 
 /* ============================================================
    SERVICE-CARD ICON MOTION
+   The entrance (stroke drawing itself) lives in ServiceCards.tsx;
+   this is the hover reply. An overshooting curve so the icon lands
+   with a small bounce instead of easing flatly into place.
    ============================================================ */
-.service-card-tile svg { transition: transform .5s var(--ease); }
-.service-card:hover .service-card-tile svg { transform: scale(1.12) rotate(-4deg); }
+.service-card-tile svg {
+  transition: transform .55s cubic-bezier(.34, 1.56, .64, 1);
+}
+.service-card:hover .service-card-tile svg {
+  transform: translateY(-4px) scale(1.14) rotate(-5deg);
+}
+/* the ground answers too: tile tints toward the accent, card lifts a hair */
+.service-card-tile { transition: background .4s var(--ease), color .4s var(--ease); }
+.service-card:hover .service-card-tile { background: #e6f6f8; }
+.service-card { transition: border-color .3s, background .3s, transform .35s var(--ease); }
+.service-card:hover { transform: translateY(-3px); }
+@media (prefers-reduced-motion: reduce) {
+  .service-card:hover { transform: none; }
+  .service-card:hover .service-card-tile svg { transform: none; }
+}
 
 /* ============================================================
    NUMBERS BAND — count-up + reveal
@@ -1928,8 +1944,10 @@ h1.headline em.glow, .cta-headline em.glow {
 .sticky-cta-call {
   display: inline-flex; align-items: center; gap: .4rem;
   font-family: var(--font-m); font-size: .82rem;
-  color: var(--paper); padding: .7rem .8rem;
-  border: 1px solid rgba(143, 227, 238, .28); border-radius: 999px;
+  /* --paper became near-black in the light retheme, which made this
+     invisible on the navy bar — the colour has to be its own */
+  color: #f2f5f8; padding: .7rem .8rem;
+  border: 1px solid rgba(143, 227, 238, .38); border-radius: 999px;
   white-space: nowrap;
 }
 .sticky-cta-btn { flex: 1; justify-content: center; padding: .8rem 1rem; font-size: .9rem; }

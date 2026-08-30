@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export interface ServiceCardItem {
   title: string;
@@ -21,7 +21,25 @@ const cardVariants = {
   }),
 };
 
+// The icon draws itself as its card arrives — the stroke starts empty and
+// runs the path, landing just after the card settles so the two read as one
+// gesture rather than two competing animations.
+const iconVariants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  visible: (i: number) => ({
+    pathLength: 1,
+    opacity: 1,
+    transition: {
+      delay: i * 0.1 + 0.25,
+      pathLength: { delay: i * 0.1 + 0.25, duration: 1.1, ease: "easeInOut" as const },
+      opacity: { delay: i * 0.1 + 0.25, duration: 0.3 },
+    },
+  }),
+};
+
 export default function ServiceCards({ items }: { items: ServiceCardItem[] }) {
+  const reduce = useReducedMotion();
+
   return (
     <ul className="services-grid" role="list">
       {items.map((svc, i) => (
@@ -29,21 +47,34 @@ export default function ServiceCards({ items }: { items: ServiceCardItem[] }) {
           key={svc.title}
           className="service-card"
           custom={i}
-          initial="hidden"
+          initial={reduce ? false : "hidden"}
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           variants={cardVariants}
         >
           <div className="service-card-tile" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none">
-              <path
-                d={svc.iconPath}
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
+              {reduce ? (
+                <path
+                  d={svc.iconPath}
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              ) : (
+                <motion.path
+                  d={svc.iconPath}
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                  custom={i}
+                  variants={iconVariants}
+                />
+              )}
             </svg>
           </div>
           <div className="service-card-body">
