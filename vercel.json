@@ -1,45 +1,175 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
-    { "source": "/project/gallery-one-reigate", "destination": "/work/the-gallery-tetbury/", "permanent": true },
-    { "source": "/project/abu-dhabi-holidays", "destination": "/work/", "permanent": true },
-    { "source": "/project/ja-resorts-holidays", "destination": "/work/", "permanent": true },
-    { "source": "/project/omega-executive-travel", "destination": "/work/", "permanent": true },
-    { "source": "/project/ag-edwards-son-demolition", "destination": "/work/", "permanent": true },
-    { "source": "/project/:slug", "destination": "/work/:slug/", "permanent": true },
-
-    { "source": "/our-services/travel-industry-specialists", "destination": "/services/travel-industry/", "permanent": true },
-    { "source": "/our-services/design-development", "destination": "/services/web-development/", "permanent": true },
-    { "source": "/our-services/digital-marketing", "destination": "/services/", "permanent": true },
-    { "source": "/our-services/website-design/website-maintenance", "destination": "/services/web-development/", "permanent": true },
-    { "source": "/our-services/website-design/:rest*", "destination": "/services/web-design/", "permanent": true },
-    { "source": "/our-services/website-design", "destination": "/services/web-design/", "permanent": true },
-    { "source": "/our-services/:rest*", "destination": "/services/", "permanent": true },
-    { "source": "/our-services", "destination": "/services/", "permanent": true },
-
-    { "source": "/website-design-woking", "destination": "/services/web-design/", "permanent": true },
-    { "source": "/web-design-woking", "destination": "/services/web-design/", "permanent": true },
-    { "source": "/web-design-guildford", "destination": "/services/web-design/", "permanent": true },
-    { "source": "/web-design-in-surrey", "destination": "/services/web-design/", "permanent": true },
-    { "source": "/wordpress-web-design-surrey", "destination": "/services/web-design/", "permanent": true },
-    { "source": "/web-design-hersham", "destination": "/services/web-design/", "permanent": true },
-    { "source": "/web-design-agency-near-me", "destination": "/services/web-design/", "permanent": true },
-    { "source": "/web-developers-surrey", "destination": "/services/web-development/", "permanent": true },
-
-    { "source": "/our-past-work", "destination": "/work/", "permanent": true },
-    { "source": "/about-us", "destination": "/about/", "permanent": true },
-    { "source": "/contact-us", "destination": "/contact/", "permanent": true },
-    { "source": "/privacy-policy-2", "destination": "/privacy/", "permanent": true },
-    { "source": "/terms-conditions", "destination": "/terms/", "permanent": true },
-    { "source": "/thank-you-page", "destination": "/thank-you/", "permanent": true },
-    { "source": "/elmbridge-digital-high-street-fund", "destination": "/about/", "permanent": true },
-    { "source": "/blog", "destination": "/", "permanent": true },
-
-    { "source": "/category/:slug*", "destination": "/services/", "permanent": true },
-    { "source": "/tag/:slug*", "destination": "/services/", "permanent": true },
-    { "source": "/project_category/:slug*", "destination": "/work/", "permanent": true },
-    { "source": "/layout_category/:slug*", "destination": "/", "permanent": true },
-
-    { "source": "/services/website-design", "destination": "/services/web-design/", "permanent": true }
+    {
+      "source": "/project/gallery-one-reigate",
+      "destination": "/work/the-gallery-tetbury/",
+      "permanent": true
+    },
+    {
+      "source": "/project/abu-dhabi-holidays",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/project/ja-resorts-holidays",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/project/omega-executive-travel",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/project/ag-edwards-son-demolition",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/project/:slug",
+      "destination": "/work/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/our-services/travel-industry-specialists",
+      "destination": "/services/travel-industry/",
+      "permanent": true
+    },
+    {
+      "source": "/our-services/design-development",
+      "destination": "/services/web-development/",
+      "permanent": true
+    },
+    {
+      "source": "/our-services/digital-marketing",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/our-services/website-design/website-maintenance",
+      "destination": "/services/web-development/",
+      "permanent": true
+    },
+    {
+      "source": "/our-services/website-design/:rest*",
+      "destination": "/services/web-design/",
+      "permanent": true
+    },
+    {
+      "source": "/our-services/website-design",
+      "destination": "/services/web-design/",
+      "permanent": true
+    },
+    {
+      "source": "/our-services/:rest*",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/our-services",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/website-design-woking",
+      "destination": "/services/web-design/",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-woking",
+      "destination": "/services/web-design/",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-guildford",
+      "destination": "/services/web-design/",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-in-surrey",
+      "destination": "/services/web-design/",
+      "permanent": true
+    },
+    {
+      "source": "/wordpress-web-design-surrey",
+      "destination": "/services/web-design/",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-hersham",
+      "destination": "/services/web-design/",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-agency-near-me",
+      "destination": "/services/web-design/",
+      "permanent": true
+    },
+    {
+      "source": "/web-developers-surrey",
+      "destination": "/services/web-development/",
+      "permanent": true
+    },
+    {
+      "source": "/our-past-work",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy-2",
+      "destination": "/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/thank-you-page",
+      "destination": "/thank-you/",
+      "permanent": true
+    },
+    {
+      "source": "/elmbridge-digital-high-street-fund",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/category/:slug*",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:slug*",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/project_category/:slug*",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/layout_category/:slug*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services/website-design",
+      "destination": "/services/web-design/",
+      "permanent": true
+    }
   ]
 }
