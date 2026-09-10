@@ -19,9 +19,9 @@ export const ADDRESS = {
 export const COMPANY_LEGAL_NAME = 'Cumulus Digital Limited';
 export const COMPANY_NUMBER = '09893216';
 
-// Formspree endpoint, e.g. https://formspree.io/f/abcdwxyz
-// TODO(owner): create a free Formspree account and set PUBLIC_FORM_ENDPOINT in .env
-export const FORM_ENDPOINT = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+// Formspree endpoint. Client-visible by design (the browser posts to it),
+// so it lives here; PUBLIC_FORM_ENDPOINT still overrides it if ever needed.
+export const FORM_ENDPOINT = import.meta.env.PUBLIC_FORM_ENDPOINT ?? 'https://formspree.io/f/mwlkajrw';
 
 // Google Analytics 4 measurement ID, e.g. G-XXXXXXXXXX.
 // Loaded only after the visitor accepts analytics in the cookie banner.
