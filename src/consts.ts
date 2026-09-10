@@ -23,10 +23,10 @@ export const COMPANY_NUMBER = '09893216';
 // so it lives here; PUBLIC_FORM_ENDPOINT still overrides it if ever needed.
 export const FORM_ENDPOINT = import.meta.env.PUBLIC_FORM_ENDPOINT ?? 'https://formspree.io/f/mwlkajrw';
 
-// Google Analytics 4 measurement ID, e.g. G-XXXXXXXXXX.
-// Loaded only after the visitor accepts analytics in the cookie banner.
-// TODO(owner): create a GA4 property and set PUBLIC_GA_ID in Vercel's env vars.
-export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? '';
+// Google Analytics 4 measurement ID. Client-visible by design, so it lives
+// here; PUBLIC_GA_ID still overrides it. Loaded only after the visitor
+// accepts analytics in the cookie banner.
+export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? 'G-BV4JL0GNK6';
 
 // Public link to the Google Business Profile reviews. Shown under the review
 // carousel only when at least one review is marked `source: 'google'`.
