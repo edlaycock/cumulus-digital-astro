@@ -1491,6 +1491,49 @@ h1.headline em.glow, .cta-headline em.glow {
 .prose ul { margin: 1rem 0 1rem 1.2rem; }
 .prose li + li { margin-top: .4rem; }
 .prose a { color: var(--cyan); }
+.prose h3 {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 1.08rem;
+  letter-spacing: -.01em;
+  color: var(--lt-text);
+  margin: 1.8rem 0 .6rem;
+}
+.prose strong { color: var(--lt-text); }
+.prose code {
+  font-family: var(--font-m);
+  font-size: .82em;
+  background: var(--grey-100);
+  border: 1px solid var(--lt-border);
+  border-radius: 5px;
+  padding: .1em .35em;
+  word-break: break-all;
+}
+/* policy tables (scopes, retention, providers): hairline rules, and
+   scrollable sideways on a phone rather than forcing the page wider */
+.prose table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.2rem 0;
+  font-size: .9rem;
+  line-height: 1.55;
+}
+.prose th, .prose td {
+  border: 1px solid var(--lt-border);
+  padding: .65rem .8rem;
+  text-align: left;
+  vertical-align: top;
+  min-width: 9rem;
+}
+.prose th {
+  font-family: var(--font-m);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--lt-muted);
+  background: var(--grey-50);
+}
 
 /* ============================================================
    404
