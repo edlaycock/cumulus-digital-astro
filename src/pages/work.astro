@@ -2,42 +2,36 @@
 import { getCollection } from 'astro:content';
 import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { AnimatedMarqueeHero } from '../components/ui/hero-3';
+import { PerspectiveTunnelHero } from '../components/ui/perspective-tunnel-hero';
 import WorkPreview from '../components/WorkPreview.astro';
 
 const work = (await getCollection('work'))
   .filter((w) => !w.data.draft)
   .sort((a, b) => a.data.order - b.data.order);
 
-// Marquee: purpose-shot captures of four client sites, taken at exactly the
-// frame aspect ratios (16:10 for the MacBook, 9:19.5 for the iPhone) so the
-// screen fills its bezel without being cropped or squashed.
-const FRAMED = [
-  { slug: 'elysian-collection',    client: 'Elysian Collection' },
-  { slug: 'cotswold-house-hunter', client: 'Cotswold House Hunter' },
-  { slug: 'jellylearn',            client: 'JellyLearn' },
-  { slug: 'surrey-contracting',    client: 'Surrey Contracting' },
+// Tunnel hero: portrait captures of real client builds, newest first.
+// The 4:5 card crops each capture from the top, so the site's own header
+// and hero are what fly past.
+const TUNNEL = [
+  { file: '../assets/frames/elysian-collection-phone.jpg',    client: 'Elysian Collection' },
+  { file: '../assets/frames/cotswold-house-hunter-phone.jpg', client: 'Cotswold House Hunter' },
+  { file: '../assets/frames/jellylearn-phone.jpg',            client: 'JellyLearn' },
+  { file: '../assets/frames/surrey-contracting-phone.jpg',    client: 'Surrey Contracting' },
+  { file: '../assets/work/hersham-village-mobile.jpg',        client: 'Hersham Village' },
+  { file: '../assets/work/ras-al-khaimah-holidays-mobile.jpg', client: 'Ras Al Khaimah Holidays' },
+  { file: '../assets/work/assetq-mobile.jpg',                 client: 'AssetQ' },
+  { file: '../assets/work/fidelity-accountants-mobile.jpg',   client: 'Fidelity Accountants' },
+  { file: '../assets/work/surrey-hills-surfacing-mobile.jpg', client: 'Surrey Hills Surfacing' },
 ];
-const frames = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/frames/*.jpg',
+const shots = import.meta.glob<{ default: ImageMetadata }>(
+  ['../assets/frames/*.jpg', '../assets/work/*.jpg'],
   { eager: true }
 );
-// desktop and mobile alternate, so the strip never runs four laptops together
-const framed = await Promise.all(
-  FRAMED.flatMap(({ slug, client }) => [
-    { slug, client, kind: 'desktop' as const, file: `${slug}-mac.jpg`,   w: 760 },
-    { slug, client, kind: 'mobile'  as const, file: `${slug}-phone.jpg`, w: 320 },
-  ])
-    .filter((e) => frames[`../assets/frames/${e.file}`])
-    .map(async (e) => ({
-      src: (await getImage({
-        src: frames[`../assets/frames/${e.file}`].default,
-        width: e.w,
-        format: 'webp',
-      })).src,
-      alt: `${e.client} website built by Cumulus Digital`,
-      kind: e.kind,
-    }))
+const tunnelCards = await Promise.all(
+  TUNNEL.filter((t) => shots[t.file]).map(async (t) => ({
+    src: (await getImage({ src: shots[t.file].default, width: 520, format: 'webp' })).src,
+    title: t.client,
+  }))
 );
 ---
 
@@ -45,17 +39,16 @@ const framed = await Promise.all(
   title="Our Work — Web Design & Digital Projects | Cumulus Digital"
   description="Selected projects by Cumulus Digital: bespoke websites, branding and digital marketing for Surrey businesses and travel brands."
 >
-  <AnimatedMarqueeHero
+  <PerspectiveTunnelHero
     client:load
     tagline="Our work · Surrey, UK"
-    title="Ideas made real."
-    accent="real."
+    titleHtml="Ideas made <em>real</em>."
     description="Real websites, brands and marketing for Surrey businesses — from award-winning builders to independent pubs. Here's a selection we're proud of."
     ctaText="Discuss your project →"
     ctaHref="/contact/"
     secondaryText="What we do"
     secondaryHref="/services/"
-    images={framed}
+    cards={tunnelCards}
   />
 
   <section class="section work-section">
