@@ -108,8 +108,8 @@ function Card({
   const opacity = useTransform(localProgress, [0, 0.18, 0.82, 0.98], [0, 1, 1, 0]);
 
   const cardWidth = stage.isMobile
-    ? Math.max(120, Math.min(170, stage.width * 0.38))
-    : Math.max(170, Math.min(250, stage.width * 0.17));
+    ? Math.max(104, Math.min(140, stage.width * 0.32))
+    : Math.max(150, Math.min(205, stage.width * 0.14));
 
   const baseX = layout.angleCos * (stage.width * layout.radiusFactorX);
   const baseY = layout.angleSin * (stage.height * layout.radiusFactorY);
@@ -136,9 +136,12 @@ function Card({
           : { width: cardWidth, transform, opacity, zIndex: layout.index + 1 }
       }
     >
-      <div className="ptn-card-inner">
-        <img src={layout.card.src} alt={`${layout.card.title} website built by Cumulus Digital`} draggable={false} loading="eager" />
-        <span className="ptn-card-label">{layout.card.title}</span>
+      <div className="iphone">
+        <div className="iphone-screen">
+          <img src={layout.card.src} alt={`${layout.card.title} website built by Cumulus Digital`} draggable={false} loading="eager" />
+          <span className="ptn-card-label">{layout.card.title}</span>
+        </div>
+        <span className="iphone-frame" aria-hidden="true" />
       </div>
     </motion.div>
   );
