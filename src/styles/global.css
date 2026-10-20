@@ -3021,6 +3021,142 @@ h1.headline em,
 }
 
 /* =========================================================
+   PERSPECTIVE TUNNEL HERO  (/work)
+   A 3D corridor of client builds flying past as the page scrolls through
+   a tall sticky track. Adapted from the Tailwind original onto the light
+   canvas: cyan accent, hairline rings, white card chrome.
+   ========================================================= */
+.ptn { position: relative; height: 320vh; }
+.ptn--still { height: auto; }
+.ptn-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  background: var(--white);
+}
+.ptn--still .ptn-stage { position: relative; min-height: 100svh; }
+
+/* ground: dot grid fading out radially, with a soft cyan centre glow */
+.ptn-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(#d4d7dc 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%);
+  opacity: .7;
+}
+.ptn-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(8, 145, 178, .08) 0%, transparent 70%);
+}
+.ptn-ring {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+}
+.ptn-ring--inner { width: 48vmin; height: 48vmin; border: 1px solid rgba(8, 145, 178, .14); }
+.ptn-ring--outer { width: 76vmin; height: 76vmin; border: 1px dashed var(--lt-border); }
+
+/* centre block: the page hero type, riding the camera */
+.ptn-center {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  max-width: 44rem;
+}
+.ptn-center .eyebrow { margin-bottom: 1.2rem; }
+.ptn-title {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  line-height: .98;
+  letter-spacing: -.055em;
+  color: var(--ink-black);
+  margin: 0 0 1.1rem;
+  text-wrap: balance;
+}
+.ptn-title em {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.22em;
+  letter-spacing: -.01em;
+  line-height: .9;
+  color: var(--cyan);
+}
+.ptn-lede {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--lt-muted);
+  max-width: 38rem;
+  margin: 0 0 1.7rem;
+}
+.ptn-actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
+
+/* the z-space the cards live in */
+.ptn-space {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+.ptn-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  aspect-ratio: 4 / 5;
+  will-change: transform;
+  user-select: none;
+}
+.ptn-card-inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--white);
+  border: 1px solid var(--lt-rule);
+  box-shadow: 0 24px 48px -24px rgba(10, 16, 38, .35);
+}
+.ptn-card-inner img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.ptn-card-label {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2.2rem .9rem .8rem;
+  background: linear-gradient(to top, rgba(7, 12, 24, .78), rgba(7, 12, 24, .08) 70%, transparent);
+  font-family: var(--font-m);
+  font-size: .64rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .95);
+}
+
+@media (max-width: 620px) {
+  .ptn { height: 260vh; }
+  .ptn--still { height: auto; }
+  .ptn-title { font-size: clamp(2.3rem, 10vw, 3rem); }
+}
+
+/* =========================================================
    CONTAINER SCROLL — type-only
    No device in the frame, so the track only needs enough range for the
    heading to drift. Much shorter than the device variants, or the hero
