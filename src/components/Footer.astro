@@ -1,4 +1,5 @@
 ---
+import LogoSting from './LogoSting.astro';
 import {
   SITE_TAGLINE,
   EMAIL,
@@ -15,8 +16,8 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
-      <a class="brand" href="/" aria-label="Cumulus Digital home">
-        <img class="brand-logo" src="/cumulus-logo.png" alt="Cumulus Digital" loading="lazy" />
+      <a class="brand footer-sting" href="/" aria-label="Cumulus Digital home">
+        <LogoSting />
       </a>
       <p class="footer-tagline">{SITE_TAGLINE}</p>
     </div>

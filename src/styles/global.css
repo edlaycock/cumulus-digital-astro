@@ -1064,6 +1064,10 @@ h1.headline em.glow, .cta-headline em.glow {
 @media (max-width: 720px) { .footer-inner { grid-template-columns: 1fr; gap: 3rem; } }
 
 .footer-brand .brand { margin-bottom: 1rem; }
+/* the animated sting replaces the flat footer logo; sized like a logo,
+   not a hero */
+.footer-sting { display: block; width: min(250px, 100%); }
+.footer-sting .cls-sting { width: 100%; }
 .footer-tagline { font-size: .9rem; color: var(--lt-muted); }
 .footer-nav {
   display: grid;

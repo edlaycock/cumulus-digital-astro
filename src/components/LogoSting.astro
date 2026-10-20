@@ -1,0 +1,73 @@
+---
+// The animated logo sting from the brand pack (cumulus-logo-sting-web-files):
+// wordmark wipes in, the cloud settles, the plane and DIGITAL arrive, then the
+// whole thing rests as the plain static lockup. Markup, timing and behaviour
+// are the pack's own snippet, unchanged; the four layers are served as
+// cacheable files per its README since the logo appears on every page.
+// No-JS and prefers-reduced-motion visitors see the final logo only.
+---
+
+<div class="cls-sting" role="img" aria-label="Cumulus Digital Limited">
+  <img class="cls-layer cls-cloud" alt="" src="/sting/layer_cloud.png" />
+  <img class="cls-layer cls-plane" alt="" src="/sting/layer_plane.png" />
+  <img class="cls-layer cls-wordmark" alt="" src="/sting/layer_wordmark.png" />
+  <img class="cls-layer cls-digital" alt="" src="/sting/layer_digital.png" />
+</div>
+
+<style is:global>
+.cls-sting{position:relative;display:block;width:100%;max-width:589px;aspect-ratio:589/253;margin:0;padding:0;background:transparent;overflow:hidden;line-height:0}
+@supports not (aspect-ratio:1){.cls-sting{height:0;padding-bottom:42.954%}}
+.cls-sting .cls-layer{position:absolute;top:0;left:0;width:100%;height:100%;max-width:none;margin:0;padding:0;border:0;box-shadow:none;display:block;user-select:none;-webkit-user-drag:none}
+.cls-sting.cls-armed .cls-wordmark{
+  -webkit-mask-image:linear-gradient(to right,#000 45%,transparent 55%);mask-image:linear-gradient(to right,#000 45%,transparent 55%);
+  -webkit-mask-size:250% 100%;mask-size:250% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:0% 0;mask-position:0% 0}
+.cls-sting .cls-cloud{transform-origin:81.409% 53.162%}
+</style>
+
+<script is:inline>
+(function(){
+  var T=3000,E='ease-out';
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nodes=document.querySelectorAll('.cls-sting:not([data-cls-init])');
+  if(reduce||!Element.prototype.animate)return; /* final frame stays as rendered */
+  function k(el,frames){return el.animate(frames,{duration:T,fill:'both',easing:'linear'})}
+  Array.prototype.forEach.call(nodes,function(root){
+    root.setAttribute('data-cls-init','');
+    root.classList.add('cls-armed');
+    var q=function(c){return root.querySelector('.'+c)};
+    var anims=[
+      k(q('cls-wordmark'),[
+        {offset:0,webkitMaskPosition:'100% 0',maskPosition:'100% 0'},
+        {offset:200/T,webkitMaskPosition:'100% 0',maskPosition:'100% 0',easing:E},
+        {offset:900/T,webkitMaskPosition:'0% 0',maskPosition:'0% 0'},
+        {offset:1,webkitMaskPosition:'0% 0',maskPosition:'0% 0'}]),
+      k(q('cls-cloud'),[
+        {offset:0,opacity:0,transform:'scale(0.94)'},
+        {offset:500/T,opacity:0,transform:'scale(0.94)',easing:E},
+        {offset:1300/T,opacity:1,transform:'none'},
+        {offset:1,opacity:1,transform:'none'}]),
+      k(q('cls-plane'),[
+        {offset:0,opacity:0,transform:'translate(-1.152%,2.978%)'},
+        {offset:1100/T,opacity:0,transform:'translate(-1.152%,2.978%)',easing:E},
+        {offset:1800/T,opacity:1,transform:'none'},
+        {offset:1,opacity:1,transform:'none'}]),
+      k(q('cls-digital'),[
+        {offset:0,opacity:0,transform:'translateY(1.581%)'},
+        {offset:1300/T,opacity:0,transform:'translateY(1.581%)',easing:E},
+        {offset:1900/T,opacity:1,transform:'none'},
+        {offset:1,opacity:1,transform:'none'}])
+    ];
+    anims.forEach(function(a){a.pause();a.currentTime=0});
+    /* After the hold, drop the animations so the logo rests as plain static images
+       (sharper resampling than compositor layers, and identical to the no-JS render). */
+    anims[0].finished.then(function(){anims.forEach(function(a){a.cancel()});root.classList.remove('cls-armed')},function(){});
+    function play(){anims.forEach(function(a){a.play()})}
+    if(!('IntersectionObserver' in window)){play();return}
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){io.disconnect();play()}});
+    },{threshold:0.4});
+    io.observe(root);
+  });
+})();
+</script>
