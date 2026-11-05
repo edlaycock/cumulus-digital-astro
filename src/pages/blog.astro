@@ -1,0 +1,158 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout
+  title="Blog — Web Design & Digital Marketing Insights | Cumulus Digital"
+  description="Guides and insights on web design, development and digital marketing for Surrey businesses, from the team at Cumulus Digital."
+>
+  <PageHero
+    glass
+    eyebrow="Blog"
+    lede="Guides and straight answers on web design, development and digital marketing — written for the Surrey businesses we build for."
+  >
+    Ideas worth<br /><em class="glow">reading</em>.
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <ul class="blog-grid" role="list">
+        {posts.map((post) => (
+          <li class="blog-card" data-reveal>
+            <a class="blog-card-inner" href={`/${post.id}/`}>
+              <div class="blog-card-visual">
+                {post.data.image ? (
+                  <Image
+                    src={post.data.image}
+                    alt=""
+                    widths={[480, 760]}
+                    sizes="(max-width: 720px) 94vw, 420px"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="blog-card-fallback" aria-hidden="true">
+                    <img src="/sting/layer_cloud_reversed.png" alt="" loading="lazy" />
+                  </div>
+                )}
+              </div>
+              <div class="blog-card-content">
+                <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+                <h2>{post.data.title}</h2>
+                <p>{post.data.description}</p>
+                <span class="blog-card-cta">Read the article →</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <p class="section-label">Work with us</p>
+        <h2 class="cta-headline">Rather just have it<br />done <em class="glow">properly</em>?</h2>
+        <p class="cta-sub">
+          Everything we write about here is work we do every week. Tell us what your
+          business needs and we'll give you an honest view and a straight price.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
+          <a class="btn btn--outline btn--lg" href="/services/">See our services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+  @media (max-width: 860px) { .blog-grid { grid-template-columns: 1fr; } }
+  .blog-card-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--lt-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--white);
+    text-decoration: none;
+    color: inherit;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .blog-card-inner:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -22px rgba(2, 20, 34, .35);
+  }
+  .blog-card-visual {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--grey-100);
+  }
+  .blog-card-visual :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .blog-card-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(60% 70% at 70% 20%, rgba(93, 194, 213, .35), transparent 70%),
+      linear-gradient(to top right, #021a2d, #005b90);
+  }
+  .blog-card-fallback img { width: 46% !important; height: auto !important; object-fit: contain !important; }
+  .blog-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+    padding: 1.5rem 1.6rem 1.7rem;
+  }
+  .blog-card-content time {
+    font-family: var(--font-m);
+    font-size: .8rem;
+    color: var(--lt-faint);
+  }
+  .blog-card-content h2 {
+    font-size: 1.22rem;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+    margin: 0;
+    color: var(--lt-text);
+  }
+  .blog-card-content p {
+    margin: 0;
+    font-size: .92rem;
+    line-height: 1.55;
+    color: var(--lt-muted);
+  }
+  .blog-card-cta {
+    margin-top: .5rem;
+    font-size: .9rem;
+    font-weight: 500;
+    color: var(--cyan);
+  }
+</style>
