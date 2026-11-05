@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getImage } from 'astro:assets';
 import { AnimatedMarqueeHero } from '../../components/ui/hero-3';
+import { GlassFold } from '../../components/ui/glass-fold';
 import WorkPreview from '../../components/WorkPreview.astro';
 import ReviewCarousel from '../../components/ReviewCarousel.astro';
 import { getCollection } from 'astro:content';
@@ -109,6 +110,10 @@ const faqs = [
   title="Web Design in Surrey | Cumulus Digital"
   description="Bespoke web design in Surrey — hand-built, mobile-first websites for businesses across Surrey and the South East. No templates. Based in Hersham, Walton-on-Thames."
 >
+  <div class="hero-glass">
+    <div class="page-hero-bg" aria-hidden="true">
+      <GlassFold client:load />
+    </div>
   <AnimatedMarqueeHero
     client:load
     tagline="Web design · Surrey, UK"
@@ -121,6 +126,7 @@ const faqs = [
     secondaryHref="/work/"
     images={marquee}
   />
+  </div>
 
   <!-- why sites underperform -->
   <section class="section">
