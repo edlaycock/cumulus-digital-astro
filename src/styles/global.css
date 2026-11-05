@@ -1348,42 +1348,86 @@ h1.headline em.glow, .cta-headline em.glow {
 .page-hero--glass .eyebrow-dot { background: var(--cyan-lt); }
 
 /* ============================================================
-   WEB DEVELOPMENT HERO  (navy band, tumbling deck of builds)
+   GLASS HEROES  (shared dark-ground treatment)
+   Every section hero that sits on the glass-fold shader. The canvas
+   itself goes in a .page-hero-bg child; this class supplies the solid
+   navy fallback, lifts the copy above it, and flips every hero type
+   style — whatever component the page uses — to white-on-dark, with
+   the serif accent in brand teal and the navy primary button swapped
+   for white so it doesn't sink into the ground.
    ============================================================ */
-.wd-hero {
+.hero-glass {
   position: relative;
   overflow: hidden;
-  padding: clamp(7rem, 14vh, 9.5rem) 0 0;
-  text-align: center;
   color: #f2f5f8;
   background-color: #031422;
-  background-image:
-    radial-gradient(70% 55% at 50% 0%, rgba(0, 91, 144, .55), transparent 70%),
-    radial-gradient(42% 34% at 82% 18%, rgba(93, 194, 213, .14), transparent 66%);
 }
-.wd-hero .container > * { margin-inline: auto; }
-.wd-hero .page-hero-title { color: #fff; }
-.wd-hero .page-hero-title em.glow { color: var(--cyan-lt); }
-.wd-hero .lede { color: rgba(242, 245, 248, .8); }
-.wd-hero .eyebrow {
+.hero-glass > .page-hero-bg { z-index: 0; }
+.hero-glass .container,
+.hero-glass .ih-copy,
+.hero-glass .ih-stage,
+.hero-glass .cs,
+.hero-glass .amh-copy,
+.hero-glass .amh-marquee {
+  position: relative;
+  z-index: 1;
+}
+.hero-glass .page-hero-title,
+.hero-glass .ih-title,
+.hero-glass .amh-title,
+.hero-glass .cs-header .cs-title { color: #fff; }
+.hero-glass .page-hero-title em.glow,
+.hero-glass .cs-header .cs-title em.glow,
+.hero-glass .ih-title em,
+.hero-glass .amh-title em { color: var(--cyan-lt); }
+.hero-glass .lede,
+.hero-glass .ih-lede,
+.hero-glass .amh-desc,
+.hero-glass .cs-header .cs-lede { color: rgba(242, 245, 248, .8); }
+.hero-glass .eyebrow,
+.hero-glass .amh-tag {
   color: rgba(242, 245, 248, .88);
   border-color: rgba(255, 255, 255, .24);
+  background: transparent;
 }
-.wd-hero .eyebrow-dot { background: var(--cyan-lt); }
-/* the navy primary button would sink into the navy band */
-.wd-hero .btn--primary { background: #fff; color: var(--cyan); }
-.wd-hero .btn--primary:hover { background: var(--wash); }
-.wd-hero .btn--outline {
+.hero-glass .ih-badge {
+  color: rgba(242, 245, 248, .88);
+  border-color: rgba(255, 255, 255, .24);
+  background: rgba(255, 255, 255, .06);
+}
+.hero-glass .eyebrow-dot,
+.hero-glass .ih-badge-dot { background: var(--cyan-lt); }
+.hero-glass .ih-ticks { color: rgba(242, 245, 248, .78); }
+.hero-glass .ih-tick { color: var(--cyan-lt); }
+/* the navy primary button would sink into the navy ground */
+.hero-glass .btn--primary { background: #fff; color: var(--cyan); }
+.hero-glass .btn--primary:hover { background: var(--wash); }
+.hero-glass .btn--outline {
   background: transparent;
   border-color: rgba(255, 255, 255, .34);
   color: #fff;
 }
-.wd-hero .btn--outline:hover {
+.hero-glass .btn--outline:hover {
   background: rgba(255, 255, 255, .1);
   border-color: rgba(255, 255, 255, .55);
 }
-.wd-deck { margin-top: clamp(1rem, 3vh, 2.2rem); }
+/* heroes whose own root paints white */
+.hero-glass .amh { background: transparent; }
+.ih.hero-glass { background: #031422; }
+.ih.hero-glass .ih-wash { display: none; }
+
+/* ============================================================
+   WEB DEVELOPMENT HERO  (glass band, tumbling deck of builds)
+   ============================================================ */
+.wd-hero {
+  padding: clamp(7rem, 14vh, 9.5rem) 0 0;
+  text-align: center;
+}
+.wd-hero .container > * { margin-inline: auto; }
+.wd-deck { position: relative; z-index: 1; margin-top: clamp(1rem, 3vh, 2.2rem); }
 .wd-deck-hint {
+  position: relative;
+  z-index: 1;
   padding: 0 1.25rem 1.6rem;
   text-align: center;
   font-size: .85rem;
@@ -3096,8 +3140,9 @@ h1.headline em,
 /* =========================================================
    PERSPECTIVE TUNNEL HERO  (/work)
    A 3D corridor of client builds flying past as the page scrolls through
-   a tall sticky track. Adapted from the Tailwind original onto the light
-   canvas: cyan accent, hairline rings, white card chrome.
+   a tall sticky track. Adapted from the Tailwind original. It now sits on
+   the glass-fold shader (the .hero-glass treatment colours the type), so
+   its own chrome — dots, glow, rings — reads against the dark ground.
    ========================================================= */
 .ptn { position: relative; height: 320vh; }
 .ptn--still { height: auto; }
@@ -3110,34 +3155,37 @@ h1.headline em,
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
-  background: var(--white);
+  background: #031422;
 }
 .ptn--still .ptn-stage { position: relative; min-height: 100svh; }
+/* the shader rides inside the sticky stage so it stays under the camera
+   for the whole 320vh track */
+.ptn-stage .page-hero-bg { z-index: 0; }
 
-/* ground: dot grid fading out radially, with a soft cyan centre glow */
+/* ground: dot grid fading out radially, with a soft teal centre glow */
 .ptn-dots {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(#d4d7dc 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, .22) 1px, transparent 1px);
   background-size: 28px 28px;
   -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%);
   mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%);
-  opacity: .7;
+  opacity: .5;
 }
 .ptn-glow {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at center, rgba(8, 145, 178, .08) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(93, 194, 213, .12) 0%, transparent 70%);
 }
 .ptn-ring {
   position: absolute;
   pointer-events: none;
   border-radius: 999px;
 }
-.ptn-ring--inner { width: 48vmin; height: 48vmin; border: 1px solid rgba(8, 145, 178, .14); }
-.ptn-ring--outer { width: 76vmin; height: 76vmin; border: 1px dashed var(--lt-border); }
+.ptn-ring--inner { width: 48vmin; height: 48vmin; border: 1px solid rgba(93, 194, 213, .22); }
+.ptn-ring--outer { width: 76vmin; height: 76vmin; border: 1px dashed rgba(255, 255, 255, .16); }
 
 /* centre block: the page hero type, riding the camera */
 .ptn-center {
@@ -3150,14 +3198,32 @@ h1.headline em,
   padding: 0 1.5rem;
   max-width: 44rem;
 }
-.ptn-center .eyebrow { margin-bottom: 1.2rem; }
+.ptn-center .eyebrow {
+  margin-bottom: 1.2rem;
+  color: rgba(242, 245, 248, .88);
+  border-color: rgba(255, 255, 255, .24);
+}
+.ptn-center .eyebrow-dot { background: var(--cyan-lt); }
+/* .hero-glass can't wrap the track (its overflow:hidden would unstick the
+   stage), so the button flips are restated here */
+.ptn-actions .btn--primary { background: #fff; color: var(--cyan); }
+.ptn-actions .btn--primary:hover { background: var(--wash); }
+.ptn-actions .btn--outline {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .34);
+  color: #fff;
+}
+.ptn-actions .btn--outline:hover {
+  background: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .55);
+}
 .ptn-title {
   font-family: var(--font-h);
   font-weight: 700;
   font-size: clamp(2.6rem, 7vw, 5.2rem);
   line-height: .98;
   letter-spacing: -.055em;
-  color: var(--ink-black);
+  color: #fff;
   margin: 0 0 1.1rem;
   text-wrap: balance;
 }
@@ -3168,12 +3234,12 @@ h1.headline em,
   font-size: 1.22em;
   letter-spacing: -.01em;
   line-height: .9;
-  color: var(--cyan);
+  color: var(--cyan-lt);
 }
 .ptn-lede {
   font-size: clamp(1rem, 1.5vw, 1.2rem);
   line-height: 1.6;
-  color: var(--lt-muted);
+  color: rgba(242, 245, 248, .8);
   max-width: 38rem;
   margin: 0 0 1.7rem;
 }

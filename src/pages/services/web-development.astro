@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TumbleDeckShowcase from '../../components/ui/tumble-deck-showcase';
+import { GlassFold } from '../../components/ui/glass-fold';
 import { getImage } from 'astro:assets';
 import WorkPreview from '../../components/WorkPreview.astro';
 import ReviewCarousel from '../../components/ReviewCarousel.astro';
@@ -116,7 +117,10 @@ const faqs = [
   description="Custom web development in Surrey — hand-built, fast, secure websites, e-commerce and web apps. CMS builds, integrations and ongoing maintenance. Based in Hersham, Walton-on-Thames."
 >
   <!-- heading over a navy band, then the builds tumbling flat one by one -->
-  <section class="wd-hero">
+  <section class="wd-hero hero-glass">
+    <div class="page-hero-bg" aria-hidden="true">
+      <GlassFold client:load />
+    </div>
     <div class="container">
       <p class="eyebrow"><span class="eyebrow-dot"></span>Web development · Surrey, UK</p>
       <h1 class="page-hero-title">Web development<br />that <em class="glow">lasts</em>.</h1>

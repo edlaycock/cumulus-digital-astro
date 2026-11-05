@@ -7,6 +7,7 @@ import {
   type MotionValue,
 } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { GlassFold } from './glass-fold';
 
 // Adapted from 21st.dev's PerspectiveTunnelHero. The 3D corridor, golden-angle
 // card layout and pointer parallax are kept; the Tailwind classes become a
@@ -189,6 +190,11 @@ export function PerspectiveTunnelHero({
   return (
     <div ref={trackRef} className={`ptn${frozen ? ' ptn--still' : ''}`}>
       <div className="ptn-stage" style={{ perspective: stage.isMobile ? '900px' : '1200px' }}>
+        {/* glass-fold shader behind everything; inside the sticky stage so it
+            stays under the camera for the whole scroll track */}
+        <div className="page-hero-bg" aria-hidden="true">
+          <GlassFold />
+        </div>
         <div className="ptn-dots" aria-hidden="true" />
         <div className="ptn-glow" aria-hidden="true" />
         <div className="ptn-ring ptn-ring--inner" aria-hidden="true" />

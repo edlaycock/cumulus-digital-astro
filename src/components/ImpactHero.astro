@@ -10,6 +10,7 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { FlippingWordSwap } from './ui/flipping-word-swap';
+import { GlassFold } from './ui/glass-fold';
 
 interface Chip {
   text: string;
@@ -40,17 +41,24 @@ interface Props {
   chips?: Chip[];
   /** when the captures are full-page, pan them inside the device window */
   scroll?: boolean;
+  /** animated glass-fold WebGL ground; the copy goes white */
+  glass?: boolean;
 }
 
 const {
   badge, title, titleAccent, titleAccentAlt, lede, ticks = [],
   ctaText, ctaHref, secondaryText, secondaryHref,
-  desktop, mobile, alt, chips = [], scroll = false,
+  desktop, mobile, alt, chips = [], scroll = false, glass = false,
 } = Astro.props;
 ---
 
-<section class="ih">
+<section class={`ih${glass ? ' hero-glass' : ''}`}>
   <div class="ih-wash" aria-hidden="true"></div>
+  {glass && (
+    <div class="page-hero-bg" aria-hidden="true">
+      <GlassFold client:load />
+    </div>
+  )}
 
   <div class="container ih-copy">
     <p class="ih-badge"><span class="ih-badge-dot" aria-hidden="true"></span>{badge}</p>

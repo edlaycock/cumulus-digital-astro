@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ContainerScroll } from '../../components/ui/container-scroll-animation';
+import { GlassFold } from '../../components/ui/glass-fold';
 import { getImage } from 'astro:assets';
 import WorkPreview from '../../components/WorkPreview.astro';
 import { getCollection } from 'astro:content';
@@ -74,6 +75,10 @@ const faqs = [
   description="Websites, SEO and paid search for tour operators, travel agents and destination brands — backed by 25+ years working inside the travel sector."
 >
   <!-- heading, then a real travel build tilting flat as you scroll -->
+  <div class="hero-glass">
+    <div class="page-hero-bg" aria-hidden="true">
+      <GlassFold client:load />
+    </div>
   <ContainerScroll client:load className="cs--device">
     <Fragment slot="titleComponent">
       <p class="eyebrow"><span class="eyebrow-dot"></span>Travel industry · 25+ years</p>
@@ -102,6 +107,7 @@ const faqs = [
       />
     </picture>
   </ContainerScroll>
+  </div>
 
   <section class="section">
     <div class="container">
