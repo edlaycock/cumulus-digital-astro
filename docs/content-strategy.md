@@ -160,10 +160,41 @@ salesy, never identical wording across groups — vary the opening line
 per group. Respect each group's self-promo rules; where a group has a
 promo day, hold the post for it.
 
-**Nominated groups** (owner to confirm/extend; post only where rules allow):
-- [TO BE FILLED IN BY ED — e.g. "Walton-on-Thames Community", "Hersham
-  Residents", "Surrey Small Business Network", town-by-town trade and
-  community groups]
+**Nominated groups** (owner's list, member counts as of Nov 2024; post
+only where each group's rules allow, and honour the posting days below):
+
+| Group | Members | Posting rules |
+| --- | --- | --- |
+| Guildford Community Board | 57,400 | |
+| Godalming and Villages Community | 38,200 | |
+| We Love Surrey | 31,000 | |
+| Walton on Thames and Hersham | 29,800 | Tuesdays only |
+| The Woking Residents Community | 28,000 | Monday only |
+| Camberley Community Board | 24,200 | |
+| Cobham Mummies | 24,000 | |
+| Surrey/Esher/Cobham Mums & Mums Network | 17,900 | |
+| Weybridge/Walton/Hersham-/local | 14,100 | |
+| Weybridge Community Hub | 11,700 | |
+| Woking Community | 11,600 | Monday or Thursday |
+| Surrey and Kingston Community Group | 10,000 | |
+| Cranleigh Community Group | 8,600 | Mondays and Fridays only |
+| Esher, Surbiton and Cobham mums | 7,800 | |
+| Fernhurst Village community Board | 7,200 | |
+| Haslemere and surrounding areas community board | 5,500 | |
+| Redhill, Reigate, Horley and Surrounding Areas | 5,100 | |
+| Woking and Guildford Community Chat | 4,600 | |
+| Ewhurst Community Board | 4,600 | |
+| Dorking business | 3,100 | |
+| Puttenham Community Board | 2,000 | |
+| Surrey Business Advertising | 1,900 | |
+| Godalming Community Board | — | |
+| Farnham Surrey Community Board | — | 1st and 15th of the month only |
+
+Where the article has a town angle, lead with the groups for that town.
+The article publishes on Tuesdays, which lines up with "Walton on Thames
+and Hersham" (Tuesdays only); groups with Monday/Thursday/Friday or
+date-based rules get their draft held and posted on the next allowed
+day rather than skipped.
 
 **Mechanics.** Page posting can be automated through the Facebook Graph
 API: when a Graph API token is configured on this environment and a
