@@ -49,5 +49,6 @@ export const NAV_LINKS = [
   },
   { href: '/work/', label: 'Our Work' },
   { href: '/about/', label: 'About' },
+  { href: '/blog/', label: 'Blog' },
   { href: '/contact/', label: 'Contact' },
 ];
