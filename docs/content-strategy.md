@@ -91,6 +91,16 @@ text or logos, 16:9. One hero minimum, inline images where they earn
 their place. If no image tool is available that session, publish without
 a frontmatter image — the index card has a brand fallback.
 
+## Provenance hygiene (part of every ship)
+
+- After the humanizer pass, scan the final markdown for invisible or
+  suspicious Unicode (zero-width spaces/joiners, BOM, soft hyphens,
+  variation selectors, bidi controls, tag characters) and remove any hit.
+- Always re-encode generated images through sharp before committing
+  (`sharp(input).png()` or equivalent). This strips EXIF, XMP and
+  hard-bound C2PA "Content Credentials" metadata that image generators
+  attach. Never commit a generator's file as-is.
+
 ## Mechanics (how a post ships)
 
 - Markdown file in `src/content/blog/<slug>.md` — slug is the question's
