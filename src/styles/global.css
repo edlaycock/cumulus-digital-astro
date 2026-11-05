@@ -1362,6 +1362,18 @@ h1.headline em.glow, .cta-headline em.glow {
   color: #f2f5f8;
   background-color: #031422;
 }
+/* every glass hero fills the viewport, like the /work tunnel. The
+   ContainerScroll heroes already run a taller scroll track of their own. */
+.ih.hero-glass,
+.wd-hero.hero-glass,
+.hero-glass .amh,
+.page-hero--glass {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.page-hero--glass .container { width: 100%; }
 .hero-glass > .page-hero-bg { z-index: 0; }
 .hero-glass .container,
 .hero-glass .ih-copy,
