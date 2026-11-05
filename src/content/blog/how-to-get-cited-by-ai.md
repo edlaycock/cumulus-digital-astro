@@ -1,118 +1,129 @@
 ---
-title: "How to Get Your Business Cited by ChatGPT, Perplexity and Gemini — and Seen in Google's AI Overviews"
-description: "AI assistants are the new front page. Here's how a Surrey business gets named, quoted and recommended by ChatGPT, Perplexity, Gemini and Google's AI Overviews."
+title: "How Surrey Small Businesses Get Cited by ChatGPT, Perplexity and Gemini — and Into Google's AI Overviews"
+description: "AI assistants now answer 'who's the best plumber in Woking?' by naming two or three businesses. Here's how a Surrey small business becomes one of them."
 pubDate: 2026-11-05
 image: "./images/how-to-get-cited-by-ai-hero.png"
 ---
 
-## The Search Results Page Has Changed
+## The New Way Surrey Finds Its Local Businesses
 
-For twenty years, winning online meant one thing: rank on the first page of Google. That game hasn't gone away — but a new one has started on top of it. When your customers ask ChatGPT for "a good accountant near Walton-on-Thames", ask Perplexity to "compare web design agencies in Surrey", or simply type a question into Google and read the **AI Overview** that now sits above every result, an AI is deciding which businesses get mentioned — and which don't exist at all.
+Picture a homeowner in Esher whose boiler has just given up. Five years ago they'd have typed "emergency plumber Esher" into Google and scanned a page of ten blue links. Today, there's a good chance they ask ChatGPT, or Perplexity, or simply read the **AI Overview** that Google now places above its own results — and get an answer like: *"Two well-reviewed emergency plumbers serving Esher are…"*
 
-This is being called **Answer Engine Optimisation (AEO)** or **Generative Engine Optimisation (GEO)**, and it matters for one simple reason: an AI answer usually names two or three businesses, not ten blue links. If you're one of them, you've effectively won the whole page.
+Two names. Not ten. That is the whole game now.
 
-The good news: AI assistants don't pick businesses by magic. They pick them from what they can read, verify and trust on the open web — which means there is a concrete checklist you can work through.
+For small businesses across Surrey — the trades in Walton-on-Thames and Hersham, the cafés and salons in Cobham and Weybridge, the accountants in Guildford, the builders in Woking — this is the biggest change to being found online since Google itself. The industry calls it **Answer Engine Optimisation (AEO)**. We'd put it more plainly: when an AI answers a question about your trade in your town, you want it to say your name.
 
-## How AI Assistants Actually Choose Who to Cite
+The encouraging part is that this is *very* winnable for a small local business. AI assistants don't pick names by magic — they pick them from what they can read, verify and trust on the open web. And in a market the size of Woking or Walton, the bar to being the most trustworthy, best-structured answer is far lower than it would be nationally. Most of your competitors haven't even started.
 
-Before optimising, it helps to understand where each assistant gets its information:
+## Where Each AI Gets Its Answers About Surrey
 
-- **ChatGPT** answers from its training data, and — when browsing — from **Bing's search index**. If your site isn't indexed and ranking on Bing, ChatGPT's live answers can't find you.
-- **Perplexity** is a search engine at heart. It runs real-time web searches, reads the top results, and **cites its sources inline**. Ranking well for specific questions is how you get cited.
-- **Gemini** draws on **Google's index and Google's Knowledge Graph** — the same ecosystem as your Google Business Profile, your reviews and your site's structured data.
-- **Google AI Overviews** are generated from pages Google already ranks and trusts for that query, heavily favouring content that answers the question directly and sites with demonstrable expertise.
+Before you can be the answer, it helps to know where each assistant looks:
 
-Notice the pattern: **every one of these systems leans on ordinary search visibility plus machine-readable trust signals**. AEO isn't a replacement for SEO — it's SEO with the bar raised.
+- **ChatGPT** answers from its training plus, when it browses, from **Bing's search index**. If your business barely exists on Bing — and many Surrey small-business sites have never been submitted there — ChatGPT's live answers can't find you.
+- **Perplexity** runs real web searches and **cites its sources**. When someone asks it for "the best web design agencies in Surrey", it reads the top-ranking local pages and names who they name.
+- **Gemini** leans on **Google's index and Knowledge Graph** — the same machinery behind your Google Business Profile, your reviews and your map listing.
+- **Google AI Overviews** are assembled from pages Google already ranks and trusts for that exact local query — "patio installer Weybridge", "dog groomer Hersham" — with a heavy preference for pages that answer directly.
 
-> "You can't be the answer if the machine can't read the question you solve. Write for people, structure for machines."
+Spot the pattern: **every one of them runs on ordinary local search visibility plus machine-readable trust**. AEO isn't a replacement for local SEO. It's local SEO with the bar raised — and the winners' circle cut from ten to two or three.
 
-## Step 1: Let the AI Crawlers In
+> "In a town the size of Walton, you don't need to outrank the internet. You need to be the clearest, most trusted answer for one place and one trade."
 
-The most common mistake we find in audits is also the simplest: businesses **blocking the very crawlers they want to be cited by**. Firewalls, security plugins and copy-pasted robots.txt files routinely shut out:
+## Step 1: Make Sure the AI Can Actually Reach You
+
+The most common fault we find auditing Surrey small-business sites is also the simplest: the AI crawlers are **locked out**. Security plugins, cheap-hosting firewalls and copy-pasted robots.txt files routinely block:
 
 - **GPTBot** and **OAI-SearchBot** (OpenAI / ChatGPT)
 - **PerplexityBot**
-- **Google-Extended** (Gemini's training access) and **Googlebot** itself
-- **Bingbot** — remember, ChatGPT browses through Bing
+- **Google-Extended** and **Googlebot** itself
+- **Bingbot** — and remember, ChatGPT browses through Bing
 
-Check your robots.txt, check your firewall's bot rules, and make sure your site is submitted to **both Google Search Console and Bing Webmaster Tools**. If Bing has never crawled you properly, you are invisible to a large slice of AI traffic regardless of how well you rank on Google.
+Ask whoever looks after your site to check robots.txt and the firewall's bot rules, and to verify the site in **both Google Search Console and Bing Webmaster Tools**. For many local firms, being properly indexed on Bing is the single quickest AEO win available — because almost no competitor in your town has bothered.
 
-## Step 2: Answer Real Questions, Directly
+## Step 2: Answer the Questions Surrey Customers Actually Ask
 
-AI assistants are built to answer questions, so they favour pages that do the same. The format that wins citations looks like this:
+AI assistants answer questions, so they favour pages that do the same. Think about what your customers in Surrey genuinely type and say:
 
-- **Ask the question as a heading** — the way a customer would phrase it ("How much does a website cost in Surrey?"), not the way your industry would.
-- **Answer it in the first two or three sentences**, plainly and completely. Then expand below for the humans who want detail.
-- **One page, one job.** A focused page on a single question beats a sprawling page that touches twenty.
-- **Add a genuine FAQ section** to your key pages, covering the follow-up questions you hear on the phone every week.
+- "How much does a new bathroom cost in Surrey?"
+- "Do I need planning permission for a driveway in Elmbridge?"
+- "Best family dentist near Walton-on-Thames"
+- "How much should a small business website cost?"
 
-This is exactly the content that AI Overviews lift from, and exactly what Perplexity quotes with a citation link back to you. It's also, not coincidentally, what your customers want to read.
+The format that gets lifted into AI answers is simple:
+
+- **Use the customer's question as the heading**, phrased the way they'd say it — town name included.
+- **Answer it completely in the first two or three sentences.** Then expand for the humans who want detail.
+- **One page per question.** A focused page on "driveway costs in Surrey" beats a generic national "our services" page every time.
+- **Add a real FAQ section** to your key pages — the questions you answer on the phone every week are the questions AI is being asked about your town.
+
+This is precisely the content AI Overviews quote and Perplexity cites with a link back to you. A national chain can't write credibly about Elmbridge planning quirks or Surrey pricing. You can — and that's your moat.
 
 ![An AI answer panel elevated above ordinary search results](./images/how-to-get-cited-by-ai-2.png)
 
 ## Step 3: Make Your Business Machine-Readable
 
-Humans read your website; AI systems read your **structured data** — the JSON-LD schema markup embedded in your pages. It's how a crawler knows, with certainty, your business name, what you do, where you are, your opening hours, your reviews and your people. The essentials for a local business:
+Your customers read your website; AI systems read your **structured data** — the schema markup embedded in your pages that states, unambiguously, who you are, what you do and where you do it. For a Surrey small business the essentials are:
 
-- **LocalBusiness / Organization schema** on every page — name, area served, contact details, logo.
-- **FAQPage schema** on pages with question-and-answer content.
-- **Service and Product schema** describing what you actually sell.
-- **Review and AggregateRating schema** where you legitimately hold reviews.
-- **Article schema with a named author** on your blog — expertise is attributed to people, not just brands.
+- **LocalBusiness schema** on every page — business name, the towns and areas you serve, phone number, opening hours.
+- **FAQPage schema** on your question-and-answer content.
+- **Service schema** for each thing you actually sell.
+- **Review and AggregateRating schema** where you genuinely hold reviews.
+- **Article schema with a named author** on anything you publish.
 
-Just as important is **consistency**. Your business name, location and description should match everywhere they appear — your website, Google Business Profile, Companies House, directories, social profiles. Every consistent mention strengthens your "entity" in Google's Knowledge Graph; every contradiction weakens the machine's confidence in recommending you.
+Then there's **consistency** — and this is where small businesses quietly lose. Your name, address and description must match everywhere: website, Google Business Profile, Companies House, Checkatrade or your industry's directory, Facebook, the Surrey Chambers listing. To Google's Knowledge Graph, every consistent mention makes your business a more solid, recommendable "entity". Every old address or inconsistent trading name makes the machine less sure of you — and machines don't recommend things they're unsure of.
 
 ![A knowledge graph of connected entities with one business at the centre](./images/how-to-get-cited-by-ai-3.png)
 
-## Step 4: Build the Trust Signals AI Looks For
+## Step 4: Earn the Trust Signals AI Checks
 
-Large language models are trained to be cautious about who they recommend. They weigh the same expertise and trust signals Google calls **E-E-A-T** — experience, expertise, authoritativeness, trustworthiness:
+AI assistants are deliberately cautious about recommending businesses, and they weigh the same signals Google calls **E-E-A-T** — experience, expertise, authoritativeness, trustworthiness. For a local firm that means:
 
-- **Named authors with real credentials.** An article "by the team" carries less weight than one by a named specialist with 25 years in the industry.
-- **First-hand experience.** Case studies with real outcomes, real numbers and real client names are the hardest content to fake — and AI systems increasingly privilege it.
-- **Reviews on platforms AI reads.** Google reviews feed Gemini and AI Overviews directly. Trustpilot and industry platforms get crawled and quoted.
-- **Mentions beyond your own site.** AI assistants cross-reference. Local press, industry publications, supplier pages, chamber-of-commerce listings and — significantly — **Reddit and forum discussions** all feed the models. A recommendation in a thread the model has read is a recommendation it can repeat.
+- **A named owner with a real history.** "Founded by Ed, 25 years in the trade, based in Hersham" is worth more to a machine — and a customer — than an anonymous "about us".
+- **Real local case studies.** Named clients, real streets, real outcomes. "A loft conversion in Weybridge, finished in nine weeks" is the hardest content on the internet to fake, and AI increasingly privileges it.
+- **Reviews where AI reads them.** Google reviews feed Gemini and AI Overviews directly; Checkatrade, Trustpilot and industry platforms get crawled and quoted.
+- **Being mentioned by others.** Local press like the Surrey Advertiser or your town's news site, supplier pages, the village directory, local Facebook groups and — genuinely — **Reddit and forum threads**. When someone in a "recommendations for Walton?" thread names your business, that's a sentence an AI can later repeat.
 
-> "An AI will only say your name if it has seen other people say it first."
+> "An AI will only say your name if it has seen other people in Surrey say it first."
 
-## Step 5: Win Your Google Business Profile
+## Step 5: Treat Your Google Business Profile as Half Your Website
 
-For "near me" questions — the ones local businesses live on — **your Google Business Profile is arguably more important than your website**. Gemini and AI Overviews pull opening hours, services, photos, review scores and review *content* straight from it. The checklist:
+For "near me" questions — the bread and butter of every Surrey trade and shop — **your Google Business Profile matters as much as your website**. Gemini and AI Overviews pull your hours, services, photos, review score and even the *text* of your reviews straight from it.
 
-1. Claim and fully complete the profile — every field, every service, real photos.
-2. Keep your category precise and your service areas accurate.
-3. Gather reviews steadily, and reply to every one — responses are read too.
-4. Post updates; an active profile signals a live business.
-5. Keep name, address and phone identical to your website and directories.
+1. Claim it and complete **every** field — services, areas, real photos of real jobs.
+2. Pick the most precise category for your trade, and set your genuine service area — the towns you'll actually drive to.
+3. Gather reviews steadily and reply to every one; the replies are read too.
+4. Post updates — an active profile reads as a business that's still trading.
+5. Keep the name, address and phone identical to your website, to the digit.
 
-## Step 6: Stay Fresh, and Measure It
+A Surrey business with a complete, active, well-reviewed profile routinely beats a bigger competitor with a neglected one — in the map pack and in the AI answer alike.
 
-AI answers skew towards current sources. A site that hasn't changed since 2021 reads as abandoned to a machine deciding what to trust. Review your key pages quarterly, date your content honestly, and keep publishing on the questions your customers actually ask.
+## Step 6: Stay Current, and Check What the AI Says About You
 
-Then measure. Ask ChatGPT, Perplexity and Gemini the questions your customers would ask — "best [your trade] in [your town]" — and see who gets named. Check which queries trigger AI Overviews in your market and whether you're in them. Watch your analytics for referrals from chatgpt.com, perplexity.ai and gemini.google.com: that traffic converts remarkably well, because the AI has already pre-sold the visitor.
+AI answers lean towards sources that look alive. A site untouched since 2021 reads as abandoned. Refresh your key pages a few times a year, date things honestly, and keep answering the questions your customers bring you.
 
-At Cumulus Digital we run exactly these AI-visibility audits for clients — including through our own [Cumulus Rank and Reporting](/cumulus-rank-and-reporting/) platform, which tracks how businesses surface in search and AI results over time.
+Then do the simplest, most revealing test in modern marketing: **ask the machines about yourself**. Put "best [your trade] in [your town]" to ChatGPT, Perplexity and Gemini. Search your services on Google and see whose names appear in the AI Overview. If it's not you, the six steps above are the gap — and your analytics will tell you when that changes, as visits start arriving from chatgpt.com, perplexity.ai and gemini.google.com. That traffic converts unusually well, because the AI has already made the recommendation for you.
+
+This is exactly the work we do at Cumulus Digital for Surrey clients — including tracking it over time through our own [Cumulus Rank and Reporting](/cumulus-rank-and-reporting/) platform, so you can see your business surfacing in search and AI answers month by month.
 
 ## Frequently Asked Questions
 
-### Is AEO different from SEO?
+### Is this different from the local SEO I've already done?
 
-They overlap heavily. Everything that makes you rank — relevant content, authority, technical health — also makes you citable. AEO adds emphasis on direct answers, structured data, entity consistency, Bing, and third-party mentions. Think of it as SEO's final exam, not a different subject.
+It builds directly on it. Everything that ranks you in Walton, Woking or Guildford — relevant local content, reviews, a healthy site — also makes you citable. AEO adds the newer layers: direct-answer content, structured data, entity consistency, Bing, and mentions beyond your own site. If you've done local SEO properly, you're starting from halfway.
 
-### Can I pay to appear in AI answers?
+### Can a small business really compete with national firms in AI answers?
 
-Not organically-presented ones. Ads are appearing around some AI experiences, but the citations and recommendations inside ChatGPT, Perplexity, Gemini and AI Overviews are earned, not bought. That's precisely why they carry so much trust with customers.
+For local questions, you have the advantage. When someone asks about a service *in Shepperton or Cobham*, AI wants a local answer — a national brand's generic page is a worse match than your specific, trusted, well-reviewed local one. The businesses losing out aren't the small ones; they're the invisible ones.
 
-### How long does it take?
+### Can I pay to be in AI answers?
 
-Technical fixes — schema, crawler access, Bing indexing, Business Profile — can influence results within weeks. Authority signals like reviews, mentions and expert content compound over months. The businesses getting cited today mostly started a year ago; the second-best time is now.
+Not the organic citations. Ads are creeping in around some AI products, but the recommendations inside ChatGPT, Perplexity, Gemini and AI Overviews are earned. That's exactly why a customer in Surrey trusts them — and why being named is worth so much.
 
-### Does blocking AI crawlers protect my content?
+### How long before I see results?
 
-It keeps your content out of training data — and keeps your business out of the answers your customers are reading. For most local businesses the trade-off is clear: being the cited source is the marketing win.
+Technical fixes — crawler access, Bing indexing, schema, a completed Business Profile — can move things within weeks. Reviews, local mentions and expert content compound over months. The Surrey businesses being cited today mostly started the groundwork a year ago. In a local market this early, starting now still means starting ahead.
 
-## Make Your Business the Answer
+## Be the Name the AI Gives Your Town
 
-The front page of the internet is becoming a conversation, and conversations only mention a few names. The work to be one of them — honest expertise, structured properly, visible everywhere, verified by others — is work a Surrey business can absolutely do, and we do it with our clients every week.
+Somewhere in Surrey today, a customer is asking an AI the exact question your business answers for a living. The AI will give them two or three names. Everything above — honest local expertise, structured so machines can read it, verified by your reviews and your neighbours — is how yours becomes one of them.
 
-If you'd like to know how visible your business is to AI today — and what it would take to be the answer — [talk to us](/contact/). We'll audit it and tell you straight.
+If you'd like to know what ChatGPT, Gemini and Google's AI Overviews currently say about your business — and what it would take to change it — [talk to us](/contact/). We're in Surrey too, and we'll tell you straight.
