@@ -72,43 +72,8 @@
       "permanent": true
     },
     {
-      "source": "/website-design-woking",
-      "destination": "/services/web-design/",
-      "permanent": true
-    },
-    {
-      "source": "/web-design-woking",
-      "destination": "/services/web-design/",
-      "permanent": true
-    },
-    {
-      "source": "/web-design-guildford",
-      "destination": "/services/web-design/",
-      "permanent": true
-    },
-    {
-      "source": "/web-design-in-surrey",
-      "destination": "/services/web-design/",
-      "permanent": true
-    },
-    {
-      "source": "/wordpress-web-design-surrey",
-      "destination": "/services/web-design/",
-      "permanent": true
-    },
-    {
-      "source": "/web-design-hersham",
-      "destination": "/services/web-design/",
-      "permanent": true
-    },
-    {
       "source": "/web-design-agency-near-me",
       "destination": "/services/web-design/",
-      "permanent": true
-    },
-    {
-      "source": "/web-developers-surrey",
-      "destination": "/services/web-development/",
       "permanent": true
     },
     {
@@ -139,11 +104,6 @@
     {
       "source": "/elmbridge-digital-high-street-fund",
       "destination": "/about/",
-      "permanent": true
-    },
-    {
-      "source": "/blog",
-      "destination": "/",
       "permanent": true
     },
     {

@@ -1388,6 +1388,14 @@ h1.headline em.glow, .cta-headline em.glow {
   border-color: rgba(255, 255, 255, .24);
 }
 .page-hero--glass .eyebrow-dot { background: var(--cyan-lt); }
+/* long editorial titles: smaller display size, wider measure */
+.page-hero--compact .page-hero-title {
+  font-size: clamp(1.9rem, 4.2vw, 3.2rem);
+  line-height: 1.08;
+  letter-spacing: -.035em;
+  max-width: 26ch;
+}
+.page-hero--compact .lede { max-width: 46rem; }
 
 /* ============================================================
    GLASS HEROES  (shared dark-ground treatment)

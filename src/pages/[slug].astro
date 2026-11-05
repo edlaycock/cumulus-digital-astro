@@ -1,0 +1,82 @@
+---
+// Blog posts live at root-level URLs (e.g. /web-design-guildford/) because
+// that is where they lived on the old WordPress site — the inbound links
+// and rankings stay intact. getStaticPaths only emits the blog slugs, so
+// this never shadows a real page.
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout title={`${post.data.title} | Cumulus Digital`} description={post.data.description}>
+  <PageHero glass compact eyebrow={`Blog · ${fmt(post.data.pubDate)}`} lede={post.data.description}>
+    {post.data.title}
+  </PageHero>
+
+  <article class="section blog-post">
+    <div class="container">
+      {post.data.image && (
+        <figure class="blog-post-hero" data-reveal>
+          <Image
+            src={post.data.image}
+            alt=""
+            widths={[760, 1200]}
+            sizes="(max-width: 820px) 94vw, 780px"
+            loading="eager"
+          />
+        </figure>
+      )}
+      <div class="prose">
+        <Content />
+      </div>
+      <p class="blog-post-back"><a href="/blog/">← All articles</a></p>
+    </div>
+  </article>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <p class="section-label">Work with us</p>
+        <h2 class="cta-headline">Want this done<br />for <em class="glow">you</em>?</h2>
+        <p class="cta-sub">
+          We design, build and market websites for businesses across Surrey and beyond.
+          Tell us what you're trying to achieve and we'll come back within one working day.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
+          <a class="btn btn--outline btn--lg" href="/work/">See our work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-post .container { max-width: 50rem; }
+  .blog-post-hero {
+    margin: 0 0 2.5rem;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--lt-border);
+  }
+  .blog-post-hero :global(img) { display: block; width: 100%; height: auto; }
+  .blog-post-back { margin-top: 3rem; }
+  .blog-post-back a {
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .blog-post-back a:hover { text-decoration: underline; }
+</style>

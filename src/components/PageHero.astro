@@ -7,11 +7,16 @@ interface Props {
   /** Animated glass-fold WebGL background on a deep navy ground; the copy
       goes white. Used on the About and Contact heroes. */
   glass?: boolean;
+  /** smaller display size and a wider measure — for long editorial titles
+      (blog posts) that would sprawl at the full display size */
+  compact?: boolean;
 }
-const { eyebrow, lede, glass = false } = Astro.props;
+const { eyebrow, lede, glass = false, compact = false } = Astro.props;
 ---
 
-<section class={`page-hero${glass ? ' page-hero--glass' : ''}`}>
+<section
+  class={`page-hero${glass ? ' page-hero--glass' : ''}${compact ? ' page-hero--compact' : ''}`}
+>
   {glass && (
     <div class="page-hero-bg" aria-hidden="true">
       <GlassFold client:load />

@@ -67,4 +67,17 @@ const testimonials = defineCollection({
   }),
 });
 
-export const collections = { services, work, testimonials };
+// SEO articles migrated from the live site's /blog/. Posts keep their
+// original root-level URLs (e.g. /web-design-guildford/) for link equity.
+const blog = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/blog' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      pubDate: z.coerce.date(),
+      image: image().optional(),
+    }),
+});
+
+export const collections = { services, work, testimonials, blog };
