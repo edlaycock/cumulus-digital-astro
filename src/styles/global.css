@@ -1051,14 +1051,50 @@ h1.headline em.glow, .cta-headline em.glow {
 /* ============================================================
    FOOTER  (white — stays in the canvas system)
    ============================================================ */
-/* Dark brand footer: deep navy at the base rising through brand navy into
-   a teal bloom along the top edge. Everything on it goes white. */
+/* Dark brand footer. Near-black navy for the bottom 70%, with the whole
+   teal transition confined to the top 30% so the base reads properly dark.
+   Everything on it goes white. */
 .site-footer {
+  position: relative;
+  overflow: hidden;
   color: #f2f5f8;
   background:
-    radial-gradient(70% 46% at 50% 0%, rgba(93, 194, 213, .5), transparent 72%),
-    linear-gradient(to top, #022c49, #005b90 58%, #2b8cab 100%);
+    radial-gradient(56% 30% at 50% 0%, rgba(93, 194, 213, .4), transparent 70%),
+    linear-gradient(to top, #010f1c 0%, #02203a 55%, #033c60 70%, #2b8cab 94%, #45aec4 100%);
 }
+/* the sky above the navy: a fine dot grid that dissolves a third of the
+   way down — the same ground language as the /work tunnel floor */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, .22) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 38%);
+  mask-image: linear-gradient(to bottom, #000, transparent 38%);
+  opacity: .5;
+}
+/* one soft teal glow drifting slowly along the top edge */
+.site-footer::after {
+  content: "";
+  position: absolute;
+  top: -22%;
+  left: 0;
+  width: 52%;
+  height: 46%;
+  pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(93, 194, 213, .3), transparent 70%);
+  animation: footer-drift 16s ease-in-out infinite alternate;
+}
+@keyframes footer-drift {
+  from { transform: translateX(-4%); }
+  to   { transform: translateX(104%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-footer::after { animation: none; left: 24%; }
+}
+.site-footer > * { position: relative; z-index: 1; }
 .footer-inner {
   display: grid;
   grid-template-columns: 1fr 2fr;
