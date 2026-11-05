@@ -1,11 +1,11 @@
 ---
-title: "How Surrey Small Businesses Get Cited by ChatGPT, Perplexity and Gemini — and Into Google's AI Overviews"
-description: "AI assistants now answer 'who's the best plumber in Woking?' by naming two or three businesses. Here's how a Surrey small business becomes one of them."
+title: "How Do I Get My Business Recommended by ChatGPT? An AI Search Guide for Surrey Small Businesses"
+description: "How do I get recommended by ChatGPT? How do I show up in Google's AI Overviews? Straight answers for Surrey small businesses, from plumbers to accountants."
 pubDate: 2026-11-05
 image: "./images/how-to-get-cited-by-ai-hero.png"
 ---
 
-## The New Way Surrey Finds Its Local Businesses
+## Why Is ChatGPT Recommending My Competitors and Not Me?
 
 Picture a homeowner in Esher whose boiler has just given up. Five years ago they'd have typed "emergency plumber Esher" into Google and scanned a page of ten blue links. Today, there's a good chance they ask ChatGPT, or Perplexity, or simply read the **AI Overview** that Google now places above its own results — and get an answer like: *"Two well-reviewed emergency plumbers serving Esher are…"*
 
@@ -15,7 +15,7 @@ For small businesses across Surrey — the trades in Walton-on-Thames and Hersha
 
 The encouraging part is that this is *very* winnable for a small local business. AI assistants don't pick names by magic — they pick them from what they can read, verify and trust on the open web. And in a market the size of Woking or Walton, the bar to being the most trustworthy, best-structured answer is far lower than it would be nationally. Most of your competitors haven't even started.
 
-## Where Each AI Gets Its Answers About Surrey
+## Where Do ChatGPT, Perplexity and Gemini Get Their Answers?
 
 Before you can be the answer, it helps to know where each assistant looks:
 
@@ -28,7 +28,7 @@ Spot the pattern: **every one of them runs on ordinary local search visibility p
 
 > "In a town the size of Walton, you don't need to outrank the internet. You need to be the clearest, most trusted answer for one place and one trade."
 
-## Step 1: Make Sure the AI Can Actually Reach You
+## Why Is My Business Not Showing Up in ChatGPT?
 
 The most common fault we find auditing Surrey small-business sites is also the simplest: the AI crawlers are **locked out**. Security plugins, cheap-hosting firewalls and copy-pasted robots.txt files routinely block:
 
@@ -39,7 +39,7 @@ The most common fault we find auditing Surrey small-business sites is also the s
 
 Ask whoever looks after your site to check robots.txt and the firewall's bot rules, and to verify the site in **both Google Search Console and Bing Webmaster Tools**. For many local firms, being properly indexed on Bing is the single quickest AEO win available — because almost no competitor in your town has bothered.
 
-## Step 2: Answer the Questions Surrey Customers Actually Ask
+## What Kind of Content Gets Picked Up by Google's AI Overviews?
 
 AI assistants answer questions, so they favour pages that do the same. Think about what your customers in Surrey genuinely type and say:
 
@@ -59,7 +59,7 @@ This is precisely the content AI Overviews quote and Perplexity cites with a lin
 
 ![An AI answer panel elevated above ordinary search results](./images/how-to-get-cited-by-ai-2.png)
 
-## Step 3: Make Your Business Machine-Readable
+## How Do I Make My Business Easy for AI to Read?
 
 Your customers read your website; AI systems read your **structured data** — the schema markup embedded in your pages that states, unambiguously, who you are, what you do and where you do it. For a Surrey small business the essentials are:
 
@@ -73,7 +73,7 @@ Then there's **consistency** — and this is where small businesses quietly lose
 
 ![A knowledge graph of connected entities with one business at the centre](./images/how-to-get-cited-by-ai-3.png)
 
-## Step 4: Earn the Trust Signals AI Checks
+## How Do I Get AI to Trust My Business Enough to Recommend It?
 
 AI assistants are deliberately cautious about recommending businesses, and they weigh the same signals Google calls **E-E-A-T** — experience, expertise, authoritativeness, trustworthiness. For a local firm that means:
 
@@ -84,7 +84,7 @@ AI assistants are deliberately cautious about recommending businesses, and they 
 
 > "An AI will only say your name if it has seen other people in Surrey say it first."
 
-## Step 5: Treat Your Google Business Profile as Half Your Website
+## Does My Google Business Profile Affect AI Answers?
 
 For "near me" questions — the bread and butter of every Surrey trade and shop — **your Google Business Profile matters as much as your website**. Gemini and AI Overviews pull your hours, services, photos, review score and even the *text* of your reviews straight from it.
 
@@ -96,15 +96,19 @@ For "near me" questions — the bread and butter of every Surrey trade and shop 
 
 A Surrey business with a complete, active, well-reviewed profile routinely beats a bigger competitor with a neglected one — in the map pack and in the AI answer alike.
 
-## Step 6: Stay Current, and Check What the AI Says About You
+## How Do I Check What ChatGPT and Google AI Say About My Business?
 
 AI answers lean towards sources that look alive. A site untouched since 2021 reads as abandoned. Refresh your key pages a few times a year, date things honestly, and keep answering the questions your customers bring you.
 
-Then do the simplest, most revealing test in modern marketing: **ask the machines about yourself**. Put "best [your trade] in [your town]" to ChatGPT, Perplexity and Gemini. Search your services on Google and see whose names appear in the AI Overview. If it's not you, the six steps above are the gap — and your analytics will tell you when that changes, as visits start arriving from chatgpt.com, perplexity.ai and gemini.google.com. That traffic converts unusually well, because the AI has already made the recommendation for you.
+Then do the simplest, most revealing test in modern marketing: **ask the machines about yourself**. Put "best [your trade] in [your town]" to ChatGPT, Perplexity and Gemini. Search your services on Google and see whose names appear in the AI Overview. If it's not you, the sections above are the gap — and your analytics will tell you when that changes, as visits start arriving from chatgpt.com, perplexity.ai and gemini.google.com. That traffic converts unusually well, because the AI has already made the recommendation for you.
 
 This is exactly the work we do at Cumulus Digital for Surrey clients — including tracking it over time through our own [Cumulus Rank and Reporting](/cumulus-rank-and-reporting/) platform, so you can see your business surfacing in search and AI answers month by month.
 
 ## Frequently Asked Questions
+
+### How do I get my business recommended by ChatGPT?
+
+Make sure ChatGPT can find and trust you: allow the AI crawlers (GPTBot, OAI-SearchBot and Bingbot) on your website, get your site indexed in Bing as well as Google, publish pages that directly answer the questions your customers ask, add LocalBusiness schema, and build up reviews and mentions of your business on other sites. ChatGPT recommends businesses it has repeatedly seen described, reviewed and recommended elsewhere — so the work is making your business the best-evidenced answer for your trade and your town.
 
 ### Is this different from the local SEO I've already done?
 
