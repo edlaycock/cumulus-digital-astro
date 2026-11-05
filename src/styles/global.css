@@ -31,14 +31,14 @@
   --lt-rule:    #171717;   /* the definite 1px border on cards */
 
   /* ---- signal ----
-     Pop's system allows exactly one chromatic colour. Ours is the brand
-     cyan rather than Pop's blue, deepened from the logo's #4fc5d5 so it
-     clears contrast on white. Reserved for primary CTAs and active
-     links — never decoration. */
-  --cyan:       #0d7f92;
-  --cyan-deep:  #0a6675;
-  --cyan-lt:    #4fc5d5;   /* logo cyan — artwork and tints only */
-  --wash:       #e9f6f8;   /* soft highlight surface */
+     The two colours of the brand lockup. Navy (the "Cumulus" wordmark and
+     the plane) is the working accent: it clears contrast on white, so it
+     carries CTAs and active links. Teal (the cloud and "DIGITAL LIMITED")
+     is too light for text on white — artwork, tints and dark grounds only. */
+  --cyan:       #005b90;   /* brand navy */
+  --cyan-deep:  #00486f;
+  --cyan-lt:    #5dc2d5;   /* brand teal — artwork and tints only */
+  --wash:       #e8f6f9;   /* soft teal highlight surface */
 
   --font-h: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
   --font-b: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
@@ -801,7 +801,7 @@ h1.headline em.glow, .cta-headline em.glow {
   border-radius: 50%;
   background: rgba(79,197,213,.12);
   border: 1.5px solid var(--cyan);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%234fc5d5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%235dc2d5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 10px;
@@ -1319,6 +1319,75 @@ h1.headline em.glow, .cta-headline em.glow {
   gap: .75rem;
   justify-content: center;
   margin-top: 2rem;
+}
+
+/* ---- glass variant: the WebGL glass-fold behind the copy ----
+   The canvas paints the deep navy ground itself; the solid colour here is
+   what shows before the shader's first frame, with no JS, and under
+   prefers-reduced-motion until the still frame draws. */
+.page-hero--glass {
+  background: #031422;
+  overflow: hidden;
+}
+.page-hero-bg { position: absolute; inset: 0; z-index: 0; }
+.page-hero-bg canvas { width: 100%; height: 100%; }
+/* readability scrim between the shader and the copy */
+.page-hero-bg::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(2, 12, 20, .32);
+}
+.page-hero--glass .container { position: relative; z-index: 1; }
+.page-hero--glass .page-hero-title { color: #fff; }
+.page-hero--glass .page-hero-title em.glow { color: var(--cyan-lt); }
+.page-hero--glass .lede { color: rgba(242, 245, 248, .8); }
+.page-hero--glass .eyebrow {
+  color: rgba(242, 245, 248, .88);
+  border-color: rgba(255, 255, 255, .24);
+}
+.page-hero--glass .eyebrow-dot { background: var(--cyan-lt); }
+
+/* ============================================================
+   WEB DEVELOPMENT HERO  (navy band, tumbling deck of builds)
+   ============================================================ */
+.wd-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(7rem, 14vh, 9.5rem) 0 0;
+  text-align: center;
+  color: #f2f5f8;
+  background-color: #031422;
+  background-image:
+    radial-gradient(70% 55% at 50% 0%, rgba(0, 91, 144, .55), transparent 70%),
+    radial-gradient(42% 34% at 82% 18%, rgba(93, 194, 213, .14), transparent 66%);
+}
+.wd-hero .container > * { margin-inline: auto; }
+.wd-hero .page-hero-title { color: #fff; }
+.wd-hero .page-hero-title em.glow { color: var(--cyan-lt); }
+.wd-hero .lede { color: rgba(242, 245, 248, .8); }
+.wd-hero .eyebrow {
+  color: rgba(242, 245, 248, .88);
+  border-color: rgba(255, 255, 255, .24);
+}
+.wd-hero .eyebrow-dot { background: var(--cyan-lt); }
+/* the navy primary button would sink into the navy band */
+.wd-hero .btn--primary { background: #fff; color: var(--cyan); }
+.wd-hero .btn--primary:hover { background: var(--wash); }
+.wd-hero .btn--outline {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .34);
+  color: #fff;
+}
+.wd-hero .btn--outline:hover {
+  background: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .55);
+}
+.wd-deck { margin-top: clamp(1rem, 3vh, 2.2rem); }
+.wd-deck-hint {
+  padding: 0 1.25rem 1.6rem;
+  text-align: center;
+  font-size: .85rem;
+  color: rgba(242, 245, 248, .55);
 }
 
 /* ============================================================
@@ -2320,7 +2389,7 @@ h1.headline em.glow, .cta-headline em.glow {
   pointer-events: none;
   background:
     radial-gradient(52% 40% at 0% 0%, rgba(79, 197, 213, .16), transparent 68%),
-    radial-gradient(48% 38% at 100% 22%, rgba(13, 127, 146, .09), transparent 66%);
+    radial-gradient(48% 38% at 100% 22%, rgba(0, 91, 144, .09), transparent 66%);
 }
 
 .ih-copy { position: relative; z-index: 2; }

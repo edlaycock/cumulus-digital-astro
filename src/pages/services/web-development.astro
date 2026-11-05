@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { ContainerScroll } from '../../components/ui/container-scroll-animation';
+import TumbleDeckShowcase from '../../components/ui/tumble-deck-showcase';
 import { getImage } from 'astro:assets';
-import hershamScrollDesktop from '../../assets/work/hersham-village-scroll-desktop.jpg';
-import hershamScrollMobile from '../../assets/work/hersham-village-scroll-mobile.jpg';
 import WorkPreview from '../../components/WorkPreview.astro';
 import ReviewCarousel from '../../components/ReviewCarousel.astro';
 import { getCollection } from 'astro:content';
@@ -12,15 +10,27 @@ import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
 const all = await getCollection('work');
 const live = all.filter((w) => !w.data.draft);
 
-// Hersham Village is the most development-heavy build in the portfolio —
-// searchable directory, self-service accounts, events — so it fronts the page.
-const feature = live.find((w) => w.id === 'hersham-village');
-
-// Full-page captures that pan inside the device window as you land on the
-// reveal, so the site looks like it is being scrolled. <picture> hands the
-// browser only the one it needs.
-const featDesk = await getImage({ src: hershamScrollDesktop, width: 1200, format: 'webp' });
-const featMob = await getImage({ src: hershamScrollMobile, width: 480, format: 'webp' });
+// The tumbling deck in the hero: desktop captures of real case-study builds,
+// newest first, each one tipping flat as the next arrives.
+const DECK = [
+  { file: '../../assets/work/elysian-collection-desktop.jpg',    client: 'Elysian Collection' },
+  { file: '../../assets/work/cotswold-house-hunter-desktop.jpg', client: 'Cotswold House Hunter' },
+  { file: '../../assets/work/jellylearn-desktop.jpg',            client: 'JellyLearn' },
+  { file: '../../assets/frames/surrey-contracting-mac.jpg',      client: 'Surrey Contracting' },
+  { file: '../../assets/work/hersham-village-desktop.jpg',       client: 'Hersham Village' },
+  { file: '../../assets/work/assetq-desktop.jpg',                client: 'AssetQ' },
+  { file: '../../assets/work/fidelity-accountants-desktop.jpg',  client: 'Fidelity Accountants' },
+];
+const deckShots = import.meta.glob<{ default: ImageMetadata }>(
+  ['../../assets/work/*.jpg', '../../assets/frames/*.jpg'],
+  { eager: true }
+);
+const deckCards = await Promise.all(
+  DECK.filter((d) => deckShots[d.file]).map(async (d) => ({
+    src: (await getImage({ src: deckShots[d.file].default, width: 1100, format: 'webp' })).src,
+    alt: `The ${d.client} website, built by Cumulus Digital`,
+  }))
+);
 
 const PROOF = ['hersham-village', 'assetq', 'jellylearn', 'surrey-contracting', 'fidelity-accountants', 'castellum'];
 const proof = PROOF.map((s) => live.find((w) => w.id === s)).filter(Boolean);
@@ -105,12 +115,12 @@ const faqs = [
   title="Web Development in Surrey | Cumulus Digital"
   description="Custom web development in Surrey — hand-built, fast, secure websites, e-commerce and web apps. CMS builds, integrations and ongoing maintenance. Based in Hersham, Walton-on-Thames."
 >
-  <!-- heading, then the work tilting flat as you scroll -->
-  <ContainerScroll client:load className="cs--device">
-    <Fragment slot="titleComponent">
+  <!-- heading over a navy band, then the builds tumbling flat one by one -->
+  <section class="wd-hero">
+    <div class="container">
       <p class="eyebrow"><span class="eyebrow-dot"></span>Web development · Surrey, UK</p>
-      <h1 class="page-hero-title cs-title">Web development<br />that <em class="glow">lasts</em>.</h1>
-      <p class="lede cs-lede">
+      <h1 class="page-hero-title">Web development<br />that <em class="glow">lasts</em>.</h1>
+      <p class="lede">
         Fast, secure, hand-built websites and web apps for businesses across Surrey and
         beyond — properly engineered, and looked after long after launch.
       </p>
@@ -118,31 +128,18 @@ const faqs = [
         <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
         <a class="btn btn--outline btn--lg" href="/work/">See our work</a>
       </div>
-    </Fragment>
-
-    {featDesk && (
-      <picture>
-        {featMob && (
-          <source media="(max-width: 768px)" srcset={featMob.src} width={featMob.attributes?.width} />
-        )}
-        <img
-          class="site-pan"
-          style="--pan-dur: 20s"
-          src={featDesk.src}
-          alt={`The ${feature!.data.client} website, built by Cumulus Digital`}
-          loading="eager"
-          decoding="async"
-        />
-      </picture>
-    )}
-  </ContainerScroll>
-
-  {feature && (
-    <p class="wd-caption">
-      <a href={`/work/${feature.id}/`}>{feature.data.client}</a> — a searchable business
-      directory with self-service accounts, village news and events.
-    </p>
-  )}
+    </div>
+    <div class="wd-deck">
+      <TumbleDeckShowcase
+        client:load
+        cards={deckCards}
+        aspect={1.6}
+        height="min(68vh, 620px)"
+        ariaLabel="Websites built by Cumulus Digital"
+      />
+    </div>
+    <p class="wd-deck-hint">Seven recent builds — click, drag or use the arrow keys to flip through.</p>
+  </section>
 
   <!-- what goes wrong -->
   <section class="section">
@@ -295,16 +292,6 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .wd-caption {
-    margin: 1.6rem auto 0;
-    max-width: 44rem;
-    text-align: center;
-    font-size: .92rem;
-    color: var(--lt-muted);
-  }
-  .wd-caption a { color: var(--cyan); text-decoration: none; font-weight: 500; }
-  .wd-caption a:hover { text-decoration: underline; }
-
   .care-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
