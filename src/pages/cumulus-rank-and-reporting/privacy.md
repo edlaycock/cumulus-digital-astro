@@ -8,7 +8,7 @@ heroTitle: "Cumulus Rank and Reporting <em class=\"glow\">privacy policy</em>."
 
 *Last updated: 2 October 2026*
 
-This policy explains what information Cumulus Digital Ltd collects through Cumulus Rank and Reporting, the internal web app our staff use at app.cumulusdigital.co.uk, why we collect it, how we use, share, store and protect it, how long we keep it, and how you can remove access or ask us to delete it. You can read [what the app does](/cumulus-rank-and-reporting/). This policy sits alongside our main [privacy policy](/privacy/), which covers our website and our other services.
+This policy explains what information Cumulus Digital Ltd collects through Cumulus Rank and Reporting, the internal web app our staff use, why we collect it, how we use, share, store and protect it, how long we keep it, and how you can remove access or ask us to delete it. You can read [what the app does](/cumulus-rank-and-reporting/). This policy sits alongside our main [privacy policy](/privacy/), which covers our website and our other services.
 
 ## 1. Who we are
 

@@ -6,7 +6,7 @@ eyebrow: "Our tools"
 heroTitle: "Cumulus Rank <em class=\"glow\">and Reporting</em>."
 ---
 
-Cumulus Rank and Reporting is an internal web app run by Cumulus Digital Ltd at [app.cumulusdigital.co.uk](https://app.cumulusdigital.co.uk/). Our team uses it to track and report on the search rankings, local visibility and Google Ads performance of the clients we look after.
+Cumulus Rank and Reporting is an internal web app run by Cumulus Digital Ltd. Our team uses it to track and report on the search rankings, local visibility and Google Ads performance of the clients we look after.
 
 ## Who uses it
 
@@ -37,7 +37,6 @@ Each change is proposed by the app, approved individually by an agency admin, va
 
 - [Cumulus Rank and Reporting Privacy Policy](/cumulus-rank-and-reporting/privacy/)
 - [Terms and conditions](/terms-conditions/)
-- [Staff sign in](https://app.cumulusdigital.co.uk/)
 
 ## Company details
 
