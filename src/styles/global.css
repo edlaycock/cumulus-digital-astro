@@ -195,7 +195,8 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  padding: 1.2rem clamp(1.25rem, 4vw, 3.5rem);
+  /* trimmed with the 60px logo so the bar stays lean */
+  padding: .85rem clamp(1.25rem, 4vw, 3.5rem);
   max-width: var(--maxw);
   width: 100%;
   margin: 0 auto;
@@ -208,7 +209,8 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   flex: none;
 }
 /* full-colour artwork throughout — every ground is white now */
-.brand-logo { height: 40px; width: auto; }
+.brand-logo { height: 60px; width: auto; }
+@media (max-width: 720px) { .brand-logo { height: 48px; } }
 .nav {
   display: flex;
   align-items: center;
@@ -1049,9 +1051,13 @@ h1.headline em.glow, .cta-headline em.glow {
 /* ============================================================
    FOOTER  (white — stays in the canvas system)
    ============================================================ */
+/* Dark brand footer: deep navy at the base rising through brand navy into
+   a teal bloom along the top edge. Everything on it goes white. */
 .site-footer {
-  background: var(--white);
-  border-top: 1px solid var(--lt-border);
+  color: #f2f5f8;
+  background:
+    radial-gradient(70% 46% at 50% 0%, rgba(93, 194, 213, .5), transparent 72%),
+    linear-gradient(to top, #022c49, #005b90 58%, #2b8cab 100%);
 }
 .footer-inner {
   display: grid;
@@ -1068,7 +1074,7 @@ h1.headline em.glow, .cta-headline em.glow {
    not a hero */
 .footer-sting { display: block; width: min(250px, 100%); }
 .footer-sting .cls-sting { width: 100%; }
-.footer-tagline { font-size: .9rem; color: var(--lt-muted); }
+.footer-tagline { font-size: .9rem; color: rgba(242, 245, 248, .78); }
 .footer-nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1082,13 +1088,13 @@ h1.headline em.glow, .cta-headline em.glow {
   letter-spacing: 0;
   text-transform: none;
   font-weight: 500;
-  color: var(--lt-text);
+  color: #fff;
   margin-bottom: .3rem;
 }
-.footer-col a { font-size: .88rem; color: var(--lt-muted); text-decoration: none; transition: color .2s; }
-.footer-col a:hover { color: var(--lt-text); }
-.footer-address { font-size: .85rem; line-height: 1.7; color: var(--lt-muted); }
-.footer-base { border-top: 1px solid var(--lt-border); padding: 1.5rem 0; }
+.footer-col a { font-size: .88rem; color: rgba(242, 245, 248, .75); text-decoration: none; transition: color .2s; }
+.footer-col a:hover { color: #fff; }
+.footer-address { font-size: .85rem; line-height: 1.7; color: rgba(242, 245, 248, .75); }
+.footer-base { border-top: 1px solid rgba(255, 255, 255, .18); padding: 1.5rem 0; }
 .footer-base-inner {
   display: flex;
   align-items: center;
@@ -1096,9 +1102,9 @@ h1.headline em.glow, .cta-headline em.glow {
   gap: 1rem;
   flex-wrap: wrap;
 }
-.footer-base p, .footer-legal a { font-size: .85rem; color: var(--lt-muted); text-decoration: none; }
+.footer-base p, .footer-legal a { font-size: .85rem; color: rgba(242, 245, 248, .72); text-decoration: none; }
 .footer-legal { display: flex; gap: 1.5rem; }
-.footer-legal a:hover { color: var(--lt-text); }
+.footer-legal a:hover { color: #fff; }
 
 /* ============================================================
    VALUES / PRINCIPLES  (white)

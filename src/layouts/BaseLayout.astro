@@ -36,12 +36,12 @@ const jsonLd = {
   email: EMAIL,
   identifier: COMPANY_NUMBER,
   founder: { '@type': 'Person', name: 'Ed Laycock' },
+  /* area only, deliberately no street address or postcode — the business
+     doesn't publish its physical address */
   address: {
     '@type': 'PostalAddress',
-    streetAddress: ADDRESS.street,
     addressLocality: ADDRESS.locality,
     addressRegion: ADDRESS.region,
-    postalCode: ADDRESS.postcode,
     addressCountry: 'GB',
   },
   areaServed: ['Surrey', 'Walton-on-Thames', 'Hersham', 'Esher', 'Weybridge', 'London', 'United Kingdom'],
