@@ -140,6 +140,42 @@ a frontmatter image — the index card has a brand fallback.
 - How long does a small-business website take to build (and what slows it down)?
 - What does "SEO" actually buy a small Surrey business per month?
 
+## Distribution: Facebook (every article, same day)
+
+Each published article gets two pieces of social copy, written fresh for
+the article (never a template fill-in):
+
+**1. Page post** (Cumulus Digital's Facebook Page). 2–4 sentences.
+Lead with the question the article answers, in the customer's words.
+One concrete takeaway from the piece, then the link. The hero image is
+the attachment. Plain, confident, no hashtag soup (two at most, e.g.
+#Surrey #SmallBusiness).
+
+**2. Groups post** (the nominated local groups below). Softer and
+community-first or it gets deleted and we get banned: open with the
+problem as locals experience it, give the single most useful tip from
+the article in full (genuinely useful on its own, no clickbait), then
+"I wrote up the rest here" with the link. First person, from Ed. Never
+salesy, never identical wording across groups — vary the opening line
+per group. Respect each group's self-promo rules; where a group has a
+promo day, hold the post for it.
+
+**Nominated groups** (owner to confirm/extend; post only where rules allow):
+- [TO BE FILLED IN BY ED — e.g. "Walton-on-Thames Community", "Hersham
+  Residents", "Surrey Small Business Network", town-by-town trade and
+  community groups]
+
+**Mechanics.** Page posting can be automated through the Facebook Graph
+API: when a Graph API token is configured on this environment and a
+Page ID is listed below, publish with
+`POST https://graph.facebook.com/v23.0/<PAGE_ID>/feed` (fields:
+`message`, `link`) and record the returned post id. Until then, and
+always for groups (Meta removed the Groups API in 2024, so group posts
+are manual by design), include both drafts verbatim in the weekly
+report for a human to paste.
+
+**Facebook Page ID:** not yet configured.
+
 ## Measuring (monthly, not per-post)
 
 Search Console: impressions/clicks on question queries. GA4: referrals
