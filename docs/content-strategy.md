@@ -54,6 +54,35 @@ priced, local answers.
 - **UK English.** No em-dash-studded AI boilerplate; keep the voice of the
   existing posts: plain, confident, a little dry.
 
+## The humanizer pass (mandatory before shipping)
+
+Every draft gets a final edit against the "signs of AI writing" list
+(Wikipedia's WikiProject AI Cleanup). If the anthropic-skills:humanizer
+skill is available in your session, run it on the draft. Either way, the
+finished article must pass this checklist:
+
+- **No em dashes or en dashes anywhere.** Replace with a full stop,
+  comma, colon, parentheses, or restructure. Scan for `—` and `–`
+  before shipping; any hit means it isn't done.
+- No bold-colon bullet lists ("**Speed:** ...") used mechanically; write
+  sentences, keep plain lists for genuinely list-shaped things.
+- Kill the AI vocabulary: delve, crucial, pivotal, landscape, tapestry,
+  testament, underscore, showcase, foster, vibrant, seamless, elevate,
+  "serves as", "stands as". Prefer is/are/has.
+- No rule-of-three padding, no "It's not just X, it's Y", no false
+  ranges ("from X to Y"), no "-ing" clauses bolted on for fake depth
+  ("...highlighting the importance of...").
+- No vague authority ("experts say", "studies show") and no invented
+  numbers, clients or quotes. Specific and checkable, or cut it.
+- No filler ("in order to", "it is important to note"), no signposting
+  ("let's dive in"), no generic upbeat endings.
+- Vary sentence length. Short ones land points. Let a longer one breathe
+  now and then. Read a paragraph aloud; if it has an even, mid-length
+  drone, break it up.
+- Keep the human details: first-person agency experience ("we audit
+  Surrey sites every week and the usual finding is..."), real towns,
+  real prices, an opinion where we hold one.
+
 ## Images
 
 House style: premium editorial 3D illustration, deep navy ground
