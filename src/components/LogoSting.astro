@@ -5,12 +5,21 @@
 // are the pack's own snippet, unchanged; the four layers are served as
 // cacheable files per its README since the logo appears on every page.
 // No-JS and prefers-reduced-motion visitors see the final logo only.
+//
+// dark: the navy "Cumulus" wordmark and plane are swapped for white
+// recolours (same artwork, alpha preserved) so the lockup reads on a dark
+// ground; the teal cloud and "DIGITAL LIMITED" already do.
+interface Props {
+  dark?: boolean;
+}
+const { dark = false } = Astro.props;
+const suffix = dark ? '_white' : '';
 ---
 
 <div class="cls-sting" role="img" aria-label="Cumulus Digital Limited">
   <img class="cls-layer cls-cloud" alt="" src="/sting/layer_cloud.png" />
-  <img class="cls-layer cls-plane" alt="" src="/sting/layer_plane.png" />
-  <img class="cls-layer cls-wordmark" alt="" src="/sting/layer_wordmark.png" />
+  <img class="cls-layer cls-plane" alt="" src={`/sting/layer_plane${suffix}.png`} />
+  <img class="cls-layer cls-wordmark" alt="" src={`/sting/layer_wordmark${suffix}.png`} />
   <img class="cls-layer cls-digital" alt="" src="/sting/layer_digital.png" />
 </div>
 

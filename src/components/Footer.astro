@@ -5,7 +5,6 @@ import {
   EMAIL,
   PHONE_DISPLAY,
   PHONE_TEL,
-  ADDRESS,
   COMPANY_LEGAL_NAME,
   COMPANY_NUMBER,
 } from '../consts';
@@ -17,7 +16,7 @@ const year = new Date().getFullYear();
   <div class="container footer-inner">
     <div class="footer-brand">
       <a class="brand footer-sting" href="/" aria-label="Cumulus Digital home">
-        <LogoSting />
+        <LogoSting dark />
       </a>
       <p class="footer-tagline">{SITE_TAGLINE}</p>
     </div>
@@ -47,11 +46,7 @@ const year = new Date().getFullYear();
         <h4>Contact</h4>
         <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
         <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-        <p class="footer-address">
-          {ADDRESS.street}<br />
-          {ADDRESS.locality}<br />
-          {ADDRESS.region} {ADDRESS.postcode}
-        </p>
+        <p class="footer-address">Proudly based in Surrey</p>
       </div>
     </nav>
   </div>

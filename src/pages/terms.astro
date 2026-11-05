@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import { COMPANY_LEGAL_NAME, COMPANY_NUMBER, EMAIL, ADDRESS } from '../consts';
+import { COMPANY_LEGAL_NAME, COMPANY_NUMBER, EMAIL } from '../consts';
 ---
 
 <!-- TODO(owner): have these terms reviewed before launch. -->
@@ -19,8 +19,8 @@ import { COMPANY_LEGAL_NAME, COMPANY_NUMBER, EMAIL, ADDRESS } from '../consts';
       <div class="prose">
         <p>
           This website is operated by {COMPANY_LEGAL_NAME}, registered in England &amp;
-          Wales (company no. {COMPANY_NUMBER}) at {ADDRESS.street}, {ADDRESS.locality},
-          {ADDRESS.region} {ADDRESS.postcode}. By using this site you accept these terms.
+          Wales (company no. {COMPANY_NUMBER}), based in Surrey. By using this site you
+          accept these terms.
         </p>
 
         <h2>Use of this site</h2>
