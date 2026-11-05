@@ -1,12 +1,22 @@
 ---
+import { GlassFold } from './ui/glass-fold';
+
 interface Props {
   eyebrow: string;
   lede?: string;
+  /** Animated glass-fold WebGL background on a deep navy ground; the copy
+      goes white. Used on the About and Contact heroes. */
+  glass?: boolean;
 }
-const { eyebrow, lede } = Astro.props;
+const { eyebrow, lede, glass = false } = Astro.props;
 ---
 
-<section class="page-hero">
+<section class={`page-hero${glass ? ' page-hero--glass' : ''}`}>
+  {glass && (
+    <div class="page-hero-bg" aria-hidden="true">
+      <GlassFold client:load />
+    </div>
+  )}
   <div class="container">
     <p class="eyebrow reveal d1">
       <span class="eyebrow-dot"></span>
