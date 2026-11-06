@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
@@ -39,6 +39,11 @@ export const FlippingWordSwap: React.FC<FlippingWordSwapProps> = ({
   const reduce = useReducedMotion();
   const swapped = useRef(false);
   const [isSwapped, setIsSwapped] = useState(false);
+  // word2 is injected only after mount: the server-rendered HTML then carries
+  // a single clean reading ("… & beyond.") for crawlers and no-JS visitors,
+  // instead of both words concatenated inside the h1.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const update = useCallback((next: boolean) => {
     swapped.current = next;
@@ -98,7 +103,7 @@ export const FlippingWordSwap: React.FC<FlippingWordSwapProps> = ({
     >
       <span className="fws-stage">
         {layer(chars1, 'first')}
-        {layer(chars2, 'second')}
+        {mounted && layer(chars2, 'second')}
       </span>
     </button>
   );
