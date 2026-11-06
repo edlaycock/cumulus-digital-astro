@@ -26,6 +26,8 @@ What most trades miss is that the research still happens now. People sit down in
 
 That changes what November is for. It is not the month to win calls. It is the month to win shortlists.
 
+![A homeowner on a frosted glass sofa, reading a glowing shortlist of three entries with the top one lit in teal](./images/quiet-november-shortlist.png)
+
 ## What should I do in November to win January jobs?
 
 Make yourself the easiest trade in your town to research. Everything else follows from that.
@@ -35,6 +37,8 @@ Start with your Google Business Profile, because it is where nearly every local 
 Next, look at your website the way a stranger would. Does it say which towns you cover? Does each service you offer have its own page, or is everything squeezed onto one? Does it answer the questions you get asked on every quote visit, like how long the job takes and what affects the price? We wrote about why those question pages matter so much in [our guide to getting recommended by ChatGPT](/how-to-get-cited-by-ai/), and the short version is that the same pages that persuade a homeowner also feed Google and AI answers.
 
 Finally, put something new out. One honest article or even a photo post about a recent job tells Google, and every person researching you, that the business is alive and busy. Silence reads as closed.
+
+![A frosted glass map pin surrounded by glowing teal review stars and floating photo cards](./images/quiet-november-map-pin.png)
 
 ## How do homeowners in Surrey choose a trade they have never used?
 

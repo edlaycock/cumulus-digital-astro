@@ -87,9 +87,16 @@ finished article must pass this checklist:
 
 House style: premium editorial 3D illustration, deep navy ground
 (#031422), frosted-glass objects, teal (#5dc2d5) light, film grain, no
-text or logos, 16:9. One hero minimum, inline images where they earn
-their place. If no image tool is available that session, publish without
-a frontmatter image — the index card has a brand fallback.
+text or logos, 16:9. Every article ships with one hero PLUS two or
+three inline images as standard (the owner wants articles visually
+rich). Each inline image must depict the idea of the section it sits
+in, not generic decoration: translate the section's concrete nouns into
+frosted-glass objects (a silent phone, a map pin with stars, a
+shortlist panel). Place each image directly after the H2 section it
+illustrates, roughly evenly through the body, with meaningful alt text.
+Generate two takes per subject and keep the better one. If no image
+tool is available that session, publish without images rather than
+substituting stock — the index card has a brand fallback.
 
 ## Provenance hygiene (part of every ship)
 
