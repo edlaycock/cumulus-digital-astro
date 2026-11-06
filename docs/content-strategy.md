@@ -196,16 +196,20 @@ and Hersham" (Tuesdays only); groups with Monday/Thursday/Friday or
 date-based rules get their draft held and posted on the next allowed
 day rather than skipped.
 
-**Mechanics.** Page posting can be automated through the Facebook Graph
-API: when a Graph API token is configured on this environment and a
-Page ID is listed below, publish with
-`POST https://graph.facebook.com/v23.0/<PAGE_ID>/feed` (fields:
-`message`, `link`) and record the returned post id. Until then, and
-always for groups (Meta removed the Groups API in 2024, so group posts
-are manual by design), include both drafts verbatim in the weekly
+**Mechanics.** Page posting is automated through the Facebook Graph
+API. The Page access token is stored as a network secret on this
+environment (host graph.facebook.com); the session's proxy injects it
+into requests automatically, so never add an Authorization header or
+`access_token` parameter yourself — send the request plain. Publish
+with `POST https://graph.facebook.com/v27.0/<PAGE_ID>/feed` (fields:
+`message`, `link`) and record the returned post id in the weekly
+report. If the call returns 401/403, report it as a blocker (the token
+may have been invalidated by a password change or Page-role change);
+do not retry with workarounds. Groups are always manual (Meta removed
+the Groups API in 2024): include both drafts verbatim in the weekly
 report for a human to paste.
 
-**Facebook Page ID:** not yet configured.
+**Facebook Page ID:** 997169053672137 (Cumulus Digital Ltd).
 
 ## Measuring (monthly, not per-post)
 
