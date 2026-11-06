@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ServiceSchema from '../../components/ServiceSchema.astro';
 import { ContainerScroll } from '../../components/ui/container-scroll-animation';
 import { GlassFold } from '../../components/ui/glass-fold';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
@@ -73,6 +75,13 @@ const faqs = [
   title="AI SEO & AEO Agency | Cumulus Digital"
   description="AI SEO and answer engine optimisation (AEO) agency. We get businesses recommended by ChatGPT, Gemini and Perplexity and cited in Google's AI Overviews — with honest measurement, from Surrey, UK."
 >
+  <FaqSchema faqs={faqs} />
+  <ServiceSchema
+    name="AI SEO & AEO (Answer Engine Optimisation)"
+    description="Getting businesses recommended by ChatGPT, Gemini and Perplexity and cited in Google’s AI Overviews."
+    path="/services/ai-seo/"
+    areaServed={['United Kingdom']}
+  />
   <div class="hero-glass">
     <div class="page-hero-bg" aria-hidden="true">
       <GlassFold client:load />

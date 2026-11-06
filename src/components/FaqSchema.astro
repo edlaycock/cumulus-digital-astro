@@ -1,0 +1,21 @@
+---
+// Emits FAQPage JSON-LD so answer engines can lift the page's Q&As directly.
+// Pass the same faqs array that renders the visible FAQ section — the schema
+// must mirror on-page content, never carry extra questions.
+interface Props {
+  faqs: { q: string; a: string }[];
+}
+const { faqs } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />

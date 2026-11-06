@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ServiceSchema from '../../components/ServiceSchema.astro';
 import { getImage } from 'astro:assets';
 import { AnimatedMarqueeHero } from '../../components/ui/hero-3';
 import { GlassFold } from '../../components/ui/glass-fold';
@@ -110,6 +112,13 @@ const faqs = [
   title="Web Design in Surrey | Cumulus Digital"
   description="Bespoke web design in Surrey — hand-built, mobile-first websites for businesses across Surrey and the South East. No templates. Based in Hersham, Walton-on-Thames."
 >
+  <FaqSchema faqs={faqs} />
+  <ServiceSchema
+    name="Web Design"
+    description="Bespoke, conversion-focused website design for businesses in Surrey and the South East."
+    path="/services/web-design/"
+    areaServed={['Surrey', 'United Kingdom']}
+  />
   <div class="hero-glass">
     <div class="page-hero-bg" aria-hidden="true">
       <GlassFold client:load />

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ServiceSchema from '../../components/ServiceSchema.astro';
 import { ContainerScroll } from '../../components/ui/container-scroll-animation';
 import { GlassFold } from '../../components/ui/glass-fold';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
@@ -65,6 +67,13 @@ const faqs = [
   title="Google Ads Agency in Surrey | Cumulus Digital"
   description="Google Ads management for Surrey businesses — Search, Shopping, Performance Max and remarketing built to bring in enquiries. Based in Hersham, Walton-on-Thames."
 >
+  <FaqSchema faqs={faqs} />
+  <ServiceSchema
+    name="Google Ads Management"
+    description="Search, Shopping, Performance Max and remarketing campaign management for Surrey businesses."
+    path="/services/google-ads/"
+    areaServed={['Surrey', 'United Kingdom']}
+  />
   <!-- type-only reveal: the heading drifts as you scroll. No device, because
        nothing in the portfolio evidences a Google Ads account yet. -->
   <div class="hero-glass">

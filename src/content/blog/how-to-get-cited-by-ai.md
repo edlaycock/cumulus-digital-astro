@@ -3,6 +3,17 @@ title: "How Do I Get My Business Recommended by ChatGPT? An AI Search Guide for 
 description: "How do I get recommended by ChatGPT? How do I show up in Google's AI Overviews? Straight answers for Surrey small businesses, from plumbers to accountants."
 pubDate: 2026-11-05
 image: "./images/how-to-get-cited-by-ai-hero.png"
+faqs:
+  - q: "How do I get my business recommended by ChatGPT?"
+    a: "Make sure ChatGPT can find and trust you: allow the AI crawlers (GPTBot, OAI-SearchBot and Bingbot) on your website, get indexed in Bing as well as Google, publish pages that directly answer the questions your customers ask, add LocalBusiness schema, and build up reviews and mentions of your business on other sites. ChatGPT recommends businesses it has repeatedly seen described, reviewed and recommended elsewhere, so the job is making yours the best evidenced answer for your trade and your town."
+  - q: "Is this different from the local SEO I've already done?"
+    a: "It builds straight on it. Everything that ranks you in Walton, Woking or Guildford also makes you citable. AEO adds the newer layers on top: direct-answer content, structured data, consistency across listings, Bing, and mentions beyond your own site. If you've done local SEO properly, you're starting from halfway."
+  - q: "Can a small business really compete with national firms in AI answers?"
+    a: "For local questions, you have the advantage. When someone asks about a service in Shepperton or Cobham, the AI wants a local answer, and a national brand's generic page is a worse match than your specific, trusted, well reviewed local one. The businesses losing out aren't the small ones. They're the invisible ones."
+  - q: "Can I pay to be in AI answers?"
+    a: "Not the organic citations. Ads are creeping in around some AI products, but the recommendations inside ChatGPT, Perplexity, Gemini and AI Overviews are earned. That's exactly why a customer in Surrey trusts them, and why being named is worth so much."
+  - q: "How long before I see results?"
+    a: "Technical fixes (crawler access, Bing indexing, schema, a completed Business Profile) can move things within weeks. Reviews, local mentions and expert content build over months. The Surrey businesses being cited today mostly started the groundwork a year ago. In a local market this early, starting now still means starting ahead."
 ---
 
 ## Why Is ChatGPT Recommending My Competitors and Not Me?

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ServiceSchema from '../../components/ServiceSchema.astro';
 import TumbleDeckShowcase from '../../components/ui/tumble-deck-showcase';
 import { GlassFold } from '../../components/ui/glass-fold';
 import { getImage } from 'astro:assets';
@@ -116,6 +118,13 @@ const faqs = [
   title="Web Development in Surrey | Cumulus Digital"
   description="Custom web development in Surrey — hand-built, fast, secure websites, e-commerce and web apps. CMS builds, integrations and ongoing maintenance. Based in Hersham, Walton-on-Thames."
 >
+  <FaqSchema faqs={faqs} />
+  <ServiceSchema
+    name="Web Development"
+    description="Hand-built, fast, accessible websites and web applications developed in Surrey."
+    path="/services/web-development/"
+    areaServed={['Surrey', 'United Kingdom']}
+  />
   <!-- heading over a navy band, then the builds tumbling flat one by one -->
   <section class="wd-hero hero-glass">
     <div class="page-hero-bg" aria-hidden="true">

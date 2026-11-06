@@ -77,6 +77,9 @@ const blog = defineCollection({
       description: z.string(),
       pubDate: z.coerce.date(),
       image: image().optional(),
+      // mirror of the article's visible FAQ section, emitted as FAQPage
+      // JSON-LD — only ever questions that appear on the page itself
+      faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
     }),
 });
 

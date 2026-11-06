@@ -1,0 +1,31 @@
+---
+// Emits Service JSON-LD for a service page, naming the offering and tying it
+// back to the business entity declared in BaseLayout's ProfessionalService.
+import { SITE_NAME, SITE_URL } from '../consts';
+
+interface Props {
+  name: string;
+  description: string;
+  /** Path of the service page, e.g. /services/seo/ */
+  path: string;
+  areaServed?: string[];
+}
+const { name, description, path, areaServed = ['Surrey', 'United Kingdom'] } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name,
+  serviceType: name,
+  description,
+  url: `${SITE_URL}${path}`,
+  areaServed,
+  provider: {
+    '@type': 'ProfessionalService',
+    name: SITE_NAME,
+    url: SITE_URL,
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />

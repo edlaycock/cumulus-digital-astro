@@ -7,6 +7,7 @@ import {
   PHONE_TEL,
   COMPANY_LEGAL_NAME,
   COMPANY_NUMBER,
+  FACEBOOK_URL,
 } from '../consts';
 
 const year = new Date().getFullYear();
@@ -48,6 +49,7 @@ const year = new Date().getFullYear();
         <h4>Contact</h4>
         <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
         <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        <a href={FACEBOOK_URL} rel="noopener" target="_blank">Facebook</a>
         <p class="footer-address">Proudly based in Surrey</p>
       </div>
     </nav>
