@@ -1,6 +1,7 @@
 ---
 title: Digital Marketing & SEO
 order: 4
+href: /services/seo/
 iconPath: "M24 8a16 16 0 1 0 0 32 16 16 0 0 0 0-32zM24 8Q36 24 24 40M24 8Q12 24 24 40M8 24h32"
 summary: "SEO, content and social media strategies that put you in front of the right audience — and keep you there."
 outcomes:

@@ -42,6 +42,8 @@ export const NAV_LINKS = [
       { href: '/services/', label: 'All services' },
       { href: '/services/web-design/', label: 'Web Design' },
       { href: '/services/web-development/', label: 'Web Development' },
+      { href: '/services/seo/', label: 'SEO' },
+      { href: '/services/ai-seo/', label: 'AI SEO & AEO' },
       { href: '/services/google-ads/', label: 'Google Ads' },
       { href: '/services/travel-industry/', label: 'Travel Industry' },
       { href: '/services/trades/', label: 'Trades & Construction' },

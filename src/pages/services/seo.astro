@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ContainerScroll } from '../../components/ui/container-scroll-animation';
+import { GlassFold } from '../../components/ui/glass-fold';
+import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
+
+// The work, in the order it actually happens on an engagement.
+const process = [
+  {
+    step: '01',
+    title: 'Audit where you stand',
+    body: 'Rankings, technical health, content, backlinks and your Google Business Profile — benchmarked against the competitors actually taking your enquiries. You get a plain-English picture of why they rank and you don’t.',
+  },
+  {
+    step: '02',
+    title: 'Fix the foundations',
+    body: 'Site speed, crawlability, structured data, page titles and internal linking. Unglamorous work, but Google can’t reward content it struggles to read — and most local sites we audit fail here first.',
+  },
+  {
+    step: '03',
+    title: 'Build pages that deserve to rank',
+    body: 'Service and location pages written around the searches your customers really type, in your voice — not padded-out filler. One honest page that answers the question beats ten thin ones.',
+  },
+  {
+    step: '04',
+    title: 'Win the local map pack',
+    body: 'Your Google Business Profile drives the “near me” searches, which are bigger than any keyword. Categories, reviews, photos and posts managed so you show up when someone nearby needs you.',
+  },
+  {
+    step: '05',
+    title: 'Report what matters',
+    body: 'Daily rank tracking through our own reporting platform, plus the numbers that count: enquiries, calls and where they came from. If something isn’t moving, we say so and change course.',
+  },
+];
+
+const included = [
+  { name: 'Local SEO', body: 'Google Business Profile, local landing pages, citations and reviews — the work that wins Surrey searches and the map pack.' },
+  { name: 'Technical SEO', body: 'Speed, indexing, structured data and site architecture. We build websites for a living, so nothing gets “logged for the developer”.' },
+  { name: 'Content', body: 'Pages and articles written around real searches, in plain English, published on a schedule we actually keep.' },
+  { name: 'Links & authority', body: 'Earned mentions from relevant local and industry sources. No bought link packages, ever — they’re how sites get burned.' },
+  { name: 'AI search (AEO)', body: 'ChatGPT, Gemini and Google’s AI Overviews now answer buyers directly. We optimise for those answers too — see our dedicated AI SEO service.' },
+  { name: 'Honest reporting', body: 'Our own rank and visibility tracking, reported monthly in plain English against the enquiries you received.' },
+];
+
+const faqs = [
+  {
+    q: 'How long does SEO take to work?',
+    a: 'For local Surrey searches, movement within two to three months is realistic and some fixes pay back faster. Competitive national terms take longer. Anyone promising page one in thirty days is reading from a script — ask them what happens in month two.',
+  },
+  {
+    q: 'How much does SEO cost in Surrey?',
+    a: 'Sensible local campaigns typically run a few hundred pounds a month; broader or more competitive work costs more. We scope it against what an enquiry is worth to you, and we’ll tell you plainly if the maths doesn’t work for your budget.',
+  },
+  {
+    q: 'Do you guarantee rankings?',
+    a: 'No — and nobody honest does, because Google’s results aren’t ours to promise. What we guarantee is the work: what we’ll do each month, reported against rankings and enquiries you can check yourself.',
+  },
+  {
+    q: 'Am I tied into a contract?',
+    a: 'No. We work month to month. SEO rewards consistency, so we’ll recommend sticking with it — but the reason to stay should be results, not a signature.',
+  },
+  {
+    q: 'Do you only work with businesses in Surrey?',
+    a: 'Surrey is home — we’re based in Hersham and most of our clients are nearby. But the work travels, and we look after businesses across the South East and beyond.',
+  },
+  {
+    q: 'What about ChatGPT and AI search?',
+    a: 'It’s already changing how people find local businesses, and the groundwork is the same: clear pages, strong local signals and a consistent business identity. We run answer engine optimisation as its own service for businesses that want to get ahead of it.',
+  },
+];
+---
+
+<BaseLayout
+  title="SEO Agency in Surrey | Cumulus Digital"
+  description="SEO agency in Surrey helping local businesses rank, win the map pack and turn searches into enquiries. Local, technical and content SEO from Hersham — honest reporting, no long contracts."
+>
+  <div class="hero-glass">
+    <div class="page-hero-bg" aria-hidden="true">
+      <GlassFold client:load />
+    </div>
+  <ContainerScroll client:load className="cs--bare" parallax>
+    <Fragment slot="titleComponent">
+      <p class="eyebrow"><span class="eyebrow-dot"></span>SEO · Surrey, UK</p>
+      <h1 class="page-hero-title cs-title">SEO Agency in <em class="glow">Surrey</em>.</h1>
+      <p class="lede cs-lede">
+        Local, technical and content SEO that turns searches into enquiries — for businesses
+        across Guildford, Woking, Walton-on-Thames and the rest of Surrey, run from our base
+        in Hersham.
+      </p>
+      <div class="page-hero-actions">
+        <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Get a free SEO audit →</a>
+        <a class="btn btn--outline btn--lg" href="/services/">See all services</a>
+      </div>
+    </Fragment>
+  </ContainerScroll>
+  </div>
+
+  <!-- why local businesses don't rank -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Why you're not ranking</p>
+        <h2 class="section-title">It's rarely one big thing.<br />It's five small <em>ones</em>.</h2>
+        <p class="section-sub">
+          When a Surrey business isn't showing up, the audit nearly always finds the same
+          culprits — and every one of them is fixable.
+        </p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card" data-reveal>
+          <span class="value-num">01</span>
+          <h3>The site is slow or hard to crawl</h3>
+          <p>Google rations its attention. A slow, tangled site gets less of it, and pages it can't read cleanly don't rank — however good the words are.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.1s">
+          <span class="value-num">02</span>
+          <h3>One page trying to do everything</h3>
+          <p>A single “services” page can't compete with a rival that has a dedicated page for each service and town it works in.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.2s">
+          <span class="value-num">03</span>
+          <h3>A neglected Google Business Profile</h3>
+          <p>The map pack wins the “near me” searches, and it's driven by your profile — categories, reviews and activity — more than your website.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.3s">
+          <span class="value-num">04</span>
+          <h3>Nothing new in years</h3>
+          <p>Google favours businesses that look alive. A site last touched in 2021 tells it, and your customers, the opposite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- process -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How we work</p>
+        <h2 class="section-title">Audit first.<br />Then earn it, <em>monthly</em>.</h2>
+      </div>
+
+      <div class="values-grid">
+        {process.map((p, i) => (
+          <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="value-num">{p.step}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- what's included -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What's included</p>
+        <h2 class="section-title">Everything search,<br />under one <em>roof</em>.</h2>
+        <p class="section-sub">
+          We design and build websites as well as market them, so SEO recommendations get
+          implemented — not emailed to a developer and forgotten.
+        </p>
+      </div>
+
+      <ul class="services-grid" role="list">
+        {included.map((c) => (
+          <li class="service-card">
+            <div class="service-card-body">
+              <h3>{c.name}</h3>
+              <p>{c.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <p style="text-align:center; margin-top:2.5rem; color:var(--lt-muted); font-size:.95rem">
+        Progress is tracked daily in <a href="/cumulus-rank-and-reporting/">Cumulus Rank &amp; Reporting</a>,
+        our own reporting platform — and if AI search matters to you, read about our
+        <a href="/services/ai-seo/">AI SEO &amp; AEO service</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- faqs -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Common questions</p>
+        <h2 class="section-title">Asked by almost<br />every new client.</h2>
+      </div>
+
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item" data-reveal>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <p class="section-label">Start with the audit</p>
+        <h2 class="cta-headline">
+          Find out why they rank<br />and you <em class="glow">don't</em>.
+        </h2>
+        <p class="cta-sub">
+          Send us your website and your three biggest competitors. We'll come back with an
+          honest read on the gap, what closing it involves, and what it's likely to cost.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Request the audit →</a>
+          <a class="btn btn--ghost btn--lg" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
