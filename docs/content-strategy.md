@@ -211,6 +211,50 @@ report for a human to paste.
 
 **Facebook Page ID:** 997169053672137 (Cumulus Digital Ltd).
 
+## Keyword targets (tracked in Cumulus Rank & Reporting)
+
+UK monthly volumes and keyword difficulty (KD, 0-100) from Google Ads /
+DataForSEO, pulled November 2026. Weekly articles should support these
+targets with internal links to the mapped page whenever the topic fits.
+
+**Tier 1: priority (dedicated page exists, win these first)**
+
+| Keyword | Vol/mo | KD | Target page |
+|---|---|---|---|
+| ai seo agency | 480 | 2 | /services/ai-seo/ |
+| answer engine optimisation | 140 | 0 | /services/ai-seo/ |
+| aeo agency | new, growing | - | /services/ai-seo/ |
+| seo agency surrey | 140 | 0 | /services/seo/ |
+| seo surrey | 140 | 0 | /services/seo/ |
+| seo company surrey | 90 | 0 | /services/seo/ |
+| seo services surrey | 70 | - | /services/seo/ |
+| web design surrey | 590 | 40 | /services/web-design/ |
+| web designers surrey | 590 | 16 | /services/web-design/ |
+| website design surrey | 590 | - | /services/web-design/ |
+| web developers surrey | 590 | 18 | /services/web-development/ |
+| google ads agency | 880 | 13 | /services/google-ads/ |
+
+**Tier 2: supporting (blog articles + internal links)**
+
+| Keyword | Vol/mo | KD | Target |
+|---|---|---|---|
+| ai seo | 1,600 | - | /services/ai-seo/ + blog |
+| small business web design | 720 | 3 | /services/web-design/ + blog |
+| google ads management | 320 | 33 | /services/google-ads/ |
+| web design guildford | 260 | 0 | /web-design-guildford/ |
+| web design agency surrey | 210 | - | /services/web-design/ |
+| marketing agency surrey | 170 | 36 | /services/seo/ |
+| digital marketing agency surrey | 110 | 25 | /services/seo/ |
+| web design woking | 110 | 5 | /web-design-woking/ |
+| ppc agency surrey | 50 | - | /services/google-ads/ |
+
+**Handled by the Google Business Profile, not page copy:** "web designer
+near me" (5,400/mo), "website designers near me" (5,400/mo), "web design
+near me" (2,900/mo). These resolve by the searcher's location; the play
+is profile activity, categories and reviews. Hersham and
+Walton-on-Thames terms have little measurable volume (about 10/mo) and
+are covered by existing posts.
+
 ## Measuring (monthly, not per-post)
 
 Search Console: impressions/clicks on question queries. GA4: referrals

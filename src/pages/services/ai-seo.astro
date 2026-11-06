@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ContainerScroll } from '../../components/ui/container-scroll-animation';
+import { GlassFold } from '../../components/ui/glass-fold';
+import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
+
+const process = [
+  {
+    step: '01',
+    title: 'Audit what AI says about you',
+    body: 'We ask ChatGPT, Gemini, Perplexity and Google’s AI Overviews the questions your customers ask, and record what comes back: whether you’re named, what’s said, and who gets recommended instead.',
+  },
+  {
+    step: '02',
+    title: 'Fix your machine readability',
+    body: 'AI engines lean on structured data, consistent business details and pages that answer questions directly. We tighten schema markup, entity signals and page structure so your site is easy for a model to read and safe to cite.',
+  },
+  {
+    step: '03',
+    title: 'Publish answer-shaped content',
+    body: 'AI answers are assembled from pages that resolve a question cleanly in the first few sentences. We write and structure your content that way — the same discipline we use on our own site.',
+  },
+  {
+    step: '04',
+    title: 'Build the trust signals',
+    body: 'Models recommend businesses the wider web vouches for: reviews, consistent citations, a live Google Business Profile and mentions in sources AI actually reads. We work that list deliberately.',
+  },
+  {
+    step: '05',
+    title: 'Monitor and adapt',
+    body: 'AI search moves fast. We re-run the visibility checks through our own reporting platform and adjust as the engines change — because what worked in spring may not hold by autumn.',
+  },
+];
+
+const engines = [
+  { name: 'Google AI Overviews', body: 'The AI answer at the top of Google itself — assembled from pages that answer the question directly, with sources linked.' },
+  { name: 'ChatGPT', body: 'Now a genuine discovery channel. Its answers draw on your website, your reviews and what the wider web says about you.' },
+  { name: 'Gemini', body: 'Google’s assistant leans heavily on Google’s own index and your Business Profile — local signals matter most here.' },
+  { name: 'Perplexity', body: 'Answers with citations by design. Clear, well-sourced pages earn the links that put you in front of its users.' },
+  { name: 'Copilot & the rest', body: 'Bing-backed assistants and whatever ships next. The groundwork is shared, so one job covers the field.' },
+  { name: 'Your buyers', body: 'The point of all of it. People increasingly ask AI “who should I use?” — the work above decides whose name comes back.' },
+];
+
+const faqs = [
+  {
+    q: 'What is answer engine optimisation (AEO)?',
+    a: 'Answer engine optimisation is the work of getting your business named and cited when AI tools — ChatGPT, Gemini, Perplexity and Google’s AI Overviews — answer a question your customer asked. Where SEO earns you a ranking, AEO earns you the recommendation inside the answer itself.',
+  },
+  {
+    q: 'How do I get my business recommended by ChatGPT?',
+    a: 'Make yourself the easiest business to verify. That means pages that answer real questions directly, accurate and consistent business details across the web, genuine reviews, and structured data that tells machines plainly who you are, where you work and what you do. There’s no secret handshake — it’s deliberate, checkable groundwork.',
+  },
+  {
+    q: 'Is AI SEO different from normal SEO?',
+    a: 'They overlap — a healthy, fast, well-structured site helps both. The difference is the target: SEO optimises for a list of links, AEO for being quoted in a composed answer. That changes how content is written, how questions are addressed, and which trust signals matter most.',
+  },
+  {
+    q: 'Can you guarantee my business will appear in AI answers?',
+    a: 'No, and you should walk away from anyone who says yes — these engines change weekly and their outputs aren’t anyone’s to promise. What we guarantee is the work and the measurement: you’ll see exactly what the engines say about you before we start and as we go.',
+  },
+  {
+    q: 'Will AI Overviews take my website traffic?',
+    a: 'For some informational searches, yes — people get their answer without clicking. Which is precisely why being the business named inside the answer matters. The enquiry still lands somewhere; the work is making sure it lands with you.',
+  },
+  {
+    q: 'Do you work with businesses outside Surrey?',
+    a: 'Yes. We’re based in Hersham and much of our local SEO work is Surrey-focused, but AI visibility work isn’t tied to geography — we take it on for businesses across the UK.',
+  },
+];
+---
+
+<BaseLayout
+  title="AI SEO & AEO Agency | Cumulus Digital"
+  description="AI SEO and answer engine optimisation (AEO) agency. We get businesses recommended by ChatGPT, Gemini and Perplexity and cited in Google's AI Overviews — with honest measurement, from Surrey, UK."
+>
+  <div class="hero-glass">
+    <div class="page-hero-bg" aria-hidden="true">
+      <GlassFold client:load />
+    </div>
+  <ContainerScroll client:load className="cs--bare" parallax>
+    <Fragment slot="titleComponent">
+      <p class="eyebrow"><span class="eyebrow-dot"></span>AI SEO &amp; AEO · UK</p>
+      <h1 class="page-hero-title cs-title">Be the answer<br />AI gives <em class="glow">about you</em>.</h1>
+      <p class="lede cs-lede">
+        An AI SEO and answer engine optimisation agency. When your customers ask ChatGPT,
+        Gemini or Google who to use, we work on making your business the name that comes back.
+      </p>
+      <div class="page-hero-actions">
+        <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Get an AI visibility audit →</a>
+        <a class="btn btn--outline btn--lg" href="/how-to-get-cited-by-ai/">Read our guide first</a>
+      </div>
+    </Fragment>
+  </ContainerScroll>
+  </div>
+
+  <!-- the shift -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Why this matters now</p>
+        <h2 class="section-title">Your customers stopped<br />clicking. They're <em>asking</em>.</h2>
+        <p class="section-sub">
+          A growing share of buyers now ask an AI assistant instead of scrolling results.
+          The answer names two or three businesses — and everyone else is invisible.
+        </p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card" data-reveal>
+          <span class="value-num">01</span>
+          <h3>The answer replaces the results page</h3>
+          <p>AI Overviews sit above every ranking you've earned. If the answer covers the question, the ten blue links below it never get read.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.1s">
+          <span class="value-num">02</span>
+          <h3>Recommendations are winner-takes-most</h3>
+          <p>Ask ChatGPT for “a good accountant in Guildford” and it names a few. There's no page two of an AI answer.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.2s">
+          <span class="value-num">03</span>
+          <h3>Most websites are hard for AI to read</h3>
+          <p>Vague pages, missing structured data and inconsistent business details make a model unsure — and unsure models recommend someone else.</p>
+        </div>
+        <div class="value-card" data-reveal style="--reveal-delay:.3s">
+          <span class="value-num">04</span>
+          <h3>Hardly anyone is working on it yet</h3>
+          <p>Unlike classic SEO, the field is nearly empty. Deliberate groundwork now buys a position that will cost far more to win later.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- process -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How we work</p>
+        <h2 class="section-title">Measure what AI says.<br />Then change <em>it</em>.</h2>
+      </div>
+
+      <div class="values-grid">
+        {process.map((p, i) => (
+          <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="value-num">{p.step}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <p style="text-align:center; margin-top:2.5rem; color:var(--lt-muted); font-size:.95rem">
+        Visibility is tracked in <a href="/cumulus-rank-and-reporting/">Cumulus Rank &amp; Reporting</a>,
+        our own platform, alongside your classic rankings from our
+        <a href="/services/seo/">Surrey SEO service</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- engines -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Where you'll show up</p>
+        <h2 class="section-title">One body of work,<br />every answer <em>engine</em>.</h2>
+        <p class="section-sub">
+          The engines differ in detail but reward the same things: clarity, consistency and
+          proof. We build for all of them at once.
+        </p>
+      </div>
+
+      <ul class="services-grid" role="list">
+        {engines.map((c) => (
+          <li class="service-card">
+            <div class="service-card-body">
+              <h3>{c.name}</h3>
+              <p>{c.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- faqs -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Common questions</p>
+        <h2 class="section-title">What businesses ask us<br />about AI search.</h2>
+      </div>
+
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item" data-reveal>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <p class="section-label">Start with the facts</p>
+        <h2 class="cta-headline">
+          Hear what AI says<br />about you <em class="glow">today</em>.
+        </h2>
+        <p class="cta-sub">
+          We'll run your business through the major AI engines and send you what they say,
+          who they recommend instead, and what we'd do about it. No obligation, no jargon.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Request the audit →</a>
+          <a class="btn btn--ghost btn--lg" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
