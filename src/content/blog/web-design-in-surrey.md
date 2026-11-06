@@ -167,6 +167,8 @@ By choosing Cumulus Digital, you gain access to ongoing support tailored to your
 
 ### Integrating SEO Best Practices in Your Website Design
 
+![A frosted glass megaphone sending teal signal arcs toward floating browser and chart panels](./images/surrey-marketing-megaphone.png)
+
 A well-designed website is not just about aesthetics; it requires a strategic approach to search engine optimisation (SEO). Integrating SEO during the web design phase can lead to higher visibility and improved rankings on search engines.
 
 - **Keyword Research**: Identify relevant keywords that your target audience is searching for. Incorporate these keywords into your website’s content, metadata, and URLs.
