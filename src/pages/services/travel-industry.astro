@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ServiceSchema from '../../components/ServiceSchema.astro';
 import { ContainerScroll } from '../../components/ui/container-scroll-animation';
 import { GlassFold } from '../../components/ui/glass-fold';
 import { getImage } from 'astro:assets';
@@ -74,6 +76,13 @@ const faqs = [
   title="Digital Marketing for the Travel Industry | Cumulus Digital"
   description="Websites, SEO and paid search for tour operators, travel agents and destination brands — backed by 25+ years working inside the travel sector."
 >
+  <FaqSchema faqs={faqs} />
+  <ServiceSchema
+    name="Travel Industry Web Design & Marketing"
+    description="Websites and digital marketing for travel companies, built on 25 years of trade experience."
+    path="/services/travel-industry/"
+    areaServed={['United Kingdom']}
+  />
   <!-- heading, then a real travel build tilting flat as you scroll -->
   <div class="hero-glass">
     <div class="page-hero-bg" aria-hidden="true">

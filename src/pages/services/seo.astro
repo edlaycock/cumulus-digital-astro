@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ServiceSchema from '../../components/ServiceSchema.astro';
 import { ContainerScroll } from '../../components/ui/container-scroll-animation';
 import { GlassFold } from '../../components/ui/glass-fold';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
@@ -74,6 +76,13 @@ const faqs = [
   title="SEO Agency in Surrey | Cumulus Digital"
   description="SEO agency in Surrey helping local businesses rank, win the map pack and turn searches into enquiries. Local, technical and content SEO from Hersham — honest reporting, no long contracts."
 >
+  <FaqSchema faqs={faqs} />
+  <ServiceSchema
+    name="SEO"
+    description="Local, technical and content search engine optimisation for Surrey businesses."
+    path="/services/seo/"
+    areaServed={['Surrey', 'United Kingdom']}
+  />
   <div class="hero-glass">
     <div class="page-hero-bg" aria-hidden="true">
       <GlassFold client:load />

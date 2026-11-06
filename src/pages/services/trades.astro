@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ServiceSchema from '../../components/ServiceSchema.astro';
 import ImpactHero from '../../components/ImpactHero.astro';
 import WorkPreview from '../../components/WorkPreview.astro';
 import { Image } from 'astro:assets';
@@ -88,6 +90,13 @@ const faqs = [
   title="Digital Marketing for Trades | Cumulus Digital, Surrey"
   description="Websites, local SEO and Google Ads for groundworks, surfacing, fencing, landscaping and construction firms across Surrey and the South East."
 >
+  <FaqSchema faqs={faqs} />
+  <ServiceSchema
+    name="Web Design & Marketing for Trades & Construction"
+    description="Websites and lead generation for tradespeople and construction firms in Surrey."
+    path="/services/trades/"
+    areaServed={['Surrey', 'United Kingdom']}
+  />
   <ImpactHero
     glass
     badge="Built for UK tradespeople"

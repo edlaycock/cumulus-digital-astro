@@ -211,6 +211,14 @@ report for a human to paste.
 
 **Facebook Page ID:** 997169053672137 (Cumulus Digital Ltd).
 
+## FAQ schema on every article
+
+Every article's FAQ section must also be mirrored into the post's
+frontmatter as a `faqs` list (`- q:` / `a:` pairs, plain text, markdown
+links stripped). The blog template emits it as FAQPage JSON-LD so AI
+engines can lift the Q&As. Only ever mirror questions that appear
+verbatim in the article body; never add schema-only questions.
+
 ## Keyword targets (tracked in Cumulus Rank & Reporting)
 
 UK monthly volumes and keyword difficulty (KD, 0-100) from Google Ads /
