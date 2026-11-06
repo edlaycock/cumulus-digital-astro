@@ -1,6 +1,6 @@
 ---
-title: "Your Ultimate Guide to Web Design in Guildford: Transform Your Online Presence in 2026"
-description: "Elevate your business with professional web design in Guildford. Attract customers & boost engagement for your Surrey-based small business."
+title: "How Do I Choose a Web Design Company in Guildford?"
+description: "What should a Guildford business look for in a web designer, what does it cost, and what difference does it make? Straight answers from a Surrey agency."
 pubDate: 2026-04-07
 image: "./images/web-design-guildford-hero.png"
 ---

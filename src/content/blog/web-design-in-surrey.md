@@ -1,6 +1,6 @@
 ---
-title: "The Complete Guide to Web Design in Surrey: Transform Your Online Presence in 2026"
-description: "Discover the importance of web design for small businesses in Surrey. Enhance credibility, brand awareness, and customer conversions with Cumulus Digital."
+title: "What Makes Good Web Design for a Surrey Small Business?"
+description: "What separates a website that wins work from one that just exists? What Surrey small businesses should expect from web design, in plain English."
 pubDate: 2026-04-07
 image: "./images/web-design-in-surrey-hero.png"
 ---

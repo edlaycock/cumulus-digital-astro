@@ -1,6 +1,6 @@
 ---
-title: "The Complete Guide to WordPress Web Design in Surrey"
-description: "Boost your Surrey business with cost-effective, SEO-friendly WordPress web design. Perfect for small to medium-sized enterprises."
+title: "Is WordPress Web Design Right for Your Surrey Business?"
+description: "When WordPress is the right choice for a Surrey small business, when it is not, and what a well-built WordPress site should give you."
 pubDate: 2026-04-07
 image: "./images/wordpress-web-design-surrey-hero.png"
 ---

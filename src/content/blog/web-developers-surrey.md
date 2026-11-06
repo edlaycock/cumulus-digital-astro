@@ -1,6 +1,6 @@
 ---
-title: "Finding the Best Web Developers in Surrey: A 2026 Guide"
-description: "Discover top web developers in Surrey for custom website design and e-commerce solutions. Tailored for small to medium-sized businesses."
+title: "How Do I Find the Right Web Developers in Surrey?"
+description: "Custom build or template? Agency or freelancer? How Surrey businesses should choose web developers, and the questions worth asking first."
 pubDate: 2026-04-07
 image: "./images/web-developers-surrey-hero.png"
 ---
