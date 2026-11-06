@@ -98,6 +98,30 @@ Generate two takes per subject and keep the better one. If no image
 tool is available that session, publish without images rather than
 substituting stock — the index card has a brand fallback.
 
+## Animated hero for social (owner-approved, standard from Nov 2026)
+
+After the hero image is final, animate it into a roughly 5 second
+motion loop for the social posts: ONE subtle continuous motion only
+(slow push-in, gentle light pulse, drifting particles), glass objects
+fixed, seamless loop, no new objects, no text, no camera shake. Use
+the Gemini API (Veo) once a key is configured on this environment,
+otherwise an available video model in the session's creative tools;
+if neither is available, fall back to the static-image link post
+rather than blocking the article. Keep the clip's downloadable URL
+for the posting step; expect a cost of roughly one to two pounds per
+clip on ElevenLabs, less on Gemini credit.
+
+**Posting the video.** Facebook: publish as native video via
+`POST https://graph.facebook.com/v27.0/<PAGE_ID>/videos` with
+`file_url` (the clip's https URL) and `description` (the Page post
+text including the article link; links in video descriptions are not
+clickable cards, so write the URL plainly). On any failure, fall back
+to the ordinary /feed link post once, then report. LinkedIn: once the
+org ID and token are configured, upload the clip via LinkedIn's media
+upload flow and attach it to the post; until then, or on failure, the
+LinkedIn draft stays manual. Record every returned post id in the
+report.
+
 ## Provenance hygiene (part of every ship)
 
 - After the humanizer pass, scan the final markdown for invisible or
