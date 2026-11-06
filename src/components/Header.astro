@@ -8,7 +8,8 @@ const isActive = (href: string) => path === href || path === href.replace(/\/$/,
 <div class="site-head-wrap" id="site-head-wrap">
   <header class="site-head">
     <a class="brand" href="/" aria-label="Cumulus Digital home">
-      <img class="brand-logo" src="/cumulus-logo.png" alt="Cumulus Digital" />
+      <img class="brand-logo brand-logo--standard" src="/cumulus-logo.png" alt="Cumulus Digital" />
+      <img class="brand-logo brand-logo--reversed" src="/cumulus-logo-reversed.png" alt="Cumulus Digital" />
     </a>
 
     <nav class="nav" aria-label="Primary">
@@ -52,7 +53,14 @@ const isActive = (href: string) => path === href || path === href.replace(/\/$/,
 
 <script>
   const headWrap = document.getElementById('site-head-wrap');
-  const setScrolled = () => headWrap?.classList.toggle('scrolled', window.scrollY > 60);
+
+  // Pages that open with a dark glass hero get the see-through bar (white
+  // links, reversed logo); everywhere else the bar keeps its solid ground.
+  const hero = document.querySelector('.hero-glass, .page-hero--glass, .ptn');
+  const heroAtTop = !!hero && hero.getBoundingClientRect().top + window.scrollY < 120;
+  headWrap?.classList.toggle('head-clear', heroAtTop);
+
+  const setScrolled = () => headWrap?.classList.toggle('scrolled', window.scrollY > 24);
   window.addEventListener('scroll', setScrolled, { passive: true });
   setScrolled();
 
