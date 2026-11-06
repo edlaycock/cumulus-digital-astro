@@ -1,6 +1,6 @@
 ---
-title: "Guide to Web Design in Hersham: Elevate Your Online Presence"
-description: "Discover the importance of web design for small businesses in Hersham. Enhance your brand and drive traffic with Cumulus Digital."
+title: "What Does Good Web Design Look Like for a Hersham Business?"
+description: "What a Hersham small business should expect from its website, and how good local web design wins trust and customers."
 image: "./images/web-design-hersham-hero.png"
 pubDate: 2026-04-08
 ---

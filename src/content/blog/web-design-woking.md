@@ -1,6 +1,6 @@
 ---
-title: "Your Ultimate Guide to Web Design in Woking: Elevate Your Online Presence in 2026"
-description: "Discover how professional web design in Woking can enhance your business's credibility and user experience. Perfect for SMEs in Surrey."
+title: "How Do I Choose a Web Designer in Woking?"
+description: "What makes good web design for a Woking business, and how do you pick the right person to build it? Plain answers for local SMEs."
 pubDate: 2026-04-07
 image: "./images/web-design-woking-hero.png"
 ---
