@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ServiceSchema from '../../components/ServiceSchema.astro';
+import ValueIcon from '../../components/ValueIcon.astro';
+import { MapPackRise } from '../../components/ui/map-pack-rise';
 import { ContainerScroll } from '../../components/ui/container-scroll-animation';
 import { GlassFold } from '../../components/ui/glass-fold';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
@@ -119,24 +121,32 @@ const faqs = [
       <div class="values-grid">
         <div class="value-card" data-reveal>
           <span class="value-num">01</span>
+          <ValueIcon name="gauge" />
           <h3>The site is slow or hard to crawl</h3>
           <p>Google rations its attention. A slow, tangled site gets less of it, and pages it can't read cleanly don't rank — however good the words are.</p>
         </div>
         <div class="value-card" data-reveal style="--reveal-delay:.1s">
           <span class="value-num">02</span>
+          <ValueIcon name="layout" />
           <h3>One page trying to do everything</h3>
           <p>A single “services” page can't compete with a rival that has a dedicated page for each service and town it works in.</p>
         </div>
         <div class="value-card" data-reveal style="--reveal-delay:.2s">
           <span class="value-num">03</span>
+          <ValueIcon name="pin" />
           <h3>A neglected Google Business Profile</h3>
           <p>The map pack wins the “near me” searches, and it's driven by your profile — categories, reviews and activity — more than your website.</p>
         </div>
         <div class="value-card" data-reveal style="--reveal-delay:.3s">
           <span class="value-num">04</span>
+          <ValueIcon name="clock" />
           <h3>Nothing new in years</h3>
           <p>Google favours businesses that look alive. A site last touched in 2021 tells it, and your customers, the opposite.</p>
         </div>
+      </div>
+
+      <div class="graphic-slot" data-reveal>
+        <MapPackRise client:visible />
       </div>
     </div>
   </section>
@@ -149,7 +159,7 @@ const faqs = [
         <h2 class="section-title">Audit first.<br />Then earn it, <em>monthly</em>.</h2>
       </div>
 
-      <div class="values-grid">
+      <div class="values-grid values-grid--flow">
         {process.map((p, i) => (
           <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
             <span class="value-num">{p.step}</span>

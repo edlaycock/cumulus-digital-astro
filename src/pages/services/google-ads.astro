@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ServiceSchema from '../../components/ServiceSchema.astro';
+import ValueIcon from '../../components/ValueIcon.astro';
+import { BudgetSplit } from '../../components/ui/budget-split';
 import { ContainerScroll } from '../../components/ui/container-scroll-animation';
 import { GlassFold } from '../../components/ui/glass-fold';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
@@ -112,24 +114,32 @@ const faqs = [
       <div class="values-grid">
         <div class="value-card" data-reveal>
           <span class="value-num">01</span>
+          <ValueIcon name="target" />
           <h3>Conversion tracking isn't right</h3>
           <p>If Google is optimising towards page views instead of enquiries, it will confidently spend your budget on the wrong people.</p>
         </div>
         <div class="value-card" data-reveal style="--reveal-delay:.1s">
           <span class="value-num">02</span>
+          <ValueIcon name="funnel" />
           <h3>Broad match with no negatives</h3>
           <p>Left unchecked, broad match will happily buy clicks for searches that have nothing to do with your business.</p>
         </div>
         <div class="value-card" data-reveal style="--reveal-delay:.2s">
           <span class="value-num">03</span>
+          <ValueIcon name="layers" />
           <h3>One campaign for everything</h3>
           <p>Bundling every service into a single ad group means no control over budget, message or bids — and worse quality scores.</p>
         </div>
         <div class="value-card" data-reveal style="--reveal-delay:.3s">
           <span class="value-num">04</span>
+          <ValueIcon name="cursor" />
           <h3>Traffic lands on the wrong page</h3>
           <p>Sending every ad to the homepage wastes the click. The page has to answer the search that earned it.</p>
         </div>
+      </div>
+
+      <div class="graphic-slot" data-reveal>
+        <BudgetSplit client:visible />
       </div>
     </div>
   </section>
@@ -142,7 +152,7 @@ const faqs = [
         <h2 class="section-title">Audit first.<br />Spend <em>second</em>.</h2>
       </div>
 
-      <div class="values-grid">
+      <div class="values-grid values-grid--flow">
         {process.map((p, i) => (
           <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
             <span class="value-num">{p.step}</span>

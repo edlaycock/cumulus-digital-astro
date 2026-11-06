@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ValueIcon from '../../components/ValueIcon.astro';
+import { PagesMultiply } from '../../components/ui/pages-multiply';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ServiceSchema from '../../components/ServiceSchema.astro';
 import { getImage } from 'astro:assets';
@@ -44,21 +46,25 @@ const marquee = await Promise.all(
 const problems = [
   {
     n: '01',
+    icon: 'layers',
     h: 'It looks like everyone else',
     p: 'A theme bought off the shelf gives you the same site as a thousand other businesses, with your logo dropped in the corner. Customers notice, even if they could not tell you why.',
   },
   {
     n: '02',
+    icon: 'gauge',
     h: 'It is slow',
     p: 'Page builders stack plugin on plugin until a simple page pulls a megabyte of code nobody needed. Slow sites lose visitors before they have read a word — and Google counts it against you.',
   },
   {
     n: '03',
+    icon: 'layout',
     h: 'It was never built for phones',
     p: 'Most of your visitors arrive on a phone. A design squeezed down from desktop rather than planned for mobile makes them pinch, scroll and give up.',
   },
   {
     n: '04',
+    icon: 'cursor',
     h: 'It does not ask for the enquiry',
     p: 'A beautiful site that buries the contact route is decoration. Every page should make the next step obvious.',
   },
@@ -156,10 +162,15 @@ const faqs = [
         {problems.map((x, i) => (
           <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
             <span class="value-num">{x.n}</span>
+            <ValueIcon name={x.icon} />
             <h3>{x.h}</h3>
             <p>{x.p}</p>
           </div>
         ))}
+      </div>
+
+      <div class="graphic-slot" data-reveal>
+        <PagesMultiply client:visible />
       </div>
     </div>
   </section>
@@ -188,7 +199,7 @@ const faqs = [
         <p class="section-label">How we work</p>
         <h2 class="section-title">Four steps, no <em>mystery</em>.</h2>
       </div>
-      <div class="values-grid">
+      <div class="values-grid values-grid--flow">
         {process.map((p, i) => (
           <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
             <span class="value-num">{p.step}</span>

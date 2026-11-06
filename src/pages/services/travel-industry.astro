@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import illo from '../../assets/illustrations/travel-industry.png';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ServiceSchema from '../../components/ServiceSchema.astro';
 import { ContainerScroll } from '../../components/ui/container-scroll-animation';
@@ -137,6 +139,14 @@ const faqs = [
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <figure class="svc-figure" data-reveal>
+        <Image src={illo} alt="A frosted glass globe with teal flight paths and a glass paper plane" widths={[760, 1280]} sizes="(max-width: 920px) 94vw, 880px" loading="lazy" />
+      </figure>
     </div>
   </section>
 
