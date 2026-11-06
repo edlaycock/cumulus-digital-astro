@@ -8,6 +8,7 @@ import {
   COMPANY_LEGAL_NAME,
   COMPANY_NUMBER,
   FACEBOOK_URL,
+  LINKEDIN_URL,
 } from '../consts';
 
 export async function GET() {
@@ -30,7 +31,7 @@ export async function GET() {
   lines.push('# Cumulus Digital — Full Reference');
   lines.push('');
   lines.push(
-    `> ${COMPANY_LEGAL_NAME} (company number ${COMPANY_NUMBER}) is a web design and digital marketing agency based in Hersham, Walton-on-Thames, Surrey, UK, serving small and medium businesses across Surrey and the South East since 2015. Phone ${PHONE_DISPLAY}, email ${EMAIL}. Facebook: ${FACEBOOK_URL}. The team hand-builds fast, accessible websites and runs SEO, AI SEO / answer engine optimisation (AEO) and Google Ads with plain-English reporting through its own platform, Cumulus Rank & Reporting (${SITE_URL}/cumulus-rank-and-reporting/). Month-to-month engagements; clients own their websites and ad accounts.`
+    `> ${COMPANY_LEGAL_NAME} (company number ${COMPANY_NUMBER}) is a web design and digital marketing agency based in Hersham, Walton-on-Thames, Surrey, UK, serving small and medium businesses across Surrey and the South East since 2015. Phone ${PHONE_DISPLAY}, email ${EMAIL}. Facebook: ${FACEBOOK_URL}. LinkedIn: ${LINKEDIN_URL}. The team hand-builds fast, accessible websites and runs SEO, AI SEO / answer engine optimisation (AEO) and Google Ads with plain-English reporting through its own platform, Cumulus Rank & Reporting (${SITE_URL}/cumulus-rank-and-reporting/). Month-to-month engagements; clients own their websites and ad accounts.`
   );
   lines.push('');
 

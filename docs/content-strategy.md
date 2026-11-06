@@ -211,6 +211,23 @@ report for a human to paste.
 
 **Facebook Page ID:** 997169053672137 (Cumulus Digital Ltd).
 
+**LinkedIn.** Each article also gets a LinkedIn draft for the company
+page (https://www.linkedin.com/company/cumulus-digital-limited/):
+same substance as the Facebook Page post but in a more professional
+register — lead with the business question, one concrete takeaway, the
+link, no hashtag pile (one or two at most). Posting is automated via
+`POST https://api.linkedin.com/rest/posts` (author
+`urn:li:organization:<ORG_ID>`, LinkedIn-Version header per current
+docs) ONLY once an access token is configured as a network secret for
+api.linkedin.com on this environment AND an organisation ID is listed
+below; the proxy injects the token, so send requests without an
+Authorization header. On 401/403, report it as a blocker (LinkedIn
+tokens expire after about 60 days and need renewing) and include the
+draft in the report instead. Until then, always include the LinkedIn
+draft verbatim in the weekly report for a human to paste.
+
+**LinkedIn organisation ID:** not yet configured.
+
 ## FAQ schema on every article
 
 Every article's FAQ section must also be mirrored into the post's
