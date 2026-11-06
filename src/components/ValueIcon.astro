@@ -1,0 +1,28 @@
+---
+// Small stroked icon for a value-card, drawn in the same 48x48 stroked style
+// as the services-hub icons. Decorative only — the card copy carries meaning.
+const ICONS: Record<string, string> = {
+  gauge: 'M8 32a16 16 0 1 1 32 0M24 32 33 20',
+  layout: 'M8 10h32v28H8zM8 18h32M20 18v20',
+  pin: 'M24 6a11 11 0 0 1 11 11c0 8-11 21-11 21S13 25 13 17A11 11 0 0 1 24 6ZM24 21a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z',
+  clock: 'M24 8a16 16 0 1 0 0 32 16 16 0 0 0 0-32ZM24 16v9l7 4',
+  speech: 'M8 12h32v20H22l-8 8v-8H8z',
+  target: 'M24 10a14 14 0 1 0 0 28 14 14 0 0 0 0-28ZM24 17a7 7 0 1 0 0 14 7 7 0 0 0 0-14Z',
+  scan: 'M14 6h14l8 8v28H14zM28 6v8h8M19 22h10M19 28h10M19 34h7',
+  bolt: 'M26 6 12 28h9l-3 14 16-24h-9l1-12Z',
+  funnel: 'M8 10h32L28 26v12l-8 4V26L8 10Z',
+  layers: 'M24 8 42 18 24 28 6 18 24 8ZM10 26l14 8 14-8',
+  cursor: 'M14 10l20 8-9 3-3 9-8-20ZM27 23l9 9',
+  chart: 'M10 38V10M10 38h28M16 32l7-8 6 4 9-12',
+};
+
+interface Props {
+  name: keyof typeof ICONS | string;
+}
+const { name } = Astro.props;
+const d = ICONS[name] ?? ICONS.chart;
+---
+
+<svg class="value-icon" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <path d={d} />
+</svg>

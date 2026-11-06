@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ServiceSchema from '../../components/ServiceSchema.astro';
+import ValueIcon from '../../components/ValueIcon.astro';
+import { AiAnswerDemo } from '../../components/ui/ai-answer-demo';
 import { ContainerScroll } from '../../components/ui/container-scroll-animation';
 import { GlassFold } from '../../components/ui/glass-fold';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
@@ -117,24 +119,32 @@ const faqs = [
       <div class="values-grid">
         <div class="value-card" data-reveal>
           <span class="value-num">01</span>
+          <ValueIcon name="speech" />
           <h3>The answer replaces the results page</h3>
           <p>AI Overviews sit above every ranking you've earned. If the answer covers the question, the ten blue links below it never get read.</p>
         </div>
         <div class="value-card" data-reveal style="--reveal-delay:.1s">
           <span class="value-num">02</span>
+          <ValueIcon name="target" />
           <h3>Recommendations are winner-takes-most</h3>
           <p>Ask ChatGPT for “a good accountant in Guildford” and it names a few. There's no page two of an AI answer.</p>
         </div>
         <div class="value-card" data-reveal style="--reveal-delay:.2s">
           <span class="value-num">03</span>
+          <ValueIcon name="scan" />
           <h3>Most websites are hard for AI to read</h3>
           <p>Vague pages, missing structured data and inconsistent business details make a model unsure — and unsure models recommend someone else.</p>
         </div>
         <div class="value-card" data-reveal style="--reveal-delay:.3s">
           <span class="value-num">04</span>
+          <ValueIcon name="bolt" />
           <h3>Hardly anyone is working on it yet</h3>
           <p>Unlike classic SEO, the field is nearly empty. Deliberate groundwork now buys a position that will cost far more to win later.</p>
         </div>
+      </div>
+
+      <div class="graphic-slot" data-reveal>
+        <AiAnswerDemo client:visible />
       </div>
     </div>
   </section>
@@ -147,7 +157,7 @@ const faqs = [
         <h2 class="section-title">Measure what AI says.<br />Then change <em>it</em>.</h2>
       </div>
 
-      <div class="values-grid">
+      <div class="values-grid values-grid--flow">
         {process.map((p, i) => (
           <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
             <span class="value-num">{p.step}</span>

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import illo from '../../assets/illustrations/web-development.png';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ServiceSchema from '../../components/ServiceSchema.astro';
 import TumbleDeckShowcase from '../../components/ui/tumble-deck-showcase';
@@ -201,7 +203,7 @@ const faqs = [
         <p class="section-label">How we work</p>
         <h2 class="section-title">Four steps, no <em>mystery</em>.</h2>
       </div>
-      <div class="values-grid">
+      <div class="values-grid values-grid--flow">
         {process.map((p, i) => (
           <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
             <span class="value-num">{p.step}</span>
@@ -210,6 +212,14 @@ const faqs = [
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <figure class="svc-figure" data-reveal>
+        <Image src={illo} alt="Frosted glass code editor panels floating in deep navy space, lit in teal" widths={[760, 1280]} sizes="(max-width: 920px) 94vw, 880px" loading="lazy" />
+      </figure>
     </div>
   </section>
 

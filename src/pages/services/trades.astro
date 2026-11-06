@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import illo from '../../assets/illustrations/trades.png';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ServiceSchema from '../../components/ServiceSchema.astro';
 import ImpactHero from '../../components/ImpactHero.astro';
@@ -136,6 +138,14 @@ const faqs = [
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <figure class="svc-figure" data-reveal>
+        <Image src={illo} alt="Frosted glass hard hat, scaffolding and rising graph bars in deep navy" widths={[760, 1280]} sizes="(max-width: 920px) 94vw, 880px" loading="lazy" />
+      </figure>
     </div>
   </section>
 
