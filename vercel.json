@@ -2,6 +2,16 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml",
+      "permanent": true
+    },
+    {
+      "source": "/website-design-woking",
+      "destination": "/web-design-woking/",
+      "permanent": true
+    },
+    {
       "source": "/project/gallery-one-reigate",
       "destination": "/work/the-gallery-tetbury/",
       "permanent": true
