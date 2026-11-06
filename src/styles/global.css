@@ -184,10 +184,45 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   background: rgba(255,255,255,.88);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  transition: box-shadow .35s;
+  transition: background-color .35s, box-shadow .35s;
 }
 /* a hairline appears only once the canvas starts moving underneath */
 .site-head-wrap.scrolled { box-shadow: 0 1px 0 var(--lt-border); }
+
+/* ---- see-through bar over dark glass heroes ----
+   .head-clear is set by the header script only when the page opens with a
+   dark hero (.hero-glass / .page-hero--glass / .ptn). At the top of such a
+   page the bar is transparent with white links and the reversed logo; the
+   blur stays off here because backdrop-filter blurs the hero even through
+   a transparent ground. Scrolling restores the solid bar and standard logo. */
+.site-head-wrap.head-clear:not(.scrolled) {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.brand-logo--reversed { display: none; }
+.head-clear:not(.scrolled) .brand-logo--reversed { display: block; }
+.head-clear:not(.scrolled) .brand-logo--standard { display: none; }
+.site-head-wrap.head-clear:not(.scrolled) .nav-links > a,
+.site-head-wrap.head-clear:not(.scrolled) .nav-item--sub > a { color: #fff; }
+.site-head-wrap.head-clear:not(.scrolled) .nav-links > a:hover,
+.site-head-wrap.head-clear:not(.scrolled) .nav-item--sub > a:hover { color: var(--cyan-lt); }
+.site-head-wrap.head-clear:not(.scrolled) .nav-phone { color: rgba(242,245,248,.78); }
+.site-head-wrap.head-clear:not(.scrolled) .nav-phone:hover { color: var(--cyan-lt); }
+.site-head-wrap.head-clear:not(.scrolled) .nav-burger span { background: #fff; }
+.site-head-wrap.head-clear:not(.scrolled) .nav > .btn--primary {
+  background: #fff;
+  color: var(--cyan);
+}
+/* the open mobile panel keeps its white ground, so its links stay dark
+   even while the bar itself is transparent */
+@media (max-width: 880px) {
+  .site-head-wrap.head-clear:not(.scrolled) .nav--open .nav-links > a,
+  .site-head-wrap.head-clear:not(.scrolled) .nav--open .nav-item--sub > a { color: var(--lt-text); }
+  .site-head-wrap.head-clear:not(.scrolled) .nav--open .nav-links > a:hover,
+  .site-head-wrap.head-clear:not(.scrolled) .nav--open .nav-item--sub > a:hover,
+  .site-head-wrap.head-clear:not(.scrolled) .nav--open .nav-links > a[aria-current="page"] { color: var(--cyan); }
+}
 
 /* ---- nav ---- */
 .site-head {
