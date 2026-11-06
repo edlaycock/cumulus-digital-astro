@@ -1146,6 +1146,20 @@ h1.headline em.glow, .cta-headline em.glow {
 .footer-sting { display: block; width: min(250px, 100%); }
 .footer-sting .cls-sting { width: 100%; }
 .footer-tagline { font-size: .9rem; color: rgba(242, 245, 248, .78); }
+.footer-social { display: flex; gap: 1rem; margin-top: 1.1rem; }
+.footer-social a {
+  display: grid; place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.22);
+  color: rgba(242,245,248,.85);
+  transition: color .25s, border-color .25s, background .25s;
+}
+.footer-social a:hover {
+  color: #031422;
+  background: var(--cyan-lt);
+  border-color: var(--cyan-lt);
+}
 .footer-nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

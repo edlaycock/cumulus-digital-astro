@@ -39,4 +39,5 @@ Cumulus Digital builds hand-coded, fast websites rather than templated ones, and
 - Phone: 020 8050 4754
 - Email: info@cumulusdigital.co.uk
 - Facebook: https://www.facebook.com/997169053672137
+- LinkedIn: https://www.linkedin.com/company/cumulus-digital-limited/
 - Extended version of this file: https://cumulusdigital.co.uk/llms-full.txt

@@ -19,9 +19,10 @@ export const ADDRESS = {
 export const COMPANY_LEGAL_NAME = 'Cumulus Digital Limited';
 export const COMPANY_NUMBER = '09893216';
 
-// The agency's Facebook Page — the only social profile. Used in the footer
-// and as the schema sameAs entity link.
+// The agency's social profiles. Used in the footer and as the schema
+// sameAs entity links.
 export const FACEBOOK_URL = 'https://www.facebook.com/997169053672137';
+export const LINKEDIN_URL = 'https://www.linkedin.com/company/cumulus-digital-limited/';
 
 // Formspree endpoint. Client-visible by design (the browser posts to it),
 // so it lives here; PUBLIC_FORM_ENDPOINT still overrides it if ever needed.
