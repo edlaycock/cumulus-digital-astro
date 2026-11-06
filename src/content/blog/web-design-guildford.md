@@ -109,6 +109,8 @@ Understanding these elements can help small to medium-sized businesses in Surrey
 
 In today’s fast-paced digital environment, studies show that visitors make judgments about your website within the first three seconds. These fleeting moments are crucial, especially for small to medium-sized businesses in Surrey trying to capture customer interest amid intense competition.
 
+![A frosted glass stopwatch with a teal second hand in front of a browser window](./images/guildford-three-second-rule.png)
+
 To maximise impact during this limited timeframe, it’s essential to understand how to effectively engage your audience right from the start.
 
 ### How to Capture a Visitor’s Attention Quickly
@@ -135,6 +137,8 @@ By prioritising these design aspects, small to medium-sized businesses in Surrey
 ## Essential Web Design Principles: The 5 Golden Rules
 
 ### Simplicity and Clarity
+
+![Five upright frosted glass tiles in an arc with the centre tile glowing teal](./images/guildford-golden-rules.png)
 
 A clean, straightforward design is crucial for user experience. Visitors appreciate websites that are easy to navigate without unnecessary clutter. To achieve simplicity:
 

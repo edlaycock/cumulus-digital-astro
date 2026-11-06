@@ -111,6 +111,8 @@ Prioritize these considerations to find a web developer in Surrey who meets your
 
 Working with developers can significantly influence your online presence. The choice between hiring a freelance developer and engaging with a local agency can affect quality, communication, and ongoing support.
 
+![A glass path splitting toward a single desk on one side and a cluster of desks on the other](./images/surrey-freelance-vs-agency.png)
+
 ### Pros and Cons of Working with Freelance Developers
 
 Freelance developers can offer **flexibility** and **cost-effectiveness**. Here are some advantages and disadvantages:

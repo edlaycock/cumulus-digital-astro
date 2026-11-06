@@ -104,6 +104,8 @@ Choosing a web design agency in Woking requires considering multiple factors. Th
 
 ### Initial Consultation: Understanding Your Vision
 
+![Four glass panels ascending from a loose wireframe to a finished glowing webpage](./images/woking-design-process.png)
+
 The web design process begins with an **initial consultation**, where we focus on understanding your unique needs and vision. During this phase, we aim to clarify your goals, target audience, and preferred styles.
 
 - **Establishing Goals**: Discuss what you want your website to achieve, whether it’s increasing leads, showcasing your portfolio, or driving sales.

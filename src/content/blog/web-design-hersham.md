@@ -71,6 +71,8 @@ Improving load speed can enhance both user satisfaction and search engine rankin
 
 Pricing for web design services in the UK can vary widely based on several factors. Typically, small to medium-sized businesses should expect to spend anywhere from £1,500 to £15,000 for a custom website.
 
+![A frosted glass laptop beside stacks of glass coins, one stack glowing teal](./images/hersham-website-cost.png)
+
 ### What You Can Expect to Pay
 
 For basic websites, prices usually start around £1,500 to £3,000. These sites often include:
@@ -157,6 +159,8 @@ With these hallmarks, your website can be well poised to attract and retain visi
 ## The Role of Local Expertise in Web Design
 
 Choosing a local web design agency like [Cumulus Digital](/) offers numerous advantages tailored to businesses in Hersham.
+
+![A warmly lit frosted glass village shopfront with a glowing teal location pin above it](./images/hersham-local-shopfront.png)
 
 ### Benefits of Choosing Local Expertise
 
