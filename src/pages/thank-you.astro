@@ -9,6 +9,30 @@ import { EMAIL, PHONE_DISPLAY, PHONE_TEL } from '../consts';
 >
   <Fragment slot="head"><meta name="robots" content="noindex" /></Fragment>
 
+  <script>
+    // Lead conversion for GA4. Analytics only exists here if the visitor
+    // accepted the cookie banner (the banner script defines window.gtag),
+    // so poll briefly for it rather than loading anything ourselves — and
+    // fire once per browser session so a refresh doesn't double-count.
+    (() => {
+      const KEY = 'cd-lead-sent';
+      try {
+        if (sessionStorage.getItem(KEY)) return;
+      } catch {}
+      let tries = 0;
+      const timer = window.setInterval(() => {
+        const g = (window as any).gtag;
+        if (typeof g === 'function') {
+          g('event', 'generate_lead', { form_name: 'contact' });
+          try { sessionStorage.setItem(KEY, '1'); } catch {}
+          window.clearInterval(timer);
+        } else if (++tries > 20) {
+          window.clearInterval(timer);
+        }
+      }, 250);
+    })();
+  </script>
+
   <section class="notfound thankyou">
     <div>
       <p class="thankyou-mark" aria-hidden="true">
