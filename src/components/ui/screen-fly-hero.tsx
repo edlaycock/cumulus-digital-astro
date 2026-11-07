@@ -1,5 +1,5 @@
 import { animate, motion, useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { GlassFold } from './glass-fold';
 
 // Web design hero: client sites in browser frames rise from a perspective
@@ -86,6 +86,8 @@ export function ScreenFlyHero({
   screens, tagline, titleHtml, description, ctaText, ctaHref, secondaryText, secondaryHref,
 }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
+  const [horizon, setHorizon] = useState<number | null>(null);
   const [still, setStill] = useState(false);
   const [stage, setStage] = useState<Stage>({ w: 1440, h: 900, mobile: false });
 
@@ -94,8 +96,16 @@ export function ScreenFlyHero({
     const apply = () => setStill(mq.matches);
     apply();
     mq.addEventListener('change', apply);
-    const size = () =>
+    const size = () => {
       setStage({ w: window.innerWidth, h: window.innerHeight, mobile: window.innerWidth < 768 });
+      // the horizon sits just under the buttons, however the copy wraps
+      const c = copyRef.current;
+      if (c) {
+        const bottom = c.offsetTop + c.offsetHeight;
+        const gap = window.innerWidth < 768 ? 44 : 40;
+        setHorizon(Math.min(Math.max(bottom + gap, window.innerHeight * 0.5), window.innerHeight * 0.72));
+      }
+    };
     size();
     window.addEventListener('resize', size);
     return () => {
@@ -132,7 +142,10 @@ export function ScreenFlyHero({
         <div className="page-hero-bg" aria-hidden="true">
           <GlassFold />
         </div>
-        <div className="sfh-world">
+        <div
+          className="sfh-world"
+          style={horizon ? ({ '--sfh-h': `${horizon}px` } as CSSProperties) : undefined}
+        >
           <motion.div
             className="sfh-floor"
             aria-hidden="true"
@@ -147,7 +160,7 @@ export function ScreenFlyHero({
           ))}
         </div>
 
-        <motion.div className="sfh-copy" style={still ? undefined : { y: copyY }}>
+        <motion.div ref={copyRef} className="sfh-copy" style={still ? undefined : { y: copyY }}>
           <p className="eyebrow"><span className="eyebrow-dot" />{tagline}</p>
           <h1 className="sfh-title" dangerouslySetInnerHTML={{ __html: titleHtml }} />
           <p className="sfh-lede">{description}</p>

@@ -3826,10 +3826,10 @@ h1.headline em,
   z-index: 1;
   pointer-events: none;
   perspective: 1000px;
-  perspective-origin: 50% 64%;
+  perspective-origin: 50% var(--sfh-h, 64%);
 }
 /* the vanishing point every 3D child is placed from */
-.sfh-floor, .sfh-screen, .sfh-horizon { position: absolute; left: 50%; top: 64%; }
+.sfh-floor, .sfh-screen, .sfh-horizon { position: absolute; left: 50%; top: var(--sfh-h, 64%); }
 .sfh-floor {
   width: 800vw;
   height: 6000px;
@@ -3915,8 +3915,6 @@ h1.headline em,
 .sfh-actions .btn--outline:hover { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .55); }
 @media (max-width: 767px) {
   .sfh { height: 220vh; }
-  .sfh-world { perspective-origin: 50% 72%; }
-  .sfh-floor, .sfh-screen, .sfh-horizon { top: 72%; }
   .sfh-lede { font-size: .98rem; }
   .sfh-bar { height: 16px; gap: 4px; padding: 0 6px; }
   .sfh-bar i { width: 5px; height: 5px; }
