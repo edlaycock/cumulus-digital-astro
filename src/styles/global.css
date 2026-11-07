@@ -3919,6 +3919,7 @@ h1.headline em,
   .sfh-bar { height: 16px; gap: 4px; padding: 0 6px; }
   .sfh-bar i { width: 5px; height: 5px; }
   .sfh-bar span { font-size: 7px; }
+}
 /* ============================================================
    AI FOR BUSINESS page
    ============================================================ */
@@ -4015,3 +4016,16 @@ h1.headline em,
 @media (max-width: 640px) {
   .ai-uses, .ai-case-grid { grid-template-columns: 1fr; }
 }
+
+/* AI SEO: engine logos on the "every answer engine" cards */
+.engine-logos { display: flex; align-items: center; gap: .55rem; margin-bottom: 1.1rem; color: var(--cyan); }
+.engine-logos img { width: 40px; height: 40px; object-fit: contain; }
+.engine-logos img + img { width: 28px; height: 28px; opacity: .9; }
+.ai-tools { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.2rem; padding: 0; list-style: none; }
+.ai-tools li {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .45rem .85rem .45rem .55rem;
+  border: 1px solid var(--grey-200, #e3e7ea); border-radius: 999px;
+  background: #fff; font-size: .88rem; font-weight: 500;
+}
+.ai-tools img { width: 22px; height: 22px; object-fit: contain; }
