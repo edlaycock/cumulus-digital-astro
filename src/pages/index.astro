@@ -13,6 +13,7 @@ import WorkPreview from '../components/WorkPreview.astro';
 import ReviewCarousel from '../components/ReviewCarousel.astro';
 import ClientBand from '../components/ClientBand.astro';
 import PhoneShowcase from '../components/PhoneShowcase.astro';
+import FaqSchema from '../components/FaqSchema.astro';
 
 
 const services = (await getCollection('services'))
@@ -39,12 +40,42 @@ const work = (await getCollection('work'))
 // mistake.
 const marquee = await clientMarquee(['surrey-contracting']);
 
+// Home page Q&As. FaqSchema mirrors this list exactly, so every answer here
+// must stay visible on the page.
+const faqs = [
+  {
+    q: 'What does Cumulus Digital do?',
+    a: "We're a web design and digital marketing agency in Hersham, Surrey. We design and hand-build websites, then help people find them through SEO, AI search optimisation and Google Ads. We also help trades and small businesses put AI to work on their everyday admin.",
+  },
+  {
+    q: 'Do you only work with businesses in Surrey?',
+    a: "Most of our clients are in Surrey and the South East, but not all of them. We've built sites for holiday companies selling the Gulf and for a road-safety training business that works worldwide. AI search work suits any UK business, wherever it's based.",
+  },
+  {
+    q: 'How much does a website cost?',
+    a: "It depends on how many pages you need, whether you take bookings or sell online, and whether your branding exists yet. So we quote each project rather than publish a price that would be wrong for most people. You'll get a straight figure up front with no surprises later.",
+  },
+  {
+    q: 'Do I have to sign a long contract?',
+    a: "No. Our marketing work runs month to month. Your website, domain and accounts belong to you, so if we ever part ways you take everything with you.",
+  },
+  {
+    q: 'Can you get my business recommended by ChatGPT and Google AI?',
+    a: "That's what answer engine optimisation is for. AI tools favour clear pages that answer real questions, business details that match everywhere, and good reviews. We check what ChatGPT, Gemini, Perplexity and Google's AI Overviews say about you now, do the work, and show you how the answers change.",
+  },
+  {
+    q: 'What kinds of businesses have you worked with?',
+    a: "Builders, groundworks and surfacing contractors, fencing and landscaping firms, accountants, a hair salon, an aesthetics clinic, an art gallery, holiday companies and our own village community site, among others. You can browse more than 30 of them on our work page and filter by industry.",
+  },
+];
+
 ---
 
 <BaseLayout
   title="Web Design in Surrey &amp; Beyond — Cumulus Digital"
   description="Web design in Surrey and beyond. Bespoke branding, hand-built websites, SEO and Google Ads for ambitious UK businesses. Based in Hersham, Walton-on-Thames."
 >
+  <FaqSchema faqs={faqs} />
   <div class="h2">
     <!-- ===================== HERO ===================== -->
     <ImpactHero
@@ -141,6 +172,21 @@ const marquee = await clientMarquee(['surrey-contracting']);
           <p class="section-sub">Real words from the businesses we've built for.</p>
         </div>
         <ReviewCarousel reviews={reviews} />
+      </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="section" style="background:var(--grey-50)">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Common questions</p>
+          <h2 class="section-title">The things people<br />ask us <em>first</em>.</h2>
+        </div>
+        <div class="faq-list">
+          {faqs.map((f) => (
+            <details class="faq-item" data-reveal><summary>{f.q}</summary><p>{f.a}</p></details>
+          ))}
+        </div>
       </div>
     </section>
 
