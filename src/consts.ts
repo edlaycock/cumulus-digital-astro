@@ -35,8 +35,9 @@ export const GA_ID = import.meta.env.PUBLIC_GA_ID ?? 'G-BV4JL0GNK6';
 
 // Public link to the Google Business Profile reviews. Shown under the review
 // carousel only when at least one review is marked `source: 'google'`.
-// TODO(owner): paste the "Write a review"/profile URL from Google Business Profile.
-export const GOOGLE_REVIEWS_URL = import.meta.env.PUBLIC_GOOGLE_REVIEWS_URL ?? '';
+export const GOOGLE_REVIEWS_URL =
+  import.meta.env.PUBLIC_GOOGLE_REVIEWS_URL ??
+  'https://www.google.com/maps/place/?q=place_id:ChIJo4xDhGt1dkgRaus8MDLaj5M';
 
 export const NAV_LINKS = [
   {
@@ -50,6 +51,13 @@ export const NAV_LINKS = [
       { href: '/services/seo/', label: 'SEO' },
       { href: '/services/ai-seo/', label: 'AI SEO & AEO' },
       { href: '/services/google-ads/', label: 'Google Ads' },
+    ],
+  },
+  {
+    href: '/sectors/',
+    label: 'Sectors',
+    children: [
+      { href: '/sectors/', label: 'All sectors' },
       { href: '/services/travel-industry/', label: 'Travel Industry' },
       { href: '/services/trades/', label: 'Trades & Construction' },
     ],

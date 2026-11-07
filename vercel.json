@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/work/ja-resorts-holidays",
+      "destination": "/work/just-all-inclusive/",
+      "permanent": true
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/sitemap-index.xml",
       "permanent": true
@@ -18,12 +23,12 @@
     },
     {
       "source": "/project/abu-dhabi-holidays",
-      "destination": "/work/",
+      "destination": "/work/abu-dhabi-holidays/",
       "permanent": true
     },
     {
       "source": "/project/ja-resorts-holidays",
-      "destination": "/work/",
+      "destination": "/work/just-all-inclusive/",
       "permanent": true
     },
     {

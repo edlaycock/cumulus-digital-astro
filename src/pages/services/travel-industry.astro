@@ -9,12 +9,13 @@ import { GlassFold } from '../../components/ui/glass-fold';
 import { getImage } from 'astro:assets';
 import WorkPreview from '../../components/WorkPreview.astro';
 import { getCollection } from 'astro:content';
+import { inSector } from '../../lib/sectors';
 import auhMac from '../../assets/frames/abu-dhabi-holidays-scroll-desktop.jpg';
 import auhPhone from '../../assets/frames/abu-dhabi-holidays-scroll-mobile.jpg';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
 
 const all = await getCollection('work');
-const proof = ['ras-al-khaimah-holidays'].map((s) => all.find((w) => w.id === s)).filter(Boolean);
+const proof = inSector(all, 'travel');
 
 // The reveal shows a real travel build as a full-page capture that pans
 // inside the device window, so the site looks like it is being scrolled.
@@ -171,12 +172,12 @@ const faqs = [
       <div class="container">
         <div class="section-header">
           <p class="section-label">Proof</p>
-          <h2 class="section-title">Travel work.</h2>
-          <p class="section-sub">A destination booking site built for the UAE's adventure emirate.</p>
+          <h2 class="section-title">Travel brands we've <em>built for</em>.</h2>
+          <p class="section-sub">Destination specialists, resort brands and hotel representation, every one built by people who've worked inside the trade.</p>
         </div>
         <ul class="work-grid" role="list">
           {proof.map((item) => (
-            <li class="work-card work-card--wide">
+            <li class="work-card">
               <a class="work-card-inner" href={`/work/${item!.id}/`}>
                 <WorkPreview client={item!.data.client} url={item!.data.url} image={item!.data.mockup ?? item!.data.image} />
                 <div class="work-card-content">

@@ -57,8 +57,14 @@ const testimonials = defineCollection({
   loader: file('./src/content/testimonials/testimonials.json'),
   schema: z.object({
     id: z.string(),
-    quote: z.string(),
+    // empty for a stars-only review: it shows on its case study, not in carousels
+    quote: z.string().default(''),
     attribution: z.string(),
+    // case-study id this review belongs to, so it also shows on that page
+    work: z.string().optional(),
+    // true when the quote is only the reviewer's opening sentences; the card
+    // then links to the full review on Google rather than inventing the rest
+    excerpt: z.boolean().default(false),
     // star rating shown on the review card
     rating: z.number().min(1).max(5).default(5),
     // set to 'google' ONLY for reviews genuinely left on the Google Business
