@@ -5,7 +5,7 @@ sector: Construction · Groundworks & Civil Engineering
 services:
 - Web Design
 summary: Lancing-based groundworks specialists covering demolition, land clearance, footings and substructures across Sussex.
-order: 27
+order: 28
 image: ../../assets/work/sussex-groundworks.jpg
 mockup: ../../assets/work/sussex-groundworks-shot1.jpg
 brandColors:
