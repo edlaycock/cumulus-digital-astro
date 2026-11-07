@@ -6,7 +6,7 @@ services:
 - Web Design
 - Web Development
 summary: An award-winning prime construction company offering a turnkey Design & Build service across London, Surrey and the Home Counties — rebuilt around the portfolio of projects they're proud of.
-order: 1
+order: 8
 image: ../../assets/work/castellum.jpg
 gallery:
 - ../../assets/work/castellum-projects.jpg

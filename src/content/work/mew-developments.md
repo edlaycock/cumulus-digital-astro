@@ -6,7 +6,7 @@ services:
 - Branding
 - Web Design
 summary: A Surrey and South London home-renovation specialist that transforms homes with expert craftsmanship — a website reflecting their established brand.
-order: 26
+order: 22
 image: ../../assets/work/mew-developments.jpg
 mockup: ../../assets/work/mew-developments-shot3.jpg
 gallery:

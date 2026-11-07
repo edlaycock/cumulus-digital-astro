@@ -6,7 +6,7 @@ services:
 - Web Design
 - Web Development
 summary: A destination-dedicated holiday site for Abu Dhabi — luxury hotels, discounted special offers, holiday types and clear phone and booking routes, built by travel-industry specialists.
-order: 22
+order: 18
 url: https://abudhabiholidays.co.uk
 image: ../../assets/work/abu-dhabi-holidays.jpg
 gallery:

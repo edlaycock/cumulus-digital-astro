@@ -6,7 +6,7 @@ services:
 - Web Design
 - Web Development
 summary: The leading semi-automated solution for suitability checks on client investments — a data-rich regtech platform presented clearly for a demanding professional audience.
-order: 2
+order: 7
 image: ../../assets/work/assetq.jpg
 mockup: ../../assets/work/assetq-shot1.jpg
 gallery:
