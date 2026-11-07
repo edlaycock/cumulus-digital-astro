@@ -5,8 +5,7 @@ import { PagesMultiply } from '../../components/ui/pages-multiply';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ServiceSchema from '../../components/ServiceSchema.astro';
 import { getImage } from 'astro:assets';
-import { AnimatedMarqueeHero } from '../../components/ui/hero-3';
-import { GlassFold } from '../../components/ui/glass-fold';
+import { ScreenFlyHero } from '../../components/ui/screen-fly-hero';
 import WorkPreview from '../../components/WorkPreview.astro';
 import ReviewCarousel from '../../components/ReviewCarousel.astro';
 import { getCollection } from 'astro:content';
@@ -20,7 +19,7 @@ const proof = PROOF.map((s) => live.find((w) => w.id === s)).filter(Boolean);
 
 const reviews = (await getCollection('testimonials')).map((t) => t.data);
 
-// Marquee: real screenshots of sites we've built, most recent first (portfolio
+// Fly-through hero: real screenshots of sites we've built, most recent first (portfolio
 // order is curated newest-and-strongest first). Optimised at build time and
 // passed to the React island as plain URLs.
 const shots = import.meta.glob<{ default: ImageMetadata }>(
@@ -33,13 +32,14 @@ const bySlug = new Map(
     mod.default,
   ])
 );
-const marquee = await Promise.all(
+const screens = await Promise.all(
   live
     .sort((a, b) => a.data.order - b.data.order)
     .filter((w) => bySlug.has(w.id))
     .map(async (w) => ({
       src: (await getImage({ src: bySlug.get(w.id)!, width: 680, format: 'webp' })).src,
       alt: `${w.data.client} website designed by Cumulus Digital`,
+      domain: w.data.url ? new URL(w.data.url).hostname.replace(/^www\./, '') : w.data.client,
     }))
 );
 
@@ -129,23 +129,17 @@ const faqs = [
     path="/services/web-design/"
     areaServed={['Surrey', 'United Kingdom']}
   />
-  <div class="hero-glass">
-    <div class="page-hero-bg" aria-hidden="true">
-      <GlassFold client:load />
-    </div>
-  <AnimatedMarqueeHero
+  <ScreenFlyHero
     client:load
     tagline="Web design · Surrey, UK"
-    title="Web design in Surrey &amp; Beyond."
-    accent="Surrey &amp; Beyond"
-    description="Bespoke, hand-built websites for businesses across Surrey and beyond — designed from a blank page around your business, built to be fast, and made to bring in enquiries."
+    titleHtml="Web design in <em>Surrey &amp; Beyond</em>."
+    description="Bespoke, hand-built websites for businesses across Surrey and beyond, designed from a blank page around your business, built to be fast, and made to bring in enquiries."
     ctaText="Start a project →"
     ctaHref="/contact/"
     secondaryText="See our work"
     secondaryHref="/work/"
-    images={marquee}
+    screens={screens}
   />
-  </div>
 
   <!-- why sites underperform -->
   <section class="section">
