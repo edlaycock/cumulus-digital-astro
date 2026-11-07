@@ -4,8 +4,8 @@ import ValueIcon from '../../components/ValueIcon.astro';
 import { PagesMultiply } from '../../components/ui/pages-multiply';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ServiceSchema from '../../components/ServiceSchema.astro';
-import MotionCard from '../../components/MotionCard.astro';
-import { GlassFold } from '../../components/ui/glass-fold';
+import { getImage } from 'astro:assets';
+import { ScreenFlyHero } from '../../components/ui/screen-fly-hero';
 import WorkPreview from '../../components/WorkPreview.astro';
 import ReviewCarousel from '../../components/ReviewCarousel.astro';
 import { getCollection } from 'astro:content';
@@ -19,6 +19,29 @@ const proof = PROOF.map((s) => live.find((w) => w.id === s)).filter(Boolean);
 
 const reviews = (await getCollection('testimonials')).map((t) => t.data);
 
+// Fly-through hero: real screenshots of sites we've built, most recent first (portfolio
+// order is curated newest-and-strongest first). Optimised at build time and
+// passed to the React island as plain URLs.
+const shots = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/work/*-desktop.jpg',
+  { eager: true }
+);
+const bySlug = new Map(
+  Object.entries(shots).map(([path, mod]) => [
+    path.split('/').pop()!.replace('-desktop.jpg', ''),
+    mod.default,
+  ])
+);
+const screens = await Promise.all(
+  live
+    .sort((a, b) => a.data.order - b.data.order)
+    .filter((w) => bySlug.has(w.id))
+    .map(async (w) => ({
+      src: (await getImage({ src: bySlug.get(w.id)!, width: 680, format: 'webp' })).src,
+      alt: `${w.data.client} website designed by Cumulus Digital`,
+      domain: w.data.url ? new URL(w.data.url).hostname.replace(/^www\./, '') : w.data.client,
+    }))
+);
 
 const problems = [
   {
@@ -106,61 +129,17 @@ const faqs = [
     path="/services/web-design/"
     areaServed={['Surrey', 'United Kingdom']}
   />
-  <div class="hero-glass">
-    <div class="page-hero-bg" aria-hidden="true">
-      <GlassFold client:load />
-    </div>
-  <section class="mh">
-    <div class="container mh-inner">
-      <div class="mh-copy">
-        <p class="eyebrow"><span class="eyebrow-dot"></span>Web design · Surrey, UK</p>
-        <h1 class="mh-title">Web design in <em class="glow">Surrey &amp; Beyond</em>.</h1>
-        <p class="mh-lede">
-          Bespoke, hand-built websites for businesses across Surrey and beyond — designed from a
-          blank page around your business, built to be fast, and made to bring in enquiries.
-        </p>
-        <div class="page-hero-actions">
-          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Start a project →</a>
-          <a class="btn btn--outline btn--lg" href="/work/">See our work</a>
-        </div>
-      </div>
-
-      <div class="mh-stage">
-        <MotionCard
-          class="mh-side mh-side--l"
-          src="/motion/site-qatar.mp4"
-          srcWebm="/motion/site-qatar.webm"
-          poster="/motion/site-qatar.webp"
-          aspect="4 / 5"
-          alt="The Qatar Holidays website scrolling on a phone: a luxury Doha hotel slider, hotel offers and destination guide."
-        />
-        <MotionCard
-          class="mh-main"
-          src="/motion/site-elysian.mp4"
-          srcWebm="/motion/site-elysian.webm"
-          poster="/motion/site-elysian.webp"
-          aspect="16 / 10"
-          priority
-          alt="The Elysian Collection website scrolling on desktop: a beach hero, the founder introduction and the hotel representation story."
-        />
-        <MotionCard
-          class="mh-side mh-side--r"
-          src="/motion/site-cotswold.mp4"
-          srcWebm="/motion/site-cotswold.webm"
-          poster="/motion/site-cotswold.webp"
-          aspect="4 / 5"
-          alt="The Cotswold House Hunter website scrolling on a phone: a Cotswold stone cottage hero and the buying agent's services."
-        />
-      </div>
-      <p class="mh-caption">
-        Recent builds, live:
-        <a href="/work/elysian-collection/">Elysian Collection</a> ·
-        <a href="/work/qatar-holidays/">Qatar Holidays</a> ·
-        <a href="/work/cotswold-house-hunter/">Cotswold House Hunter</a>
-      </p>
-    </div>
-  </section>
-  </div>
+  <ScreenFlyHero
+    client:load
+    tagline="Web design · Surrey, UK"
+    titleHtml="Web design in <em>Surrey &amp; Beyond</em>."
+    description="Bespoke, hand-built websites for businesses across Surrey and beyond, designed from a blank page around your business, built to be fast, and made to bring in enquiries."
+    ctaText="Start a project →"
+    ctaHref="/contact/"
+    secondaryText="See our work"
+    secondaryHref="/work/"
+    screens={screens}
+  />
 
   <!-- why sites underperform -->
   <section class="section">
