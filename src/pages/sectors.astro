@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import WorkPreview from '../components/WorkPreview.astro';
+import { SECTORS, inSector, type SectorKey } from '../lib/sectors';
+
+const work = await getCollection('work');
+const blurbs: Record<SectorKey, string> = {
+  travel:
+    "Twenty-five years inside the travel trade before we built a single website. Tour operators, destination specialists and hotel brands, sold the way travellers actually book.",
+  trades:
+    'Contractors, surfacers, groundworkers and fencers across Surrey and the South East. Sites that win the local search and turn it into a call.',
+};
+const sectors = (Object.keys(SECTORS) as SectorKey[]).map((key) => ({
+  key,
+  ...SECTORS[key],
+  blurb: blurbs[key],
+  clients: inSector(work, key),
+}));
+---
+
+<BaseLayout
+  title="Sectors We Specialise In | Cumulus Digital"
+  description="Specialist web design and marketing for the travel industry and for trades and construction firms, with the clients we have built for in each."
+>
+  <PageHero
+    glass
+    eyebrow="Sectors"
+    lede="Two industries we know from the inside, and the businesses in each we have built for."
+  >
+    Specialists, not<br /><em class="glow">generalists</em>.
+  </PageHero>
+
+  {sectors.map((s, i) => (
+    <section class="section" style={i % 2 ? 'background:var(--grey-50)' : undefined}>
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">{s.clients.length} clients</p>
+          <h2 class="section-title">{s.name}</h2>
+          <p class="section-sub">{s.blurb}</p>
+        </div>
+        <ul class="work-grid" role="list">
+          {s.clients.map((item) => (
+            <li class="work-card">
+              <a class="work-card-inner" href={`/work/${item.id}/`}>
+                <WorkPreview client={item.data.client} url={item.data.url} image={item.data.mockup ?? item.data.image} />
+                <div class="work-card-content">
+                  <span class="work-client">{item.data.client}</span>
+                  <h3>{item.data.title}</h3>
+                  <span class="work-card-cta">View case study →</span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="work-cta">
+          <a class="btn btn--primary btn--lg" href={s.href}>{s.name} services →</a>
+        </div>
+      </div>
+    </section>
+  ))}
+</BaseLayout>

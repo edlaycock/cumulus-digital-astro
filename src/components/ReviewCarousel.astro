@@ -13,11 +13,15 @@ interface Review {
   attribution: string;
   rating?: number;
   source?: 'google';
+  work?: string;
+  excerpt?: boolean;
 }
 interface Props {
   reviews: Review[];
 }
-const { reviews: items } = Astro.props as Props;
+const { reviews } = Astro.props as Props;
+// stars-only reviews have no words to show here; they appear on their case study
+const items = reviews.filter((r) => r.quote && r.quote.trim());
 const anyGoogle = items.some((r) => r.source === 'google');
 ---
 
@@ -46,7 +50,12 @@ const anyGoogle = items.some((r) => r.source === 'google');
           )}
         </div>
         <blockquote class="review-quote">{r.quote}</blockquote>
-        <p class="review-by">{r.attribution}</p>
+        <p class="review-by">
+          {r.work ? <a href={`/work/${r.work}/`}>{r.attribution}</a> : r.attribution}
+        </p>
+        {r.excerpt && r.source === 'google' && GOOGLE_REVIEWS_URL && (
+          <a class="review-more" href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener">Full review on Google →</a>
+        )}
       </article>
     ))}
   </div>

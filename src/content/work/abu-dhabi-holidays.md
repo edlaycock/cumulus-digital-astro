@@ -1,19 +1,23 @@
 ---
-title: Website for a luxury travel brand
+title: Booking website for an Abu Dhabi holiday specialist
 client: Abu Dhabi Holidays
 sector: Travel · Luxury Holidays
 services:
 - Web Design
-summary: A luxury travel brand — one of the travel-industry projects in our portfolio.
+- Web Development
+summary: A destination-dedicated holiday site for Abu Dhabi — luxury hotels, discounted special offers, holiday types and clear phone and booking routes, built by travel-industry specialists.
 order: 22
 url: https://abudhabiholidays.co.uk
 image: ../../assets/work/abu-dhabi-holidays.jpg
+gallery:
+- ../../assets/work/abu-dhabi-holidays-home.jpg
+screenshotDesktop: ../../assets/work/abu-dhabi-holidays-desktop.jpg
+screenshotMobile: ../../assets/work/abu-dhabi-holidays-mobile.jpg
 brandColors:
 - '#3E9B94'
 - '#3E7CA8'
 - '#C0392B'
-challenge: Abu Dhabi Holidays is a travel brand focused on the luxury end of the market, presenting one of the Gulf's most aspirational destinations. To compete for discerning travellers, the brand needed a website that felt as premium and inviting as the holidays it offers.
-approach: Cumulus built the site around aspirational photography — a sweeping aerial view of the Abu Dhabi skyline, sea and coastline — to sell the destination on first impression. The palette draws on the natural blues and teals of the sky and Gulf waters, with a warm accent for the brand mark, creating a fresh, escapist feel appropriate to premium travel.
-result: The outcome is an inviting, credible web presence that positions the brand firmly in the luxury travel space and does justice to the destination it sells.
-draft: true
+challenge: Abu Dhabi Holidays sells one of the Gulf's most aspirational destinations to UK travellers. To compete with the big online travel agents, the brand needed a site that sold the place first, then made it effortless to compare hotels, spot a deal and pick up the phone to book.
+approach: We built a destination-first site led by full-width resort photography, with a hotel carousel carrying the current discount on each property, dedicated sections for destination, hotels, special offers and holiday types, and a blog for destination content. The phone number and a Book Now button stay in view on every screen, desktop and mobile, because on a four-figure purchase most bookings still start with a conversation.
+result: A polished, conversion-focused destination site that presents Abu Dhabi's luxury hotels and live offers to UK travellers, with clear booking paths throughout. It sits alongside our Ras Al Khaimah Holidays build as part of a family of destination-specialist sites.
 ---

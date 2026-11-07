@@ -2303,6 +2303,38 @@ h1.headline em.glow, .cta-headline em.glow {
   margin: 0; margin-top: auto;
   font-weight: 600; font-size: .86rem; color: var(--lt-text);
 }
+.review-by a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(0,91,144,.25); }
+.review-by a:hover { color: var(--cyan); border-bottom-color: var(--cyan); }
+.review-more {
+  margin-top: -.4rem;
+  font-size: .8rem; font-weight: 500;
+  color: var(--cyan); text-decoration: none;
+}
+.review-more:hover { text-decoration: underline; }
+
+/* ---- review block on a case-study page ---- */
+.cs-review {
+  margin: clamp(2.5rem, 6vh, 4rem) 0 0;
+  padding: clamp(1.6rem, 3vw, 2.2rem);
+  border: 1px solid var(--lt-border);
+  border-left: 4px solid var(--cyan-lt);
+  border-radius: var(--radius);
+  background: var(--wash);
+}
+.cs-review + .cs-review { margin-top: 1.2rem; }
+.cs-review-top { display: flex; align-items: center; gap: .8rem; margin-bottom: .9rem; }
+.cs-review-top .review-stars svg { width: 18px; height: 18px; }
+.cs-review blockquote {
+  margin: 0 0 .9rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+  line-height: 1.55;
+  color: var(--lt-text);
+}
+.cs-review blockquote::before { content: '\201C'; }
+.cs-review blockquote::after { content: '\201D'; }
+.cs-review-by { margin: 0; font-weight: 600; font-size: .92rem; color: var(--lt-text); }
+.cs-review-by a { color: var(--cyan); font-weight: 500; margin-left: .6rem; text-decoration: none; }
+.cs-review-by a:hover { text-decoration: underline; }
 .reviews-controls {
   display: flex; align-items: center; justify-content: center; gap: 1rem;
   margin-top: .4rem;
@@ -3739,3 +3771,4 @@ h1.headline em,
   .tml-plane { display: none; }
   .tml-item::before { top: .3rem; left: -1.95rem; }
 }
+.cs-review-note { margin: 0 0 .9rem; font-size: 1.02rem; color: var(--lt-text); }

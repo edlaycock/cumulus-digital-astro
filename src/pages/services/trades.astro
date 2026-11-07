@@ -12,19 +12,11 @@ import ytqMobile from '../../assets/products/ytq-dashboard-mobile.png';
 import ytqLogo from '../../assets/products/ytq-logo.png';
 import ytwLogo from '../../assets/products/ytw-logo.png';
 import { getCollection } from 'astro:content';
+import { inSector } from '../../lib/sectors';
 import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
 
-// Real trade and construction clients — proof, not stock claims.
-const TRADE_SLUGS = [
-  'surrey-contracting',
-  'surrey-hills-surfacing',
-  'oakbridge-group',
-  'macdonald-fencing-sons',
-  'sussex-groundworks',
-  'tts-surfacing-ltd',
-];
-const all = await getCollection('work');
-const proof = TRADE_SLUGS.map((s) => all.find((w) => w.id === s)).filter(Boolean);
+// Every trade and construction client — proof, not stock claims.
+const proof = inSector(await getCollection('work'), 'trades');
 
 // The enquiry-to-paid flow the two products cover between them.
 const flow = [
@@ -240,7 +232,7 @@ const faqs = [
       <div class="section-header">
         <p class="section-label">Proof</p>
         <h2 class="section-title">100's of trade &amp; construction<br />projects delivered.</h2>
-        <p class="section-sub">A few of the contractors we've built for.</p>
+        <p class="section-sub">Every contractor and trade business we've built for, from groundworks to fencing.</p>
       </div>
       <ul class="work-grid" role="list">
         {proof.map((item) => (

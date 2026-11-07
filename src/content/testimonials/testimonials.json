@@ -1,27 +1,97 @@
 [
   {
+    "id": "google-dave-brookes",
+    "quote": "We worked with Cumulus Digital to redesign our website, Ed and his team were great and made the process easy. Would recommend them highly.",
+    "attribution": "Dave Brookes — Abbey Group Services",
+    "work": "abbey-group-services",
+    "source": "google"
+  },
+  {
+    "id": "google-dorcas-george-jones",
+    "quote": "I have only good things to say about Ed Laycock and his team at Cumulus Digital Ltd.",
+    "attribution": "Dorcas George-Jones — Castellum",
+    "work": "castellum",
+    "excerpt": true,
+    "source": "google"
+  },
+  {
+    "id": "google-richard-williams",
+    "quote": "I'm very pleased with the quality of the website built by Cumulus Digital, it looks extremely professional…",
+    "attribution": "Richard Williams — Fidelity Accountants",
+    "work": "fidelity-accountants",
+    "excerpt": true,
+    "source": "google"
+  },
+  {
+    "id": "google-tim-todd",
+    "quote": "We hired Cumulus Digital over 2 years ago now and have seen all our website marketing go from strength to strength. No matter what, the team are always there to help and are a real asset to the business.",
+    "attribution": "Tim Todd — TTS Surfacing",
+    "work": "tts-surfacing-ltd",
+    "source": "google"
+  },
+  {
+    "id": "google-michael-bennett",
+    "quote": "Ed was patient with us as our ideas evolved, and we utilised his vast knowledge of the world of websites.",
+    "attribution": "Michael Bennett — JellyLearn",
+    "work": "jellylearn",
+    "excerpt": true,
+    "source": "google"
+  },
+  {
     "id": "castellum",
     "quote": "Working with Ed Laycock and the team at Cumulus Digital to build our new website has been incredibly easy — a service second to none. I have been incredibly impressed by their knowledge, expertise and the speed at which they turned this around. Our new website has been well received universally.",
-    "attribution": "Castellum — award-winning construction"
+    "attribution": "Castellum — award-winning construction",
+    "work": "castellum"
+  },
+  {
+    "id": "google-daniela-teglerova",
+    "quote": "We had an excellent experience working with our website designers.",
+    "attribution": "Daniela Teglerova — Abbey Group Services",
+    "work": "abbey-group-services",
+    "excerpt": true,
+    "source": "google"
+  },
+  {
+    "id": "google-harvey-macdonald",
+    "quote": "We were recommended to Cumulus Digital by another local business in Cobham.",
+    "attribution": "Harvey Macdonald — MacDonald Fencing & Sons",
+    "work": "macdonald-fencing-sons",
+    "excerpt": true,
+    "source": "google"
   },
   {
     "id": "baloolah",
     "quote": "Ed at Cumulus Digital was recommended to me when I started exploring having a new website created. This is not a world I know much about; they were excellent at guiding me through the process and hand-held me every step of the way. I have no hesitation in recommending them.",
-    "attribution": "Corinne — Baloolah Hair, Cobham"
+    "attribution": "Corinne — Baloolah Hair, Cobham",
+    "work": "baloolah-hair"
   },
   {
-    "id": "migration",
-    "quote": "We found Cumulus Digital to be very helpful and efficient in handling our web site build and deployment. We relied on their experience to navigate us through the migration, and will continue to use Cumulus Digital for new requirements on an ongoing basis.",
-    "attribution": "Website build & migration client"
+    "id": "google-dean-barker",
+    "quote": "We have been working with Cumulus Digital for several years and they consistently deliver.",
+    "attribution": "Dean Barker — Hemisphere Creative",
+    "excerpt": true,
+    "source": "google"
   },
   {
-    "id": "since-2016",
-    "quote": "We started working with Cumulus Digital back in 2016 when we decided we needed a new, more up-to-date website. During the design stage, they recommended a complete brand styling change which we agreed to and have never looked back.",
-    "attribution": "Client since 2016 — brand & website"
+    "id": "google-andrew-hobbs",
+    "quote": "For some time we had been looking to update our website so we could sell online…",
+    "attribution": "Andrew Hobbs — Jeremy Hobbs",
+    "work": "jeremy-hobbs",
+    "excerpt": true,
+    "source": "google"
   },
   {
-    "id": "referral",
-    "quote": "Cumulus Digital understood our business needs and helped revamp our branding, literature and website.",
-    "attribution": "Referred by another local business"
+    "id": "google-chris-ward",
+    "quote": "We started working with Cumulus Digital a few years ago and we can highly recommend them.",
+    "attribution": "Chris Ward — Letsgo2.com",
+    "excerpt": true,
+    "source": "google"
+  },
+  {
+    "id": "google-tania-thompson",
+    "quote": "",
+    "attribution": "Tania Thompson — Cotswold House Hunter",
+    "work": "cotswold-house-hunter",
+    "source": "google"
   }
 ]
