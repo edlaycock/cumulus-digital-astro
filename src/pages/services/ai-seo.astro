@@ -37,12 +37,12 @@ const process = [
 ];
 
 const engines = [
-  { name: 'Google AI Overviews', body: 'The AI answer at the top of Google itself — assembled from pages that answer the question directly, with sources linked.' },
-  { name: 'ChatGPT', body: 'Now a genuine discovery channel. Its answers draw on your website, your reviews and what the wider web says about you.' },
-  { name: 'Gemini', body: 'Google’s assistant leans heavily on Google’s own index and your Business Profile — local signals matter most here.' },
-  { name: 'Perplexity', body: 'Answers with citations by design. Clear, well-sourced pages earn the links that put you in front of its users.' },
-  { name: 'Copilot & the rest', body: 'Bing-backed assistants and whatever ships next. The groundwork is shared, so one job covers the field.' },
-  { name: 'Your buyers', body: 'The point of all of it. People increasingly ask AI “who should I use?” — the work above decides whose name comes back.' },
+  { name: 'Google AI Overviews', logos: ['google'], body: 'The AI answer at the top of Google itself — assembled from pages that answer the question directly, with sources linked.' },
+  { name: 'ChatGPT', logos: ['chatgpt'], body: 'Now a genuine discovery channel. Its answers draw on your website, your reviews and what the wider web says about you.' },
+  { name: 'Gemini', logos: ['gemini'], body: 'Google’s assistant leans heavily on Google’s own index and your Business Profile — local signals matter most here.' },
+  { name: 'Perplexity', logos: ['perplexity'], body: 'Answers with citations by design. Clear, well-sourced pages earn the links that put you in front of its users.' },
+  { name: 'Claude', logos: ['claude'], body: 'Anthropic’s assistant, popular with business owners. It searches the web as it answers, so clear, current pages are the ones it picks up.' },
+  { name: 'Copilot & the rest', logos: ['copilot', 'bing'], body: 'Bing-backed assistants and whatever ships next. The groundwork is shared, so one job covers the field.' },
 ];
 
 const faqs = [
@@ -189,8 +189,11 @@ const faqs = [
 
       <ul class="services-grid" role="list">
         {engines.map((c) => (
-          <li class="service-card">
+          <li class="service-card engine-card">
             <div class="service-card-body">
+              <div class="engine-logos" aria-hidden="true">
+                {c.logos.map((l) => <img src={`/logos/ai/${l}.svg`} alt="" width="40" height="40" loading="lazy" />)}
+              </div>
               <h3>{c.name}</h3>
               <p>{c.body}</p>
             </div>
