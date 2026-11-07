@@ -3801,3 +3801,93 @@ h1.headline em,
 .work-chip[aria-pressed="true"] .work-chip-count { background: rgba(255,255,255,.2); color: #fff; }
 .work-filter-status { text-align: center; font-size: .85rem; color: var(--lt-muted); min-height: 1.3em; margin: -1.2rem 0 1.2rem; }
 .work-grid > [hidden] { display: none !important; }
+
+/* ============================================================
+   MOTION CARDS — a poster that becomes a looping clip in view,
+   in a double glass bezel. Behaviour: scripts/motion-cards.ts
+   ============================================================ */
+.mc { position: relative; }
+.mc--framed {
+  border-radius: 24px;
+  padding: 6px;
+  background: linear-gradient(160deg, rgba(255,255,255,.28), rgba(255,255,255,.05) 45%, rgba(93,194,213,.18));
+  box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 16px 40px rgba(2,12,20,.38), 0 40px 90px -40px rgba(2,12,20,.55);
+}
+.mc--framed .mc-glass {
+  border-radius: 19px;
+  padding: 8px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.mc-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 13px;
+  background: #031422;
+}
+.mc-poster, .mc-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+}
+.mc-video { opacity: 0; transition: opacity .3s ease; }
+.mc-video.is-ready { opacity: 1; }
+
+/* reveal: fade up once, the first time a card is seen */
+.mc { opacity: 0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+.mc.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .mc { opacity: 1; transform: none; transition: none; }
+  .mc-video { display: none; }
+}
+
+/* ---- web design motion hero ---- */
+.mh {
+  position: relative;
+  padding: clamp(7rem, 15vh, 9.5rem) 0 clamp(3rem, 7vh, 5rem);
+}
+.mh-inner { position: relative; z-index: 1; }
+.mh-copy { max-width: 46rem; margin: 0 auto; text-align: center; }
+.mh-title {
+  margin: 1rem 0 0;
+  font-size: clamp(2.6rem, 6.2vw, 5.4rem);
+  line-height: 1.02;
+  letter-spacing: -.035em;
+  color: #fff;
+}
+.mh-title em { color: var(--cyan-lt); }
+.mh-lede {
+  margin: 1.3rem auto 0;
+  max-width: 38rem;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(242,245,248,.82);
+}
+.mh .page-hero-actions { justify-content: center; margin-top: 2rem; }
+.mh-stage {
+  display: grid;
+  grid-template-columns: 1fr 2.6fr 1fr;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  margin-top: clamp(2.6rem, 6vh, 4rem);
+}
+.mh-side { margin-top: 3.5rem; }
+.mh-side--l { transition-delay: .12s; }
+.mh-side--r { transition-delay: .24s; }
+.mh-caption {
+  margin: 1.8rem 0 0;
+  text-align: center;
+  font-family: var(--font-m);
+  font-size: .8rem;
+  color: rgba(242,245,248,.6);
+}
+.mh-caption a { color: rgba(242,245,248,.9); text-decoration: none; border-bottom: 1px solid rgba(93,194,213,.45); }
+.mh-caption a:hover { color: var(--cyan-lt); }
+@media (max-width: 820px) {
+  .mh-stage { grid-template-columns: 1fr 1fr; }
+  .mh-main { grid-column: 1 / -1; order: -1; }
+  .mh-side { margin-top: 0; }
+}
