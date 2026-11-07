@@ -6,7 +6,7 @@ services:
 - Branding
 - Web Design
 summary: A luxury aesthetics, skincare and beauty clinic in Carshalton, Surrey, led by Harley Street-trained practitioners — brand and website.
-order: 27
+order: 23
 image: ../../assets/work/aesthetics-by-suzannah.jpg
 mockup: ../../assets/work/aesthetics-by-suzannah-shot1.jpg
 brandColors:
