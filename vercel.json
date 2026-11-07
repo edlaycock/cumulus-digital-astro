@@ -33,12 +33,12 @@
     },
     {
       "source": "/project/omega-executive-travel",
-      "destination": "/work/",
+      "destination": "/work/omega-executive-travel/",
       "permanent": true
     },
     {
       "source": "/project/ag-edwards-son-demolition",
-      "destination": "/work/",
+      "destination": "/work/ag-edwards-son-demolition/",
       "permanent": true
     },
     {
