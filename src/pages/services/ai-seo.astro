@@ -41,8 +41,8 @@ const engines = [
   { name: 'ChatGPT', logos: ['chatgpt'], body: 'Now a genuine discovery channel. Its answers draw on your website, your reviews and what the wider web says about you.' },
   { name: 'Gemini', logos: ['gemini'], body: 'Google’s assistant leans heavily on Google’s own index and your Business Profile — local signals matter most here.' },
   { name: 'Perplexity', logos: ['perplexity'], body: 'Answers with citations by design. Clear, well-sourced pages earn the links that put you in front of its users.' },
-  { name: 'Copilot & the rest', logos: ['copilot', 'claude', 'bing'], body: 'Bing-backed assistants and whatever ships next. The groundwork is shared, so one job covers the field.' },
-  { name: 'Your buyers', logos: [] as string[], body: 'The point of all of it. People increasingly ask AI “who should I use?” — the work above decides whose name comes back.' },
+  { name: 'Claude', logos: ['claude'], body: 'Anthropic’s assistant, popular with business owners. It searches the web as it answers, so clear, current pages are the ones it picks up.' },
+  { name: 'Copilot & the rest', logos: ['copilot', 'bing'], body: 'Bing-backed assistants and whatever ships next. The groundwork is shared, so one job covers the field.' },
 ];
 
 const faqs = [
@@ -192,11 +192,7 @@ const faqs = [
           <li class="service-card engine-card">
             <div class="service-card-body">
               <div class="engine-logos" aria-hidden="true">
-                {c.logos.length ? (
-                  c.logos.map((l) => <img src={`/logos/ai/${l}.svg`} alt="" width="40" height="40" loading="lazy" />)
-                ) : (
-                  <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1.1-4.6A8 8 0 1 1 21 12Z" /><path d="M10.2 9.6a2 2 0 1 1 2.6 1.9c-.5.2-.8.6-.8 1.1v.4" /><path d="M12 15.6h.01" /></svg>
-                )}
+                {c.logos.map((l) => <img src={`/logos/ai/${l}.svg`} alt="" width="40" height="40" loading="lazy" />)}
               </div>
               <h3>{c.name}</h3>
               <p>{c.body}</p>
