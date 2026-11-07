@@ -50,6 +50,7 @@ export const NAV_LINKS = [
       { href: '/services/web-development/', label: 'Web Development' },
       { href: '/services/seo/', label: 'SEO' },
       { href: '/services/ai-seo/', label: 'AI SEO & AEO' },
+      { href: '/services/ai-automation/', label: 'AI for Business' },
       { href: '/services/google-ads/', label: 'Google Ads' },
     ],
   },

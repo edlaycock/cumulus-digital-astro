@@ -10,6 +10,7 @@ Cumulus Digital builds hand-coded, fast websites rather than templated ones, and
 - [Web Development](https://cumulusdigital.co.uk/services/web-development/): Hand-built, fast, accessible sites and web applications.
 - [SEO](https://cumulusdigital.co.uk/services/seo/): Local, technical and content SEO for Surrey businesses, including Google Business Profile management.
 - [AI SEO & AEO](https://cumulusdigital.co.uk/services/ai-seo/): Answer engine optimisation — getting businesses recommended by ChatGPT, Gemini and Perplexity and cited in Google's AI Overviews.
+- [AI for Business](https://cumulusdigital.co.uk/services/ai-automation/): Practical AI and bespoke AI automation for trades and small businesses, from voice-note quoting to invoice chasing. Built by the team behind YourTradeQuotes.
 - [Google Ads](https://cumulusdigital.co.uk/services/google-ads/): Search, Shopping, Performance Max and remarketing management.
 - [Travel Industry](https://cumulusdigital.co.uk/services/travel-industry/): Websites and marketing for travel companies, built on 25 years of trade experience.
 - [Trades & Construction](https://cumulusdigital.co.uk/services/trades/): Websites and lead generation for tradespeople and construction firms.

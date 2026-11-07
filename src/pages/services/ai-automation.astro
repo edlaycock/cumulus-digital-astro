@@ -1,0 +1,384 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ServiceSchema from '../../components/ServiceSchema.astro';
+import DeviceMockup from '../../components/DeviceMockup.astro';
+import { Image } from 'astro:assets';
+import { ContainerScroll } from '../../components/ui/container-scroll-animation';
+import { GlassFold } from '../../components/ui/glass-fold';
+import { PHONE_DISPLAY, PHONE_TEL } from '../../consts';
+
+import imgVoice from '../../assets/ai/voice-quote.jpg';
+import imgCalls from '../../assets/ai/missed-calls.jpg';
+import imgChasing from '../../assets/ai/chasing.jpg';
+import imgSchedule from '../../assets/ai/scheduling.jpg';
+import imgReviews from '../../assets/ai/reviews.jpg';
+import imgAdmin from '../../assets/ai/admin.jpg';
+import imgTools from '../../assets/ai/everyday-tools.jpg';
+import imgBespoke from '../../assets/ai/bespoke.jpg';
+import imgAudit from '../../assets/ai/audit.jpg';
+import imgHuman from '../../assets/ai/human-check.jpg';
+import imgData from '../../assets/ai/data-safe.jpg';
+import imgToolbox from '../../assets/ai/toolbox.jpg';
+import imgBusinesses from '../../assets/ai/businesses.jpg';
+import ytqDesktop from '../../assets/ai/ytq-ai-desktop.jpg';
+import ytqMobile from '../../assets/ai/ytq-ai-mobile.jpg';
+import ytqHomeDesktop from '../../assets/ai/ytq-home-desktop.jpg';
+import ytqHomeMobile from '../../assets/ai/ytq-home-mobile.jpg';
+
+// The everyday jobs AI handles well for small firms, each with its picture.
+const uses = [
+  {
+    img: imgVoice,
+    alt: 'A phone on a van dashboard turning a spoken description into an itemised quote',
+    h: 'Turn a voice note into a quote',
+    p: "Talk through the job in the van and get an itemised draft back, ready for your prices. You still decide what it costs. What disappears is the typing you'd otherwise do at the kitchen table at nine at night.",
+  },
+  {
+    img: imgCalls,
+    alt: 'A ringing phone, a chat bubble and a calendar tile, a missed call becoming a booking',
+    h: 'Stop losing the calls you miss',
+    p: "When you're up a ladder the phone rings out, and that customer rings the next number on their list. AI can answer, take the details and get the enquiry in front of you before the moment has gone.",
+  },
+  {
+    img: imgChasing,
+    alt: 'A fan of invoices circled by a looping arrow with a tick on the front sheet',
+    h: 'Chase quotes and invoices for you',
+    p: "A polite follow-up a couple of days after a quote goes out. A reminder every week on an overdue invoice until it's paid. It's the job everyone hates, and the one that costs most when it slips.",
+  },
+  {
+    img: imgSchedule,
+    alt: 'Job tiles sliding into place on a weekly planner',
+    h: 'Keep the diary straight',
+    p: 'Reminder messages the afternoon before an appointment, accepted quotes that turn into booked jobs, and a warning when two jobs land on the same morning.',
+  },
+  {
+    img: imgReviews,
+    alt: 'Five stars and speech bubbles rising above a phone',
+    h: 'Ask for reviews and post about the work',
+    p: "It can ask each customer for a review a week after the job's finished and draft a reply when one comes in. It'll also write up this week's project as a short Facebook post. You read it, change what you like and send it.",
+  },
+  {
+    img: imgAdmin,
+    alt: 'A messy stack of papers passing through a beam of light and coming out as tidy folders',
+    h: 'Clear the paperwork pile',
+    p: 'Pulling details out of emails and PDFs, sorting receipts, drafting letters and method statements. The jobs that quietly eat your Sunday evening.',
+  },
+];
+
+const steps = [
+  { n: '01', h: 'Look at your week', p: 'We sit down with you for an hour and go through an ordinary week. Where does the time go, and which tasks look the same every single time?' },
+  { n: '02', h: 'Pick one job to fix first', p: 'The most repetitive, most irritating task usually wins. One improvement you can feel beats a grand plan that never gets finished.' },
+  { n: '03', h: 'Try it on real work', p: 'A short pilot on your own quotes, calls or invoices, so you judge it on what it does for your business and not on a slick demo.' },
+  { n: '04', h: 'Roll it out and train the team', p: 'Once it has earned its place we set it up properly, show everyone how it works and stay on hand while it beds in.' },
+];
+
+const faqs = [
+  {
+    q: 'How can AI help my small business?',
+    a: 'Mostly by taking repetitive admin off your hands: drafting quotes, answering and logging enquiries, chasing unpaid invoices, sending reminders and asking for reviews. You stay in charge of the decisions. The AI does the typing and the remembering.',
+  },
+  {
+    q: 'How much does AI cost for a small business?',
+    a: "Often less than people expect. Many AI tools are already included in software you pay for, such as Microsoft 365 or Google Workspace, and setting them up properly is a short piece of work. A bespoke system costs more, so we quote it in stages and you only commit to the next stage once the last one is working.",
+  },
+  {
+    q: 'Will AI replace my staff?',
+    a: "That isn't how we use it. The aim is to give your team back the hours they lose to admin so they can spend them on the work customers pay for. Every system we build keeps a person checking anything before it reaches a customer.",
+  },
+  {
+    q: 'Is it safe to put customer information into AI?',
+    a: "Not into a free public chatbot, no. We agree clear rules about what goes where, use business accounts that don't train on your data, and design bespoke systems so your customer data stays under your control.",
+  },
+  {
+    q: 'Do I need to be good with technology to use AI?',
+    a: "No. If you can use WhatsApp, you can use what we set up. We train you using your own quotes and emails rather than made-up examples, and we're on the end of the phone afterwards.",
+  },
+];
+---
+
+<BaseLayout
+  title="AI for Trades & Small Businesses in Surrey | Cumulus Digital"
+  description="Practical AI for trades and small businesses in Surrey: quoting from a voice note, chasing invoices, answering missed calls and bespoke AI automation systems built around how you work."
+>
+  <FaqSchema faqs={faqs} />
+  <ServiceSchema
+    name="AI Automation for Trades and Small Businesses"
+    description="Practical AI for small firms: setting up everyday AI tools and building bespoke AI automation systems for quoting, enquiries, scheduling and invoice chasing."
+    path="/services/ai-automation/"
+    areaServed={['Surrey', 'United Kingdom']}
+  />
+
+  <div class="hero-glass">
+    <div class="page-hero-bg" aria-hidden="true">
+      <GlassFold client:load />
+    </div>
+  <ContainerScroll client:load className="cs--bare" parallax>
+    <Fragment slot="titleComponent">
+      <p class="eyebrow"><span class="eyebrow-dot"></span>AI for business · Surrey, UK</p>
+      <h1 class="page-hero-title cs-title">Less admin.<br />More time on <em class="glow">the tools</em>.</h1>
+      <p class="lede cs-lede">
+        We help trades and small businesses put AI to work on the jobs nobody enjoys: quoting,
+        chasing, answering the phone, keeping the diary. Sometimes that means setting up tools you
+        already pay for. Sometimes it means building something just for you.
+      </p>
+      <div class="page-hero-actions">
+        <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Book a free AI review →</a>
+        <a class="btn btn--outline btn--lg" href="#ytq">See what we built for trades</a>
+      </div>
+    </Fragment>
+  </ContainerScroll>
+  </div>
+
+  <!-- intro with the toolbox picture -->
+  <section class="section">
+    <div class="container ai-split">
+      <div class="ai-split-copy" data-reveal>
+        <p class="section-label">Why bother</p>
+        <h2 class="section-title">AI is just another tool<br />in the <em>van</em>.</h2>
+        <p>
+          Most small business owners we talk to lose a day or more every week to admin. Quotes typed
+          up late at night, invoices nobody has chased, calls missed while their hands were full.
+          None of that is the work they started the business to do.
+        </p>
+        <p>
+          AI won't fit a boiler or lay a patio. What it can do now, reliably, is the repetitive
+          paperwork around the job. We're a Surrey agency that builds software for a living, so we
+          set it up in a way that fits how you already work, and we tell you plainly when something
+          isn't worth the bother.
+        </p>
+      </div>
+      <figure class="ai-figure" data-reveal>
+        <Image src={imgToolbox} alt="An open toolbox with a tablet and an AI spark rising out of it beside a spirit level and spanner" widths={[640, 1000]} sizes="(max-width: 860px) 94vw, 540px" loading="lazy" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- use cases -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What it can do</p>
+        <h2 class="section-title">What can AI actually do<br />for a small <em>business</em>?</h2>
+        <p class="section-sub">
+          Plenty, though less than the hype suggests. These are the jobs we see it handle well right
+          now, for firms with one van or twenty staff.
+        </p>
+      </div>
+      <ul class="ai-uses" role="list">
+        {uses.map((u, i) => (
+          <li class="ai-use" data-reveal style={`--reveal-delay:${(i % 3) * 0.08}s`}>
+            <figure class="ai-use-img">
+              <Image src={u.img} alt={u.alt} widths={[480, 760]} sizes="(max-width: 720px) 94vw, (max-width: 1100px) 46vw, 360px" loading="lazy" />
+            </figure>
+            <h3>{u.h}</h3>
+            <p>{u.p}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- two ways we help -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How we help</p>
+        <h2 class="section-title">Off the shelf,<br />or built for <em>you</em>.</h2>
+      </div>
+
+      <div class="ai-path" data-reveal>
+        <figure class="ai-figure">
+          <Image src={imgTools} alt="A laptop with an assistant chat panel and emails drifting towards it" widths={[640, 1000]} sizes="(max-width: 860px) 94vw, 560px" loading="lazy" />
+        </figure>
+        <div class="ai-path-copy">
+          <h3>Get more from the tools you already have</h3>
+          <p>
+            A lot of businesses already pay for an AI assistant and barely touch it. Microsoft 365
+            Copilot, Gemini in Gmail, ChatGPT. We set them up properly, show your team what they're
+            genuinely good for, and write the templates so the good habits stick once we've gone.
+          </p>
+          <ul class="ai-ticks" role="list">
+            <li>A training session built around your own quotes, emails and enquiries</li>
+            <li>Ready-made prompts and templates for the jobs you repeat</li>
+            <li>Clear rules on what should never go into an AI tool</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ai-path ai-path--flip" data-reveal>
+        <figure class="ai-figure">
+          <Image src={imgBespoke} alt="Interlocking glass modules and gears joined into one custom machine with a phone and an invoice docked in" widths={[640, 1000]} sizes="(max-width: 860px) 94vw, 560px" loading="lazy" />
+        </figure>
+        <div class="ai-path-copy">
+          <h3>Build a system around how you work</h3>
+          <p>
+            When the off-the-shelf tools don't fit, we build software that does. We design and code
+            it ourselves, the same way we build websites, and use AI where it saves real time:
+            reading enquiries, drafting quotes, chasing payments, pulling a weekly report together.
+          </p>
+          <ul class="ai-ticks" role="list">
+            <li>Connects to your website, inbox and accounts software</li>
+            <li>Your data stays yours, and you own what we build</li>
+            <li>Built in stages, so you see it working early</li>
+            <li>Hosted and looked after by us once it's live, so it keeps working</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- process -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How we work</p>
+        <h2 class="section-title">Start small.<br />Prove it <em>works</em>.</h2>
+      </div>
+      <figure class="ai-figure ai-figure--wide" data-reveal>
+        <Image src={imgAudit} alt="A magnifying glass over a weekly timetable, picking out the repeated tasks" widths={[760, 1280]} sizes="(max-width: 960px) 94vw, 900px" loading="lazy" />
+      </figure>
+      <div class="values-grid values-grid--flow">
+        {steps.map((s, i) => (
+          <div class="value-card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="value-num">{s.n}</span>
+            <h3>{s.h}</h3>
+            <p>{s.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- case study: YourTradeQuotes -->
+  <section class="section ai-case" id="ytq">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Case study · our own product</p>
+        <h2 class="section-title">YourTradeQuotes: AI for the trades,<br />built by <em>us</em>.</h2>
+        <p class="section-sub">
+          We didn't want to only talk about AI for trades, so we built it. YourTradeQuotes is our
+          own quoting and job management app for UK tradespeople, and it runs on the same ideas we
+          bring to clients.
+        </p>
+      </div>
+
+      <div class="ai-case-devices" data-reveal>
+        <DeviceMockup client="YourTradeQuotes" url="https://yourtradequotes.com/ai/" desktop={ytqDesktop} mobile={ytqMobile} />
+      </div>
+
+      <div class="ai-case-grid">
+        <div class="ai-case-feature" data-reveal>
+          <h3>Voice Quote</h3>
+          <p>Talk through the job for up to three minutes, from the van or on site. The quote builder opens with the customer attached and every line drafted.</p>
+        </div>
+        <div class="ai-case-feature" data-reveal style="--reveal-delay:.08s">
+          <h3>Build With AI</h3>
+          <p>Describe the job the way you'd describe it to a mate, and AI drafts the itemised lines, ready for your prices.</p>
+        </div>
+        <div class="ai-case-feature" data-reveal style="--reveal-delay:.16s">
+          <h3>Autopilot</h3>
+          <p>Quotes are followed up on day 2 and day 5. Overdue invoices get a reminder every 7 days until they're paid. Appointment reminders go out at 4pm the day before, and a review request a week after the job's finished.</p>
+        </div>
+        <div class="ai-case-feature" data-reveal style="--reveal-delay:.24s">
+          <h3>Chip, the assistant</h3>
+          <p>An assistant on every page that answers questions about your own quotes, jobs and invoices, or how to do something in the app.</p>
+        </div>
+      </div>
+      <p class="ai-case-pilot" data-reveal>
+        In pilot with trade businesses now: an AI receptionist that answers the calls you miss, and a
+        WhatsApp assistant you can text to run your day.
+      </p>
+
+      <div class="ai-split ai-split--rule" data-reveal>
+        <figure class="ai-figure">
+          <Image src={imgHuman} alt="A hand about to press send on a document, with a tick beside it" widths={[640, 1000]} sizes="(max-width: 860px) 94vw, 540px" loading="lazy" />
+        </figure>
+        <div class="ai-split-copy">
+          <h3>The rule it's built on: AI drafts, you decide</h3>
+          <p>
+            YourTradeQuotes never invents a price. Unpriced lines are flagged for you to fill in,
+            and nothing reaches a customer until you've checked it and pressed send. We hold every
+            system we build for clients to exactly the same rule.
+          </p>
+          <div class="ai-case-actions">
+            <a class="btn btn--primary btn--lg" href="https://yourtradequotes.com/" target="_blank" rel="noopener">Visit YourTradeQuotes →</a>
+            <a class="btn btn--outline btn--lg" href="/contact/">Talk to us about your own system</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-case-devices ai-case-devices--second" data-reveal>
+        <DeviceMockup client="YourTradeQuotes" url="https://yourtradequotes.com/" desktop={ytqHomeDesktop} mobile={ytqHomeMobile} />
+      </div>
+    </div>
+  </section>
+
+  <!-- fit + data -->
+  <section class="section" style="background:var(--grey-50)">
+    <div class="container ai-pair">
+      <div class="ai-pair-item" data-reveal>
+        <figure class="ai-figure">
+          <Image src={imgBusinesses} alt="A van, paint roller, scissors, spade, calculator and lightning bolt in a row, linked by one line of light" widths={[640, 1000]} sizes="(max-width: 860px) 94vw, 540px" loading="lazy" />
+        </figure>
+        <h3>Will AI work in a business like mine?</h3>
+        <p>
+          If you quote, book, chase or answer the same questions every week, almost certainly. We
+          see the same admin at electricians, plumbers, builders, landscapers, cleaners, salons and
+          accountancy practices. The details change. The paperwork looks much the same.
+        </p>
+      </div>
+      <div class="ai-pair-item" data-reveal style="--reveal-delay:.1s">
+        <figure class="ai-figure">
+          <Image src={imgData} alt="A shield and padlock wrapped around documents and a phone" widths={[640, 1000]} sizes="(max-width: 860px) 94vw, 540px" loading="lazy" />
+        </figure>
+        <h3>What happens to my customers' data?</h3>
+        <p>
+          It's the right thing to ask first. We tell you exactly where your data goes before anything
+          is switched on, keep customer details out of public AI tools, and choose tools and hosting
+          that keep data in the UK or EU wherever we can. If a tool can't meet that bar, we won't
+          recommend it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- faqs -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Common questions</p>
+        <h2 class="section-title">What small businesses ask us<br />about <em>AI</em>.</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item" data-reveal>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <p class="section-label">Free AI review</p>
+        <h2 class="cta-headline">
+          Find out what AI could<br />take off your <em class="glow">plate</em>.
+        </h2>
+        <p class="cta-sub">
+          We'll look at an ordinary week in your business and tell you honestly which jobs AI could
+          handle, and which it can't.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary btn--lg" href="/contact/" data-magnetic>Book your free review →</a>
+          <a class="btn btn--ghost btn--lg" href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
