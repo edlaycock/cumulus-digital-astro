@@ -5,7 +5,7 @@ sector: Travel & Hospitality · Luxury Resorts
 services:
 - Web Design
 summary: An image-first resort holidays site, launched as JA Resorts Holidays and now trading as Just All Inclusive — part of our travel-industry portfolio.
-order: 20
+order: 21
 url: https://justallinclusive.com
 image: ../../assets/work/ja-resorts-holidays.jpg
 brandColors:

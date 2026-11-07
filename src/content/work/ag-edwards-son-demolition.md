@@ -5,7 +5,7 @@ sector: Construction · Demolition
 services:
 - Web Design
 summary: A robust, no-nonsense website for a family-run demolition contractor serving Surrey, London and the Home Counties.
-order: 31
+order: 32
 image: ../../assets/work/ag-edwards-son-demolition.jpg
 brandColors:
 - '#B5322A'

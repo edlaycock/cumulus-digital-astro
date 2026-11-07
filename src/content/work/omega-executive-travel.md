@@ -5,7 +5,7 @@ sector: Travel · Executive & Business Travel
 services:
 - Web Design
 summary: A calm, premium website presenting an executive travel company as a considered, professional travel partner.
-order: 30
+order: 31
 image: ../../assets/work/omega-executive-travel.jpg
 brandColors:
 - '#7C8085'

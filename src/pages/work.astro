@@ -4,10 +4,17 @@ import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { PerspectiveTunnelHero } from '../components/ui/perspective-tunnel-hero';
 import WorkPreview from '../components/WorkPreview.astro';
+import { INDUSTRIES, industryOf } from '../lib/sectors';
 
 const work = (await getCollection('work'))
   .filter((w) => !w.data.draft)
-  .sort((a, b) => a.data.order - b.data.order);
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((w) => ({ ...w, industry: industryOf(w.data.sector) }));
+
+// Only offer chips that have at least one case study behind them.
+const chips = [...INDUSTRIES, { key: 'other', label: 'Other' }]
+  .map((c) => ({ key: c.key, label: c.label, count: work.filter((w) => w.industry === c.key).length }))
+  .filter((c) => c.count > 0);
 
 // Tunnel hero: portrait captures of real client builds, newest first.
 // The 4:5 card crops each capture from the top, so the site's own header
@@ -53,9 +60,21 @@ const tunnelCards = await Promise.all(
 
   <section class="section work-section">
     <div class="container">
-      <ul class="work-grid" role="list">
+      <div class="work-filter" role="group" aria-label="Filter case studies by industry" data-work-filter>
+        <button type="button" class="work-chip" aria-pressed="true" data-industry="all">
+          All <span class="work-chip-count">{work.length}</span>
+        </button>
+        {chips.map((c) => (
+          <button type="button" class="work-chip" aria-pressed="false" data-industry={c.key}>
+            {c.label} <span class="work-chip-count">{c.count}</span>
+          </button>
+        ))}
+      </div>
+      <p class="work-filter-status" aria-live="polite" data-work-status></p>
+
+      <ul class="work-grid" role="list" data-work-grid>
         {work.map((item) => (
-          <li class={`work-card${item.data.wide ? ' work-card--wide' : ''}`}>
+          <li class={`work-card${item.data.wide ? ' work-card--wide' : ''}`} data-industry={item.industry}>
             <a class="work-card-inner" href={`/work/${item.id}/`}>
               <WorkPreview client={item.data.client} url={item.data.url} image={item.data.mockup ?? item.data.image} />
               <div class="work-card-content">
@@ -76,3 +95,35 @@ const tunnelCards = await Promise.all(
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Client-side industry filter. Without JS every case study shows, so the
+  // page never hides work from crawlers or no-JS visitors. ?industry=travel
+  // deep-links a filter and is kept in sync as visitors click.
+  const bar = document.querySelector('[data-work-filter]');
+  const grid = document.querySelector('[data-work-grid]');
+  const status = document.querySelector('[data-work-status]');
+  if (bar && grid) {
+    const chips = [...bar.querySelectorAll<HTMLButtonElement>('[data-industry]')];
+    const cards = [...grid.querySelectorAll<HTMLElement>(':scope > [data-industry]')];
+    const apply = (key: string, push: boolean) => {
+      if (!chips.some((c) => c.dataset.industry === key)) key = 'all';
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.industry === key)));
+      let shown = 0;
+      cards.forEach((card) => {
+        const on = key === 'all' || card.dataset.industry === key;
+        card.hidden = !on;
+        if (on) shown++;
+      });
+      const label = chips.find((c) => c.dataset.industry === key)?.firstChild?.textContent?.trim();
+      if (status) status.textContent = key === 'all' ? '' : `Showing ${shown} ${label} case ${shown === 1 ? 'study' : 'studies'}`;
+      if (push) {
+        const url = new URL(location.href);
+        if (key === 'all') url.searchParams.delete('industry'); else url.searchParams.set('industry', key);
+        history.replaceState(null, '', url);
+      }
+    };
+    chips.forEach((c) => c.addEventListener('click', () => apply(c.dataset.industry!, true)));
+    apply(new URLSearchParams(location.search).get('industry') ?? 'all', false);
+  }
+</script>

@@ -3772,3 +3772,32 @@ h1.headline em,
   .tml-item::before { top: .3rem; left: -1.95rem; }
 }
 .cs-review-note { margin: 0 0 .9rem; font-size: 1.02rem; color: var(--lt-text); }
+
+/* ---- /work/ industry filter ---- */
+.work-filter {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem;
+  margin: 0 auto clamp(1.6rem, 4vh, 2.6rem);
+  max-width: 60rem;
+}
+.work-chip {
+  display: inline-flex; align-items: center; gap: .45rem;
+  padding: .55rem 1rem;
+  border: 1px solid var(--lt-border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--lt-text);
+  font: inherit; font-size: .88rem;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, color .2s;
+}
+.work-chip:hover { border-color: var(--cyan-lt); }
+.work-chip:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.work-chip[aria-pressed="true"] { background: var(--cyan); border-color: var(--cyan); color: #fff; }
+.work-chip-count {
+  font-family: var(--font-m); font-size: .74rem;
+  padding: .05rem .45rem; border-radius: 999px;
+  background: var(--grey-100); color: var(--lt-muted);
+}
+.work-chip[aria-pressed="true"] .work-chip-count { background: rgba(255,255,255,.2); color: #fff; }
+.work-filter-status { text-align: center; font-size: .85rem; color: var(--lt-muted); min-height: 1.3em; margin: -1.2rem 0 1.2rem; }
+.work-grid > [hidden] { display: none !important; }
