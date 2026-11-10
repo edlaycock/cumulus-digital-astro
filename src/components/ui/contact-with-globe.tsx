@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { WireframeGlobe } from './wireframe-globe';
 import { useTurnstile } from './use-turnstile';
+import { useFadeIn } from './use-fade-in';
 
 // Contact section: details and a wireframe globe on the left, the enquiry
 // form on the right. Posts to Formspree like the old ContactForm.astro did.
@@ -50,7 +50,7 @@ export const ContactWithGlobe: React.FC<Props> = ({
   turnstileSiteKey,
   services,
 }) => {
-  const reduce = useReducedMotion();
+  const rootRef = useFadeIn<HTMLDivElement>();
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<{ text: string; error?: boolean }>({ text: '' });
@@ -61,14 +61,6 @@ export const ContactWithGlobe: React.FC<Props> = ({
   useEffect(() => {
     if (formRef.current) formRef.current.noValidate = true;
   }, []);
-
-  const fade = (delay = 0) => ({
-    initial: { opacity: 0, y: 24 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: '-60px' },
-    transition: reduce ? { duration: 0 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const, delay },
-    'data-fade': '',
-  });
 
   const fields = () =>
     [...(formRef.current?.querySelectorAll<Field>('input[required], textarea[required], input[type=email]') ?? [])];
@@ -96,7 +88,10 @@ export const ContactWithGlobe: React.FC<Props> = ({
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    if ((data.get('_gotcha') as string)?.length) return;
+    if ((data.get('_gotcha') as string)?.length) {
+      setStatus({ text: '' });
+      return;
+    }
 
     const bad = fields().filter((el) => !check(el));
     if (bad.length) {
@@ -123,7 +118,7 @@ export const ContactWithGlobe: React.FC<Props> = ({
             : 'Please wait for the security check to finish, then send again.',
           error: true,
         });
-        turnstile.reset();
+        if (turnstile.failed) turnstile.reset();
         return;
       }
       data.set('cf-turnstile-response', token);
@@ -168,16 +163,16 @@ export const ContactWithGlobe: React.FC<Props> = ({
   const req = <span className="cwg-req" aria-hidden="true">*</span>;
 
   return (
-    <div className="cwg">
-      <motion.div className="cwg-pill-wrap" {...fade()}>
+    <div className="cwg" ref={rootRef}>
+      <div className="cwg-pill-wrap" data-fade="0">
         <span className="eyebrow cwg-pill">
           <span className="eyebrow-dot" aria-hidden="true" />
           We reply within one working day
         </span>
-      </motion.div>
+      </div>
 
       <div className="cwg-grid">
-        <motion.div className="cwg-info" {...fade(0.08)}>
+        <div className="cwg-info" data-fade="0.08">
           <h2 className="section-title cwg-title">
             Get in <em>touch</em>
           </h2>
@@ -215,9 +210,9 @@ export const ContactWithGlobe: React.FC<Props> = ({
               </div>
             </li>
           </ul>
-        </motion.div>
+        </div>
 
-        <motion.div className="cwg-card" {...fade(0.16)}>
+        <div className="cwg-card" data-fade="0.16">
           <h3 className="cwg-card-title">Send a message</h3>
           <hr className="cwg-sep" />
 
@@ -285,15 +280,21 @@ export const ContactWithGlobe: React.FC<Props> = ({
               </p>
             </div>
 
+            <noscript>
+              <p className="form-alt cwg-nojs">
+                JavaScript is needed to send this form. Please email us at <a href={`mailto:${email}`}>{email}</a> instead.
+              </p>
+            </noscript>
+
             <p className={`form-status${status.error ? ' form-status--error' : ''}`} role="status" aria-live="polite">
               {status.text}
             </p>
           </form>
-        </motion.div>
+        </div>
 
-        <motion.div className="cwg-globe-wrap" {...fade(0.24)}>
+        <div className="cwg-globe-wrap" data-fade="0.24">
           <WireframeGlobe className="cwg-globe" />
-        </motion.div>
+        </div>
       </div>
     </div>
   );

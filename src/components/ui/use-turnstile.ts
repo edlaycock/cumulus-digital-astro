@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 // Formspree verifies the `cf-turnstile-response` token itself, so no server code.
 
 type TurnstileApi = {
-  render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+  render: (el: HTMLElement, opts: Record<string, unknown>) => string | undefined;
   getResponse: (id: string) => string | undefined;
   reset: (id: string) => void;
   remove: (id: string) => void;
@@ -17,21 +17,29 @@ declare global {
 }
 
 const SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+const LOAD_TIMEOUT = 15000;
 let loader: Promise<void> | null = null;
 
 const loadScript = () => {
   if (window.turnstile) return Promise.resolve();
   loader ??= new Promise<void>((resolve, reject) => {
     const s = document.createElement('script');
-    s.src = SRC;
-    s.async = true;
-    s.defer = true;
-    s.onload = () => resolve();
-    s.onerror = () => {
+    const fail = () => {
+      window.clearTimeout(timer);
       loader = null;
       s.remove();
       reject(new Error('turnstile'));
     };
+    // a hung request never fires onerror, so give up after a while
+    const timer = window.setTimeout(fail, LOAD_TIMEOUT);
+    s.src = SRC;
+    s.async = true;
+    s.defer = true;
+    s.onload = () => {
+      window.clearTimeout(timer);
+      resolve();
+    };
+    s.onerror = fail;
     document.head.appendChild(s);
   });
   return loader;
@@ -48,12 +56,16 @@ export function useTurnstile(siteKey?: string) {
     loadScript()
       .then(() => {
         if (gone || !ref.current || !window.turnstile) return;
-        widget.current = window.turnstile.render(ref.current, {
+        // flexible needs at least 300px; narrow phones get the compact widget
+        const id = window.turnstile.render(ref.current, {
           sitekey: siteKey,
+          size: ref.current.clientWidth < 300 ? 'compact' : 'flexible',
           'refresh-expired': 'auto',
           callback: () => setFailed(false),
           'error-callback': () => setFailed(true),
         });
+        if (id === undefined || id === null) setFailed(true);
+        else widget.current = id;
       })
       .catch(() => setFailed(true));
     return () => {

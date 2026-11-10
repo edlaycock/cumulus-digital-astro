@@ -74,6 +74,7 @@ export const WireframeGlobe: React.FC<{ className?: string }> = ({ className }) 
 
     let start: { x: number; y: number; r: [number, number] } | null = null;
     const onDown = (e: PointerEvent) => {
+      if (!e.isPrimary || e.button !== 0) return;
       start = { x: e.clientX, y: e.clientY, r: [...rot.current] };
       dragging = true;
       wrap.setPointerCapture(e.pointerId);

@@ -100,18 +100,19 @@ Acceptance:
 ## Review (2026-11-10)
 
 ### What was built
-- `src/components/ui/contact-with-globe.tsx`: the ported section. Pill, "Get in *touch*" as an `h2` (PageHero keeps the only `h1`), lede, three contact rows (email, phone, "Based in Surrey / Monday–Friday, 9am–5:30pm"), and the "Send a message" card with a dotted rule, Full name + Company row, Email, Phone + "What do you need?" row, Message, Turnstile slot, and the navy `.btn--primary` with an arrow that nudges on hover. Fade-ups are framer-motion (opacity + 24px, 0.7s, `viewport once`).
+- `src/components/ui/contact-with-globe.tsx`: the ported section. Pill, "Get in *touch*" as an `h2` (PageHero keeps the only `h1`), lede, three contact rows (email, phone, "Based in Surrey / Monday–Friday, 9am–5:30pm"), and the "Send a message" card with a dotted rule, Full name + Company row, Email, Phone + "What do you need?" row, Message, Turnstile slot, and the navy `.btn--primary` with an arrow that nudges on hover. Fade-ups (opacity + 24px, 0.7s, once) run after hydration only, via `use-fade-in.ts` and framer-motion's `animate`, and only on blocks still below the fold. The server HTML is always fully visible.
 - `src/components/ui/wireframe-globe.tsx`: d3-geo orthographic globe, starts centred on Surrey with a navy pin, turns about once every 90s, drag to rotate, paused off-screen (IntersectionObserver) and in hidden tabs, no auto-rotate with reduced motion. Sphere and graticule are server-rendered; land (`world-atlas/land-110m.json`) and `topojson-client` load as lazy chunks after hydration. Bottom fade is a CSS mask.
-- `src/components/ui/use-turnstile.ts`: explicit-render Turnstile hook (load once, render, reset, remove on unmount).
+- `src/components/ui/use-turnstile.ts`: explicit-render Turnstile hook (load once with a 15s timeout, render `flexible`, or `compact` when the slot is under 300px, reset, remove on unmount; a missing widget id counts as failed).
+- `src/components/ui/use-fade-in.ts`: the post-hydration fade-up.
 - `src/pages/contact.astro`: PageHero kept; the old form + "Prefer to talk?" aside replaced by `<ContactWithGlobe client:visible ...>`. The aside was removed because the new left column carries all four of its items. Services still come from the `services` collection (plus "Travel industry project").
 - `src/consts.ts`: `TURNSTILE_SITE_KEY` from `PUBLIC_TURNSTILE_SITE_KEY`, empty by default. `.env.example` documents it and the test key `1x00000000000000000000AA`.
 - `src/styles/global.css`: new `CONTACT WITH GLOBE` block, existing tokens only; reuses `.form-field`, `.form-row`, `.field-error`, `.form-status`, `.form-spinner`, `.eyebrow`, `.section-title`.
 - Kept, unused for now: `src/components/ContactForm.astro` and the `.contact-grid` / `.contact-aside` CSS. Delete after a week live.
 
 ### Behaviour kept
-Same field names plus `company`; same validation rules and messages (blur, live clear, focus first bad field, "Please check the highlighted fields."); honeypot drop before anything else; "Sending…" with disabled button and spinner; `Accept: application/json` POST; `/thank-you/` redirect (GA4 `generate_lead` unchanged); error line with the email address; mailto fallback when no endpoint. Without JS the server-rendered form keeps `action` + `method="POST"` and native `required` checks; JS switches to `noValidate` and the custom messages after hydration. Copy changed only to drop em dashes in the new messages.
+Same field names plus `company`; same validation rules and messages (blur, live clear, focus first bad field, "Please check the highlighted fields."); honeypot drop before anything else; "Sending…" with disabled button and spinner; `Accept: application/json` POST; `/thank-you/` redirect (GA4 `generate_lead` unchanged); error line with the email address; mailto fallback when no endpoint. Without JS the server-rendered form keeps `action` + `method="POST"` and native `required` checks, and a `<noscript>` line says JavaScript is needed to send the form and gives the email address (native posts will fail once Turnstile is enforced); JS switches to `noValidate` and the custom messages after hydration. Copy changed only to drop em dashes in the new messages.
 
-Turnstile handling: no key, no widget and no request to Cloudflare. With a key: submit is blocked with "Please wait for the security check to finish, then send again." until a token exists, or "The security check didn't load. Please refresh the page, or email us at …" if the script or widget fails. After any failed send the widget is reset; a Formspree error mentioning captcha shows "The security check expired…".
+Turnstile handling: no key, no widget and no request to Cloudflare. With a key: submit is blocked with "Please wait for the security check to finish, then send again." until a token exists (no reset, so a challenge in progress is not thrown away), or "The security check didn't load. Please refresh the page, or email us at …" if the script errors, hangs past 15s, or the widget fails (only then is it reset). After any failed send the widget is reset; a Formspree error mentioning captcha shows "The security check expired…".
 
 ### Verification (all observed)
 - `npm run build`: passes, 64 pages, no warnings, with and without `PUBLIC_TURNSTILE_SITE_KEY`. Isolated `tsc --strict` on the new files: clean.
@@ -122,11 +123,10 @@ Turnstile handling: no key, no widget and no request to Cloudflare. With a key: 
 - JS disabled: form has `action="https://formspree.io/f/mwlkajrw"` `method="POST"`, card opacity 1, sphere/graticule/pin rendered.
 - Empty endpoint build: submit opens `mailto:info@cumulusdigital.co.uk?subject=Project enquiry: general` with Company in the body.
 
-### JS cost on /contact/ (gzip -9)
-- Island `contact-with-globe.*.js` (component + d3-geo): 34.8 KB raw / 13.4 KB gzip.
+### JS cost on /contact/ (gzip -9, after the review fixes)
+- Island `contact-with-globe.*.js` (component + d3-geo): 35.9 KB raw / 13.7 KB gzip. With its static imports (React runtime shared with the hero island, plus a 20.5 KB gzip framer-motion core chunk for `animate`): 41.1 KB gzip in total.
 - Lazy after hydration: `topojson-client` 6.9 / 2.6 KB, `land-110m` 55.3 / 20.9 KB.
-- Shared framer-motion chunk `proxy.*.js` 122.9 / 40.0 KB is now also loaded on `/contact/` (already used elsewhere on the site, so usually cached).
-- Every pre-existing bundle hash is unchanged, so no other page got heavier.
+- The section no longer pulls in the full framer-motion `proxy` chunk (40 KB gzip in the first version). Rollup re-split framer-motion into `proxy` + `single-value`, so those hashes changed, but no page loads new code beyond this island.
 
 ### Ed's remaining steps
 1. Cloudflare > Turnstile > Add widget for `cumulusdigital.co.uk` and `www.cumulusdigital.co.uk` (add `localhost` if testing locally), Managed mode.
@@ -143,3 +143,20 @@ Turnstile handling: no key, no widget and no request to Cloudflare. With a key: 
 - Once enforcement is on, a visitor without JS (or with Cloudflare blocked) cannot submit; the email link is the fallback.
 - Turnstile stops scripts, not people; Formspree's own spam filter is the second layer.
 - `design-system/components/contact-form.html` is stale (see Phase 2).
+
+### Review fixes (second pass, 2026-11-10)
+An independent review found these; all fixed and re-verified:
+1. The four fade wrappers were server-rendered at `opacity:0; translateY(24px)`, so a slow or failed JS bundle left the form invisible. Now nothing is hidden in the HTML (0 `opacity` styles inside the island markup); the fade is applied after hydration only to blocks below the fold. The `<noscript>` style override in `contact.astro` was removed as redundant, as was the reduced-motion `!important` rule.
+2. `<noscript>` line under the submit button: "JavaScript is needed to send this form. Please email us at info@cumulusdigital.co.uk instead."
+3. 24px horizontal scroll at 320px: the mobile grid is now `minmax(0, 1fr)`, the form rows use `minmax(0, 1fr)` and inputs have `min-width: 0; width: 100%`.
+4. Turnstile overflowed narrow cards (slot 274px at 360px, widget 300px): `flexible` when the slot is at least 300px, `compact` below that, with a 145px reserved height under 420px.
+5. Missing token no longer resets the widget unless it has failed.
+6. Script load times out after 15s; `render()` returning no id marks it failed.
+7. Globe drag ignores non-primary pointers and non-left buttons; honeypot early return clears any stale status text.
+
+Re-verified (observed): `npm run build` passes (64 pages, no warnings) with and without the test key; the full Playwright script passes in both builds, plus new checks:
+- All `/_astro/*.js` requests aborted at 390x844: pill, details, links, card and globe all have computed opacity 1, and the form still has the Formspree `action` and `POST`.
+- Fade still works: the below-fold globe goes 0 -> 1 when scrolled to.
+- `scrollWidth` equals the viewport at 320, 360 and 390, with zero console errors.
+- Test key: Turnstile fits its slot at 320 (230px slot, compact), 360 (270px, compact) and 390 (300px, flexible).
+- Turnstile script aborted, and separately left hanging for 16.5s: both show "The security check didn't load…" and post nothing.
