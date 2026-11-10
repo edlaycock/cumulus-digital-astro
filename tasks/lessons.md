@@ -1,0 +1,5 @@
+# Lessons
+
+- **Never server-render a hidden entrance-animation state on content people need.** framer-motion's `initial={{ opacity: 0 }}` is written into the SSR HTML, so if the island's JS is slow or blocked, the form disappears. Keep the server HTML in its final visible state and apply the "from" state after hydration, only to elements still below the fold (`src/components/ui/use-fade-in.ts`).
+- **Use `minmax(0, 1fr)`, not `1fr`, for single-column grids holding form controls.** A `1fr` track will not shrink below its content's min-content width, and inputs, selects and `white-space: nowrap` buttons have one, which caused sideways scroll at 320px.
+- **Check third-party widget minimum sizes against the narrowest card.** Turnstile's normal and flexible widgets need 300px; use `compact` below that.

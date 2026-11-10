@@ -1,8 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import ContactForm from '../components/ContactForm.astro';
-import { EMAIL, PHONE_DISPLAY, PHONE_TEL } from '../consts';
+import { ContactWithGlobe } from '../components/ui/contact-with-globe';
+import { EMAIL, FORM_ENDPOINT, PHONE_DISPLAY, PHONE_TEL, TURNSTILE_SITE_KEY } from '../consts';
+
+const services = [
+  ...(await getCollection('services')).sort((a, b) => a.data.order - b.data.order).map((s) => s.data.title),
+  'Travel industry project',
+];
 ---
 
 <BaseLayout
@@ -17,29 +23,17 @@ import { EMAIL, PHONE_DISPLAY, PHONE_TEL } from '../consts';
     Let's make your<br />idea <em class="glow">happen</em>.
   </PageHero>
 
-  <section class="section">
-    <div class="container contact-grid">
-      <ContactForm />
-
-      <aside class="contact-aside">
-        <h3>Prefer to talk?</h3>
-        <div class="contact-aside-item">
-          <span class="label">Phone</span>
-          <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
-        </div>
-        <div class="contact-aside-item">
-          <span class="label">Email</span>
-          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-        </div>
-        <div class="contact-aside-item">
-          <span class="label">Location</span>
-          <address>Proudly based in Surrey</address>
-        </div>
-        <div class="contact-aside-item">
-          <span class="label">Hours</span>
-          <address>Monday–Friday, 9am–5:30pm</address>
-        </div>
-      </aside>
+  <section class="section cwg-section">
+    <div class="container">
+      <ContactWithGlobe
+        client:visible
+        email={EMAIL}
+        phoneDisplay={PHONE_DISPLAY}
+        phoneTel={PHONE_TEL}
+        endpoint={FORM_ENDPOINT}
+        turnstileSiteKey={TURNSTILE_SITE_KEY}
+        services={services}
+      />
     </div>
   </section>
 </BaseLayout>

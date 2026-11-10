@@ -1699,6 +1699,115 @@ h1.headline em.glow, .cta-headline em.glow {
 .contact-aside-item address { font-style: normal; color: var(--lt-body); line-height: 1.6; }
 
 /* ============================================================
+   CONTACT WITH GLOBE  (src/components/ui/contact-with-globe.tsx)
+   ============================================================ */
+.cwg-pill { margin-bottom: clamp(1.5rem, 3vw, 2.25rem); }
+/* globe sits under the details on desktop, after the form on phones */
+.cwg-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  grid-template-areas: "info card" "globe card";
+  grid-template-rows: auto 1fr;
+  gap: 2.25rem clamp(2.5rem, 5vw, 5rem);
+  align-items: start;
+}
+.cwg-info { grid-area: info; }
+.cwg-card { grid-area: card; }
+.cwg-globe-wrap { grid-area: globe; }
+@media (max-width: 900px) {
+  .cwg-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "info" "card" "globe"; grid-template-rows: none; gap: 2.5rem; }
+}
+
+.cwg-title {
+  font-size: clamp(2.1rem, 4.4vw, 3.2rem);
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.cwg-lede {
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--lt-muted);
+  max-width: 32rem;
+  margin-bottom: 2rem;
+}
+
+.cwg-links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.1rem; }
+.cwg-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--lt-text);
+  text-decoration: none;
+}
+.cwg-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--wash);
+  color: var(--cyan);
+  transition: background .2s, color .2s;
+}
+.cwg-icon svg { width: 20px; height: 20px; }
+a.cwg-link:hover .cwg-icon { background: var(--cyan); color: var(--white); }
+a.cwg-link:hover .cwg-link-value { color: var(--cyan); }
+.cwg-link-label { display: block; font-size: .8rem; color: var(--lt-muted); }
+.cwg-link-value { display: block; font-weight: 600; transition: color .2s; overflow-wrap: anywhere; }
+
+/* wireframe globe: fixed square box so nothing shifts as the land loads */
+.cwg-globe {
+  width: min(100%, 420px);
+  aspect-ratio: 1;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 98%);
+          mask-image: linear-gradient(to bottom, black 55%, transparent 98%);
+}
+.cwg-globe:active { cursor: grabbing; }
+.wglobe svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.wglobe-sphere { fill: var(--white); stroke: var(--lt-border); stroke-width: 1; }
+.wglobe-grat { fill: none; stroke: var(--cyan-lt); stroke-opacity: .5; stroke-width: .6; }
+.wglobe-land { fill: var(--wash); stroke: var(--cyan); stroke-width: .8; stroke-linejoin: round; }
+.wglobe-pin { fill: var(--cyan); }
+@media (max-width: 900px) { .cwg-globe { width: min(100%, 320px); margin-inline: auto; } }
+
+.cwg-card {
+  background: var(--white);
+  border: 1px solid var(--lt-border);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 3.2vw, 2.5rem);
+}
+.cwg-card-title {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -.025em;
+  color: var(--lt-text);
+}
+.cwg-sep {
+  border: 0;
+  border-top: 2px dotted var(--lt-border);
+  margin: 1.1rem 0 1.6rem;
+}
+.cwg-req { color: var(--cyan); font-weight: 700; }
+.cwg-turnstile { min-height: 65px; max-width: 100%; }
+@media (max-width: 420px) { .cwg-turnstile { min-height: 145px; } }
+.cwg-nojs { margin-top: -.4rem; }
+/* inputs and the pill button must be able to shrink below their intrinsic width */
+.cwg-form .form-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+@media (max-width: 580px) { .cwg-form .form-row { grid-template-columns: minmax(0, 1fr); } }
+.cwg-form input, .cwg-form select, .cwg-form textarea { min-width: 0; width: 100%; }
+.cwg-arrow { width: 1.1em; height: 1.1em; transition: transform .25s var(--ease); }
+.cwg-submit:hover .cwg-arrow { transform: translateX(4px); }
+.is-sending .cwg-arrow { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cwg-arrow { transition: none; }
+}
+
+/* ============================================================
    LEGAL / PROSE PAGES
    ============================================================ */
 .prose {
