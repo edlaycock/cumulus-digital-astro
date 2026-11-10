@@ -28,6 +28,10 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/company/cumulus-digital-li
 // so it lives here; PUBLIC_FORM_ENDPOINT still overrides it if ever needed.
 export const FORM_ENDPOINT = import.meta.env.PUBLIC_FORM_ENDPOINT ?? 'https://formspree.io/f/mwlkajrw';
 
+// Cloudflare Turnstile site key (public). Formspree checks the token server-side.
+// Empty until the widget exists, and while empty the contact form shows no widget.
+export const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+
 // Google Analytics 4 measurement ID. Client-visible by design, so it lives
 // here; PUBLIC_GA_ID still overrides it. Loaded only after the visitor
 // accepts analytics in the cookie banner.
