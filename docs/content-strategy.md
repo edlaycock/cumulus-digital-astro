@@ -228,19 +228,24 @@ date-based rules get their draft held and posted on the next allowed
 day rather than skipped.
 
 **Mechanics.** Page posting is automated through the Facebook Graph
-API. The Page access token is stored as a network secret on this
-environment (host graph.facebook.com); the session's proxy injects it
-into requests automatically, so never add an Authorization header or
-`access_token` parameter yourself — send the request plain. Publish
+API. A long-lived user token for Ed's account (covering both the
+Cumulus Digital and YourTradeQuotes Pages, with pages_manage_posts) is
+stored as a network secret on this environment (host
+graph.facebook.com); the session's proxy injects it automatically, so
+never add an Authorization header yourself. Publishing as a Page needs
+that Page's own token, so first fetch it with a plain
+`GET https://graph.facebook.com/v27.0/<PAGE_ID>?fields=access_token`
+and pass it as the `access_token` form field on the publish call, in
+the same script. Never print, log, commit or report the token. Publish
 with `POST https://graph.facebook.com/v27.0/<PAGE_ID>/feed` (fields:
 `message`, `link`) and record the returned post id in the weekly
-report. If the call returns 401/403, report it as a blocker (the token
-may have been invalidated by a password change or Page-role change);
-do not retry with workarounds. Groups are always manual (Meta removed
-the Groups API in 2024): include both drafts verbatim in the weekly
-report for a human to paste.
+report. If a call returns 401/403, report it as a blocker (the token
+may have expired or been invalidated by a password or Page-role
+change); do not retry with workarounds. Groups are always manual (Meta
+removed the Groups API in 2024): include both drafts verbatim in the
+weekly report for a human to paste.
 
-**Facebook Page ID:** 997169053672137 (Cumulus Digital Ltd).
+**Facebook Page ID:** 997169053672137 (Cumulus Digital Ltd). YourTradeQuotes Page ID, for YTQ posts only: 1116312498229851.
 
 **LinkedIn.** Each article also gets a LinkedIn draft for the company
 page (https://www.linkedin.com/company/cumulus-digital-limited/):
