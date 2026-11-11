@@ -19,15 +19,15 @@ Plan written 2026-11-10. Ed approved the recommended option for D1-D7 the same d
 - [x] **D3. Globe on a white site.** The original is designed for a dark zinc background. Recommended: navy wireframe on the white canvas (teal graticule, navy land outline). Alternative: put the whole section on a dark navy panel.
 - [x] **D4. Fields.** Recommended: Full Name, Company (new, optional), Email, Phone (optional), "What do you need?" dropdown, Message. The original component has no phone or service field; dropping them would lose data Ed gets today.
 - [x] **D5. Third contact link.** The component has three links (Mail, Phone, Headphones/"support"). There is no support line. Recommended: Mail, Phone, and location/hours ("Surrey, Mon-Fri 9am-5:30pm") instead of a made-up support channel.
-- [ ] **D6. Confirm the email address.** `src/consts.ts:7` still has `TODO(owner): confirm — live site uses info@, earlier drafts used hello@`. Not answered; the build keeps `info@` and the TODO is untouched.
+- [x] **D6. Confirm the email address.** Decided 2026-11-11: keep `info@cumulusdigital.co.uk` (what the live site uses). The TODO in `src/consts.ts` is removed; no `hello@` remains anywhere in the repo.
 - [x] **D7. Does the new section replace the PageHero** ("Let's make your idea happen.") or sit under it? The component brings its own pill + title + description. Recommended: keep the PageHero, drop the component's duplicate title, so there is still one `h1`.
 
 ## Phase 0: stop the spam today (Ed, in dashboards, no code)
 
-- [ ] Cloudflare dashboard > Turnstile > Add widget. Hostnames: `cumulusdigital.co.uk`, `www.cumulusdigital.co.uk`, `localhost`, plus the Vercel preview domain if previews should work. Mode: Managed. Copy the **site key** (public) and **secret key** (private).
-- [ ] Formspree dashboard > form `mwlkajrw` > Settings > CAPTCHA > Adjust settings > Cloudflare Turnstile > paste the **secret key**. Do NOT switch this on until Phase 1 is live, or every real enquiry will be rejected for a missing token.
+- [x] Cloudflare dashboard > Turnstile > Add widget. Hostnames: `cumulusdigital.co.uk`, `www.cumulusdigital.co.uk`, `localhost`, plus the Vercel preview domain if previews should work. Mode: Managed. Copy the **site key** (public) and **secret key** (private).
+- [x] Formspree dashboard > form `mwlkajrw` > Settings > CAPTCHA > Adjust settings > Cloudflare Turnstile > paste the **secret key**. Do NOT switch this on until Phase 1 is live, or every real enquiry will be rejected for a missing token.
 - [ ] While there: check what spam filtering (Formshield) level and domain restriction the plan offers, and turn on what is available.
-- [ ] Put the **site key** in Vercel as `PUBLIC_TURNSTILE_SITE_KEY` (Production). The code already reads it (`TURNSTILE_SITE_KEY` in `src/consts.ts`, empty by default so no widget shows until it is set). The secret key never goes in the repo or in Vercel (Formspree holds it).
+- [x] Put the **site key** in Vercel as `PUBLIC_TURNSTILE_SITE_KEY` (Production). The code already reads it (`TURNSTILE_SITE_KEY` in `src/consts.ts`, empty by default so no widget shows until it is set). The secret key never goes in the repo or in Vercel (Formspree holds it).
 
 Acceptance: both keys exist; secret is saved in Formspree; captcha enforcement still off.
 
@@ -37,8 +37,8 @@ Acceptance: both keys exist; secret is saved in Formspree; captcha enforcement s
 - [x] Turnstile lives in the new React section instead of `ContactForm.astro` (`src/components/ui/use-turnstile.ts`): the script `api.js?render=explicit` is loaded async/defer on `/contact/` only, and only when the key is set; the widget renders above the submit button and the token is sent as `cf-turnstile-response`.
 - [x] Block submit with a clear message if the token is missing; call `turnstile.reset()` after a failed send; surface Formspree's error text when it rejects the captcha.
 - [x] Keep the `_gotcha` honeypot and the existing mailto fallback.
-- [ ] Deploy, then Ed enables CAPTCHA enforcement in Formspree.
-- [ ] Privacy page (left for when the key goes live, so the page never claims a check that is not running): add one line that the form uses Cloudflare Turnstile. Check whether the cookie banner needs to mention it (Turnstile is a security check, not analytics).
+- [x] Deploy, then Ed enables CAPTCHA enforcement in Formspree.
+- [x] Privacy page (done in `ba0b78d`, `src/pages/privacy.astro`; left for when the key goes live, so the page never claims a check that is not running): add one line that the form uses Cloudflare Turnstile. Check whether the cookie banner needs to mention it (Turnstile is a security check, not analytics).
 
 Acceptance:
 - `npm run build` passes.
@@ -67,7 +67,7 @@ Build
 - [x] Reduced motion: `useReducedMotion()` from framer-motion; when set, no fade-ins and the globe is drawn once and does not rotate. Fade-ins otherwise follow CLAUDE.md: opacity + max 24px translate, 0.6-0.8s, `viewport={{ once: true }}`.
 - [x] `src/pages/contact.astro`: replace the `<section class="section">` block (form + aside) with `<ContactWithGlobe client:visible ... />`. Keep `ContactForm.astro` in the repo until the new section has been live and receiving enquiries for a week, then delete it and its unused CSS.
 - [x] `client:visible` means the form is not interactive until the React code loads. Give the server-rendered `<form>` a real `action` + `method="POST"` so a very early submit still reaches Formspree.
-- [ ] `design-system/components/contact-form.html` is now **stale**: it is generated from markup hard-coded in `design-system/build.mjs:375`, which still describes the old form. Not a trivial change, so left for a separate pass.
+- [x] `design-system/components/contact-form.html` regenerated (2026-11-11) from updated markup in `design-system/build.mjs`: the cwg card with all six fields, required markers, an error state and a Turnstile slot placeholder.
 
 Acceptance:
 - `npm run build` passes, still 64 pages, no new warnings.
@@ -81,7 +81,7 @@ Acceptance:
 
 - [x] `npm run build` and `npm run preview`.
 - [x] Dev submit with Cloudflare's test keys (site key `1x00000000000000000000AA` always passes, `2x00000000000000000000AB` always fails) to check both paths without burning real challenges.
-- [ ] One real end-to-end submission on a Vercel preview, confirmed in the Formspree inbox with all six fields present, then `/thank-you/` shown.
+- [x] (Done on production instead, see Launch.) One real end-to-end submission on a Vercel preview, confirmed in the Formspree inbox with all six fields present, then `/thank-you/` shown.
 - [x] Honeypot: set `_gotcha` in devtools, submit, confirm no network request.
 - [x] Validation: empty submit focuses the first bad field; bad email shows the email message.
 - [x] Playwright (already a devDependency; Chromium is at `/opt/pw-browsers/chromium` in this environment): screenshots at 1440x900 and 430x932, assert zero console errors and zero failed requests, check the Turnstile iframe is present.
@@ -107,7 +107,7 @@ Acceptance:
 - `src/pages/contact.astro`: PageHero kept; the old form + "Prefer to talk?" aside replaced by `<ContactWithGlobe client:visible ...>`. The aside was removed because the new left column carries all four of its items. Services still come from the `services` collection (plus "Travel industry project").
 - `src/consts.ts`: `TURNSTILE_SITE_KEY` from `PUBLIC_TURNSTILE_SITE_KEY`, empty by default. `.env.example` documents it and the test key `1x00000000000000000000AA`.
 - `src/styles/global.css`: new `CONTACT WITH GLOBE` block, existing tokens only; reuses `.form-field`, `.form-row`, `.field-error`, `.form-status`, `.form-spinner`, `.eyebrow`, `.section-title`.
-- Kept, unused for now: `src/components/ContactForm.astro` and the `.contact-grid` / `.contact-aside` CSS. Delete after a week live.
+- Kept, unused for now: `src/components/ContactForm.astro` and the `.contact-grid` / `.contact-aside` CSS. (Deleted 2026-11-11, see Launch.)
 
 ### Behaviour kept
 Same field names plus `company`; same validation rules and messages (blur, live clear, focus first bad field, "Please check the highlighted fields."); honeypot drop before anything else; "Sending…" with disabled button and spinner; `Accept: application/json` POST; `/thank-you/` redirect (GA4 `generate_lead` unchanged); error line with the email address; mailto fallback when no endpoint. Without JS the server-rendered form keeps `action` + `method="POST"` and native `required` checks, and a `<noscript>` line says JavaScript is needed to send the form and gives the email address (native posts will fail once Turnstile is enforced); JS switches to `noValidate` and the custom messages after hydration. Copy changed only to drop em dashes in the new messages.
@@ -136,7 +136,7 @@ Turnstile handling: no key, no widget and no request to Cloudflare. With a key: 
 5. Test on production: the widget shows, a real enquiry reaches Formspree with all fields, `/thank-you/` loads.
 6. Then turn on Formspree CAPTCHA enforcement and check a `curl -X POST` with no token is rejected.
 7. Add the one-line Turnstile mention to the privacy page at the same time.
-8. Answer D6 (info@ or hello@).
+8. Answer D6 (info@ or hello@). Done: info@.
 
 ### Remaining risks
 - Vercel preview URLs are not registered hostnames, so the widget errors there unless the test key is set for Preview.
@@ -160,3 +160,13 @@ Re-verified (observed): `npm run build` passes (64 pages, no warnings) with and 
 - `scrollWidth` equals the viewport at 320, 360 and 390, with zero console errors.
 - Test key: Turnstile fits its slot at 320 (230px slot, compact), 360 (270px, compact) and 390 (300px, flexible).
 - Turnstile script aborted, and separately left hanging for 16.5s: both show "The security check didn't load…" and post nothing.
+
+## Launch (2026-11-10)
+
+- [x] PR #112 (globe contact section + Turnstile) squash-merged into `main` on 10 Nov 2026 as `7d42dec`. Production was live within about 30 seconds of the merge.
+- [x] Production HTML on `cumulusdigital.co.uk/contact/` carries the real Turnstile site key, not the `1x00000000000000000000AA` test key.
+- [x] Ed confirmed a real end-to-end submission on production with Formspree CAPTCHA enforcement switched on.
+- [x] Privacy line: Turnstile disclosure is on `/privacy/` (`ba0b78d`).
+- [x] Email decision (D6): `info@cumulusdigital.co.uk`; TODO removed from `src/consts.ts`.
+- [x] Cleanup (2026-11-11): deleted `src/components/ContactForm.astro` and its now-unused `.contact-grid` / `.contact-aside*` CSS. Shared form CSS (`.contact-form`, `.form-row`, `.form-field`, `.form-honeypot`, `.form-status`, `.form-spinner`, `.field-error`) stays because the new section uses it. Design-system contact form specimen regenerated.
+- Still open: Formshield / domain restriction check (Phase 0), keyboard and contrast pass, the one-week spam comparison (Phase 3).

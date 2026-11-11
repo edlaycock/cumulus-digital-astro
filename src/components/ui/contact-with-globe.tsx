@@ -4,7 +4,7 @@ import { useTurnstile } from './use-turnstile';
 import { useFadeIn } from './use-fade-in';
 
 // Contact section: details and a wireframe globe on the left, the enquiry
-// form on the right. Posts to Formspree like the old ContactForm.astro did.
+// form on the right. Posts to Formspree.
 
 type Props = {
   email: string;
