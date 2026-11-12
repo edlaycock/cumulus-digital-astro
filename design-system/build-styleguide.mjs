@@ -1,19 +1,11 @@
 // Builds a single-page style guide with fonts embedded as data URIs (for publishing/offline review).
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { FONT_STYLESHEETS, contactCard } from './shared.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const UA =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
-
-const FACES = [
-  ['Montserrat', 'wght@900', 900],
-  ['Montserrat', 'wght@700', 700],
-  ['Montserrat', 'wght@600', 600],
-  ['Hanken+Grotesk', 'wght@400', 400, 'Hanken Grotesk'],
-  ['Hanken+Grotesk', 'wght@600', 600, 'Hanken Grotesk'],
-  ['JetBrains+Mono', 'wght@400', 400, 'JetBrains Mono'],
-];
 
 const get = async (url, asBuffer = false) => {
   const r = await fetch(url, { headers: { 'user-agent': UA }, signal: AbortSignal.timeout(30000) });
@@ -21,22 +13,37 @@ const get = async (url, asBuffer = false) => {
   return asBuffer ? Buffer.from(await r.arrayBuffer()) : r.text();
 };
 
-let fontCss = '';
-for (const [family, axis, weight, displayName] of FACES) {
-  const css = await get(`https://fonts.googleapis.com/css2?family=${family}:${axis}&display=swap`);
-  // keep the plain `latin` subset block only — enough for English copy, keeps the page small
-  const blocks = css.split('@font-face').slice(1);
-  const latin = blocks.find((b) => /\/\* latin \*\//.test(css.slice(0, css.indexOf(b))) || b.includes('U+0000-00FF'));
-  const target = latin || blocks[blocks.length - 1];
-  const url = target.match(/url\((https:\/\/[^)]+\.woff2)\)/)?.[1];
-  if (!url) throw new Error(`no woff2 for ${family} ${axis}`);
-  const buf = await get(url, true);
-  const name = displayName || family;
-  fontCss += `@font-face{font-family:'${name}';font-style:normal;font-weight:${weight};font-display:swap;src:url(data:font/woff2;base64,${buf.toString('base64')}) format('woff2');}\n`;
-  console.log(`embedded ${name} ${weight} — ${(buf.length / 1024).toFixed(0)}KB`);
-}
-
 const siteCss = readFileSync(join(ROOT, 'src/styles/global.css'), 'utf8');
+// Comments and indentation are a fifth of global.css; dropping them keeps this page under Claude Design's 256 KB limit.
+const siteCssMin = siteCss.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^[ \t]+/gm, '').replace(/\n{2,}/g, '\n');
+// Only weights the stylesheet asks for: BaseLayout also loads Satoshi 900, but nothing uses it.
+const usedWeights = new Set(['400', ...[...siteCss.matchAll(/font-weight:\s*(\d+)/g)].map((m) => m[1])]);
+
+// Embed the faces BaseLayout.astro links (Satoshi, and the plain `latin`
+// subset of Instrument Serif italic, enough for English copy).
+let fontCss = '';
+for (const sheet of FONT_STYLESHEETS) {
+  const css = await get(sheet);
+  const blocks = [...css.matchAll(/(?:\/\*\s*([\w-]+)\s*\*\/\s*)?@font-face\s*\{([^}]*)\}/g)];
+  for (const [, subset, body] of blocks) {
+    // Google splits faces into per-script subsets; Fontshare serves one face per weight
+    if (sheet.includes('fonts.googleapis.com') && subset !== 'latin') continue;
+    const family = body.match(/font-family:\s*'([^']+)'/)?.[1];
+    const weight = body.match(/font-weight:\s*(\d+)/)?.[1] ?? '400';
+    const style = body.match(/font-style:\s*(\w+)/)?.[1] ?? 'normal';
+    if (!usedWeights.has(weight)) continue;
+    const range = body.match(/unicode-range:\s*([^;]+);/)?.[1];
+    const src = body.match(/url\(['"]?((?:https:)?\/\/[^)'"]+\.woff2)['"]?\)/)?.[1];
+    if (!family || !src) throw new Error(`no woff2 in ${sheet}`);
+    const buf = await get(src.startsWith('//') ? `https:${src}` : src, true);
+    fontCss += `@font-face{font-family:'${family}';font-style:${style};font-weight:${weight};font-display:swap;` +
+      `src:url(data:font/woff2;base64,${buf.toString('base64')}) format('woff2');${range ? `unicode-range:${range};` : ''}}\n`;
+    console.log(`embedded ${family} ${weight} ${style} (${(buf.length / 1024).toFixed(0)}KB)`);
+  }
+}
+if (!fontCss.includes("'Satoshi'") || !fontCss.includes("'Instrument Serif'")) throw new Error('font embedding incomplete');
+
+const caseStudies = readdirSync(join(ROOT, 'src/content/work')).filter((f) => /\.mdx?$/.test(f)).length;
 
 const swatch = (name, hex, note = '') =>
   `<figure class="sg-sw"><span class="sg-sw-chip" style="background:${hex}"></span>
@@ -50,35 +57,38 @@ const html = `<!doctype html>
 <title>Cumulus Digital — design system</title>
 <style>
 ${fontCss}
-${siteCss}
+${siteCssMin}
 
 /* ---------- style-guide chrome (sg- prefix; never collides with site classes) ---------- */
-:root { --sg-ground: #f7f8fb; --sg-panel: #ffffff; --sg-rule: #e2e6f0; }
+:root { --sg-ground: #fafafa; --sg-panel: #ffffff; --sg-rule: #e4e4e8; }
 html, body { background: var(--sg-ground); }
 body { color: var(--lt-text); font-family: var(--font-b); margin: 0; }
 .sg-wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
 .sg-mast {
-  background: var(--ink); color: var(--paper);
+  background: var(--white); color: var(--lt-text); border-bottom: 1px solid var(--sg-rule);
   padding: clamp(56px, 10vw, 104px) 0 clamp(48px, 8vw, 80px);
 }
 .sg-mast h1 {
-  font-family: var(--font-h); font-weight: 900; color: var(--paper);
-  font-size: clamp(2.6rem, 7vw, 4.6rem); line-height: .98; letter-spacing: -.02em;
+  font-family: var(--font-h); font-weight: 700; color: var(--ink-black);
+  font-size: clamp(2.6rem, 7vw, 4.6rem); line-height: .98; letter-spacing: -.055em;
   margin: .3em 0 .4em; text-wrap: balance;
 }
-.sg-mast h1 span { color: var(--cyan); }
+.sg-mast h1 em {
+  font-family: var(--font-accent); font-style: italic; font-weight: 400;
+  font-size: 1.22em; letter-spacing: -.01em; line-height: .9; color: var(--cyan);
+}
 .sg-kicker {
   font-family: var(--font-m); font-size: .72rem; letter-spacing: .18em;
   text-transform: uppercase; color: var(--cyan); margin: 0;
 }
-.sg-mast p { color: var(--muted); font-size: clamp(1rem, 2vw, 1.15rem); max-width: 58ch; line-height: 1.6; margin: 0; }
+.sg-mast p { color: var(--lt-muted); font-size: clamp(1rem, 2vw, 1.15rem); max-width: 58ch; line-height: 1.6; margin: 0; }
 .sg-meta { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 36px; }
 .sg-meta div { display: flex; flex-direction: column; gap: 3px; }
 .sg-meta dt, .sg-meta .k {
   font-family: var(--font-m); font-size: .66rem; letter-spacing: .16em;
   text-transform: uppercase; color: var(--slate);
 }
-.sg-meta .v { font-weight: 600; color: var(--paper); font-size: .95rem; }
+.sg-meta .v { font-weight: 500; color: var(--lt-text); font-size: .95rem; }
 
 .sg-sec { padding: clamp(48px, 7vw, 80px) 0; border-top: 1px solid var(--sg-rule); }
 .sg-sec:first-of-type { border-top: 0; }
@@ -108,7 +118,7 @@ body { color: var(--lt-text); font-family: var(--font-b); margin: 0; }
 }
 .sg-frame-bar .sg-ground-tag { color: var(--lt-muted); opacity: .75; }
 .sg-stage { padding: clamp(24px, 4vw, 44px); overflow-x: auto; }
-.sg-stage--dark { background: var(--navy-deep); }
+.sg-stage--dark { background: var(--white); }
 .sg-stage--light { background: var(--grey-50); }
 .sg-stage > * { max-width: 100%; }
 .sg-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
@@ -132,12 +142,12 @@ a { cursor: default; }
 <header class="sg-mast">
   <div class="sg-wrap">
     <p class="sg-kicker">Design system</p>
-    <h1>Cumulus <span>Digital</span>.</h1>
+    <h1>Cumulus <em>Digital</em>.</h1>
     <p>The colour, type and component set behind cumulusdigital.co.uk. Every specimen below is rendered from the site's own stylesheet — what you see here is what ships.</p>
     <div class="sg-meta">
       <div><span class="k">Source</span><span class="v">src/styles/global.css</span></div>
-      <div><span class="k">Components</span><span class="v">13 across 7 groups</span></div>
-      <div><span class="k">Case studies live</span><span class="v">28</span></div>
+      <div><span class="k">Fonts</span><span class="v">Satoshi · Instrument Serif</span></div>
+      <div><span class="k">Case studies live</span><span class="v">${caseStudies}</span></div>
     </div>
   </div>
 </header>
@@ -147,55 +157,55 @@ a { cursor: default; }
   <section class="sg-sec">
     <p class="sg-eyebrow">Foundations</p>
     <h2 class="sg-h">Colour</h2>
-    <p class="sg-sub">Two grounds, one accent. Dark carries the hero, footer and case-study heroes; light carries everything between. Cyan is the only accent — it never competes with a second.</p>
+    <p class="sg-sub">A white canvas throughout, black display type, and one signal colour. Brand navy is the working accent: it clears contrast on white, so it carries CTAs, links and accent words. Brand teal is artwork, tints and dark grounds only.</p>
 
-    <p class="sg-eyebrow">Dark ground</p>
+    <p class="sg-eyebrow">Signal</p>
     <div class="sg-swatches">
-      ${swatch('Ink', '#070a14', 'deepest ground')}${swatch('Navy deep', '#0b1026')}${swatch('Navy', '#141b38')}${swatch('Navy soft', '#1b2547')}${swatch('Slate', '#434960')}
+      ${swatch('Brand navy', '#005b90', 'the accent')}${swatch('Navy deep', '#00486f', 'hover')}${swatch('Brand teal', '#5dc2d5', 'artwork only')}${swatch('Wash', '#e8f6f9', 'highlight surface')}
     </div>
 
-    <p class="sg-eyebrow">Accent &amp; light text</p>
+    <p class="sg-eyebrow">Surfaces</p>
     <div class="sg-swatches">
-      ${swatch('Cyan', '#4fc5d5', 'the accent')}${swatch('Cyan light', '#8fe3ee', 'hover')}${swatch('Muted', '#97a4c4')}${swatch('Paper', '#eaf2f6')}
+      ${swatch('White', '#ffffff', 'canvas + cards')}${swatch('Grey 50', '#fafafa', 'section alternation')}${swatch('Grey 100', '#f5f5f7', 'device wells')}${swatch('Grey 200', '#ebebef')}${swatch('Border', '#e4e4e8', 'hairlines')}
     </div>
 
-    <p class="sg-eyebrow">Light ground &amp; text</p>
+    <p class="sg-eyebrow">Ink</p>
     <div class="sg-swatches">
-      ${swatch('White', '#ffffff')}${swatch('Grey 50', '#f7f8fb', 'section ground')}${swatch('Grey 100', '#eef0f5')}${swatch('Border', '#e2e6f0')}${swatch('Text', '#141b38')}${swatch('Body', '#434960')}${swatch('Muted', '#6b7594')}
+      ${swatch('Ink black', '#000000', 'display only')}${swatch('Text', '#171717')}${swatch('Body', '#3f3f42')}${swatch('Muted', '#5e5e5e')}${swatch('Faint', '#6e6e73')}
     </div>
-    <p class="sg-sub" style="margin:0">Never pure black or pure white — the darkest ground is #070a14, the lightest #f7f8fb.</p>
+    <p class="sg-sub" style="margin:0">Depth comes from hairline borders and large radii, never from drop shadows.</p>
   </section>
 
   <section class="sg-sec">
     <p class="sg-eyebrow">Foundations</p>
     <h2 class="sg-h">Type</h2>
-    <p class="sg-sub">Montserrat sets headlines, Hanken Grotesk carries reading copy, and JetBrains Mono handles the small uppercase labels, breadcrumbs and hex codes.</p>
+    <p class="sg-sub">Satoshi sets everything: headlines, reading copy and labels. Instrument Serif italic appears only on the highlighted words in a heading, never for body copy or a whole heading.</p>
 
     <div class="sg-type-row">
-      <span class="sg-type-spec">Montserrat 900 · display · hero only · clamp 2.6–4.6rem</span>
-      <div style="font-family:var(--font-h);font-weight:900;font-size:clamp(2rem,5vw,3.4rem);line-height:1;letter-spacing:-.02em">Ideas made real.</div>
+      <span class="sg-type-spec">Satoshi 700 · display · -.055em tracking · clamp 2.9–6.5rem on the site</span>
+      <h1 class="headline" style="font-size:clamp(2.4rem,6vw,4.2rem);margin:0">Ideas made <em>real</em>.</h1>
     </div>
     <div class="sg-type-row">
-      <span class="sg-type-spec">Montserrat 700 · section title</span>
-      <div style="font-family:var(--font-h);font-weight:700;font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.1">Everything you need to grow online.</div>
+      <span class="sg-type-spec">Satoshi 700 · section title · -.045em tracking</span>
+      <h2 class="section-title" style="margin:0">Everything you need to <em>grow</em> online.</h2>
     </div>
     <div class="sg-type-row">
-      <span class="sg-type-spec">Hanken Grotesk 400 · body · 1.55–1.65 line-height · ~65ch</span>
-      <div style="max-width:65ch;line-height:1.62;color:var(--lt-body)">Custom code, not plugin stacks. Every site we build is hand-crafted for speed, security and longevity — so you never outgrow it. Most clients see measurable impact within weeks, not quarters.</div>
+      <span class="sg-type-spec">Satoshi 400 · body · 1.55–1.65 line-height · ~65ch</span>
+      <div style="max-width:65ch;line-height:1.62;color:var(--lt-body)">Custom code, not plugin stacks. Every site we build is hand-crafted for speed, security and longevity, so you never outgrow it. Most clients see measurable impact within weeks, not quarters.</div>
     </div>
     <div class="sg-type-row">
-      <span class="sg-type-spec">JetBrains Mono 400 · labels, breadcrumbs, metadata · .18em tracking</span>
-      <div style="font-family:var(--font-m);letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--lt-muted)">What we do · Our work · Case studies</div>
+      <span class="sg-type-spec">Satoshi 500 · section label · navy · sentence case</span>
+      <p class="section-label" style="margin:0">What we do</p>
     </div>
   </section>
 
   <section class="sg-sec">
     <p class="sg-eyebrow">Actions</p>
     <h2 class="sg-h">Buttons</h2>
-    <p class="sg-sub">One primary action per view. Ghost pairs with primary on dark; outline is its counterpart on light.</p>
+    <p class="sg-sub">One primary action per view. Ghost and outline share one style: white fill, 1px ink border.</p>
 
     <div class="sg-frame">
-      <div class="sg-frame-bar"><span>Primary + ghost</span><span class="sg-ground-tag">on ink</span></div>
+      <div class="sg-frame-bar"><span>Primary + ghost</span><span class="sg-ground-tag">on white</span></div>
       <div class="sg-stage sg-stage--dark">
         <div class="sg-row">
           <a class="btn btn--primary btn--lg" href="#">Start a project →</a>
@@ -293,7 +303,7 @@ a { cursor: default; }
   <section class="sg-sec">
     <p class="sg-eyebrow">Sections</p>
     <h2 class="sg-h">Headers &amp; stat band</h2>
-    <p class="sg-sub">Every section opens with the same three-part header: a mono label, a Montserrat title, and a supporting line.</p>
+    <p class="sg-sub">Every section opens with the same three-part header: a navy label, a Satoshi title with one serif accent word, and a supporting line.</p>
 
     <div class="sg-frame">
       <div class="sg-frame-bar"><span>Section header</span><span class="sg-ground-tag">on grey 50</span></div>
@@ -307,7 +317,7 @@ a { cursor: default; }
     </div>
 
     <div class="sg-frame">
-      <div class="sg-frame-bar"><span>Numbers band</span><span class="sg-ground-tag">over muted video on the site</span></div>
+      <div class="sg-frame-bar"><span>Numbers band</span><span class="sg-ground-tag">styles kept; no page uses this markup today</span></div>
       <div class="sg-stage sg-stage--dark">
         <ul class="numbers-row" role="list">
           <li><strong class="number-val"><span>25</span><span>+</span></strong><span class="number-label">Years travel experience</span></li>
@@ -322,7 +332,7 @@ a { cursor: default; }
   <section class="sg-sec">
     <p class="sg-eyebrow">Case study</p>
     <h2 class="sg-h">Case-study blocks</h2>
-    <p class="sg-sub">Each of the 28 case studies is assembled from these parts: a lede, narrative blocks, the client's brand palette, optional metrics, and a device frame holding real screenshots.</p>
+    <p class="sg-sub">Each of the ${caseStudies} case studies is assembled from these parts: a lede, narrative blocks, the client's brand palette, optional metrics, and a device frame holding real screenshots.</p>
 
     <div class="sg-frame">
       <div class="sg-frame-bar"><span>Narrative, palette &amp; metrics</span><span class="sg-ground-tag">case-study body</span></div>
@@ -337,7 +347,7 @@ a { cursor: default; }
               <li><span class="cs-swatch" style="background:#cccccc"></span><code>#cccccc</code></li>
             </ul>
           </div>
-          <ul class="cs-metrics" role="list"><li><strong>2 weeks</strong><span>Turnaround</span></li><li><strong>28</strong><span>Case studies live</span></li></ul>
+          <ul class="cs-metrics" role="list"><li><strong>2 weeks</strong><span>Turnaround</span></li><li><strong>${caseStudies}</strong><span>Case studies live</span></li></ul>
         </div>
       </div>
     </div>
@@ -360,23 +370,11 @@ a { cursor: default; }
   <section class="sg-sec">
     <p class="sg-eyebrow">Forms</p>
     <h2 class="sg-h">Contact form</h2>
-    <p class="sg-sub">Paired fields on desktop, stacked on mobile, with a single primary submit and an email fallback beneath it.</p>
+    <p class="sg-sub">The enquiry card on /contact/ (src/components/ui/contact-with-globe.tsx): paired fields on desktop, stacked on mobile, required markers, an inline error state, the Turnstile slot and a single primary submit.</p>
     <div class="sg-frame">
-      <div class="sg-frame-bar"><span>Contact form</span><span class="sg-ground-tag">on grey 50</span></div>
+      <div class="sg-frame-bar"><span>Contact card</span><span class="sg-ground-tag">on grey 50</span></div>
       <div class="sg-stage sg-stage--light">
-        <form class="contact-form" onsubmit="return false">
-          <div class="form-row">
-            <div class="form-field"><label for="g-name">Name</label><input id="g-name" type="text"></div>
-            <div class="form-field"><label for="g-email">Email</label><input id="g-email" type="email"></div>
-          </div>
-          <div class="form-row">
-            <div class="form-field"><label for="g-phone">Phone <span class="form-optional">(optional)</span></label><input id="g-phone" type="tel"></div>
-            <div class="form-field"><label for="g-service">What do you need?</label><select id="g-service"><option>Not sure yet</option><option>Web Design</option><option>Branding</option></select></div>
-          </div>
-          <div class="form-field"><label for="g-msg">Tell us about your project</label><textarea id="g-msg" rows="4"></textarea></div>
-          <div class="form-actions"><button class="btn btn--primary btn--lg" type="button">Send message →</button>
-            <p class="form-alt">Prefer email? <a href="#">info@cumulusdigital.co.uk</a></p></div>
-        </form>
+        ${contactCard('g')}
       </div>
     </div>
   </section>
