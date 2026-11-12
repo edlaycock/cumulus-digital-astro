@@ -170,3 +170,15 @@ Re-verified (observed): `npm run build` passes (64 pages, no warnings) with and 
 - [x] Email decision (D6): `info@cumulusdigital.co.uk`; TODO removed from `src/consts.ts`.
 - [x] Cleanup (2026-11-11): deleted `src/components/ContactForm.astro` and its now-unused `.contact-grid` / `.contact-aside*` CSS. Shared form CSS (`.contact-form`, `.form-row`, `.form-field`, `.form-honeypot`, `.form-status`, `.form-spinner`, `.field-error`) stays because the new section uses it. Design-system contact form specimen regenerated.
 - Still open: Formshield / domain restriction check (Phase 0), keyboard and contrast pass, the one-week spam comparison (Phase 3).
+
+## Design-system bundle refresh (2026-11-12)
+
+Every page under `design-system/` still inlined the pre-redesign navy/Montserrat stylesheet; only `components/contact-form.html` had been regenerated (in #113, which this work stacks on).
+
+- [x] Read both build scripts; list what each inlines and every stale font or class reference.
+- [x] `build-styleguide.mjs`: replace the old contact form with the live cwg card, shared with `build.mjs` via `design-system/shared.mjs`; embed Satoshi + Instrument Serif instead of Montserrat / Hanken Grotesk / JetBrains Mono.
+- [x] `build.mjs`: link the same fonts as `BaseLayout.astro`; update palette swatches and type labels to the current tokens.
+- [x] Regenerate all pages, run both scripts again, confirm zero diff.
+- [x] Grep output and scripts for `contact-grid`, `contact-aside`, Montserrat and other removed classes or fonts.
+- [x] Playwright screenshots and computed-style checks against the built site.
+- [x] `npm run build` passes; nothing changed under `src/`.

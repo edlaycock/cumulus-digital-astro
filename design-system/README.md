@@ -32,9 +32,15 @@ there.
 
 ## Notes
 
-- **Fonts.** The bundle pages link Google Fonts (Montserrat / Hanken Grotesk /
-  JetBrains Mono), which resolves in any normal browser. `styleguide.html`
-  instead embeds the latin subsets as data URIs, so it needs no network at all.
+- **Fonts.** The bundle pages link the same stylesheets as `BaseLayout.astro`
+  (Satoshi from Fontshare, Instrument Serif italic from Google Fonts); both
+  scripts take the URLs from `shared.mjs`. `styleguide.html` instead embeds
+  the Satoshi weights the site uses and the latin subset of Instrument Serif as
+  data URIs, so it needs no network at all. It also strips the comments from
+  the inlined stylesheet to stay under the 256 KB limit.
+- **Contact card.** Both scripts render the `/contact/` enquiry card from
+  `contactCard()` in `shared.mjs`, a static copy of
+  `src/components/ui/contact-with-globe.tsx`. Update it when that form changes.
 - **Images.** Work covers and device frames use their built-in placeholder
   states rather than real screenshots, which keeps every file under the 256 KB
   per-file limit Claude Design applies.
