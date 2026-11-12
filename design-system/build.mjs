@@ -377,24 +377,35 @@ const COMPONENTS = [
     group: 'Forms',
     body: `
 <section class="ds-stage ds-stage--light">
-  <p class="ds-label">Contact form — inputs, select, textarea, submit</p>
-  <form class="contact-form">
-    <div class="form-row">
-      <div class="form-field"><label for="p-name">Name</label><input id="p-name" type="text"></div>
-      <div class="form-field"><label for="p-email">Email</label><input id="p-email" type="email"></div>
-    </div>
-    <div class="form-row">
-      <div class="form-field"><label for="p-phone">Phone <span class="form-optional">(optional)</span></label><input id="p-phone" type="tel"></div>
-      <div class="form-field"><label for="p-service">What do you need?</label>
-        <select id="p-service"><option>Not sure yet</option><option>Web Design</option><option>Branding</option></select>
+  <p class="ds-label">Contact card — the enquiry form on /contact/ (src/components/ui/contact-with-globe.tsx)</p>
+  <div class="cwg-card" style="max-width: 640px">
+    <h3 class="cwg-card-title">Send a message</h3>
+    <hr class="cwg-sep">
+    <form class="contact-form cwg-form" onsubmit="return false">
+      <div class="form-row">
+        <div class="form-field"><label for="p-name">Full name <span class="cwg-req" aria-hidden="true">*</span></label><input id="p-name" name="name" type="text"></div>
+        <div class="form-field"><label for="p-company">Company <span class="form-optional">(optional)</span></label><input id="p-company" name="company" type="text"></div>
       </div>
-    </div>
-    <div class="form-field"><label for="p-msg">Tell us about your project</label><textarea id="p-msg" rows="5"></textarea></div>
-    <div class="form-actions">
-      <button class="btn btn--primary btn--lg" type="button">Send message →</button>
-      <p class="form-alt">Prefer email? <a href="#">info@cumulusdigital.co.uk</a></p>
-    </div>
-  </form>
+      <div class="form-field form-field--invalid"><label for="p-email">Email <span class="cwg-req" aria-hidden="true">*</span></label><input id="p-email" name="email" type="email" value="jane@" aria-invalid="true" aria-describedby="p-email-error"><p class="field-error" id="p-email-error">That email doesn't look quite right — please check it.</p></div>
+      <div class="form-row">
+        <div class="form-field"><label for="p-phone">Phone <span class="form-optional">(optional)</span></label><input id="p-phone" name="phone" type="tel"></div>
+        <div class="form-field"><label for="p-service">What do you need?</label>
+          <select id="p-service" name="service"><option>Not sure yet</option><option>Web Design</option><option>Branding</option></select>
+        </div>
+      </div>
+      <div class="form-field"><label for="p-msg">Tell us about your project <span class="cwg-req" aria-hidden="true">*</span></label><textarea id="p-msg" name="message" rows="5"></textarea></div>
+      <div class="cwg-turnstile" style="display:flex;align-items:center;justify-content:center;border:1px dashed var(--lt-border);border-radius:8px;font-size:13px;color:var(--lt-muted)">Cloudflare Turnstile widget</div>
+      <div class="form-actions">
+        <button class="btn btn--primary btn--lg cwg-submit" type="button">
+          <span class="form-btn-label">Send message</span>
+          <svg class="cwg-arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="form-alt"><span class="cwg-req" aria-hidden="true">*</span> Required</p>
+      </div>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  <p class="ds-note">Email shown in its error state. The Turnstile slot is a placeholder here; on the site the widget renders only on /contact/ when the site key is set. A hidden <code>_gotcha</code> honeypot (<code>.form-honeypot</code>) sits before it.</p>
 </section>`,
   },
   {

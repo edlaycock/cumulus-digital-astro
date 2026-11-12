@@ -4,7 +4,6 @@ export const SITE_NAME = 'Cumulus Digital';
 export const SITE_TAGLINE = "It's about making ideas happen.";
 export const SITE_URL = 'https://cumulusdigital.co.uk';
 
-// TODO(owner): confirm — live site uses info@, earlier drafts used hello@
 export const EMAIL = 'info@cumulusdigital.co.uk';
 export const PHONE_DISPLAY = '020 8050 4754';
 export const PHONE_TEL = '+442080504754';

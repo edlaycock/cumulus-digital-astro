@@ -1617,14 +1617,6 @@ h1.headline em.glow, .cta-headline em.glow {
 /* ============================================================
    CONTACT PAGE + FORM
    ============================================================ */
-.contact-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: clamp(2.5rem, 5vw, 5rem);
-  align-items: start;
-}
-@media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
-
 .contact-form { display: flex; flex-direction: column; gap: 1.3rem; }
 .form-row {
   display: grid;
@@ -1665,38 +1657,6 @@ h1.headline em.glow, .cta-headline em.glow {
 .form-alt a { color: var(--cyan); font-weight: 600; text-decoration: none; }
 .form-status { font-size: .92rem; font-weight: 600; color: var(--lt-text); min-height: 1.4em; }
 .form-status--error { color: #c0392b; }
-
-.contact-aside {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 2rem;
-  border-radius: var(--radius);
-  background: var(--grey-50);
-  border: 1px solid var(--lt-border);
-}
-.contact-aside h3 {
-  font-family: var(--font-h);
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -.02em;
-  color: var(--lt-text);
-}
-.contact-aside-item { display: flex; flex-direction: column; gap: .2rem; }
-.contact-aside-item .label {
-  font-family: var(--font-m);
-  font-size: .68rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--lt-muted);
-}
-.contact-aside-item a {
-  color: var(--lt-text);
-  font-weight: 600;
-  text-decoration: none;
-}
-.contact-aside-item a:hover { color: var(--cyan); }
-.contact-aside-item address { font-style: normal; color: var(--lt-body); line-height: 1.6; }
 
 /* ============================================================
    CONTACT WITH GLOBE  (src/components/ui/contact-with-globe.tsx)
