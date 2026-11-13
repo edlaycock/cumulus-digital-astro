@@ -5,9 +5,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Contact form — Cumulus Digital design system</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f%5B%5D=satoshi@400,500,700,900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap">
 <style>
 /* ============================================================
    Cumulus Digital — global stylesheet
@@ -4114,7 +4117,8 @@ h1.headline em,
 
   body { margin: 0; }
   .ds-stage { padding: 56px 48px; }
-  .ds-stage--dark { background: var(--navy-deep); color: var(--paper); }
+  /* the site is a white canvas; "dark" stages are the white ground, "light" the grey-50 alternation */
+  .ds-stage--dark { background: var(--white); color: var(--lt-text); }
   .ds-stage--light { background: var(--grey-50); color: var(--lt-text); }
   .ds-stage + .ds-stage { border-top: 1px solid rgba(128,128,150,.18); }
   .ds-label {
@@ -4151,7 +4155,7 @@ h1.headline em,
         <div class="form-field"><label for="p-name">Full name <span class="cwg-req" aria-hidden="true">*</span></label><input id="p-name" name="name" type="text"></div>
         <div class="form-field"><label for="p-company">Company <span class="form-optional">(optional)</span></label><input id="p-company" name="company" type="text"></div>
       </div>
-      <div class="form-field form-field--invalid"><label for="p-email">Email <span class="cwg-req" aria-hidden="true">*</span></label><input id="p-email" name="email" type="email" value="jane@" aria-invalid="true" aria-describedby="p-email-error"><p class="field-error" id="p-email-error">That email doesn't look quite right — please check it.</p></div>
+      <div class="form-field form-field--invalid"><label for="p-email">Email <span class="cwg-req" aria-hidden="true">*</span></label><input id="p-email" name="email" type="email" value="jane@" aria-invalid="true" aria-describedby="p-email-error"><p class="field-error" id="p-email-error">That email doesn't look quite right. Please check it.</p></div>
       <div class="form-row">
         <div class="form-field"><label for="p-phone">Phone <span class="form-optional">(optional)</span></label><input id="p-phone" name="phone" type="tel"></div>
         <div class="form-field"><label for="p-service">What do you need?</label>

@@ -1,19 +1,17 @@
 // Generates the Claude Design bundle: one self-contained preview page per component group.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
+import { FONT_LINKS, contactCard } from './shared.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const css = readFileSync(join(ROOT, 'src/styles/global.css'), 'utf8');
-
-const FONTS =
-  'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900' +
-  '&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap';
 
 // Preview harness only — never ships to the site.
 const HARNESS = `
   body { margin: 0; }
   .ds-stage { padding: 56px 48px; }
-  .ds-stage--dark { background: var(--navy-deep); color: var(--paper); }
+  /* the site is a white canvas; "dark" stages are the white ground, "light" the grey-50 alternation */
+  .ds-stage--dark { background: var(--white); color: var(--lt-text); }
   .ds-stage--light { background: var(--grey-50); color: var(--lt-text); }
   .ds-stage + .ds-stage { border-top: 1px solid rgba(128,128,150,.18); }
   .ds-label {
@@ -45,9 +43,7 @@ const page = (title, group, body) =>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${title} — Cumulus Digital design system</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="${FONTS}">
+${FONT_LINKS}
 <style>
 ${css}
 /* ---- preview harness ---- */
@@ -71,32 +67,27 @@ const COMPONENTS = [
     group: 'Foundations',
     body: `
 <section class="ds-stage ds-stage--light">
-  <p class="ds-label">Dark palette — hero, footer, case-study heroes</p>
+  <p class="ds-label">Signal — navy is the one working accent</p>
   <div class="ds-row">
-    ${swatch('Ink', '#070a14')}${swatch('Navy deep', '#0b1026')}${swatch('Navy', '#141b38')}
-    ${swatch('Navy soft', '#1b2547')}${swatch('Slate', '#434960')}
+    ${swatch('Brand navy', '#005b90')}${swatch('Navy deep', '#00486f')}
+    ${swatch('Brand teal', '#5dc2d5')}${swatch('Wash', '#e8f6f9')}
+  </div>
+  <p class="ds-note">Navy clears contrast on white, so it carries CTAs, links and accent words. Teal is too light for text on white: artwork, tints and dark grounds only.</p>
+</section>
+<section class="ds-stage ds-stage--light">
+  <p class="ds-label">Surfaces — white canvas throughout</p>
+  <div class="ds-row">
+    ${swatch('White', '#ffffff')}${swatch('Grey 50', '#fafafa')}${swatch('Grey 100', '#f5f5f7')}
+    ${swatch('Grey 200', '#ebebef')}${swatch('Border', '#e4e4e8')}
   </div>
 </section>
 <section class="ds-stage ds-stage--light">
-  <p class="ds-label">Accent — one saturated accent, never two</p>
+  <p class="ds-label">Ink</p>
   <div class="ds-row">
-    ${swatch('Cyan', '#4fc5d5')}${swatch('Cyan light', '#8fe3ee')}
-    ${swatch('Muted', '#97a4c4')}${swatch('Paper', '#eaf2f6')}
+    ${swatch('Ink black', '#000000')}${swatch('Text', '#171717')}${swatch('Body', '#3f3f42')}
+    ${swatch('Muted', '#5e5e5e')}${swatch('Faint', '#6e6e73')}
   </div>
-</section>
-<section class="ds-stage ds-stage--light">
-  <p class="ds-label">Light palette — main sections</p>
-  <div class="ds-row">
-    ${swatch('White', '#ffffff')}${swatch('Grey 50', '#f7f8fb')}${swatch('Grey 100', '#eef0f5')}
-    ${swatch('Grey 200', '#dde1ec')}${swatch('Border', '#e2e6f0')}
-  </div>
-</section>
-<section class="ds-stage ds-stage--light">
-  <p class="ds-label">Text</p>
-  <div class="ds-row">
-    ${swatch('Text primary', '#141b38')}${swatch('Body', '#434960')}${swatch('Muted', '#6b7594')}
-  </div>
-  <p class="ds-note">Never pure black or pure white — the darkest ground is #070a14 and the lightest is #f7f8fb.</p>
+  <p class="ds-note">Pure black is reserved for display headlines; reading text is #171717. Depth comes from hairline borders and large radii, never drop shadows.</p>
 </section>`,
   },
   {
@@ -105,8 +96,8 @@ const COMPONENTS = [
     group: 'Foundations',
     body: `
 <section class="ds-stage ds-stage--dark">
-  <p class="ds-label">Display headline — Montserrat 900, hero only</p>
-  <h1 class="headline">It's about making<br>ideas <em class="glow">happen</em>.</h1>
+  <p class="ds-label">Display headline — Satoshi 700, accent word in Instrument Serif italic</p>
+  <h1 class="headline">It's about making<br>ideas <em>happen</em>.</h1>
 </section>
 <section class="ds-stage ds-stage--light">
   <p class="ds-label">Section header — label, title, sub</p>
@@ -122,12 +113,12 @@ const COMPONENTS = [
   <p class="lede">Bespoke branding, fast hand-built websites and search marketing for ambitious UK businesses — backed by 25&nbsp;years in the travel sector.</p>
 </section>
 <section class="ds-stage ds-stage--light">
-  <p class="ds-label">Body copy — Hanken Grotesk</p>
+  <p class="ds-label">Body copy — Satoshi 400</p>
   <div class="prose" style="max-width:60ch">
     <p>Custom code, not plugin stacks. Every site we build is hand-crafted for speed, security and longevity — so you never outgrow it.</p>
     <p>Most clients see measurable impact within weeks, not quarters.</p>
   </div>
-  <p class="ds-note">Headings: Montserrat. Body: Hanken Grotesk. Labels &amp; metadata: JetBrains Mono.</p>
+  <p class="ds-note">One family, Satoshi, for headings, body and labels. Instrument Serif italic only on the highlighted words in a heading, never for body copy.</p>
 </section>`,
   },
   {
@@ -136,7 +127,7 @@ const COMPONENTS = [
     group: 'Actions',
     body: `
 <section class="ds-stage ds-stage--dark">
-  <p class="ds-label">On dark — primary is the only filled button on screen</p>
+  <p class="ds-label">On the white canvas — primary is the only filled button on screen</p>
   <div class="ds-row">
     <a class="btn btn--primary btn--lg" href="#">Start a project →</a>
     <a class="btn btn--ghost btn--lg" href="#">See our work</a>
@@ -147,12 +138,12 @@ const COMPONENTS = [
   </div>
 </section>
 <section class="ds-stage ds-stage--light">
-  <p class="ds-label">On light</p>
+  <p class="ds-label">On grey 50</p>
   <div class="ds-row">
     <a class="btn btn--primary btn--lg" href="#">Discuss your project →</a>
     <a class="btn btn--outline btn--lg" href="#">Visit the live site →</a>
   </div>
-  <p class="ds-note">One primary call to action per view. Ghost sits on dark, outline on light.</p>
+  <p class="ds-note">One primary call to action per view. Ghost and outline share one style: white fill, 1px ink border.</p>
 </section>`,
   },
   {
@@ -297,7 +288,7 @@ const COMPONENTS = [
     group: 'Sections',
     body: `
 <section class="ds-stage ds-stage--dark">
-  <p class="ds-label">Stat band — sits over a muted video on the site</p>
+  <p class="ds-label">Stat band — styles kept in global.css; no page uses this markup today</p>
   <ul class="numbers-row" role="list">
     <li><strong class="number-val"><span>25</span><span>+</span></strong><span class="number-label">Years travel experience</span></li>
     <li><strong class="number-val"><span>2015</span></strong><span class="number-label">Serving Surrey since</span></li>
@@ -378,33 +369,7 @@ const COMPONENTS = [
     body: `
 <section class="ds-stage ds-stage--light">
   <p class="ds-label">Contact card — the enquiry form on /contact/ (src/components/ui/contact-with-globe.tsx)</p>
-  <div class="cwg-card" style="max-width: 640px">
-    <h3 class="cwg-card-title">Send a message</h3>
-    <hr class="cwg-sep">
-    <form class="contact-form cwg-form" onsubmit="return false">
-      <div class="form-row">
-        <div class="form-field"><label for="p-name">Full name <span class="cwg-req" aria-hidden="true">*</span></label><input id="p-name" name="name" type="text"></div>
-        <div class="form-field"><label for="p-company">Company <span class="form-optional">(optional)</span></label><input id="p-company" name="company" type="text"></div>
-      </div>
-      <div class="form-field form-field--invalid"><label for="p-email">Email <span class="cwg-req" aria-hidden="true">*</span></label><input id="p-email" name="email" type="email" value="jane@" aria-invalid="true" aria-describedby="p-email-error"><p class="field-error" id="p-email-error">That email doesn't look quite right — please check it.</p></div>
-      <div class="form-row">
-        <div class="form-field"><label for="p-phone">Phone <span class="form-optional">(optional)</span></label><input id="p-phone" name="phone" type="tel"></div>
-        <div class="form-field"><label for="p-service">What do you need?</label>
-          <select id="p-service" name="service"><option>Not sure yet</option><option>Web Design</option><option>Branding</option></select>
-        </div>
-      </div>
-      <div class="form-field"><label for="p-msg">Tell us about your project <span class="cwg-req" aria-hidden="true">*</span></label><textarea id="p-msg" name="message" rows="5"></textarea></div>
-      <div class="cwg-turnstile" style="display:flex;align-items:center;justify-content:center;border:1px dashed var(--lt-border);border-radius:8px;font-size:13px;color:var(--lt-muted)">Cloudflare Turnstile widget</div>
-      <div class="form-actions">
-        <button class="btn btn--primary btn--lg cwg-submit" type="button">
-          <span class="form-btn-label">Send message</span>
-          <svg class="cwg-arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </button>
-        <p class="form-alt"><span class="cwg-req" aria-hidden="true">*</span> Required</p>
-      </div>
-      <p class="form-status" role="status" aria-live="polite"></p>
-    </form>
-  </div>
+  ${contactCard('p')}
   <p class="ds-note">Email shown in its error state. The Turnstile slot is a placeholder here; on the site the widget renders only on /contact/ when the site key is set. A hidden <code>_gotcha</code> honeypot (<code>.form-honeypot</code>) sits before it.</p>
 </section>`,
   },
