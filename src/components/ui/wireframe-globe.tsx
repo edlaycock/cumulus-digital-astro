@@ -2,14 +2,15 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { geoGraticule10, geoOrthographic, geoPath, type GeoPermissibleObjects } from 'd3-geo';
 
-// Decorative navy wireframe globe. Starts facing the UK, turns slowly, and can
-// be dragged. Sphere and graticule render on the server; the land outline is
+// Decorative navy wireframe globe. Starts facing the UK, turns slowly for a few
+// seconds, and can be dragged. Sphere and graticule render on the server; the land outline is
 // a bundled world-atlas file loaded after hydration so the form is usable first.
 
 const SIZE = 480;
 const HOME: [number, number] = [0.4, -38]; // rotation that centres on Surrey
 const SURREY: GeoPermissibleObjects = { type: 'Point', coordinates: [-0.4, 51.3] };
 const SPEED = 0.004; // degrees per ms, about 90s a turn
+const SPIN_MS = 5000; // WCAG 2.2.2: auto-rotation must stop within 5s; dragging still works
 const graticule = geoGraticule10();
 
 export const WireframeGlobe: React.FC<{ className?: string }> = ({ className }) => {
@@ -39,6 +40,7 @@ export const WireframeGlobe: React.FC<{ className?: string }> = ({ className }) 
     let inView = false;
     let dragging = false;
     let cancelled = false;
+    let spun = 0;
 
     const draw = () => {
       projection.rotate(rot.current);
@@ -48,12 +50,17 @@ export const WireframeGlobe: React.FC<{ className?: string }> = ({ className }) 
     };
 
     const tick = (t: number) => {
-      if (last) rot.current = [(rot.current[0] + (t - last) * SPEED) % 360, rot.current[1]];
+      if (last) {
+        rot.current = [(rot.current[0] + (t - last) * SPEED) % 360, rot.current[1]];
+        spun += t - last;
+      }
       last = t;
       draw();
-      raf = requestAnimationFrame(tick);
+      raf = 0;
+      if (spun < SPIN_MS) raf = requestAnimationFrame(tick);
+      else sync();
     };
-    const shouldRun = () => !reduce && inView && !dragging && !document.hidden;
+    const shouldRun = () => !reduce && inView && !dragging && !document.hidden && spun < SPIN_MS;
     const sync = () => {
       if (shouldRun() && !raf) {
         last = 0;

@@ -23,6 +23,7 @@ const MESSAGES: Record<string, string> = {
   message: 'Please tell us a little about your project.',
 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const CHECK_FIELDS = 'Please check the highlighted fields.';
 
 const errorFor = (el: Field): string | null => {
   const value = el.value.trim();
@@ -62,6 +63,11 @@ export const ContactWithGlobe: React.FC<Props> = ({
     if (formRef.current) formRef.current.noValidate = true;
   }, []);
 
+  // The summary only makes sense while something is still highlighted.
+  useEffect(() => {
+    if (!Object.keys(errors).length) setStatus((s) => (s.text === CHECK_FIELDS ? { text: '' } : s));
+  }, [errors]);
+
   const fields = () =>
     [...(formRef.current?.querySelectorAll<Field>('input[required], textarea[required], input[type=email]') ?? [])];
 
@@ -86,6 +92,8 @@ export const ContactWithGlobe: React.FC<Props> = ({
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // aria-disabled (not disabled) keeps focus on the button, so guard repeat clicks here
+    if (sending) return;
     const form = e.currentTarget;
     const data = new FormData(form);
     if ((data.get('_gotcha') as string)?.length) {
@@ -95,7 +103,7 @@ export const ContactWithGlobe: React.FC<Props> = ({
 
     const bad = fields().filter((el) => !check(el));
     if (bad.length) {
-      setStatus({ text: 'Please check the highlighted fields.', error: true });
+      setStatus({ text: CHECK_FIELDS, error: true });
       bad[0].focus();
       return;
     }
@@ -223,6 +231,10 @@ export const ContactWithGlobe: React.FC<Props> = ({
             action={endpoint || undefined}
             onSubmit={onSubmit}
           >
+            <p className="form-alt cwg-req-key">
+              <span className="cwg-req" aria-hidden="true">*</span> Required
+            </p>
+
             <div className="form-row">
               <div className={fieldClass('name')}>
                 <label htmlFor="cwg-name">Full name {req}</label>
@@ -268,16 +280,13 @@ export const ContactWithGlobe: React.FC<Props> = ({
             {turnstile.enabled && <div className="cwg-turnstile" ref={turnstile.ref} />}
 
             <div className="form-actions">
-              <button className="btn btn--primary btn--lg cwg-submit" type="submit" disabled={sending}>
+              <button className="btn btn--primary btn--lg cwg-submit" type="submit" aria-disabled={sending}>
                 <span className="form-btn-label">{sending ? 'Sending…' : 'Send message'}</span>
                 <svg className="cwg-arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
                 <span className="form-spinner" aria-hidden="true" />
               </button>
-              <p className="form-alt">
-                <span className="cwg-req" aria-hidden="true">*</span> Required
-              </p>
             </div>
 
             <noscript>
@@ -286,9 +295,11 @@ export const ContactWithGlobe: React.FC<Props> = ({
               </p>
             </noscript>
 
-            <p className={`form-status${status.error ? ' form-status--error' : ''}`} role="status" aria-live="polite">
-              {status.text}
-            </p>
+            {/* Two always-mounted live regions: swapping role on one node is announced unreliably. */}
+            <div className="form-status">
+              <span role="status">{status.error ? '' : status.text}</span>
+              <span role="alert" className="form-status--error">{status.error ? status.text : ''}</span>
+            </div>
           </form>
         </div>
 
