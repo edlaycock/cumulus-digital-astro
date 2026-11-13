@@ -85,7 +85,7 @@ Acceptance:
 - [x] Honeypot: set `_gotcha` in devtools, submit, confirm no network request.
 - [x] Validation: empty submit focuses the first bad field; bad email shows the email message.
 - [x] Playwright (already a devDependency; Chromium is at `/opt/pw-browsers/chromium` in this environment): screenshots at 1440x900 and 430x932, assert zero console errors and zero failed requests, check the Turnstile iframe is present.
-- [ ] Keyboard-only pass and a contrast check on the navy-on-white text.
+- [x] Keyboard-only pass and a contrast check on the navy-on-white text (see "Accessibility fixes" below).
 - [ ] After a week live: compare spam count in Formspree against the week before.
 
 ## Risks / open questions
@@ -169,7 +169,7 @@ Re-verified (observed): `npm run build` passes (64 pages, no warnings) with and 
 - [x] Privacy line: Turnstile disclosure is on `/privacy/` (`ba0b78d`).
 - [x] Email decision (D6): `info@cumulusdigital.co.uk`; TODO removed from `src/consts.ts`.
 - [x] Cleanup (2026-11-11): deleted `src/components/ContactForm.astro` and its now-unused `.contact-grid` / `.contact-aside*` CSS. Shared form CSS (`.contact-form`, `.form-row`, `.form-field`, `.form-honeypot`, `.form-status`, `.form-spinner`, `.field-error`) stays because the new section uses it. Design-system contact form specimen regenerated.
-- Still open: Formshield / domain restriction check (Phase 0), keyboard and contrast pass, the one-week spam comparison (Phase 3).
+- Still open: Formshield / domain restriction check (Phase 0), the one-week spam comparison (Phase 3). Keyboard and contrast pass done (2026-11-13, below).
 
 ## Design-system bundle refresh (2026-11-12)
 
@@ -182,3 +182,19 @@ Every page under `design-system/` still inlined the pre-redesign navy/Montserrat
 - [x] Grep output and scripts for `contact-grid`, `contact-aside`, Montserrat and other removed classes or fonts.
 - [x] Playwright screenshots and computed-style checks against the built site.
 - [x] `npm run build` passes; nothing changed under `src/`.
+
+## Accessibility fixes (2026-11-13)
+
+Ten fixes from the audit of `main` at `5ea11d7`, checked with Playwright and axe-core against a test-key build.
+
+- [x] Contrast: new `--error` token `#c0392b` for `.field-error`, `.form-status--error` and the invalid border (5.44:1 on white; was `#d4485f`, 4.29:1). Form control borders use the new `--field-border` token `#8a8a8f` (3.44:1; was `#e4e4e8`, 1.27:1). Card, pill and divider borders are unchanged.
+- [x] Focus: inputs show a 2px navy outline (7.24:1); a focused invalid field stays red.
+- [x] Skip link: "Skip to content" is the first thing on every page and moves focus to `<main id="main">`. All 64 built pages have exactly one `<main>` and one skip link.
+- [x] Focus not obscured: `scroll-padding-top: 6.5rem` keeps focused fields below the fixed header. While the cookie banner shows, `scroll-padding-bottom` uses the banner's height, and focused fields it overlaps are scrolled clear. On phones there's also bottom padding for the sticky CTA bar.
+- [x] The cookie banner is second in tab order while it shows; it is still drawn in the same place on screen.
+- [x] Submit button: `aria-disabled` instead of `disabled`, so focus stays on it after a failed send and repeat clicks while sending are ignored (mocked 500: one request, focus kept).
+- [x] Status messages: two live regions are always present, `role="status"` for "Sending…" and `role="alert"` for errors. "Please check the highlighted fields." clears once every field is fixed.
+- [x] The "* Required" key now sits above the first field.
+- [x] The globe stops turning on its own after 5 seconds; dragging still works, and with reduced motion it never turns. With reduced motion the send spinner doesn't spin either.
+- [x] Results: axe found 0 violations on `/contact/` (default and error states). On `/` it found one existing `heading-order` issue in the footer `h4`, which this work didn't touch. No sideways scrolling at 320 or 390px on `/contact/`, `/` or `/about/`. The only console error was the deliberately mocked 500.
+- [ ] Follow-up: regenerate the design-system contact form specimen so it picks up the new border, focus and error colours.

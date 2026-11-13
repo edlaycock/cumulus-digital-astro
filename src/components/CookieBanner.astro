@@ -46,8 +46,21 @@ import { GA_ID } from '../consts';
       gtag('config', GA_ID, { anonymize_ip: true, allow_google_signals: false });
     };
 
+    // exposes the banner height so global.css can pad scrolling clear of it
+    const ro = banner && 'ResizeObserver' in window
+      ? new ResizeObserver(() => document.documentElement.style.setProperty('--cookie-banner-h', `${banner.offsetHeight}px`))
+      : null;
+    // Chrome won't scroll a field that's partly visible, so lift anything the banner overlaps
+    const reveal = (e) => {
+      const t = e.target;
+      if (!(t instanceof Element) || banner.contains(t)) return;
+      if (t.getBoundingClientRect().bottom > banner.getBoundingClientRect().top) t.scrollIntoView({ block: 'nearest' });
+    };
+
     const decide = (value) => {
       try { localStorage.setItem(KEY, value); } catch {}
+      ro?.disconnect();
+      document.removeEventListener('focusin', reveal);
       banner?.setAttribute('hidden', '');
       document.body.classList.remove('has-cookie-banner');
       if (value === 'granted') loadAnalytics();
@@ -62,6 +75,8 @@ import { GA_ID } from '../consts';
       // only claim the screen when there is actually a banner to show —
       // otherwise the sticky mobile CTA stays suppressed forever
       banner.removeAttribute('hidden');
+      ro?.observe(banner);
+      document.addEventListener('focusin', reveal);
       document.body.classList.add('has-cookie-banner');
     }
 

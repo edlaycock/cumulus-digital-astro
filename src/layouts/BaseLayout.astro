@@ -100,13 +100,17 @@ const jsonLd = {
   </head>
 
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <!-- fixed-position, so placing it first only changes tab order: it's reachable before the page while shown -->
+    <CookieBanner />
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
     <Header />
-    <slot />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
     <Footer />
     <StickyMobileCta />
-    <CookieBanner />
     <script>
       import '../scripts/reveal.js';
       import '../scripts/interactions.js';
